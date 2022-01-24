@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "Header": "Date",
+      "accessor": "created_at"
+    },
+    {
+      "Header": "Platform",
+      "accessor": "platform"
+    },
+    {
+      "Header": "Channel",
+      "accessor": "channel"
+    },
+    {
+      "Header": "Titles",
+      "accessor": "text"
+    },
+    {
+      "Header": "Likes",
+      "accessor": "scores.likes"
+    },
+    {
+      "Header": "Dislikes",
+      "accessor": "scores.dislikes"
+    },
+    {
+      "Header": "Shares",
+      "accessor": "scores.shares"
+    },
+    {
+      "Header": "Comments",
+      "accessor": "scores.engagement"
+    },
+    {
+      "Header": "Toxicity",
+      "accessor": "hate_speech"
+    }
+  ]
+}

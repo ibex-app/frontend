@@ -1,0 +1,173 @@
+{
+  "data": [
+    {
+      "id": "date-from",
+      "type": "date",
+      "label": "Date from",
+      "value": ""
+  
+    },
+    {
+      "id": "date-to",
+      "type": "date",
+      "label": "Date to",
+      "value": ""
+    },
+    {
+      "id": "platform",
+      "type": "tag",
+      "label": "Platform",
+      "value": [],
+      "values": [
+        {
+          "id": 0,
+          "label": "facebook"
+        },
+        {
+          "id": 1,
+          "label": "twitter"
+        },
+        {
+          "id": 2,
+          "label": "youtube"
+        },
+        {
+          "id": 3,
+          "label": "geoTV"
+        }
+      ]
+    },
+    {
+      "id": "dataSource",
+      "type": "tag",
+      "label": "Data source",
+      "value": [],
+      "values": [
+        {
+          "id": 0,
+          "label": "TVImedi"
+        },
+        {
+          "id": 1,
+          "label": "RadioPirveli"
+        },
+        {
+          "id": 2,
+          "label": "Rustavi2"
+        },
+        {
+          "id": 3,
+          "label": "Publika"
+        }
+      ]
+    },
+    {
+      "id": "topics",
+      "type": "tag",
+      "label": "Topics",
+      "value": [],
+      "values": [
+        {
+          "id": 0,
+          "label": "Anti west"
+        },
+        {
+          "id": 1,
+          "label": "Pro-kremlian"
+        },
+        {
+          "id": 2,
+          "label": "Hate speech"
+        },
+        {
+          "id": 3,
+          "label": "Border"
+        },
+        {
+          "id": 4,
+          "label": "Prisoners"
+        },
+        {
+          "id": 5,
+          "label": "Military"
+        }
+      ]
+    },
+    {
+      "id": "persons",
+      "type": "tag",
+      "label": "Persons",
+      "value": [],
+      "values": [
+        {
+          "id": 0,
+          "label": "Tom Jones"
+        },
+        {
+          "id": 1,
+          "label": "Joe Smith"
+        },
+        {
+          "id": 2,
+          "label": "Guram Jgenti"
+        },
+        {
+          "id": 3,
+          "label": "Kote Iashvili"
+        },
+        {
+          "id": 4,
+          "label": "Peter Green"
+        },
+        {
+          "id": 5,
+          "label": "Konstantine Baratashvili"
+        }
+      ]
+    },
+    {
+      "id": "locations",
+      "type": "tag",
+      "label": "Locations",
+      "value": [],
+      "values": [
+        {
+          "id": 0,
+          "label": "Tbilisi"
+        },
+        {
+          "id": 1,
+          "label": "Batumi"
+        },
+        {
+          "id": 2,
+          "label": "New York"
+        },
+        {
+          "id": 3,
+          "label": "Paris"
+        },
+        {
+          "id": 4,
+          "label": "Zestafoni"
+        },
+        {
+          "id": 5,
+          "label": "Maui"
+        }
+      ]
+    },
+    {
+      "id": "postContains",
+      "type": "text",
+      "label": "Post contains",
+      "value": ""
+    },
+    {
+      "id": "hasVideo",
+      "type": "checkbox",
+      "label": "Has video",
+      "value": true
+    }
+  ]
+}
