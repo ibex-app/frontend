@@ -1,14 +1,13 @@
 {
   "data": [
     {
-      "id": "date-from",
+      "id": "time_interval_from",
       "type": "date",
       "label": "Date from",
       "value": ""
-  
     },
     {
-      "id": "date-to",
+      "id": "time_interval_to",
       "type": "date",
       "label": "Date to",
       "value": ""
