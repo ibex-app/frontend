@@ -12,7 +12,7 @@ export function Sidebar() {
             <ul>
               <li><a className="inactive" href="#">COVID19</a></li>
               <li><a className="inactive" href="#">Elections</a></li>
-              <li><a className="" href="/taxonomy">+ Create</a></li>
+              <li><a className="" href="/taxonomy-init">+ Create</a></li>
             </ul>
           </li>
         </ul>
