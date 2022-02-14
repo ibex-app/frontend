@@ -1,18 +1,21 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { useTable } from 'react-table';
+import { usePagination, useSortBy, useTable } from 'react-table';
 import cols from '../../data/columns.json';
 import { Https } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
+import { useGlobalState } from '../../app/store';
 
 export function Table() {
   const [data, setData]: any = useState([]);
+  const [filters, _]: any = useGlobalState('filters');
   const columns: any = useMemo(() => cols.data, []);
 
   useEffect(() => {
+
+    console.log(filters);
     const fetchData = Https.get('posts', {
-      "time_interval_from": "2021-01-16T17:23:05.925Z",
-      "time_interval_to": "2021-07-16T17:23:05.925Z",
+      ...filters,
       "count": 10
     });
 
@@ -26,7 +29,7 @@ export function Table() {
       // console.log(_data);
     });
 
-  }, []);
+  }, [filters]);
 
   const {
     getTableProps,
@@ -34,10 +37,14 @@ export function Table() {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({
-    columns,
-    data
-  });
+  } = useTable(
+    {
+      columns,
+      data
+    },
+    useSortBy,
+    usePagination
+  );
 
   return (
     <table {...getTableProps()} className="table">
@@ -71,7 +78,7 @@ export function Table() {
                     </td>
                   })}
                 </div>
-              
+
                 <div className="table--extra-row"><i className="icn icn--type-video"></i>
                   <div className="table--item-tags">
                     <div className="flex">
