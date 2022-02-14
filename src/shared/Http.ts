@@ -7,7 +7,7 @@ export type Response<T> = E.Either<Error, T>;
 class HttpsClass {
   get = async (path: string, params: Object) => pipe(
     TE.tryCatch(
-      () => fetch(`http://161.35.73.100/${path}`, {
+      () => fetch(`http://161.35.73.100:8888/${path}`, {
         method: 'post',
         headers: new Headers({
           'Content-Type': 'application/json',

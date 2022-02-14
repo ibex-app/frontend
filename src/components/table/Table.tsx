@@ -5,6 +5,10 @@ import cols from '../../data/columns.json';
 import { Https } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { useGlobalState } from '../../app/store';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook, faTwitter, faYoutube} from "@fortawesome/free-brands-svg-icons"
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+
 
 export function Table() {
   const [data, setData]: any = useState([]);
@@ -12,8 +16,15 @@ export function Table() {
   const columns: any = useMemo(() => cols.data, []);
 
   useEffect(() => {
-
+    
+    if(filters.time_interval_from && filters.time_interval_to){
+      filters.time_interval_from += filters.time_interval_from.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
+      filters.time_interval_to += filters.time_interval_to.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
+      filters.platforms = filters.platforms.map((a : any) => a.label)
+      // console.log(platforms)
+    }
     console.log(filters);
+
     const fetchData = Https.get('posts', {
       ...filters,
       "count": 10
@@ -21,12 +32,22 @@ export function Table() {
 
     fetchData.then(_data => {
       let maybeData = E.getOrElse(() => [])(_data)
+      if(!maybeData.forEach) return
+
       maybeData.forEach((row: any) => {
-        // console.log(row)
-        row.created_at = new Date(row.created_at).toLocaleDateString("en-US")
+        row.created_at = new Date(row.created_at.$date).toLocaleDateString("en-US")
+        switch (row.platform) {
+            case 'facebook': 
+              row.platform = <FontAwesomeIcon icon={faFacebook} />
+              break;
+            case 'twitter': 
+              row.platform = <FontAwesomeIcon icon={faTwitter} />
+              break;
+            case 'youtube': 
+              row.platform = <FontAwesomeIcon icon={faYoutube} />
+        }
       })
       setData(maybeData);
-      // console.log(_data);
     });
 
   }, [filters]);

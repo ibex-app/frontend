@@ -13,7 +13,7 @@
       "value": ""
     },
     {
-      "id": "platform",
+      "id": "platforms",
       "type": "tag",
       "label": "Platform",
       "value": [],
