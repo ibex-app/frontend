@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 import { Filter } from '../filter/Filter';
 import { Table } from '../table/Table';

@@ -1679,7 +1679,7 @@ main.main .main-dashboard {
   padding-left: 10px;
 }
 
-input[type="date"]{
+.filter input[type="date"]{
   width: 100%;
 }
 

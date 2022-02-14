@@ -8,11 +8,11 @@ export function Sidebar() {
         <ul>
           <li><a className="inactive" href="/taxonomy">Taxonomy</a></li>
           <li><a className="inactive" href="/sources">Data Sources</a></li>
-          <li><a href="/results">Results <i className="icn icn-arrow arrw-dwn"></i></a>
+          <li><a href="/results">Monitors<i className="icn icn-arrow arrw-dwn"></i></a>
             <ul>
               <li><a className="inactive" href="#">COVID19</a></li>
               <li><a className="inactive" href="#">Elections</a></li>
-              <li><a className="inactive" href="#">Supply Chain</a></li>
+              <li><a className="" href="/taxonomy">+ Create</a></li>
             </ul>
           </li>
         </ul>
