@@ -1484,9 +1484,10 @@ footer {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-  padding: 6px;
+  padding: 7px;
   cursor: pointer;
   display: block;
+  border-radius: 6px;
 }
 
 .rbt-menu > .dropdown-item:hover{
@@ -1497,12 +1498,13 @@ footer {
 flex-wrap: wrap;
 background: white none repeat scroll 0% 0%;
 z-index: 5;
-box-shadow: rgb(136, 136, 136) 0px 4px 2px 1px;
+box-shadow: rgba(136, 136, 136, 0.3) 0px 1px 1px 1px;
 padding: 8px;
 top: 10px;
 left: 0px;
 transform: translate3d(0px, 16px, 0px);
-
+margin-top: 5px;
+border-radius: 8px;
 }
 
 .rbt-menu.dropdown-menu.show{
@@ -1512,7 +1514,9 @@ transform: translate3d(0px, 16px, 0px);
 .rbt-token-removeable {
   padding-right: 30px;
 }
-
+.rbt-token .rbt-token-remove-button span{
+  color: whitesmoke;
+}
 .rbt-token .rbt-token-remove-button{
   background: none;
   border:none
@@ -1525,28 +1529,40 @@ transform: translate3d(0px, 16px, 0px);
 
 .rbt-input-multi .rbt-input-wrapper, input, select {
   padding: 6px;
-  min-height: 30px;
+  min-height: 38px;
   border:none;
-  background: rgba(230, 230, 230, 0.48);
-  border:none;
+  /* background: rgba(230, 230, 230, 0.48); */
+  border: 2px solid rgba(199, 199, 199, 0.48);
+  /* border:none; */
+  border-radius: 8px;
+  
 }
 
 .rbt-input-multi .rbt-input-wrapper{
-  min-height: 35px;
+  /* min-height: 38px; */
+  padding-top: 0px;
+padding-bottom: 5px;
 }
-
+.rbt-input-multi.focus{
+  border:none;
+  box-shadow: inset 0 0 0 0.1rem rgba(165, 165, 165, 0.25);
+  border-radius: 8px;
+}
 
 .rbt-input-multi .rbt-input-main{
   min-height: auto;
 }
 
+.rbt-input-multi {
+  overflow: visible;
+}
 .sidebar {
   min-width: 5%;
   border-right: 1px solid #ddd;
 }
 
 .font--xs.font--gray-3.mb-5 {
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   margin-top: 10px;
 }
 
@@ -1557,14 +1573,20 @@ transform: translate3d(0px, 16px, 0px);
 
 /* Table */
 .table--item {
-  margin-bottom: 20px;
+  margin-top: 20px;
   display: block;
   position: relative;
   cursor: pointer;
+  border-radius: 13px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  width: 80%;
+  margin-left: 10%; 
 }
 
 .table--row {
-  max-height: 70px;
+  /* max-height: 70px; */
+  margin-bottom: 0;
 }
 .table--col{
   overflow: hidden;
@@ -1634,12 +1656,15 @@ a, span, div, button {
   flex-grow: 1;
   display: block;
   border-radius: 0;
+  background-color: #FCFCFC;
+  border-bottom: 1px solid #ddd;
+  padding-top: 5px;
 }
 
 .table--body {
   padding: 0 15px;
   position: absolute;
-  height: calc(100% - 38px);
+  height: 100%;
   bottom: 0;
   width: 100%;
   overflow: scroll;
@@ -1654,7 +1679,7 @@ main.main .main-dashboard {
   margin: 0;
 }
 
-.table--header, .table--item {
+.table--header {
   border-radius: 4px;
 }
 
@@ -1732,8 +1757,8 @@ font-size: 14px;
 
 
 .rbt-token.rbt-token-removeable{
-  background: #8d639a63;
-  color: inherit;
+  background: #4670be;
+  color: whitesmoke;
 }
 
 
@@ -1756,4 +1781,8 @@ font-size: 14px;
   border-radius: 50%;
   border: 1px solid white;
   /* display: none; */
+}
+.rbt-token.rbt-token-removeable {
+  margin-top: 5px;
+  margin-bottom: 0px;
 }

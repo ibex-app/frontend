@@ -1,6 +1,7 @@
 import { Tag } from '../inputs/Tag';
 import { FilterElement } from '../../types/form';
 import { useEffect, useMemo, useState } from 'react';
+import { Table } from '../table/Table';
 
 import './Taxonomy.css';
 
@@ -24,6 +25,7 @@ export function Taxonomy() {
     // })
 
     return (
+      <div>
       <div className="leftbox">
         <div>
           <input type="text" placeholder="Name"></input>
@@ -80,6 +82,9 @@ export function Taxonomy() {
         </div>
         <button >Get Semple</button>
         <button >Run</button>
+        
       </div>
+      {<Table />} 
+      </div> 
     );
   }

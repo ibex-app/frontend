@@ -7,7 +7,11 @@ import * as E from "fp-ts/lib/Either";
 import { useGlobalState } from '../../app/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube} from "@fortawesome/free-brands-svg-icons"
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+// import { } from "@fortawesome/free-brands-svg-icons"
+
+import { faTrashCan, faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
+import './table.css';
+
 
 
 export function Table() {
@@ -27,7 +31,7 @@ export function Table() {
 
     const fetchData = Https.get('posts', {
       ...filters,
-      "count": 10
+      "count": 40
     });
 
     fetchData.then(_data => {
@@ -35,7 +39,7 @@ export function Table() {
       if(!maybeData.forEach) return
 
       maybeData.forEach((row: any) => {
-        row.created_at = new Date(row.created_at.$date).toLocaleDateString("en-US")
+        row.created_at = new Date(row.created_at.$date).toLocaleString('en-us',{month:'short', year:'numeric', day: 'numeric'})
         switch (row.platform) {
             case 'facebook': 
               row.platform = <FontAwesomeIcon icon={faFacebook} />
@@ -46,7 +50,10 @@ export function Table() {
             case 'youtube': 
               row.platform = <FontAwesomeIcon icon={faYoutube} />
         }
+
+        // Channel
       })
+      
       setData(maybeData);
     });
 
@@ -69,7 +76,7 @@ export function Table() {
 
   return (
     <table {...getTableProps()} className="table">
-      <thead className="table--header">
+      {/* <thead className="table--header">
         {headerGroups.map((headerGroup: any) => (
           <tr {...headerGroup.getHeaderGroupProps()} className="table--row">
             {headerGroup.headers.map((column: any) => (
@@ -77,10 +84,11 @@ export function Table() {
             ))}
           </tr>
         ))}
-      </thead>
+      </thead> */}
       <tbody className="table--body" {...getTableBodyProps()}>
         {rows.map((row: any, i: number) => {
           prepareRow(row)
+          console.log(333, row.cells[3].value.length)
           const { labels } = data[i];
           const tags = [].concat(
             labels.topics || [],
@@ -92,99 +100,50 @@ export function Table() {
           return (
             <>
               <tr {...row.getRowProps()} className="table--item">
-                <div className="table--row">
-                  {row.cells.map((cell: any) => {
-                    return <td {...cell.getCellProps()} className="table--col">
-                      {cell.render('Cell')}
-                    </td>
-                  })}
+                <td className="table--row">
+                <div >
+                  { <div {...row.cells[3].getCellProps()} className="title"> { 
+                      row.cells[3].value.length < 100  ? row.cells[3].value : row.cells[3].value.slice(0, 220) } </div> }
+                  { <div {...row.cells[0].getCellProps()} className="sub-title"> { row.cells[0].render('Cell')} | chanell name </div> }
+                  {/* {row.cells.map((cell: any) => {
+                      return <div {...cell.getCellProps()} className="table--col"> {cell.render('Cell')} </div>
+                  })} */}
+                  { <div {...row.cells[1].getCellProps()} className="platform"> { row.cells[1].render('Cell')} <a target="_blank" href={ row.cells[4].value }>{ row.cells[4].render('Cell')}</a> </div> }
+                  { <div className="scores"> 
+                      <FontAwesomeIcon icon={faThumbsUp} /> { row.cells[6].value } 
+                      <FontAwesomeIcon icon={faThumbsDown} /> { row.cells[7].value } 
+                      <FontAwesomeIcon icon={faShare} /> { row.cells[8].value } 
+                      <FontAwesomeIcon icon={faMessage} /> { row.cells[9].value } 
+                      <FontAwesomeIcon icon={faBiohazard} /> { row.cells[10].value } </div>} 
+                 
                 </div>
-
+                { <img src={row.cells[5].value} /> }
+                  
                 <div className="table--extra-row"><i className="icn icn--type-video"></i>
                   <div className="table--item-tags">
                     <div className="flex">
                       {/* <span className="font-xs mr-15">Tags</span> */}
-                      <div className="flex">
-                        {tags.map(({ title }: any) => (
-                          <a href="£" className="badge bg-secondary">{title}</a>
-                        ))}
+                      <div className="flex"> 
+                        {tags.map(({ title }: any) => ( <a href="£" className="badge bg-secondary">{title}</a> ))}
                       </div>
                     </div>
                   </div>
                 </div>
+                </td>
               </tr>
             </>
           )
         })}
+        { 
+          rows.length ? (<tr className="button-tr">
+            <td><div className="round-btn-transp">
+          Load more results
+        </div></td>
+          </tr>) : ''
+        }
+        
       </tbody>
-      {/* <div className="table--body">
-        <div className="table--item">
-          <div className="table--row">
-            <div className="table--col"><span className="font--xs">12/03/2021</span></div>
-            <div className="table--col"><i className="icn icn--facebook"></i></div>
-            <div className="table--col">
-              <div className="flex">
-                <div className="channgel-logo"><img src="" alt="" /></div><span>რადიო თავისუფლება</span>
-              </div>
-            </div>
-            <div className="table--col"> <span>"საჭიროა ისიც გავარკვიოთ, რა სარგებლობას აძლევს რუსეთს აფხაზეთის დამოუკიდებლობის აღიარება" - სტატია, რომელიც აუცილებლად უნდა წაიკითხოთ! 👇</span></div>
-            <div className="table--col"> <span>2000</span></div>
-            <div className="table--col"> <span>500</span></div>
-            <div className="table--col"> <span>256</span></div>
-            <div className="table--col"> <span>3755</span></div>
-            <div className="table--col"> <span>95</span></div>
-          </div>
-          
-        </div>
-        <div className="table--item">
-          <div className="table--row">
-            <div className="table--col"><span className="font--xs">12/03/2021</span></div>
-            <div className="table--col"><i className="icn icn--facebook"></i></div>
-            <div className="table--col">
-              <div className="flex">
-                <div className="channgel-logo"><img src="" alt="" /></div><span className="font--xs">რადიო თავისუფლება</span>
-              </div>
-            </div>
-            <div className="table--col"> <span>"საჭიროა ისიც გავარკვიოთ, რა სარგებლობას აძლევს რუსეთს აფხაზეთის დამოუკიდებლობის აღიარება" - სტატია, რომელიც აუცილებლად უნდა წაიკითხოთ! 👇</span></div>
-            <div className="table--col"> <span>2000</span></div>
-            <div className="table--col"> <span>500</span></div>
-            <div className="table--col"> <span>256</span></div>
-            <div className="table--col"> <span>3755</span></div>
-            <div className="table--col"> <span>95</span></div>
-          </div>
-          <div className="table--extra-row">
-            <div className="table--item-type"><i className="icn icn--type-text"></i></div>
-            <div className="table--item-tags">
-              <div className="flex"><span className="font-xs mr-15">Tags</span>
-                <div className="flex"><span className="badge bg-secondary">tag 1</span><span className="badge bg-secondary">tag 2</span><span className="badge bg-secondary">tag 3</span></div>
-              </div>
-            </div>
-            <div className="table--item-tags">
-              <div className="flex"><span className="font-xs mr-15">Person</span>
-                <div className="flex"><span className="badge bg-secondary">Mikheil saakashvili</span><span className="badge bg-secondary">Giorgi gakharia</span><span className="badge bg-secondary">tag 3</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      
     </table>
   )
-  // return (
-  //   <div>
-  //     <h1>Table</h1>
-
-  //     <table {...getTableProps()}>
-  //       <thead>
-  //         {headerGroups.map((headerGroup: any) => (
-  //           <tr {...headerGroup.getHeaderGroupProps()}>
-  //             {headerGroup.headers.map((column: any) => (
-  //               <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-  //             ))}
-  //           </tr>
-  //         ))}
-  //       </thead>
-
-  //     </table>
-  //   </div>
-  // );
 }
