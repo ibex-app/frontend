@@ -4,13 +4,13 @@
       "id": "time_interval_from",
       "type": "date",
       "label": "Date from",
-      "value": ""
+      "value": "2022-02-01"
     },
     {
       "id": "time_interval_to",
       "type": "date",
       "label": "Date to",
-      "value": ""
+      "value": "2022-02-15"
     },
     {
       "id": "platforms",

@@ -8,5 +8,8 @@ export const Date = ({ data }: FilterElementInput) => {
     setFilters({ ...filters, [data.id]: e.target.value });
   };
 
-  return <input type="date" onChange={onChange} />
+
+  // setFilters({ ...filters, [data.id]: data.value });
+
+  return <input type="date" onChange={onChange} value={data.value}/>
 }
