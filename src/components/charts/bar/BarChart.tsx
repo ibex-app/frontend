@@ -3,7 +3,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { Https } from '../../../shared/Http';
+import { get } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 
 import {
@@ -77,7 +77,7 @@ export function BarChart() {
     }
 
     const fetchAndSet = (labelType: string) => {
-        const fetchData = Https.get('posts_aggregated', {
+        const fetchData = get('posts_aggregated', {
             "post_request_params": {
                 "time_interval_from": "2021-01-16T17:23:05.925Z",
                 "time_interval_to": "2021-07-16T17:23:05.925Z",

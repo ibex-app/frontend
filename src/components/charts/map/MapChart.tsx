@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import {CRS} from 'leaflet'
 import L from 'leaflet';
-import { Https } from '../../../shared/Http';
+import { get } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 
 import {
@@ -73,7 +73,7 @@ export function MapChart() {
     }
 
     const fetchAndSet = (labelType: string) => {
-        const fetchData = Https.get('posts_aggregated', {
+        const fetchData = get('posts_aggregated', {
             "post_request_params": {
                 "time_interval_from": "2021-01-16T17:23:05.925Z",
                 "time_interval_to": "2021-07-16T17:23:05.925Z",

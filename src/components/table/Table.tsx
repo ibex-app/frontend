@@ -2,50 +2,48 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { usePagination, useSortBy, useTable } from 'react-table';
 import cols from '../../data/columns.json';
-import { Https } from '../../shared/Http';
+import { get } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { useGlobalState } from '../../app/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faTwitter, faYoutube} from "@fortawesome/free-brands-svg-icons"
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
-
+import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
+import { match } from 'ts-pattern';
+import { useNavigate } from "react-router-dom";
 
 export function Table() {
   const [data, setData]: any = useState([]);
   const [filters, _]: any = useGlobalState('filters');
   const columns: any = useMemo(() => cols.data, []);
 
+  const navigate = useNavigate();
+
+  const routeChange = (postId: string) => navigate(`/details/${postId}`);
+
   useEffect(() => {
-    
-    if(filters.time_interval_from && filters.time_interval_to){
+
+    if (filters.time_interval_from && filters.time_interval_to) {
       filters.time_interval_from += filters.time_interval_from.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
       filters.time_interval_to += filters.time_interval_to.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
-      filters.platforms = filters.platforms.map((a : any) => a.label)
-      // console.log(platforms)
+      filters.platforms = filters.platforms.map((a: any) => a.label)
     }
-    console.log(filters);
 
-    const fetchData = Https.get('posts', {
+    const fetchData = get('posts', {
       ...filters,
       "count": 10
     });
 
     fetchData.then(_data => {
       let maybeData = E.getOrElse(() => [])(_data)
-      if(!maybeData.forEach) return
+      if (!maybeData.forEach) return
 
       maybeData.forEach((row: any) => {
         row.created_at = new Date(row.created_at.$date).toLocaleDateString("en-US")
-        switch (row.platform) {
-            case 'facebook': 
-              row.platform = <FontAwesomeIcon icon={faFacebook} />
-              break;
-            case 'twitter': 
-              row.platform = <FontAwesomeIcon icon={faTwitter} />
-              break;
-            case 'youtube': 
-              row.platform = <FontAwesomeIcon icon={faYoutube} />
-        }
+
+        row.platform = match(row.platform)
+          .with("facebook", () => <FontAwesomeIcon icon={faFacebook} />)
+          .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
+          .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
+          .otherwise(() => <span>Invalid Icon</span>)
       })
       setData(maybeData);
     });
@@ -81,7 +79,7 @@ export function Table() {
       <tbody className="table--body" {...getTableBodyProps()}>
         {rows.map((row: any, i: number) => {
           prepareRow(row)
-          const { labels } = data[i];
+          const { labels, _id } = data[i];
           const tags = [].concat(
             labels.topics || [],
             labels.persons || [],
@@ -91,7 +89,7 @@ export function Table() {
 
           return (
             <>
-              <tr {...row.getRowProps()} className="table--item">
+              <tr {...row.getRowProps()} className="table--item" onClick={() => routeChange(_id.$oid)}>
                 <div className="table--row">
                   {row.cells.map((cell: any) => {
                     return <td {...cell.getCellProps()} className="table--col">
