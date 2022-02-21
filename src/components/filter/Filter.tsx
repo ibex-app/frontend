@@ -8,6 +8,9 @@ import { Checkbox } from '../inputs/Checkbox';
 import { Text } from '../inputs/Text';
 import { Date } from '../inputs/Date';
 import { DateInterval } from '../date-interval/DateInterval';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faFolderArrowDown } from "@fortawesome/free-brands-svg-icons"
+import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 export function Filter() {
   const { data }: { data: FilterElement[] } = require('../../data/filter.json')
@@ -56,14 +59,15 @@ export function Filter() {
                     </div>
                   <div className="col-2">
                       
-                      <div className="form__item btn">
+                      {/* <div className="form__item btn">
                         <a href="#" >Download</a>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="col-2">
                       
-                      <div className="form__item btn">
-                        <a href="#" >Save</a>
+                      <div className="form__item btn-small">
+                        {/* <a href="#" >Save</a> */}
+                        <FontAwesomeIcon icon={faFileArrowDown} />
                       </div>
                     </div>
 

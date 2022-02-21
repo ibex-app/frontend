@@ -77,7 +77,7 @@ export function TaxonomyParams() {
 
           {/* <div className="sugg" >Suggestions: <a href="#">FB CNN </a>, <a href="#">NBC</a></div> */}
 
-          <button >Preview results</button>
+          <a href="/taxonomy" className=""><button >Preview results</button></a>
           <button >Start data collection</button>
         </div>
         

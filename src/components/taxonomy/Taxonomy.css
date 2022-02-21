@@ -39,7 +39,7 @@ padding: 22px;
     font-size: 18px;
 }
 
-.leftbox > button, .tax-full button {
+.leftbox > button, .tax-full button, .round-btn-transp {
     background: #4670be;
 border: none;
 margin-left: 55px;

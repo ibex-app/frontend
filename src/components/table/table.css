@@ -1,0 +1,80 @@
+.sub-title {
+    color: #b7b7b7;
+    margin: 14px 0;
+    font-size: 13px;
+}
+
+.table{
+    background-color: #f4f4f5;
+}
+
+.platform a{
+    font-size: 13px;
+    color: gray;
+}
+
+.table--row img {
+    width: 140px;
+}
+
+.scores {
+    margin: 15px 0;
+    color: #606060;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.scores svg {
+    font-size: 12px;
+    margin-left: 55px;
+    margin-right: 5px;
+    color: #b9b9b9;
+}
+
+.scores svg:first-child {
+    margin-left: 5px;
+}
+
+.table--row{
+    line-height: 1.3em;
+}
+
+.form__item.btn-small{
+    position: absolute;
+bottom: 0;
+right: 15px;
+padding: 8px;
+min-height: 38px;
+display: flex;
+align-items: center;
+background: #f2f2f2;
+border-radius: 8px;
+color: #727272;
+cursor: pointer;
+}
+
+.round-btn-transp{
+    width: 210px;
+text-align: center;
+margin-bottom: 20px;
+margin: 10px auto 20px auto;
+background: none;
+color: #4670be;
+box-shadow: inset 0px 0px 1px 1px #4670be;
+cursor: pointer;
+}
+
+.round-btn-transp:hover{
+    background: #4670be;
+    color: #f2f2f2;
+}
+
+.button-tr{
+    display: flex;
+width: 100%;
+justify-content: center;
+align-items: center;
+} 
+.button-tr .round-btn-transp{
+margin-left: 0px;
+}

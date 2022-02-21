@@ -10,11 +10,19 @@
     },
     {
       "Header": "Channel",
-      "accessor": "channel"
+      "accessor": "data_source_id"
     },
     {
       "Header": "Titles",
-      "accessor": "text"
+      "accessor": "title"
+    },
+    {
+      "Header": "URL",
+      "accessor": "url"
+    },
+    {
+      "Header": "ImageURL",
+      "accessor": "image_url"
     },
     {
       "Header": "Likes",
