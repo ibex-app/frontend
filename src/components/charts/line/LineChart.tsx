@@ -145,7 +145,7 @@ export function LineChart() {
   return (
     <div className="results">
       <select onChange={change}>
-        {['topics', 'persons', 'locations', 'platforms', 'datasources'].map(d => <option key={d}>{d}</option>)}
+        {['topics', 'persons', 'locations', 'platform', 'datasources'].map(d => <option key={d}>{d}</option>)}
 
       </select>
       <select onChange={change}>

@@ -3,7 +3,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { get } from '../../../shared/Http';
+import { get, transform_filters_to_request } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 
 import {
@@ -48,11 +48,15 @@ export const options = {
 
 
 export function BarChart() {
-
-    const [filters, setFilters] = useGlobalState('filters');
+    const [data, setData]: any = useState([]);
+    const [fetching, setFetching]: any = useState(true);
+    const [filters, _]: any = useGlobalState('filters');
+    
     useEffect(() => {
-        console.log(filters);
+        if (Object.keys(filters).length) loadData('persons');
     }, [filters]);
+    
+    // useEffect(() => fetchAndSet('topics'), []);
 
     // const BarChart = () => {
     var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
@@ -61,36 +65,33 @@ export function BarChart() {
         labels,
         datasets: [
             {
-                label: 'Topics',
+                label: 'Locations',
                 data: [0],
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
         ],
     };
 
-    const [data, setData] = useState(data_);
-    const [fetching, setFetching] = useState(true);
-
     const change = (e: any) => {
-        setFetching(true)
-        fetchAndSet(e.target.value)
+        loadData(e.target.value)
     }
 
-    const fetchAndSet = (labelType: string) => {
+    const loadData = (labelType: string) => {
+        setFetching(true)
+
         const fetchData = get('posts_aggregated', {
-            "post_request_params": {
-                "time_interval_from": "2021-01-16T17:23:05.925Z",
-                "time_interval_to": "2021-07-16T17:23:05.925Z",
-            },
-            "axisX": labelType,
-            // "days": 30
+            post_request_params: transform_filters_to_request(filters),
+            axisX: labelType
         });
+       
 
         fetchData.then(_data => {
             let pre_data: any = { count: 0 }
             pre_data[labelType] = { title: 0 }
+
             let maybeData = E.getOrElse(() => [pre_data])(_data)
-            let labels = maybeData.map(i => i[labelType].title)
+            
+            let labels = maybeData.map(i => i[labelType].title || i[labelType])
             data_ = {
                 labels,
                 datasets: [
@@ -108,40 +109,35 @@ export function BarChart() {
             };
             setData(data_);
             setFetching(false)
-        });
 
+            console.log(data_);
+        })
     }
-
-    useEffect(() => fetchAndSet('topics'), []);
-
-    if (fetching) {
-        return (
-            <div className="results">Loading...</div>
-        )
-    }
-    return (
+   
+    
+    return ( 
         <div className="results">
             <select onChange={change}>
-                {['topics', 'persons', 'locations', 'platforms', 'datasources'].map(d => <option key={d}>{d}</option>)}
+                {['persons', 'locations', 'platform', 'topics', 'datasources'].map(d => <option key={d}>{d}</option>)}
             </select>
             <select onChange={change}>
-                {['hate-speech', 'count', 'reach-out', 'likes', 'shares', 'sentiment', 'comments'].map(d => <option key={d}>{d}</option>)}
+                {['count', 'hate-speech', 'reach-out', 'likes', 'shares', 'sentiment', 'comments'].map(d => <option key={d}>{d}</option>)}
             </select>
-
-            {/* <Typeahead
+            {
+                fetching ? (
+                    <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>
+                ) : (<div className="chart"><Bar options={options} data={data} /></div>)
+                // ) : (<div className="chart"></div>)
+            }
+        </div>
+    ) 
+}
+ /* <Typeahead
                 // multiple
                 id="Axis-X"
                 onChange={change}
                 options={filterData.data.map(d => d.label)}
                 placeholder="Axis X"
             // selected={value}
-            /> */}
-            <div className="chart">
-                <Bar options={options} data={data} />
-            </div>
-
-        </div>
-    );
-}
-
+            /> */
 // export default BarChart

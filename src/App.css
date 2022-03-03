@@ -1535,6 +1535,7 @@ border-radius: 8px;
   border: 2px solid rgba(199, 199, 199, 0.48);
   /* border:none; */
   border-radius: 8px;
+  background: none;
   
 }
 
@@ -1684,12 +1685,12 @@ main.main .main-dashboard {
 }
 
 .chart {
-  width: 100%;
+  width: 80%;
+  left: 5%;
   height: calc(100% - 50px);
   position: absolute;
   top: 70px;
   overflow: hidden;
-  width: 70%;
 }
 
 .inactive {
@@ -1789,4 +1790,9 @@ font-size: 14px;
 
 .rbt-input-hint, .rbt-input-main{
   min-height: 25px !important;
+}
+
+.results select{
+  width: 15%;
+  margin-right: 2%;
 }

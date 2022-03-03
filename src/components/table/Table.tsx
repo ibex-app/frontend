@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { usePagination, useSortBy, useTable } from 'react-table';
 import cols from '../../data/columns.json';
-import { get } from '../../shared/Http';
+import { get, transform_filters_to_request } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { useGlobalState } from '../../app/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -18,7 +18,7 @@ import './table.css';
 
 export function Table() {
   const [data, setData]: any = useState([]);
-  const [loading, setLoading]: any = useState(false);
+  const [fetching, setFetching]: any = useState(false);
 
   const [filters, _]: any = useGlobalState('filters');
   const columns: any = useMemo(() => cols.data, []);
@@ -30,19 +30,12 @@ export function Table() {
   const routeChange = (postId: string) => navigate(`/details/${postId}`);
 
   const loadData = (si?: number, c?: number, append?: boolean) => {
-    setLoading(true)
-    if (filters.time_interval_from && filters.time_interval_to) {
-      filters.time_interval_from += filters.time_interval_from.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
-      filters.time_interval_to += filters.time_interval_to.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
-      filters.platforms = filters.platforms.map((a: any) => a.label)
-      filters.author_platform_id = filters.author_platform_id .map((a: any) => a.platform_id)
-    }
-
+    setFetching(true)
     start_index = si || start_index;
     count = c || count;
 
     const fetchData = get('posts', {
-      ...filters,
+      ...transform_filters_to_request(filters),
       "count": count,
       "start_index": start_index
     });
@@ -63,7 +56,7 @@ export function Table() {
       })
       setData(append ? [...data, ...maybeData] : [...maybeData])
      
-      setLoading(false)
+      setFetching(false)
     });
   }
 
@@ -146,7 +139,7 @@ export function Table() {
           )
         })}
         {
-          !loading && rows.length ? (
+          !fetching && rows.length ? (
             <tr className="button-tr" onClick={() => loadData(start_index + count, 20, true)}>
               <td><div className="round-btn-transp">
                 Load more results
@@ -155,8 +148,8 @@ export function Table() {
           ) : (<tr ><td></td></tr>)
         }
         {
-          !loading && !rows.length ? (
-            <tr className="button-tr" onClick={() => loadData(start_index + count, 20, true)}>
+          !fetching && !rows.length ? (
+            <tr className="button-tr" >
               <td><div className="round-btn-transp">
                 No posts to show
               </div></td>
@@ -165,8 +158,8 @@ export function Table() {
 
         }
         {
-          loading ? (
-            <tr className="button-tr" onClick={() => loadData(start_index + count, 20, true)}>
+          fetching ? (
+            <tr className="button-tr">
               <td><div className="round-btn-transp">
                 Loading...
               </div></td>

@@ -34,20 +34,18 @@ export function TaxonomyParams() {
           </div>
           <div className="tax-mid">
             <br/>
-            <br/>
-            <br/>
-            <b>Enter keywords</b> <br/><br/>
+            <br/><br/>
+            <b>Date range</b> <br/><br/>
+          <input type="date" /> <input type="date" />
+
+          <br/><br/>
+
+            <b>Keywords</b> <br/><br/>
             <input type="file" /> <br/>
           <textarea className="" placeholder="keywords"></textarea><br/><br/>
            
            
-           <br/><br/>
-            <b>Parameters</b> <br/><br/>
-            Date range<br/>
-          <input type="date" />
-          <input type="date" />
-
-          <br/><br/>
+           
           <b>Accounts / Platforms</b><br/><br/>
           <div className="tabs">
 
@@ -76,9 +74,9 @@ export function TaxonomyParams() {
           
 
           {/* <div className="sugg" >Suggestions: <a href="#">FB CNN </a>, <a href="#">NBC</a></div> */}
-
+          <br/><br/><br/><br/>
           <a href="/taxonomy" className=""><button >Preview results</button></a>
-          <button >Start data collection</button>
+          {/* <button >Start data collection</button> */}
         </div>
         
       </div>

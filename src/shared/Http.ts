@@ -17,3 +17,19 @@ export const get = async (path: string, params: Object) => pipe(
   ),
   TE.map((resp) => resp),
 )();
+
+
+export const transform_filters_to_request = (filters_: any) => {
+  let filters = JSON.parse(JSON.stringify(filters_))
+  if (filters.time_interval_from && filters.time_interval_to) {
+    filters.time_interval_from += filters.time_interval_from.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
+    filters.time_interval_to += filters.time_interval_to.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
+    filters.platform = filters.platform.map((a: any) => a.label)
+
+    filters.author_platform_id = filters.author_platform_id .map((a: any) => a.platform_id)
+    filters.locations = filters.locations .map((a: any) => a._id)
+    filters.persons = filters.persons .map((a: any) => a._id)
+
+  }
+  return filters
+}

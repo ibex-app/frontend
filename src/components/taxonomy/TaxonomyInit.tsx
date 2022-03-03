@@ -16,15 +16,15 @@ export function TaxonomyInit() {
           </div>
           <div className="tax-mid">
           <br/><br/><br/>
-            What is the name of the report? <br/>
+            What is the name of the report? <br/><br/>
             <input type="text" placeholder=""></input><br/><br/>
-            What is the report about? <br/>
-            <textarea className="" placeholder="Description"></textarea><br/><br/>
+            What is the report about? <br/><br/>
+            <textarea className="" ></textarea><br/><br/>
             {/* How do you like to collect your data? <br/>
             <input type="radio" /> List of keywords<br/>
             <input type="radio" /> Taxonomy tool<br/> */}
             {/* <input type="date" /> */}
-          <a href="/taxonomy-params" className=""><button >Save</button></a>
+          <a href="/taxonomy-params" className=""><button >Next</button></a>
           {/* <button >Run</button> */}
             </div>
       </div>

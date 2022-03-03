@@ -20,8 +20,12 @@ padding: 22px;
     font-size: 11px;
     padding: 10px;
     border-radius: 10px;
+    resize: none;
 }
 
+.tax-full textarea{
+    min-height: 90px;
+}
 .tab {
     font-size: 13px;
     display: inline-block;
@@ -42,7 +46,7 @@ padding: 22px;
 .leftbox > button, .tax-full button, .round-btn-transp {
     background: #4670be;
 border: none;
-margin-left: 55px;
+/* margin-left: 55px; */
 margin-top: 20px;
 color: #fff;
 padding: 10px 20px;
@@ -96,7 +100,8 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 .tax-mid input[type="date"]{
-    width: 40%;
+    width: 37%;
+margin-right: 5.5%;
 }
 
 .fa-facebook{
