@@ -5,9 +5,9 @@ export const Date = ({ data }: FilterElementInput) => {
   const [filters, setFilters] = useGlobalState('filters');
 
   const onChange = (e: any) => {
+    data.value = e.target.value
     setFilters({ ...filters, [data.id]: e.target.value });
   };
-
 
   // setFilters({ ...filters, [data.id]: data.value });
 

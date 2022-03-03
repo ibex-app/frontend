@@ -10,7 +10,7 @@
       "id": "time_interval_to",
       "type": "date",
       "label": "Date to",
-      "value": "2022-02-15"
+      "value": "today"
     },
     {
       "id": "platforms",

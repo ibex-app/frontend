@@ -24,6 +24,7 @@ export function Table() {
   const navigate = useNavigate();
 
   const routeChange = (postId: string) => navigate(`/details/${postId}`);
+  let start_index = 0
 
   useEffect(() => {
 
@@ -35,7 +36,8 @@ export function Table() {
 
     const fetchData = get('posts', {
       ...filters,
-      "count": 40
+      "count": 40,
+      "start_index": start_index
     });
 
     fetchData.then(_data => {

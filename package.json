@@ -22,6 +22,7 @@
     "fp-ts": "^2.11.5",
     "gh-pages": "^3.2.3",
     "leaflet": "^1.7.1",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-bootstrap-typeahead": "5.2.1",
     "react-chartjs-2": "^4.0.0",

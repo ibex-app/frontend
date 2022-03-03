@@ -11,11 +11,13 @@ import { DateInterval } from '../date-interval/DateInterval';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faFolderArrowDown } from "@fortawesome/free-brands-svg-icons"
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
+import moment from "moment";
 
 export function Filter() {
   const { data }: { data: FilterElement[] } = require('../../data/filter.json')
 
   const [_, setFilters] = useGlobalState('filters');
+  
 
   useEffect(() => {
     // generate state object from data and set it to global state
@@ -24,16 +26,22 @@ export function Filter() {
     ))(data));
   }, [])
 
-  const getElem = (el: FilterElement) => match(el.type)
-    .with("data-interval", () => <DateInterval data={el} />)
-    .with("tag", () => <Tag data={el} />)
-    .with("date", () => <Date data={el} />)
-    .with("text", () => <Text data={el} />)
-    .with("checkbox", () => <Checkbox data={el} />)
-    .otherwise(() => {
-      console.error(`Invalid component name ${el.type}`);
-      return <></>
-    })
+  const getElem = (el: FilterElement) => {
+    if (el.value === 'today') {
+      el.value = moment().format("YYYY-MM-DD")
+    }
+
+    return match(el.type)
+      .with("data-interval", () => <DateInterval data={el} />)
+      .with("tag", () => <Tag data={el} />)
+      .with("date", () => <Date data={el} />)
+      .with("text", () => <Text data={el} />)
+      .with("checkbox", () => <Checkbox data={el} />)
+      .otherwise(() => {
+        console.error(`Invalid component name ${el.type}`);
+        return <></>
+      })
+  }
 
   return (
     <section className="filter">
