@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube} from "@fortawesome/free-brands-svg-icons"
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
+import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
+
 import './Taxonomy.css';
 import fa from 'faker/locale/fa';
 
 export function TaxonomyParams() {
     const [keywordTag, setKeywordTag] = useState('input')
-    const [accountTag, setAccountTag] = useState('input')
+    const [accountTag, setAccountTag] = useState('upload')
     
     
 
@@ -40,8 +42,8 @@ export function TaxonomyParams() {
 
           <br/><br/>
 
-            <b>Keywords</b> <br/><br/>
-            <input type="file" /> <br/>
+            <b>Keywords</b> <FontAwesomeIcon className="upload-btn" icon={faFileArrowUp} /> <br/><br/>
+            {/* <input type="file" /> <br/> */}
           <textarea className="" placeholder="keywords"></textarea><br/><br/>
            
            

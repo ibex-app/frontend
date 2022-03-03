@@ -131,3 +131,7 @@ margin-right: 5.5%;
 .account .fa-trash-can{
     float: right
 }
+
+.upload-btn{
+    cursor: pointer
+}
