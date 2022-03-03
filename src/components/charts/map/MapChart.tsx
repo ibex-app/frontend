@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import {CRS} from 'leaflet'
 import L from 'leaflet';
-import { get } from '../../../shared/Http';
+import { get, transform_filters_to_request } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 
 import {
@@ -53,63 +53,55 @@ export const options = {
 
 
 export function MapChart() {
+  const [data, setData]: any = useState([]);
+  const [fetching, setFetching]: any = useState(true);
+  const [filters, _]: any = useGlobalState('filters');
+  
+  useEffect(() => {
+      if (Object.keys(filters).length) loadData('persons');
+  }, [filters]);
+  
+  // useEffect(() => fetchAndSet('topics'), []);
 
-    const [filters, setFilters] = useGlobalState('filters');
-    useEffect(() => {
-        console.log(filters);
-    }, [filters]);
+  // const BarChart = () => {
+  var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
+  let labels = [0]
+  let data_: any = {
+      labels,
+      datasets: [
+          {
+              label: 'Locations',
+              data: [0],
+              backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          },
+      ],
+  };
 
-    // const BarChart = () => {
-    var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
-    let labels = [0]
-    let data_: any = []
+  const change = (e: any) => {
+      loadData(e.target.value)
+  }
 
-    const [data, setData] = useState(data_);
-    const [fetching, setFetching] = useState(true);
+  const loadData = (labelType: string) => {
+      setFetching(true)
+      labelType = 'locations'
+      const fetchData = get('posts_aggregated', {
+          post_request_params: transform_filters_to_request(filters),
+          axisX: labelType
+      });
+     
 
-    const change = (e: any) => {
-        setFetching(true)
-        fetchAndSet(e.target.value)
-    }
+      fetchData.then(_data => {
+          let pre_data: any = { count: 0 }
+          pre_data[labelType] = { title: 0 }
 
-    const fetchAndSet = (labelType: string) => {
-        const fetchData = get('posts_aggregated', {
-            "post_request_params": {
-                "time_interval_from": "2021-01-16T17:23:05.925Z",
-                "time_interval_to": "2021-07-16T17:23:05.925Z",
-            },
-            "axisX": 'locations',
-            "days": 30
-        });
+          let maybeData = E.getOrElse(() => [pre_data])(_data)
+         
+          setData(maybeData);
+          setFetching(false)
 
-        fetchData.then(_data => {
-            let pre_data: any = { count: 0 }
-            pre_data[labelType] = { title: 0 }
-            let maybeData = E.getOrElse(() => [pre_data])(_data)
-            // let labels = maybeData.map(i => i[labelType].title)
-            
-            // data_ = {
-            //     labels,
-            //     datasets: [
-            //         {
-            //             fill: false,
-            //             lineTension: 0.1,
-            //             backgroundColor: '#8d639a',
-            //             pointBorderColor: '#111',
-            //             pointBackgroundColor: '#ff4000',
-            //             pointBorderWidth: 2,
-            //             label: labelType,
-            //             data: maybeData.map(i => i.count),
-            //         },
-            //     ],
-            // };
-            setData(maybeData);
-            setFetching(false)
-        });
-
-    }
-
-    useEffect(() => fetchAndSet('topics'), []);
+          // console.log(data_);
+      })
+  }
 
     
 
@@ -126,7 +118,7 @@ export function MapChart() {
 
     const myIcon = L.icon({
       iconUrl: require('../../../circle.jpeg'),
-      iconSize: [1,1],
+      iconSize: [8,8],
       iconAnchor: [1, 1],
       // popupAnchor: null,
       // shadowUrl: null,
@@ -140,7 +132,7 @@ export function MapChart() {
         
       <div className="results">
             <select onChange={change}>
-                {['topics', 'persons', 'locations', 'platform', 'datasources'].map(d => <option key={d}>{d}</option>)}
+                {['count', 'hate-speech', 'reach-out', 'likes', 'shares', 'sentiment', 'comments'].map(d => <option key={d}>{d}</option>)}
             </select>
 
           <MapContainer center={[42.755229, 43.304470]} zoom={7} scrollWheelZoom={false}>
