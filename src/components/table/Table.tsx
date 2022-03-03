@@ -20,23 +20,26 @@ export function Table() {
   const [data, setData]: any = useState([]);
   const [filters, _]: any = useGlobalState('filters');
   const columns: any = useMemo(() => cols.data, []);
+  let start_index = 0;
+  let count = 40;
 
   const navigate = useNavigate();
 
   const routeChange = (postId: string) => navigate(`/details/${postId}`);
-  let start_index = 0
 
-  useEffect(() => {
-
+  const loadData = (si?: number, c?: number) => {
     if (filters.time_interval_from && filters.time_interval_to) {
       filters.time_interval_from += filters.time_interval_from.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
       filters.time_interval_to += filters.time_interval_to.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
       filters.platforms = filters.platforms.map((a: any) => a.label)
     }
 
+    start_index = si || start_index;
+    count = c || count;
+
     const fetchData = get('posts', {
       ...filters,
-      "count": 40,
+      "count": count,
       "start_index": start_index
     });
 
@@ -55,9 +58,12 @@ export function Table() {
         // Channel
       })
 
-      setData(maybeData);
+      data.length ? setData([...data, ...maybeData]) : setData(maybeData);
     });
+  }
 
+  useEffect(() => {
+    if (Object.keys(filters).length) loadData();
   }, [filters]);
 
   const {
@@ -136,11 +142,13 @@ export function Table() {
           )
         })}
         {
-          rows.length ? (<tr className="button-tr">
-            <td><div className="round-btn-transp">
-              Load more results
-            </div></td>
-          </tr>) : ''
+          rows.length ? (
+            <tr className="button-tr" onClick={() => loadData(start_index + count, 20)}>
+              <td><div className="round-btn-transp">
+                Load more results
+              </div></td>
+            </tr>
+          ) : ''
         }
 
       </tbody>
