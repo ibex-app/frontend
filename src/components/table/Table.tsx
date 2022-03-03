@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { usePagination, useSortBy, useTable } from 'react-table';
 import cols from '../../data/columns.json';
-import { get } from '../../shared/Http';
+import { get, Response } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { useGlobalState } from '../../app/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -43,7 +43,7 @@ export function Table() {
       "start_index": start_index
     });
 
-    fetchData.then(_data => {
+    fetchData.then((_data: Response<any>) => {
       let maybeData = E.getOrElse(() => [])(_data)
       if (!maybeData.forEach) return
 

@@ -3,8 +3,9 @@ import * as E from "fp-ts/lib/Either";
 import { pipe } from 'fp-ts/lib/function';
 
 export type Response<T> = E.Either<Error, T>;
+export type PromiseResponse<T> = Promise<Response<T>>;
 
-export const get = async (path: string, params: Object) => pipe(
+export const get: any = async (path: string, params: Object) => pipe(
   TE.tryCatch(
     () => fetch(`http://161.35.73.100:8888/${path}`, {
       method: 'post',

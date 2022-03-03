@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import {CRS} from 'leaflet'
 import L from 'leaflet';
-import { get } from '../../../shared/Http';
+import { get, Response } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 
 import {
@@ -82,7 +82,7 @@ export function MapChart() {
             "days": 30
         });
 
-        fetchData.then(_data => {
+        fetchData.then((_data: Response<any>) => {
             let pre_data: any = { count: 0 }
             pre_data[labelType] = { title: 0 }
             let maybeData = E.getOrElse(() => [pre_data])(_data)

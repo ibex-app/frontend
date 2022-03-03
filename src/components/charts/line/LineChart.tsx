@@ -3,7 +3,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { get } from '../../../shared/Http';
+import { get, Response } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import React from 'react';
 import {
@@ -83,7 +83,7 @@ export function LineChart() {
       "days": 7
     });
 
-    fetchData.then(_data => {
+    fetchData.then((_data: Response<any>) => {
       let maybeData: any = E.getOrElse(() => [data_])(_data)
       if (!maybeData.length) {
         return
