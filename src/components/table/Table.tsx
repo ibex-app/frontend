@@ -51,8 +51,6 @@ export function Table() {
           .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
           .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
           .otherwise(() => <span>Invalid Icon</span>)
-
-        // Channel
       })
       setData(append ? [...data, ...maybeData] : [...maybeData])
      

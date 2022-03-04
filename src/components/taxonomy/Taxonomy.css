@@ -8,19 +8,30 @@ margin-left: 5%;
 border-radius: 20px;
 background-color: #fff;
 margin-top: 20px;
-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.14);
-padding: 22px;
+/* box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.14); */
+/* padding: 22px; */
+margin-top: 20px;
+display: block;
+position: relative;
+cursor: pointer;
+border-radius: 13px;
+padding: 25px;
+border: 1px solid #ddd;
+/* width: 80%; */
+margin-left: 5%;
 }
 
 .tax-full input, .tax-full textarea, .leftbox input, .leftbox textarea, .leftbox .select-tags .rbt .rbt-input-wrapper{
-    width: 80%;
+    width: 100%;
     margin-bottom: 14px;
     background: #fff;
     border: 1px solid #c8c8c8;
-    font-size: 11px;
+    font-size: 15px;
     padding: 10px;
     border-radius: 10px;
     resize: none;
+    color: #242424;
+    font-family: "FiraGO", sans-serif;
 }
 
 .tax-full textarea{
@@ -134,4 +145,13 @@ margin-right: 5.5%;
 
 .upload-btn{
     cursor: pointer
+}
+
+.left-m-5{
+    margin-left: 5%;
+}
+
+
+.leftbox td:first-child{
+    width: 100%;
 }

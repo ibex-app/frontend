@@ -48,11 +48,11 @@ export function TaxonomyParams() {
            
            
            
-          <b>Accounts / Platforms</b><br/><br/>
+          <b>Accounts / Platforms</b> <FontAwesomeIcon className="upload-btn" icon={faFileArrowUp} /> <br/><br/>
           <div className="tabs">
 
-          <div className="tab" onClick={() => setAccountTag('input')}>Accounts</div>
-          <div className="tab" onClick={() => setAccountTag('upload')}>Platforms</div>
+          {/* <div className="tab" onClick={() => setAccountTag('input')}>Accounts</div> */}
+          {/* <div className="tab" onClick={() => setAccountTag('upload')}>Platforms</div> */}
           {/* <div className="tab" onClick={() => setAccountTag('tags')}>Use existing</div> */}
           </div>
           { accountTag == 'upload' ? <div> 
