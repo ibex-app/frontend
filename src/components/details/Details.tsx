@@ -9,15 +9,53 @@ import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-i
 // import { } from "@fortawesome/free-brands-svg-icons"
 import { match } from 'ts-pattern';
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
+import { Tag } from "../inputs/Tag";
+import { FilterElement } from "../../types/form";
 
 export function Details() {
-  const [data, setData] = useState<PostDetail | null>(null);
   const { postId } = useParams();
   const [post, setPost]: any = useState([]);
-  const [fetching, setFetching]: any = useState(false);
+  const [fetching, setFetching]: any = useState(true);
+  const [options, setOptions]: any = useState({
+    autoplay: 0,
+    seconds: 0
+  });
+
+  const tags: FilterElement = {
+    "id": 0,
+    "label": "Tags",
+    "type": "tag",
+    "value": [
+      {
+        "id": "fb",
+        "label": "facebook"
+      }
+    ],
+    "values": [
+      {
+        "id": "fb",
+        "label": "facebook"
+      },
+      {
+        "id": "tw",
+        "label": "twitter"
+      },
+      {
+        "id": "yt",
+        "label": "youtube"
+      },
+      {
+        "id": "gtv",
+        "label": "geoTV"
+      }
+    ]
+  }
+
+  const rewind = (time: number) => {
+    setOptions({ autoplay: 1, seconds: time });
+  };
 
   useEffect(() => {
-    setFetching(true)
     const fetchData = get('post', {
       id: postId
     });
@@ -33,7 +71,6 @@ export function Details() {
         .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
         .otherwise(() => <span>Invalid Icon</span>)
 
-      console.log(maybePost)
       setPost(maybePost)
       setFetching(false)
     });
@@ -47,7 +84,8 @@ export function Details() {
           <div className="row">
             <div className="col-6">
               <section className="post--content">
-                <video src={post.url}></video>
+                <iframe id="ytplayer" width="640" height="360"
+                  src={`${post.url.replace("/watch?v=", "/embed/")}?start=${options.seconds}&autoplay=${options.autoplay}`} ></iframe>
               </section>
               <section className="post--content-extra">
                 <div className="table--item">
@@ -67,9 +105,7 @@ export function Details() {
                       }
 
                     </div>
-                    {
-                      post.image_url ? (<img src={post.image_url} />) : (<div> </div>)
-                    }
+                    <Tag data={tags} />
 
                     <div className="table--extra-row"><i className="icn icn--type-video"></i>
                       <div className="table--item-tags">
@@ -87,7 +123,7 @@ export function Details() {
             </div>
             <div className="col-6">
               <section className="transcripts">
-                <div className="transcripts--item">
+                <div className="transcripts--item" onClick={() => rewind(20)}>
                   <p>ავღანეთის ქალაქ ასადაბადში გამართულ </p>
                   <div className="flex"><span className="badge bg-secondary">tag 1</span><span className="badge bg-secondary">tag 2</span><span className="badge bg-secondary">tag 3</span></div>
                 </div>
