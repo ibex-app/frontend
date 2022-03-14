@@ -1,6 +1,5 @@
 {
   "name": "ibex",
-  "homepage": "https://ibex-app.github.io/frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

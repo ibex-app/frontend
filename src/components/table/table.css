@@ -37,6 +37,7 @@
 
 .table--row{
     line-height: 1.3em;
+    flex-wrap: wrap;
 }
 
 .form__item.btn-small{
@@ -77,4 +78,10 @@ align-items: center;
 } 
 .button-tr .round-btn-transp{
 margin-left: 0px;
+}
+
+.table--row .table--extra-row{
+    width: 100%;
+    position: relative;
+    bottom: 0px;
 }

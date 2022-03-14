@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { usePagination, useSortBy, useTable } from 'react-table';
 import cols from '../../data/columns.json';
-import { get, Response } from '../../shared/Http';
+import { get, Response, transform_filters_to_request } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { useGlobalState } from '../../app/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -18,6 +18,8 @@ import './table.css';
 
 export function Table() {
   const [data, setData]: any = useState([]);
+  const [fetching, setFetching]: any = useState(false);
+
   const [filters, _]: any = useGlobalState('filters');
   const columns: any = useMemo(() => cols.data, []);
   let start_index = 0;
@@ -27,18 +29,13 @@ export function Table() {
 
   const routeChange = (postId: string) => navigate(`/details/${postId}`);
 
-  const loadData = (si?: number, c?: number) => {
-    if (filters.time_interval_from && filters.time_interval_to) {
-      filters.time_interval_from += filters.time_interval_from.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
-      filters.time_interval_to += filters.time_interval_to.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''
-      filters.platforms = filters.platforms.map((a: any) => a.label)
-    }
-
+  const loadData = (si?: number, c?: number, append?: boolean) => {
+    setFetching(true)
     start_index = si || start_index;
     count = c || count;
 
     const fetchData = get('posts', {
-      ...filters,
+      ...transform_filters_to_request(filters),
       "count": count,
       "start_index": start_index
     });
@@ -54,11 +51,10 @@ export function Table() {
           .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
           .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
           .otherwise(() => <span>Invalid Icon</span>)
-
-        // Channel
       })
+      setData(append ? [...data, ...maybeData] : [...maybeData])
 
-      data.length ? setData([...data, ...maybeData]) : setData(maybeData);
+      setFetching(false)
     });
   }
 
@@ -95,7 +91,6 @@ export function Table() {
       <tbody className="table--body" {...getTableBodyProps()}>
         {rows.map((row: any, i: number) => {
           prepareRow(row)
-          console.log(333, row.cells[3].value.length)
           const { labels, _id } = data[i];
           const tags = [].concat(
             labels.topics || [],
@@ -106,10 +101,10 @@ export function Table() {
 
           return (
             <>
-              <tr {...row.getRowProps()} className="table--item" onClick={() => routeChange(_id.$oid)}>
+              <tr {...row.getRowProps()} className="table--item">
                 <td className="table--row">
                   <div >
-                    {<div {...row.cells[3].getCellProps()} className="title"> {
+                    {<div {...row.cells[3].getCellProps()} onClick={() => routeChange(_id.$oid)} className="title"> {
                       row.cells[3].value.length < 100 ? row.cells[3].value : row.cells[3].value.slice(0, 220)} </div>}
                     {<div {...row.cells[0].getCellProps()} className="sub-title"> {row.cells[0].render('Cell')} | chanell name </div>}
                     {/* {row.cells.map((cell: any) => {
@@ -142,13 +137,32 @@ export function Table() {
           )
         })}
         {
-          rows.length ? (
-            <tr className="button-tr" onClick={() => loadData(start_index + count, 20)}>
+          !fetching && rows.length ? (
+            <tr className="button-tr" onClick={() => loadData(start_index + count, 20, true)}>
               <td><div className="round-btn-transp">
                 Load more results
               </div></td>
             </tr>
-          ) : ''
+          ) : (<tr ><td></td></tr>)
+        }
+        {
+          !fetching && !rows.length ? (
+            <tr className="button-tr" >
+              <td><div className="round-btn-transp">
+                No posts to show
+              </div></td>
+            </tr>
+          ) : (<tr ><td></td></tr>)
+
+        }
+        {
+          fetching ? (
+            <tr className="button-tr">
+              <td><div className="round-btn-transp">
+                Loading...
+              </div></td>
+            </tr>
+          ) : (<tr ><td></td></tr>)
         }
 
       </tbody>

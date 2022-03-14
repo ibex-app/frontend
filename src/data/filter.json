@@ -13,7 +13,7 @@
       "value": "today"
     },
     {
-      "id": "platforms",
+      "id": "platform",
       "type": "tag",
       "label": "Platform",
       "value": [],
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "id": "dataSource",
+      "id": "author_platform_id",
       "type": "tag",
       "label": "Data source",
       "value": [],

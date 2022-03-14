@@ -8,20 +8,35 @@ margin-left: 5%;
 border-radius: 20px;
 background-color: #fff;
 margin-top: 20px;
-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.14);
-padding: 22px;
+/* box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.14); */
+/* padding: 22px; */
+margin-top: 20px;
+display: block;
+position: relative;
+cursor: pointer;
+border-radius: 13px;
+padding: 25px;
+border: 1px solid #ddd;
+/* width: 80%; */
+margin-left: 5%;
 }
 
 .tax-full input, .tax-full textarea, .leftbox input, .leftbox textarea, .leftbox .select-tags .rbt .rbt-input-wrapper{
-    width: 80%;
+    width: 100%;
     margin-bottom: 14px;
     background: #fff;
     border: 1px solid #c8c8c8;
-    font-size: 11px;
+    font-size: 15px;
     padding: 10px;
     border-radius: 10px;
+    resize: none;
+    color: #242424;
+    font-family: "FiraGO", sans-serif;
 }
 
+.tax-full textarea{
+    min-height: 90px;
+}
 .tab {
     font-size: 13px;
     display: inline-block;
@@ -42,7 +57,7 @@ padding: 22px;
 .leftbox > button, .tax-full button, .round-btn-transp {
     background: #4670be;
 border: none;
-margin-left: 55px;
+/* margin-left: 55px; */
 margin-top: 20px;
 color: #fff;
 padding: 10px 20px;
@@ -96,7 +111,8 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 .tax-mid input[type="date"]{
-    width: 40%;
+    width: 37%;
+margin-right: 5.5%;
 }
 
 .fa-facebook{
@@ -125,4 +141,17 @@ input[type="radio"], input[type="checkbox"]{
 
 .account .fa-trash-can{
     float: right
+}
+
+.upload-btn{
+    cursor: pointer
+}
+
+.left-m-5{
+    margin-left: 5%;
+}
+
+
+.leftbox td:first-child{
+    width: 100%;
 }

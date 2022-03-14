@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube} from "@fortawesome/free-brands-svg-icons"
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
+import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
+
 import './Taxonomy.css';
 import fa from 'faker/locale/fa';
 
 export function TaxonomyParams() {
     const [keywordTag, setKeywordTag] = useState('input')
-    const [accountTag, setAccountTag] = useState('input')
+    const [accountTag, setAccountTag] = useState('upload')
     
     
 
@@ -34,25 +36,23 @@ export function TaxonomyParams() {
           </div>
           <div className="tax-mid">
             <br/>
-            <br/>
-            <br/>
-            <b>Enter keywords</b> <br/><br/>
-            <input type="file" /> <br/>
+            <br/><br/>
+            <b>Date range</b> <br/><br/>
+          <input type="date" /> <input type="date" />
+
+          <br/><br/>
+
+            <b>Keywords</b> <FontAwesomeIcon className="upload-btn" icon={faFileArrowUp} /> <br/><br/>
+            {/* <input type="file" /> <br/> */}
           <textarea className="" placeholder="keywords"></textarea><br/><br/>
            
            
-           <br/><br/>
-            <b>Parameters</b> <br/><br/>
-            Date range<br/>
-          <input type="date" />
-          <input type="date" />
-
-          <br/><br/>
-          <b>Accounts / Platforms</b><br/><br/>
+           
+          <b>Accounts / Platforms</b> <FontAwesomeIcon className="upload-btn" icon={faFileArrowUp} /> <br/><br/>
           <div className="tabs">
 
-          <div className="tab" onClick={() => setAccountTag('input')}>Accounts</div>
-          <div className="tab" onClick={() => setAccountTag('upload')}>Platforms</div>
+          {/* <div className="tab" onClick={() => setAccountTag('input')}>Accounts</div> */}
+          {/* <div className="tab" onClick={() => setAccountTag('upload')}>Platforms</div> */}
           {/* <div className="tab" onClick={() => setAccountTag('tags')}>Use existing</div> */}
           </div>
           { accountTag == 'upload' ? <div> 
@@ -76,9 +76,9 @@ export function TaxonomyParams() {
           
 
           {/* <div className="sugg" >Suggestions: <a href="#">FB CNN </a>, <a href="#">NBC</a></div> */}
-
+          <br/><br/><br/><br/>
           <a href="/taxonomy" className=""><button >Preview results</button></a>
-          <button >Start data collection</button>
+          {/* <button >Start data collection</button> */}
         </div>
         
       </div>
