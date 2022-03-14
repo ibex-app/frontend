@@ -11,6 +11,7 @@ import { match } from 'ts-pattern';
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
 import { Tag } from "../inputs/Tag";
 import { FilterElement } from "../../types/form";
+import './details.css';
 
 export function Details() {
   const { postId } = useParams();
@@ -25,28 +26,23 @@ export function Details() {
     "id": 0,
     "label": "Tags",
     "type": "tag",
-    "value": [
-      {
-        "id": "fb",
-        "label": "facebook"
-      }
-    ],
+    "value": [],
     "values": [
       {
         "id": "fb",
-        "label": "facebook"
+        "label": "Pro-Russian"
       },
       {
         "id": "tw",
-        "label": "twitter"
+        "label": "Chine"
       },
       {
         "id": "yt",
-        "label": "youtube"
+        "label": "Chemical Weapon"
       },
       {
         "id": "gtv",
-        "label": "geoTV"
+        "label": "Anti-war Protest"
       }
     ]
   }
@@ -70,13 +66,19 @@ export function Details() {
         .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
         .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
         .otherwise(() => <span>Invalid Icon</span>)
-
+      
+      maybePost.tags = maybePost.labels ? [].concat(
+        maybePost.labels.topics || [],
+        maybePost.labels.persons || [],
+        maybePost.labels.locations || [],
+        maybePost.labels.organizations || []
+      ) : [];
       setPost(maybePost)
       setFetching(false)
     });
   }, []);
   return (
-    <div className="container-fluid">
+    <div className="container-fluid details">
       {
         fetching ? (
           <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>
@@ -84,16 +86,15 @@ export function Details() {
           <div className="row">
             <div className="col-6">
               <section className="post--content">
-                <iframe id="ytplayer" width="640" height="360"
-                  src={`${post.url.replace("/watch?v=", "/embed/")}?start=${options.seconds}&autoplay=${options.autoplay}`} ></iframe>
+                <iframe id="ytplayer" src={`${post.url.replace("/watch?v=", "/embed/")}?start=${options.seconds}&autoplay=${options.autoplay}`} ></iframe>
               </section>
               <section className="post--content-extra">
                 <div className="table--item">
                   <div className="table--row">
                     <div >
-                      <div className="title"> {post.title}
-                      </div>
+                      <div className="title"> {post.title}</div>
                       {<div className="sub-title"> {post.created_at} | chanell name </div>}
+                      <div className="description"> {post.text} </div>
                       {<div className="platform"> <a target="_blank" href={post.url}> {post.platform} {post.url}</a> </div>}
                       {<div className="scores">
                         <FontAwesomeIcon icon={faThumbsUp} /> {post.scores?.likes}
@@ -123,18 +124,14 @@ export function Details() {
             </div>
             <div className="col-6">
               <section className="transcripts">
-                <div className="transcripts--item" onClick={() => rewind(20)}>
-                  <p>ავღანეთის ქალაქ ასადაბადში გამართულ </p>
-                  <div className="flex"><span className="badge bg-secondary">tag 1</span><span className="badge bg-secondary">tag 2</span><span className="badge bg-secondary">tag 3</span></div>
-                </div>
-                <div className="transcripts--item">
-                  <p>ავღანეთის ქალაქ ასადაბადში გამართულ </p>
-                  <div className="flex"><span className="badge bg-secondary">tag 1</span><span className="badge bg-secondary">tag 2</span><span className="badge bg-secondary">tag 3</span></div>
-                </div>
-                <div className="transcripts--item">
-                  <p>ავღანეთის ქალაქ ასადაბადში გამართულ </p>
-                  <div className="flex"><span className="badge bg-secondary">tag 1</span><span className="badge bg-secondary">tag 2</span><span className="badge bg-secondary">tag 3</span></div>
-                </div>
+                {post.transcripts ? post.transcripts.map((transcript: any) => (
+                  
+                  // <div>aaaa</div>
+                  <div className="transcripts--item" onClick={() => rewind(transcript.second)}>
+                    <p>{transcript.text}</p>
+                  </div>
+                )) : <div/> }
+
               </section>
             </div>
           </div>
