@@ -34,7 +34,7 @@ export function Details() {
       },
       {
         "id": "tw",
-        "label": "Chine"
+        "label": "China"
       },
       {
         "id": "yt",

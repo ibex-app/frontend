@@ -1797,3 +1797,7 @@ font-size: 14px;
   margin-right: 2%;
   margin-bottom: 15px;
 }
+
+.filter input[type="text"]{
+  width: 100%;
+}

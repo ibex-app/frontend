@@ -6,5 +6,5 @@ export const Text = ({ data }: FilterElementInput) => {
 
   const onChange = (e: any) => setFilters({ ...filters, [data.id]: e.target.value });
 
-  return <input className="checkbox" type="text" onChange={onChange} />
+  return <input type="text" onChange={onChange} />
 }
