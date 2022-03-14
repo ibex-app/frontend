@@ -101,10 +101,10 @@ export function Table() {
 
           return (
             <>
-              <tr {...row.getRowProps()} className="table--item">
+              <tr {...row.getRowProps()} className="table--item" onClick={() => routeChange(_id.$oid)}>
                 <td className="table--row">
                   <div >
-                    {<div {...row.cells[3].getCellProps()} onClick={() => routeChange(_id.$oid)} className="title"> {
+                    {<div {...row.cells[3].getCellProps()} className="title"> {
                       row.cells[3].value.length < 100 ? row.cells[3].value : row.cells[3].value.slice(0, 220)} </div>}
                     {<div {...row.cells[0].getCellProps()} className="sub-title"> {row.cells[0].render('Cell')} | chanell name </div>}
                     {/* {row.cells.map((cell: any) => {
