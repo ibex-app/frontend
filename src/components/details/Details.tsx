@@ -19,7 +19,7 @@ export function Details() {
   const [fetching, setFetching]: any = useState(true);
   const [options, setOptions]: any = useState({
     autoplay: 0,
-    seconds: 0
+    second: 0
   });
 
   const tags: FilterElement = {
@@ -47,8 +47,21 @@ export function Details() {
     ]
   }
 
-  const rewind = (time: number) => {
-    setOptions({ autoplay: 1, seconds: time });
+  const toTime = (second: number) => {
+    let min = Math.floor(second/60)
+    let sec = Math.floor(second - (min * 60))
+    let hour_str = ''
+    
+    if( min > 60){
+        let hour = Math.floor(min/60)
+        min = Math.floor(min - (hour * 60))
+        hour_str = hour + ':'
+    }
+
+    return hour_str + (min < 10 ? '0' : '') + min +  ':' + (sec < 10 ? '0' : '') + sec
+  }
+  const rewind = (second: number) => {
+    setOptions({ autoplay: 1, second: Math.floor(second) });
   };
 
   useEffect(() => {
@@ -83,10 +96,10 @@ export function Details() {
         fetching ? (
           <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>
         ) : (
-          <div className="row">
+          <>
             <div className="col-6">
               <section className="post--content">
-                <iframe id="ytplayer" src={`${post.url.replace("/watch?v=", "/embed/")}?start=${options.seconds}&autoplay=${options.autoplay}`} ></iframe>
+                <iframe id="ytplayer" src={`${post.url.replace("/watch?v=", "/embed/")}?start=${options.second}&autoplay=${options.autoplay}`} ></iframe>
               </section>
               <section className="post--content-extra">
                 <div className="table--item">
@@ -127,14 +140,14 @@ export function Details() {
                 {post.transcripts ? post.transcripts.map((transcript: any) => (
                   
                   // <div>aaaa</div>
-                  <div className="transcripts--item" onClick={() => rewind(transcript.second)}>
-                    <p>{transcript.text}</p>
+                  <div className="table--item" onClick={() => rewind(transcript.second)}>
+                    <p> <span className="time">{toTime(transcript.second)}</span> {transcript.text}</p>
                   </div>
                 )) : <div/> }
 
               </section>
             </div>
-          </div>
+          </>
         )}
     </div>
   )

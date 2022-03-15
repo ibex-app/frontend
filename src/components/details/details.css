@@ -23,3 +23,24 @@
 .details .post--content .description{
     padding-bottom: 15px;
 }
+
+.transcripts{
+    background-color: #f4f4f5;
+}
+
+.details{
+    display: flex;
+}
+
+.transcripts {
+    height: 100%;
+    overflow: scroll;
+}
+
+.details .description{
+    margin-bottom: 12px;
+}
+.transcripts .time{
+    color:gray;
+    padding: 5px;
+}
