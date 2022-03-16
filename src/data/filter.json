@@ -42,6 +42,15 @@
       "label": "Data source",
       "value": [],
       "values": [
+        {"_id": "50281cf2-a8af-4745-9dc6-3dc8650ee1cb",
+        "label": "Altinfo News",
+        "platform": "youtube",
+        "platform_id": "UCP01LDPUDG3U9LMeMjgHo3Q",
+        "program_title": "",
+        "url": "https://www.youtube.com/c/AltinfoNews",
+        "img": "",
+        "tags": ["media-test"],   "id": 999999999 
+        },
         {"_id": "432189ff-2654-4ca6-a961-291ffe8af6a8", "platform": "facebook", "platform_id": "103663421806386", "program_title": "", "url": "https://www.facebook.com/103663421806386", "img": "https://graph.facebook.com/siaxlebeqasgan/picture", "tags": ["grass", "page", "disinformation"], "label": "ბექა ვარდოსანიძის ბლოგი•Beka Vardosanidze's blog", "id": 0} ,
         {"_id": "468cc70c-f1f9-4c6e-85d1-187f42844c65", "platform": "facebook", "platform_id": "1828546927363699", "program_title": "", "url": "https://www.facebook.com/1828546927363699", "img": "https://graph.facebook.com/gaagrdzele/picture", "tags": ["grass", "page", "disinformation"], "label": "გურამ ქართველიშვილი", "id": 1} ,
         {"_id": "73d6d838-2717-4559-aabe-b37bd15107a1", "platform": "facebook", "platform_id": "336802253713738", "program_title": "", "url": "https://www.facebook.com/336802253713738", "img": "https://graph.facebook.com/nan/picture", "tags": ["grass", "page", "disinformation"], "label": "პატრიოტული სულისკვეთება", "id": 2} ,

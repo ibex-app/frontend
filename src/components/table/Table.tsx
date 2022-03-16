@@ -31,6 +31,7 @@ export function Table() {
 
   const loadData = (si?: number, c?: number, append?: boolean) => {
     setFetching(true)
+    if(!append) setData([])
     start_index = si || start_index;
     count = c || count;
 
