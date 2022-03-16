@@ -2,8 +2,9 @@ import filterData from '../../../data/filter.json';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useGlobalState } from '../../../app/store';
 
-import { get, Response } from '../../../shared/Http';
+import { get, Response, transform_filters_to_request } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import React from 'react';
 import {
@@ -15,9 +16,12 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line, Chart} from 'react-chartjs-2';
 import faker from 'faker';
+
+ChartJS.register(Filler);
 
 ChartJS.register(
   CategoryScale,
@@ -30,8 +34,12 @@ ChartJS.register(
 );
 
 export const options = {
+  type: 'line',
   responsive: true,
   plugins: {
+    filler: {
+      propagate: false,
+    },
     legend: {
       position: 'right' as const,
     },
@@ -40,17 +48,41 @@ export const options = {
     //   text: 'Chart.js Line Chart',
     // },
     padding: {
-      top: 5,
+      top: 25,
       left: 15,
       right: 15,
       bottom: 200
-    }
+    },
   },
+  scales: {
+    x: {
+      // display: true,
+      // stacked: true,
+      title: {
+        display: true,
+        text: 'Week'
+      }
+    },
+    y: {
+      // display: true,
+      stacked: true,
+      title: {
+        display: true,
+        text: 'Count'
+      }
+    }
+  }
 };
 
 
 export function LineChart() {
-  // const BarChart = () => {
+  const [filters, _]: any = useGlobalState('filters');
+  useEffect(() => {
+    if (Object.keys(filters).length) loadData('persons');
+  }, [filters]);
+
+  const [fetching, setFetching] = useState(false);
+
   var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
 
   let labels = [''];
@@ -66,22 +98,104 @@ export function LineChart() {
   };
 
   const [data, setData] = useState(data_);
-  const [fetching, setFetching] = useState(false);
+
 
   const change = (e: any) => {
-    setFetching(true)
-    fetchAndSet(e.target.value)
+    loadData(e.target.value)
   }
 
-  const fetchAndSet = (labelType: string) => {
+  const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
+    // console.log(filters)
+    var dateFrom: Date = new Date(filters.time_interval_from)
+    var dateTo: Date = new Date(filters.time_interval_to)
+    dateTo.setDate(dateTo.getDate()+7);
+
+    var interval: number = (dateTo.getTime() - dateFrom.getTime())
+    var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
+    var numberOfWeeks = Math.ceil(numberOfDays / 7);
+
+    // var firstJan = new Date(1900 + dateFrom.getYear(), 0, 1)
+    var firstJan = new Date(2022, 0, 1)
+    var daysThisYear = (dateFrom.getTime() - firstJan.getTime()) / (24 * 60 * 60 * 1000)
+    var startWeek = Math.ceil(daysThisYear / 7)
+
+    let intervals: any = ['']
+    responce_data.forEach((i:any) => {
+      if(!i[labelType].title){
+        i[labelType].title = i[labelType].label
+      }
+    })
+
+    let post_label_values: [] = responce_data.map((i: any) => i[labelType].title).filter((v: any, i: any, a: any) => a.indexOf(v) === i)
+
+    console.log('post_label_values', post_label_values)
+
+    let datasets = post_label_values.map((label: any, index: number) => ({
+      label: label,
+      data: [0],
+      // borderColor:  "rgba(0,10,13,0)",
+      backgroundColor: cols[index],
+      // background: 'red',//cols[index],
+      fill: true,
+      pointBackgroundColor: 'rgba(0,0,0,.3)',
+      borderColor: 'rgba(0,0,0,0)',
+      // pointHighlightStroke: cols[index],
+      // borderCapStyle: 'butt',
+      lineTension: .35,        
+      radius: 4  
+    }))
+    labels = []
+    // debugger
+    for (let week = startWeek; week <= startWeek + numberOfWeeks; week++) {
+      var intervalDate = new Date(dateFrom);
+      dateFrom.setDate(dateFrom.getDate() + week * 7);
+
+      labels.push(intervalDate.toISOString().slice(0, 10))
+
+      datasets.forEach((dataset: any) => {
+        console.log(dataset.label)
+        let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id.week == week)
+
+        // dataset.data.push(Math.floor(Math.random() * 100))
+        dataset.data.push(match.length ? match.length : 0)
+
+      })
+    }
+    
+    // datasets[0].data.forEach((value:any, index:number) => {
+    //     let total:number = datasets.map( i => i.data[index]).reduce((a, b) => a + b, 0)
+    //     // let curValue = 0 - total/2
+    //     datasets[0].data[index] = 0 - total/2
+    // })
+
+    // datasets[0].data.forEach((value:any, index:number) => {
+    //   let total:number = datasets.map( i => i.data[index]).reduce((a, b) => a + b, 0)
+    //   let curValue = 0 - total/2
+    //   console.log('total:', total, 'curValue:', curValue)
+    //   const before = JSON.stringify(datasets.map( i => i.data[index]))  
+    //   datasets.forEach(dataset => {
+    //     const oldValue = dataset.data[index]
+    //     dataset.data[index] = curValue
+    //     curValue += oldValue
+    //     console.log('curValue:', curValue, 'oldValue:', oldValue, 'dataset.data[index]:', dataset.data[index])
+
+    //   })
+    //   console.log(before, JSON.stringify(datasets.map( i => i.data[index])))
+    // })
+    return {
+      labels,
+      datasets: datasets,
+    }
+  }
+
+  const loadData = (labelType: string) => {
+    setFetching(true)
     const fetchData = get('posts_aggregated', {
-      "post_request_params": {
-        "time_interval_from": "2021-01-16T17:23:05.925Z",
-        "time_interval_to": "2021-07-16T17:23:05.925Z",
-      },
-      "axisX": labelType,
-      "days": 7
+      post_request_params: transform_filters_to_request(filters),
+      axisX: labelType,
+      days: 7
     });
+
 
     fetchData.then((_data: Response<any>) => {
       let maybeData: any = E.getOrElse(() => [data_])(_data)
@@ -89,53 +203,13 @@ export function LineChart() {
         return
       }
 
-      var dateFrom: Date = new Date("2021-01-16T17:23:05.925Z");
-      var dateTo: Date = new Date("2021-07-16T17:23:05.925Z");
-      var interval: number = (dateTo.getTime() - dateFrom.getTime())
-      var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
-      var numberOfWeeks = Math.ceil(numberOfDays / 7);
-
-      // var firstJan = new Date(1900 + dateFrom.getYear(), 0, 1)
-      var firstJan = new Date(2021, 0, 1)
-      var daysThisYear = (dateFrom.getTime() - firstJan.getTime()) / (24 * 60 * 60 * 1000)
-      var startWeek = Math.ceil(daysThisYear / 7)
-
-
-      let intervals: any = ['']
-      let post_label_values: [] = maybeData.map((i: any) => i[labelType].title).filter((v: any, i: any, a: any) => a.indexOf(v) === i)
-
-
-      let datasets = post_label_values.map((i: any, index: number) => ({
-        label: i,
-        data: [0],
-        borderColor: cols[index],
-        backgroundColor: cols[index],
-      }))
-      labels = []
-      // debugger
-      for (let week = startWeek; week <= startWeek + numberOfWeeks; week++) {
-        var intervalDate = new Date(dateFrom);
-        dateFrom.setDate(dateFrom.getDate() + week * 7);
-
-        labels.push(intervalDate.toISOString().slice(0, 10))
-
-        datasets.forEach((dataset: any) => {
-          let match = maybeData.find((d: any) => d[labelType].title == dataset.label && d._id.week == week)
-
-          dataset.data.push(match ? match.count : 0)
-        })
-      }
-
-      setData({
-        labels,
-        datasets: datasets,
-      });
+      let dataset_and_labels: any = generate_dataset(maybeData, labelType, filters)
+      setData(dataset_and_labels);
       setFetching(false)
+      console.log(dataset_and_labels)
     });
 
   }
-
-  useEffect(() => fetchAndSet('topics'), []);
 
   if (fetching) {
     return (
@@ -145,27 +219,22 @@ export function LineChart() {
   return (
     <div className="results">
       <select onChange={change}>
-        {['topics', 'persons', 'locations', 'platform', 'datasources'].map(d => <option key={d}>{d}</option>)}
-
+        {['persons', 'locations', 'platform', 'topics', 'datasources'].map(d => <option key={d}>{d}</option>)}
       </select>
       <select onChange={change}>
-        {['hate-speech', 'count', 'reach-out', 'likes', 'shares', 'sentiment', 'comments'].map(d => <option key={d}>{d}</option>)}
+        {['count', 'hate-speech', 'reach-out', 'likes', 'shares', 'sentiment', 'comments'].map(d => <option key={d}>{d}</option>)}
       </select>
-
-      {/* <Typeahead
-                // multiple
-                id="Axis-X"
-                onChange={change}
-                options={filterData.data.map(d => d.label)}
-                placeholder="Axis X"
-            // selected={value}
-            /> */}
-      <div className="chart">
-        <Line options={options} data={data} />
-      </div>
-
+      {
+        fetching ? (
+          <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>
+        ) : (<div className="chart"><Line options={options} data={data} /></div>)
+        // ) : (<div className="chart"></div>)
+      }
     </div>
   );
 }
 
 // export default BarChart
+
+
+// 52 + 35 + 11 + 9  = 107
