@@ -116,17 +116,17 @@ export function MapChart() {
       )
     }
 
-    const myIcon = L.icon({
-      iconUrl: require('../../../circle.jpeg'),
-      iconSize: [8,8],
-      iconAnchor: [1, 1],
-      // popupAnchor: null,
-      // shadowUrl: null,
-      // shadowSize: null,
-      // shadowAnchor: null
-  });
-  const customMarkerIcon = new L.DivIcon({
-    html: '<div class="circle-map"></div>',
+    // const myIcon = L.icon({
+    //   iconUrl: require('../../../circle.jpeg'),
+    //   iconSize: [8,8],
+    //   iconAnchor: [1, 1],
+    //   // popupAnchor: null,
+    //   // shadowUrl: null,
+    //   // shadowSize: null,
+    //   // shadowAnchor: null
+    // });
+  const customMarkerIcon = (point: any, index:number) => new L.DivIcon({
+    html: '<div class="circle-map" style="background:' + cols[index%cols.length]+ ';width:' +point.count * 4+ 'px; height: '+ point.count * 4 +'px"></div>',
   });
       return(
         
@@ -140,8 +140,8 @@ export function MapChart() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              { data.map((point:any) => <Marker 
-                icon={customMarkerIcon} 
+              { data.map((point:any, index: number) => <Marker 
+                icon={customMarkerIcon(point, index)} 
                 // key={i} 
                 position={{lat:point.locations.location[1], lng: point.locations.location[0]}}>
                 <Popup>
@@ -154,10 +154,10 @@ export function MapChart() {
                     })} */}
                   </span>
                 </Popup>
-                <Circle 
+                {/* <Circle 
                   center={{lat:point.locations.location[1], lng: point.locations.location[0]}}
                   fillColor="blue" 
-                  radius={point.count * 10}/>
+                  radius={point.count * 50}/> */}
               </Marker> ) }
           </MapContainer>
       </div>
