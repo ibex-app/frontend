@@ -153,12 +153,15 @@ export function LineChart() {
       labels.push(intervalDate.toISOString().slice(0, 10))
 
       datasets.forEach((dataset: any) => {
-        console.log(dataset.label)
         let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id.week == week)
-
-        // dataset.data.push(Math.floor(Math.random() * 100))
-        dataset.data.push(match.length ? match.length : 0)
-
+        if(!match.length){
+          dataset.data.push(0)
+        } else if (labelType == 'platform'){
+          let count = match.reduce((a: any, b: any) => a += b.count, 0)
+          dataset.data.push(count)
+        } else {
+          dataset.data.push(match.length)
+        }
       })
     }
     

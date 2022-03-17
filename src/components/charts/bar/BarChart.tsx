@@ -99,7 +99,6 @@ export function BarChart() {
 
   const [data, setData] = useState(data_);
 
-
   const change = (e: any) => {
     loadData(e.target.value)
   }
@@ -119,7 +118,6 @@ export function BarChart() {
     var daysThisYear = (dateFrom.getTime() - firstJan.getTime()) / (24 * 60 * 60 * 1000)
     var startWeek = Math.ceil(daysThisYear / 7)
 
-    let intervals: any = ['']
     responce_data.forEach((i:any) => {
       if(!i[labelType].title){
         i[labelType].title = i[labelType].label
@@ -133,19 +131,15 @@ export function BarChart() {
     let datasets = post_label_values.map((label: any, index: number) => ({
       label: label,
       data: [0],
-      // borderColor:  "rgba(0,10,13,0)",
       backgroundColor: cols[index],
-      // background: 'red',//cols[index],
       fill: true,
       pointBackgroundColor: 'rgba(0,0,0,.3)',
       borderColor: 'rgba(0,0,0,0)',
-      // pointHighlightStroke: cols[index],
-      // borderCapStyle: 'butt',
       lineTension: .35,        
       radius: 4  
     }))
     labels = []
-    // debugger
+
     for (let week = startWeek; week <= startWeek + numberOfWeeks; week++) {
       var intervalDate = new Date(dateFrom);
       dateFrom.setDate(dateFrom.getDate() + week * 7);
@@ -153,35 +147,18 @@ export function BarChart() {
       labels.push(intervalDate.toISOString().slice(0, 10))
 
       datasets.forEach((dataset: any) => {
-        console.log(dataset.label)
         let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id.week == week)
-
-        // dataset.data.push(Math.floor(Math.random() * 100))
-        dataset.data.push(match.length ? match.length : 0)
-
+        if(!match.length){
+          dataset.data.push(0)
+        } else if (labelType == 'platform'){
+          let count = match.reduce((a: any, b: any) => a += b.count, 0)
+          dataset.data.push(count)
+        } else {
+          dataset.data.push(match.length)
+        }
       })
     }
-    
-    // datasets[0].data.forEach((value:any, index:number) => {
-    //     let total:number = datasets.map( i => i.data[index]).reduce((a, b) => a + b, 0)
-    //     // let curValue = 0 - total/2
-    //     datasets[0].data[index] = 0 - total/2
-    // })
 
-    // datasets[0].data.forEach((value:any, index:number) => {
-    //   let total:number = datasets.map( i => i.data[index]).reduce((a, b) => a + b, 0)
-    //   let curValue = 0 - total/2
-    //   console.log('total:', total, 'curValue:', curValue)
-    //   const before = JSON.stringify(datasets.map( i => i.data[index]))  
-    //   datasets.forEach(dataset => {
-    //     const oldValue = dataset.data[index]
-    //     dataset.data[index] = curValue
-    //     curValue += oldValue
-    //     console.log('curValue:', curValue, 'oldValue:', oldValue, 'dataset.data[index]:', dataset.data[index])
-
-    //   })
-    //   console.log(before, JSON.stringify(datasets.map( i => i.data[index])))
-    // })
     return {
       labels,
       datasets: datasets,
