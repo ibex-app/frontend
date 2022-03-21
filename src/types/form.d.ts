@@ -21,7 +21,8 @@ export interface FilterElement {
 }
 
 export interface FilterElementInput {
-  data: FilterElement
+  data: FilterElement,
+  onChange: (item: any) => any
 };
 
 export interface FormInput {

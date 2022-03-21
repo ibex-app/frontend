@@ -1,10 +1,12 @@
 import { FilterElementInput } from '../../types/form';
 import { useGlobalState } from '../../app/store';
 
-export const Checkbox = ({ data }: FilterElementInput) => {
+export const Checkbox = ({ data, onChange }: FilterElementInput) => {
   const [filters, setFilters] = useGlobalState('filters');
 
-  const onChange = (e: any) => setFilters({ ...filters, [data.id]: e.target.checked });
-
-  return <input className="checkbox" type="checkbox" onChange={onChange} />
+  return <input
+    className="checkbox"
+    type="checkbox"
+    checked={filters[data.id]}
+    onChange={({ target }) => onChange(target.checked)} />
 }
