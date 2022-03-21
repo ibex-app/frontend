@@ -108,9 +108,8 @@ export function Table() {
                     {<div {...row.cells[3].getCellProps()} className="title"> {
                       row.cells[3].value.length < 100 ? row.cells[3].value : row.cells[3].value.slice(0, 220)} </div>}
                     {<div {...row.cells[0].getCellProps()} className="sub-title"> {row.cells[0].render('Cell')} | chanell name </div>}
-                    {/* {row.cells.map((cell: any) => {
-                      return <div {...cell.getCellProps()} className="table--col"> {cell.render('Cell')} </div>
-                  })} */}
+                    <div className="description"> {row.cells[3].render('Cell')} </div>
+                    
                     {<div {...row.cells[1].getCellProps()} className="platform"> {row.cells[1].render('Cell')} <a target="_blank" href={row.cells[4].value}>{row.cells[4].render('Cell')}</a> </div>}
                     {<div className="scores">
                       <FontAwesomeIcon icon={faThumbsUp} /> {row.cells[6].value}
