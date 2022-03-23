@@ -31,7 +31,6 @@ export const transform_filters_to_request = (filters_: any) => {
     filters.author_platform_id = filters.author_platform_id.map((a: any) => a._id)
     filters.locations = filters.locations .map((a: any) => a._id)
     filters.persons = filters.persons .map((a: any) => a._id)
-
   }
   return filters
 }

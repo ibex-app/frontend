@@ -1,6 +1,11 @@
 import { pipe } from "fp-ts/lib/function";
 import { FilterElement } from '../types/form';
 
+const parse = (val: string) => {
+  try { return JSON.parse(val) }
+  catch (e) { return val }
+}
+
 export const getParamsAsObject = () => {
   // const { data }: { data: FilterElement[] } = require('/data/filter.json')
 
