@@ -12,7 +12,8 @@ interface FilterItem {
 
 const defaultState: State = {
   user: {},
-  filters: {}
+  filters: {},
+  monitorId: '',
 };
 
 const { setGlobalState, useGlobalState } = createGlobalState(defaultState);

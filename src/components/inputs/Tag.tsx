@@ -16,7 +16,7 @@ export function Tag({ data, onChange }: FilterElementInput) {
         id={data.id}
         onChange={onChange}
         options={data.values}
-        // placeholder="Choose item..."
+        // placeholder={data.id}
         selected={filters[data.id]}
       />
     </div>

@@ -4,5 +4,6 @@ export type StringRecord = Record<string, any>;
 
 export interface State {
   user: {},
-  filters: StringRecord
+  filters: StringRecord,
+  monitorId?: string | null
 }

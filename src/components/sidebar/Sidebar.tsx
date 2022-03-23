@@ -2,20 +2,28 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { get, Response } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
+import { useNavigate } from "react-router-dom";
+import { useGlobalState, setGlobalState } from '../../app/store';
 
 export function Sidebar() {
   const [data, setData]: any = useState([]);
   const [fetching, setFetching]: any = useState(true);
+  
+  const navigate = useNavigate();
+
+  const routeChange = (monitorId: string) => {
+    setGlobalState('monitorId', monitorId)
+    navigate(`results?monitor_id=${monitorId}`);
+  }
 
   useEffect(() => {
-
       const fetchData = get('get_monitors', {tag: '*'});
-      
+     
       fetchData.then((_data: Response<any>) => {
         let maybeData = E.getOrElse(() => [])(_data)
         if (!maybeData.forEach) return
+        maybeData.forEach((k:any) => k.key = k._id)
         setData(maybeData)
-        console.log(maybeData)
         setFetching(false)
       });
   }, [])
@@ -34,7 +42,7 @@ export function Sidebar() {
               
               { fetching ? (
                 <li>Loading...</li>
-              ) : (data.map(  (monitor: any) => (<li> <a href='/results/{monitor.id}'> {monitor.title}</a> </li>)))}
+              ) : (data.map(  (monitor: any) => (<li key={monitor._id}> <a onClick={() => routeChange(monitor._id)}> {monitor.title}</a> </li>)))}
               <li><a className="" href="/taxonomy-init">+ Create</a></li>
             </ul>
           </li>
