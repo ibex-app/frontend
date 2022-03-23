@@ -53,7 +53,6 @@ export function Sidebar() {
       <nav className="main-nav">
         <ul>
           <li className="inactive"> . </li>
-          <li><a href="/results" >Table</a></li>
           <li><a href="/results/bar" >Bar</a></li>
           <li><a href="/results/line" >Line</a></li>
           <li><a href="/results/map" >Map</a></li>

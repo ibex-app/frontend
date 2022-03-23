@@ -47,7 +47,6 @@ export function Filter() {
     const onChange = (item: any) => {
       setGlobalState('filters', { ...filters, [el.id]: item });
       let str_param = item.length ? item.map((i:any) => i._id).join(',') : item
-      console.log(item, str_param)
       addParamsToUrl({ [el.id]: str_param });
     }
 
