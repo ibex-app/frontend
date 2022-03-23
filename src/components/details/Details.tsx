@@ -48,17 +48,17 @@ export function Details() {
   }
 
   const toTime = (second: number) => {
-    let min = Math.floor(second/60)
+    let min = Math.floor(second / 60)
     let sec = Math.floor(second - (min * 60))
     let hour_str = ''
-    
-    if( min > 60){
-        let hour = Math.floor(min/60)
-        min = Math.floor(min - (hour * 60))
-        hour_str = hour + ':'
+
+    if (min > 60) {
+      let hour = Math.floor(min / 60)
+      min = Math.floor(min - (hour * 60))
+      hour_str = hour + ':'
     }
 
-    return hour_str + (min < 10 ? '0' : '') + min +  ':' + (sec < 10 ? '0' : '') + sec
+    return hour_str + (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec
   }
   const rewind = (second: number) => {
     setOptions({ autoplay: 1, second: Math.floor(second) });
@@ -79,7 +79,7 @@ export function Details() {
         .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
         .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
         .otherwise(() => <span>Invalid Icon</span>)
-      
+
       maybePost.tags = maybePost.labels ? [].concat(
         maybePost.labels.topics || [],
         maybePost.labels.persons || [],
@@ -119,7 +119,7 @@ export function Details() {
                       }
 
                     </div>
-                    <Tag data={tags} />
+                    <Tag data={tags} onChange={() => console.log("TODO JANEZ")} />
 
                     <div className="table--extra-row"><i className="icn icn--type-video"></i>
                       <div className="table--item-tags">
@@ -138,12 +138,12 @@ export function Details() {
             <div className="col-6">
               <section className="transcripts">
                 {post.transcripts ? post.transcripts.map((transcript: any) => (
-                  
+
                   // <div>aaaa</div>
                   <div className="table--item" onClick={() => rewind(transcript.second)}>
                     <p> <span className="time">{toTime(transcript.second)}</span> {transcript.text}</p>
                   </div>
-                )) : <div/> }
+                )) : <div />}
 
               </section>
             </div>

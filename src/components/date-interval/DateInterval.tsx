@@ -5,11 +5,9 @@ import { FilterElementInput } from '../../types/form';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 
-export const DateInterval = ({ data }: FilterElementInput) => {
+export const DateInterval = ({ data, onChange }: FilterElementInput) => {
 
   const [filters, setFilters] = useGlobalState('filters');
-
-  const onChange = (item: any) => setGlobalState('filters', { ...filters, [data.id]: item });
 
   return <DateRange
     editableDateInputs={true}

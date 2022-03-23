@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { match } from 'ts-pattern';
 import { FilterElement } from '../../types/form';
-import { useGlobalState } from '../../app/store';
+import { setGlobalState, useGlobalState } from '../../app/store';
 import { reduce } from 'fp-ts/lib/Array';
 import { Tag } from '../inputs/Tag';
 import { Checkbox } from '../inputs/Checkbox';
@@ -12,31 +12,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faFolderArrowDown } from "@fortawesome/free-brands-svg-icons"
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 import moment from "moment";
+import { addParamsToUrl, getParamsAsObject } from '../../shared/Utils';
 
 export function Filter() {
   const { data }: { data: FilterElement[] } = require('../../data/filter.json')
 
-  const [_, setFilters] = useGlobalState('filters');
-  
+  const [filters, setFilters] = useGlobalState('filters');
 
-  useEffect(() => {
-    // generate state object from data and set it to global state
-    setFilters(reduce({}, (acc, cur: FilterElement) => (
+  const getFilters = (): Object => {
+    const paramsFromUrl = getParamsAsObject();
+
+    const defaultFilters = reduce({}, (acc, cur: FilterElement) => (
       { ...acc, [cur.id]: cur.value }
-    ))(data));
-  }, [])
+    ))(data);
+
+    return { ...defaultFilters, ...paramsFromUrl };
+  };
+
+  useEffect(() => setFilters(getFilters()), [])
 
   const getElem = (el: FilterElement) => {
     if (el.value === 'today') {
       el.value = moment().format("YYYY-MM-DD")
     }
 
+    const onChange = (item: any) => {
+      setGlobalState('filters', { ...filters, [el.id]: item });
+      addParamsToUrl({ [el.id]: JSON.stringify(item) });
+    }
+
     return match(el.type)
-      .with("data-interval", () => <DateInterval data={el} />)
-      .with("tag", () => <Tag data={el} />)
-      .with("date", () => <Date data={el} />)
-      .with("text", () => <Text data={el} />)
-      .with("checkbox", () => <Checkbox data={el} />)
+      .with("data-interval", () => <DateInterval data={el} onChange={onChange} />)
+      .with("tag", () => <Tag data={el} onChange={onChange} />)
+      .with("date", () => <Date data={el} onChange={onChange} />)
+      .with("text", () => <Text data={el} onChange={onChange} />)
+      .with("checkbox", () => <Checkbox data={el} onChange={onChange} />)
       .otherwise(() => {
         console.error(`Invalid component name ${el.type}`);
         return <></>
@@ -60,24 +70,24 @@ export function Filter() {
                     </div>
                   ))}
                   <div className="col-2">
-                      
-                      <div className="form__item">
-                        
-                      </div>
+
+                    <div className="form__item">
+
                     </div>
+                  </div>
                   <div className="col-2">
-                      
-                      {/* <div className="form__item btn">
+
+                    {/* <div className="form__item btn">
                         <a href="#" >Download</a>
                       </div> */}
+                  </div>
+                  <div className="col-2">
+
+                    <div className="form__item btn-small">
+                      {/* <a href="#" >Save</a> */}
+                      <FontAwesomeIcon icon={faFileArrowDown} />
                     </div>
-                    <div className="col-2">
-                      
-                      <div className="form__item btn-small">
-                        {/* <a href="#" >Save</a> */}
-                        <FontAwesomeIcon icon={faFileArrowDown} />
-                      </div>
-                    </div>
+                  </div>
 
                 </div>
               </div>
