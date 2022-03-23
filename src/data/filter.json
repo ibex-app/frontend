@@ -20,19 +20,23 @@
       "values": [
         {
           "id": 0,
-          "label": "facebook"
+          "label": "facebook",
+          "_id": "facebook"
         },
         {
           "id": 1,
-          "label": "twitter"
+          "label": "twitter",
+          "_id": "twitter"
         },
         {
           "id": 2,
-          "label": "youtube"
+          "label": "youtube",
+          "_id": "youtube"
         },
         {
           "id": 3,
-          "label": "geoTV"
+          "label": "geoTV",
+          "_id": "geoTV"
         }
       ]
     },
@@ -43,10 +47,10 @@
       "value": [],
       "values": [
         {
-          "_id": "50281cf2-a8af-4745-9dc6-3dc8650ee1cb",
+          "__id": "50281cf2-a8af-4745-9dc6-3dc8650ee1cb",
           "label": "Altinfo News",
           "platform": "youtube",
-          "platform_id": "UCP01LDPUDG3U9LMeMjgHo3Q",
+          "_id": "UCP01LDPUDG3U9LMeMjgHo3Q",
           "program_title": "",
           "url": "https://www.youtube.com/c/AltinfoNews",
           "img": "",
@@ -56,9 +60,9 @@
           "id": 999999999
         },
         {
-          "_id": "432189ff-2654-4ca6-a961-291ffe8af6a8",
+          "__id": "432189ff-2654-4ca6-a961-291ffe8af6a8",
           "platform": "facebook",
-          "platform_id": "103663421806386",
+          "_id": "103663421806386",
           "program_title": "",
           "url": "https://www.facebook.com/103663421806386",
           "img": "https://graph.facebook.com/siaxlebeqasgan/picture",
@@ -71,9 +75,9 @@
           "id": 0
         },
         {
-          "_id": "468cc70c-f1f9-4c6e-85d1-187f42844c65",
+          "__id": "468cc70c-f1f9-4c6e-85d1-187f42844c65",
           "platform": "facebook",
-          "platform_id": "1828546927363699",
+          "_id": "1828546927363699",
           "program_title": "",
           "url": "https://www.facebook.com/1828546927363699",
           "img": "https://graph.facebook.com/gaagrdzele/picture",
@@ -86,9 +90,9 @@
           "id": 1
         },
         {
-          "_id": "73d6d838-2717-4559-aabe-b37bd15107a1",
+          "__id": "73d6d838-2717-4559-aabe-b37bd15107a1",
           "platform": "facebook",
-          "platform_id": "336802253713738",
+          "_id": "336802253713738",
           "program_title": "",
           "url": "https://www.facebook.com/336802253713738",
           "img": "https://graph.facebook.com/nan/picture",
@@ -101,9 +105,9 @@
           "id": 2
         },
         {
-          "_id": "35470826-05aa-4fce-ba00-0cfe91d61493",
+          "__id": "35470826-05aa-4fce-ba00-0cfe91d61493",
           "platform": "facebook",
-          "platform_id": "280403999300604",
+          "_id": "280403999300604",
           "program_title": "",
           "url": "https://www.facebook.com/280403999300604",
           "img": "https://graph.facebook.com/gorgasliani/picture",
@@ -116,9 +120,9 @@
           "id": 3
         },
         {
-          "_id": "f580d3e1-1f63-4d51-a3ed-11b7aabce6a4",
+          "__id": "f580d3e1-1f63-4d51-a3ed-11b7aabce6a4",
           "platform": "facebook",
-          "platform_id": "1497943103810556",
+          "_id": "1497943103810556",
           "program_title": "",
           "url": "https://www.facebook.com/1497943103810556",
           "img": "https://graph.facebook.com/nan/picture",
@@ -131,9 +135,9 @@
           "id": 4
         },
         {
-          "_id": "6df419f2-5c80-438a-a98c-5b89cba54395",
+          "__id": "6df419f2-5c80-438a-a98c-5b89cba54395",
           "platform": "facebook",
-          "platform_id": "102044314645156",
+          "_id": "102044314645156",
           "program_title": "",
           "url": "https://www.facebook.com/102044314645156",
           "img": "https://graph.facebook.com/freechannelGeorgia/picture",
@@ -146,9 +150,9 @@
           "id": 5
         },
         {
-          "_id": "1b7d41ea-83a5-4f38-9fee-ca760277388e",
+          "__id": "1b7d41ea-83a5-4f38-9fee-ca760277388e",
           "platform": "facebook",
-          "platform_id": "104764438535503",
+          "_id": "104764438535503",
           "program_title": "",
           "url": "https://www.facebook.com/104764438535503",
           "img": "https://graph.facebook.com/sarkrazm/picture",
@@ -161,9 +165,9 @@
           "id": 6
         },
         {
-          "_id": "27658213-3fde-4bdd-90e0-ce59b785a2bd",
+          "__id": "27658213-3fde-4bdd-90e0-ce59b785a2bd",
           "platform": "facebook",
-          "platform_id": "109022174360997",
+          "_id": "109022174360997",
           "program_title": "",
           "url": "https://www.facebook.com/109022174360997",
           "img": "https://graph.facebook.com/nan/picture",
@@ -176,9 +180,9 @@
           "id": 7
         },
         {
-          "_id": "c25cf9e2-8d0c-4421-8f4c-20f8a7b046cf",
+          "__id": "c25cf9e2-8d0c-4421-8f4c-20f8a7b046cf",
           "platform": "facebook",
-          "platform_id": "122744254499885",
+          "_id": "122744254499885",
           "program_title": "",
           "url": "https://www.facebook.com/122744254499885",
           "img": "https://graph.facebook.com/asavali.ge/picture",
@@ -191,9 +195,9 @@
           "id": 8
         },
         {
-          "_id": "2a86f329-aec3-48d9-872b-0540a8137b30",
+          "__id": "2a86f329-aec3-48d9-872b-0540a8137b30",
           "platform": "facebook",
-          "platform_id": "406672273396798",
+          "_id": "406672273396798",
           "program_title": "",
           "url": "https://www.facebook.com/406672273396798",
           "img": "https://graph.facebook.com/PatriotuliGverdi/picture",
@@ -206,9 +210,9 @@
           "id": 9
         },
         {
-          "_id": "c58e391e-5031-4505-9e6b-b2d136bb6179",
+          "__id": "c58e391e-5031-4505-9e6b-b2d136bb6179",
           "platform": "facebook",
-          "platform_id": "337678610466557",
+          "_id": "337678610466557",
           "program_title": "",
           "url": "https://www.facebook.com/337678610466557",
           "img": "https://graph.facebook.com/qartuliidea.ge/picture",
@@ -221,9 +225,9 @@
           "id": 10
         },
         {
-          "_id": "dd86d897-9371-4988-9ff6-e024ab25e3fa",
+          "__id": "dd86d897-9371-4988-9ff6-e024ab25e3fa",
           "platform": "facebook",
-          "platform_id": "267579327040357",
+          "_id": "267579327040357",
           "program_title": "",
           "url": "https://www.facebook.com/267579327040357",
           "img": "https://graph.facebook.com/nan/picture",
@@ -236,9 +240,9 @@
           "id": 11
         },
         {
-          "_id": "8560a5d2-76e9-4223-a1d2-52a46776aab6",
+          "__id": "8560a5d2-76e9-4223-a1d2-52a46776aab6",
           "platform": "facebook",
-          "platform_id": "340167219721098",
+          "_id": "340167219721098",
           "program_title": "",
           "url": "https://www.facebook.com/340167219721098",
           "img": "https://graph.facebook.com/nan/picture",
@@ -251,9 +255,9 @@
           "id": 12
         },
         {
-          "_id": "71d36fb7-fcaf-4d50-8128-1405dcdb1154",
+          "__id": "71d36fb7-fcaf-4d50-8128-1405dcdb1154",
           "platform": "facebook",
-          "platform_id": "241739756229634",
+          "_id": "241739756229634",
           "program_title": "",
           "url": "https://www.facebook.com/241739756229634",
           "img": "https://graph.facebook.com/QartuliIdea.ChiaturisOrganizatsia/picture",
@@ -266,9 +270,9 @@
           "id": 13
         },
         {
-          "_id": "acd8f67e-6b52-4ab3-ba04-8aa38ba5dd3c",
+          "__id": "acd8f67e-6b52-4ab3-ba04-8aa38ba5dd3c",
           "platform": "facebook",
-          "platform_id": "502534593553528",
+          "_id": "502534593553528",
           "program_title": "",
           "url": "https://www.facebook.com/502534593553528",
           "img": "https://graph.facebook.com/nan/picture",
@@ -281,9 +285,9 @@
           "id": 14
         },
         {
-          "_id": "d4967fa5-81c8-4e74-8e43-3299bad6ec7b",
+          "__id": "d4967fa5-81c8-4e74-8e43-3299bad6ec7b",
           "platform": "facebook",
-          "platform_id": "253133861897803",
+          "_id": "253133861897803",
           "program_title": "",
           "url": "https://www.facebook.com/253133861897803",
           "img": "https://graph.facebook.com/nan/picture",
@@ -296,9 +300,9 @@
           "id": 15
         },
         {
-          "_id": "80c36d35-7aef-4127-b581-729ec21c0491",
+          "__id": "80c36d35-7aef-4127-b581-729ec21c0491",
           "platform": "facebook",
-          "platform_id": "126457707537861",
+          "_id": "126457707537861",
           "program_title": "",
           "url": "https://www.facebook.com/126457707537861",
           "img": "https://graph.facebook.com/iverionii/picture",
@@ -311,9 +315,9 @@
           "id": 16
         },
         {
-          "_id": "88695f04-0635-4e0d-bf37-72a1eff269ea",
+          "__id": "88695f04-0635-4e0d-bf37-72a1eff269ea",
           "platform": "facebook",
-          "platform_id": "398969480165646",
+          "_id": "398969480165646",
           "program_title": "",
           "url": "https://www.facebook.com/398969480165646",
           "img": "https://graph.facebook.com/AgencyEurasia/picture",
@@ -326,9 +330,9 @@
           "id": 17
         },
         {
-          "_id": "c3eff975-4dcd-495c-b3fb-bfc1b94250c3",
+          "__id": "c3eff975-4dcd-495c-b3fb-bfc1b94250c3",
           "platform": "facebook",
-          "platform_id": "1725511877720259",
+          "_id": "1725511877720259",
           "program_title": "",
           "url": "https://www.facebook.com/1725511877720259",
           "img": "https://graph.facebook.com/religia.ge/picture",
@@ -341,9 +345,9 @@
           "id": 18
         },
         {
-          "_id": "0c1684ef-3d7d-421e-b2c6-ea058470d99d",
+          "__id": "0c1684ef-3d7d-421e-b2c6-ea058470d99d",
           "platform": "facebook",
-          "platform_id": "172814127623815",
+          "_id": "172814127623815",
           "program_title": "",
           "url": "https://www.facebook.com/172814127623815",
           "img": "https://graph.facebook.com/nan/picture",
@@ -356,9 +360,9 @@
           "id": 19
         },
         {
-          "_id": "929d1cd9-de3c-48be-9524-9b650aff6c91",
+          "__id": "929d1cd9-de3c-48be-9524-9b650aff6c91",
           "platform": "facebook",
-          "platform_id": "103024505375312",
+          "_id": "103024505375312",
           "program_title": "",
           "url": "https://www.facebook.com/103024505375312",
           "img": "https://graph.facebook.com/nan/picture",
@@ -371,9 +375,9 @@
           "id": 20
         },
         {
-          "_id": "4f3a4844-9e1f-42ea-a197-02dbe3204af2",
+          "__id": "4f3a4844-9e1f-42ea-a197-02dbe3204af2",
           "platform": "facebook",
-          "platform_id": "102303105528701",
+          "_id": "102303105528701",
           "program_title": "",
           "url": "https://www.facebook.com/102303105528701",
           "img": "https://graph.facebook.com/politabsurd/picture",
@@ -386,9 +390,9 @@
           "id": 21
         },
         {
-          "_id": "2dd7649d-942f-4293-acdc-721defb22e3b",
+          "__id": "2dd7649d-942f-4293-acdc-721defb22e3b",
           "platform": "facebook",
-          "platform_id": "1488708571376670",
+          "_id": "1488708571376670",
           "program_title": "",
           "url": "https://www.facebook.com/1488708571376670",
           "img": "https://graph.facebook.com/defencegeorgia/picture",
@@ -401,9 +405,9 @@
           "id": 22
         },
         {
-          "_id": "6f12ed98-513a-45a2-987f-5cec5e00dd53",
+          "__id": "6f12ed98-513a-45a2-987f-5cec5e00dd53",
           "platform": "facebook",
-          "platform_id": "102131411314617",
+          "_id": "102131411314617",
           "program_title": "",
           "url": "https://www.facebook.com/102131411314617",
           "img": "https://graph.facebook.com/mikheilukrainollogi/picture",
@@ -416,9 +420,9 @@
           "id": 23
         },
         {
-          "_id": "0c367faa-146a-4b9b-a581-430a7cefec52",
+          "__id": "0c367faa-146a-4b9b-a581-430a7cefec52",
           "platform": "facebook",
-          "platform_id": "978054062338090",
+          "_id": "978054062338090",
           "program_title": "",
           "url": "https://www.facebook.com/978054062338090",
           "img": "https://graph.facebook.com/WelcomeetoGeorgia/picture",
@@ -431,9 +435,9 @@
           "id": 24
         },
         {
-          "_id": "36af91a5-dd83-4732-9e6c-51381c7211c8",
+          "__id": "36af91a5-dd83-4732-9e6c-51381c7211c8",
           "platform": "facebook",
-          "platform_id": "184890065770012",
+          "_id": "184890065770012",
           "program_title": "",
           "url": "https://www.facebook.com/184890065770012",
           "img": "https://graph.facebook.com/Politicalmemez/picture",
@@ -446,9 +450,9 @@
           "id": 25
         },
         {
-          "_id": "a94549e5-11ef-412c-b92c-f97bf80af51f",
+          "__id": "a94549e5-11ef-412c-b92c-f97bf80af51f",
           "platform": "facebook",
-          "platform_id": "326815664127831",
+          "_id": "326815664127831",
           "program_title": "",
           "url": "https://www.facebook.com/326815664127831",
           "img": "https://graph.facebook.com/IrakliForGeorgia/picture",
@@ -461,9 +465,9 @@
           "id": 26
         },
         {
-          "_id": "969fac91-15b7-43e1-a369-6ea60c65fc02",
+          "__id": "969fac91-15b7-43e1-a369-6ea60c65fc02",
           "platform": "facebook",
-          "platform_id": "1240421019315214",
+          "_id": "1240421019315214",
           "program_title": "",
           "url": "https://www.facebook.com/1240421019315214",
           "img": "https://graph.facebook.com/stvsamegrelo/picture",
@@ -476,9 +480,9 @@
           "id": 27
         },
         {
-          "_id": "6128b09c-571c-4faf-b3f5-cb3d4453d53f",
+          "__id": "6128b09c-571c-4faf-b3f5-cb3d4453d53f",
           "platform": "facebook",
-          "platform_id": "230304133690655",
+          "_id": "230304133690655",
           "program_title": "",
           "url": "https://www.facebook.com/230304133690655",
           "img": "https://graph.facebook.com/GakhariaMedia/picture",
@@ -491,9 +495,9 @@
           "id": 28
         },
         {
-          "_id": "2dc15470-c18e-499c-b758-08142875cdab",
+          "__id": "2dc15470-c18e-499c-b758-08142875cdab",
           "platform": "facebook",
-          "platform_id": "102455424478256",
+          "_id": "102455424478256",
           "program_title": "",
           "url": "https://www.facebook.com/102455424478256",
           "img": "https://graph.facebook.com/TVPORTALI/picture",
@@ -506,9 +510,9 @@
           "id": 29
         },
         {
-          "_id": "e85aba4f-eceb-45d2-b3cf-8d1b86204c5c",
+          "__id": "e85aba4f-eceb-45d2-b3cf-8d1b86204c5c",
           "platform": "facebook",
-          "platform_id": "616643598769036",
+          "_id": "616643598769036",
           "program_title": "",
           "url": "https://www.facebook.com/616643598769036",
           "img": "https://graph.facebook.com/QartuliGverdi/picture",
@@ -521,9 +525,9 @@
           "id": 30
         },
         {
-          "_id": "0a4bbaa2-7e73-422a-84ac-395296fa59d6",
+          "__id": "0a4bbaa2-7e73-422a-84ac-395296fa59d6",
           "platform": "facebook",
-          "platform_id": "105609044355904",
+          "_id": "105609044355904",
           "program_title": "",
           "url": "https://www.facebook.com/105609044355904",
           "img": "https://graph.facebook.com/mtrebi1/picture",
@@ -536,9 +540,9 @@
           "id": 31
         },
         {
-          "_id": "757a6531-06b1-4771-9fcb-e56455da5331",
+          "__id": "757a6531-06b1-4771-9fcb-e56455da5331",
           "platform": "facebook",
-          "platform_id": "264904123911945",
+          "_id": "264904123911945",
           "program_title": "",
           "url": "https://www.facebook.com/264904123911945",
           "img": "https://graph.facebook.com/nan/picture",
@@ -551,9 +555,9 @@
           "id": 32
         },
         {
-          "_id": "facb649f-fff9-4e8b-a89f-ac0244a0defc",
+          "__id": "facb649f-fff9-4e8b-a89f-ac0244a0defc",
           "platform": "facebook",
-          "platform_id": "333779600054746",
+          "_id": "333779600054746",
           "program_title": "",
           "url": "https://www.facebook.com/333779600054746",
           "img": "https://graph.facebook.com/30vercxli/picture",
@@ -566,9 +570,9 @@
           "id": 33
         },
         {
-          "_id": "b36be1b5-e211-40e3-9fc2-4029265c35e0",
+          "__id": "b36be1b5-e211-40e3-9fc2-4029265c35e0",
           "platform": "facebook",
-          "platform_id": "1396994997276044",
+          "_id": "1396994997276044",
           "program_title": "",
           "url": "https://www.facebook.com/1396994997276044",
           "img": "https://graph.facebook.com/Rustavi5/picture",
@@ -581,9 +585,9 @@
           "id": 34
         },
         {
-          "_id": "2fafa38f-4675-404e-9463-7f05111d0af6",
+          "__id": "2fafa38f-4675-404e-9463-7f05111d0af6",
           "platform": "facebook",
-          "platform_id": "1940631769490442",
+          "_id": "1940631769490442",
           "program_title": "",
           "url": "https://www.facebook.com/1940631769490442",
           "img": "https://graph.facebook.com/GeoAltRight/picture",
@@ -596,9 +600,9 @@
           "id": 35
         },
         {
-          "_id": "a88335cc-50ef-4c41-a462-2b66be3a80af",
+          "__id": "a88335cc-50ef-4c41-a462-2b66be3a80af",
           "platform": "facebook",
-          "platform_id": "158756081445333",
+          "_id": "158756081445333",
           "program_title": "",
           "url": "https://www.facebook.com/158756081445333",
           "img": "https://graph.facebook.com/nan/picture",
@@ -611,9 +615,9 @@
           "id": 36
         },
         {
-          "_id": "92a20c96-8b3d-4729-a011-b9465f5eb883",
+          "__id": "92a20c96-8b3d-4729-a011-b9465f5eb883",
           "platform": "facebook",
-          "platform_id": "958119451032039",
+          "_id": "958119451032039",
           "program_title": "",
           "url": "https://www.facebook.com/958119451032039",
           "img": "https://graph.facebook.com/nan/picture",
@@ -626,9 +630,9 @@
           "id": 37
         },
         {
-          "_id": "cf55b9c9-6a65-4365-9ca9-406fcf72968a",
+          "__id": "cf55b9c9-6a65-4365-9ca9-406fcf72968a",
           "platform": "facebook",
-          "platform_id": "220261491870453",
+          "_id": "220261491870453",
           "program_title": "",
           "url": "https://www.facebook.com/220261491870453",
           "img": "https://graph.facebook.com/nan/picture",
@@ -641,9 +645,9 @@
           "id": 38
         },
         {
-          "_id": "8d18eafb-1aa6-4b79-9134-4e16fc742694",
+          "__id": "8d18eafb-1aa6-4b79-9134-4e16fc742694",
           "platform": "facebook",
-          "platform_id": "309261409799760",
+          "_id": "309261409799760",
           "program_title": "",
           "url": "https://www.facebook.com/309261409799760",
           "img": "https://graph.facebook.com/antinacizmi/picture",
@@ -656,9 +660,9 @@
           "id": 39
         },
         {
-          "_id": "748eddeb-f9b0-4138-9ffc-196c5fc95cf8",
+          "__id": "748eddeb-f9b0-4138-9ffc-196c5fc95cf8",
           "platform": "facebook",
-          "platform_id": "589157598122134",
+          "_id": "589157598122134",
           "program_title": "",
           "url": "https://www.facebook.com/589157598122134",
           "img": "https://graph.facebook.com/nan/picture",
@@ -671,9 +675,9 @@
           "id": 40
         },
         {
-          "_id": "c0451cee-7b54-45e5-92c7-5e0e9cea6438",
+          "__id": "c0451cee-7b54-45e5-92c7-5e0e9cea6438",
           "platform": "facebook",
-          "platform_id": "1185571358124831",
+          "_id": "1185571358124831",
           "program_title": "",
           "url": "https://www.facebook.com/1185571358124831",
           "img": "https://graph.facebook.com/Qocneba/picture",
@@ -686,9 +690,9 @@
           "id": 41
         },
         {
-          "_id": "ad9bde80-a7a0-4022-87d8-843036bf4e27",
+          "__id": "ad9bde80-a7a0-4022-87d8-843036bf4e27",
           "platform": "facebook",
-          "platform_id": "108987443932652",
+          "_id": "108987443932652",
           "program_title": "",
           "url": "https://www.facebook.com/108987443932652",
           "img": "https://graph.facebook.com/daasrule/picture",
@@ -701,9 +705,9 @@
           "id": 42
         },
         {
-          "_id": "7e42d06c-0933-4075-bcf3-6ad1db797d4f",
+          "__id": "7e42d06c-0933-4075-bcf3-6ad1db797d4f",
           "platform": "facebook",
-          "platform_id": "1545274309095512",
+          "_id": "1545274309095512",
           "program_title": "",
           "url": "https://www.facebook.com/1545274309095512",
           "img": "https://graph.facebook.com/QocBanda/picture",
@@ -716,9 +720,9 @@
           "id": 43
         },
         {
-          "_id": "78c9632a-5354-47c9-90b6-23836bdc17ff",
+          "__id": "78c9632a-5354-47c9-90b6-23836bdc17ff",
           "platform": "facebook",
-          "platform_id": "709792172430649",
+          "_id": "709792172430649",
           "program_title": "",
           "url": "https://www.facebook.com/709792172430649",
           "img": "https://graph.facebook.com/MogityanTocneba/picture",
@@ -731,9 +735,9 @@
           "id": 44
         },
         {
-          "_id": "808061b1-31e5-450f-a422-8d22a911df4e",
+          "__id": "808061b1-31e5-450f-a422-8d22a911df4e",
           "platform": "facebook",
-          "platform_id": "350075618678906",
+          "_id": "350075618678906",
           "program_title": "",
           "url": "https://www.facebook.com/350075618678906",
           "img": "https://graph.facebook.com/MeMiyvarsQocebiMogityantColebi/picture",
@@ -746,9 +750,9 @@
           "id": 45
         },
         {
-          "_id": "5e451785-ee8d-4a68-aa37-6ca4d80e1452",
+          "__id": "5e451785-ee8d-4a68-aa37-6ca4d80e1452",
           "platform": "facebook",
-          "platform_id": "109504527120984",
+          "_id": "109504527120984",
           "program_title": "",
           "url": "https://www.facebook.com/109504527120984",
           "img": "https://graph.facebook.com/nan/picture",
@@ -761,9 +765,9 @@
           "id": 46
         },
         {
-          "_id": "f36a72c3-4a09-4760-b3cc-5b20a48405f5",
+          "__id": "f36a72c3-4a09-4760-b3cc-5b20a48405f5",
           "platform": "facebook",
-          "platform_id": "1933449840047943",
+          "_id": "1933449840047943",
           "program_title": "",
           "url": "https://www.facebook.com/1933449840047943",
           "img": "https://graph.facebook.com/modzaladenacebi5/picture",
@@ -776,9 +780,9 @@
           "id": 47
         },
         {
-          "_id": "11ae6b5f-7058-41db-afa5-ff06d4d43965",
+          "__id": "11ae6b5f-7058-41db-afa5-ff06d4d43965",
           "platform": "facebook",
-          "platform_id": "113151086753583",
+          "_id": "113151086753583",
           "program_title": "",
           "url": "https://www.facebook.com/113151086753583",
           "img": "https://graph.facebook.com/nan/picture",
@@ -791,9 +795,9 @@
           "id": 48
         },
         {
-          "_id": "ea8ea052-69eb-47a2-a309-6d3252c42c24",
+          "__id": "ea8ea052-69eb-47a2-a309-6d3252c42c24",
           "platform": "facebook",
-          "platform_id": "102110914698322",
+          "_id": "102110914698322",
           "program_title": "",
           "url": "https://www.facebook.com/102110914698322",
           "img": "https://graph.facebook.com/nacarqeqia.qocatyuila/picture",
@@ -806,9 +810,9 @@
           "id": 49
         },
         {
-          "_id": "4ea5a19b-0a21-4e4f-a8d0-5bee42973ab1",
+          "__id": "4ea5a19b-0a21-4e4f-a8d0-5bee42973ab1",
           "platform": "facebook",
-          "platform_id": "102625548026556",
+          "_id": "102625548026556",
           "program_title": "",
           "url": "https://www.facebook.com/102625548026556",
           "img": "https://graph.facebook.com/ertianinacionaluridvijenia/picture",
@@ -821,9 +825,9 @@
           "id": 50
         },
         {
-          "_id": "b68e3bc2-810f-491b-b284-8430be6fcf45",
+          "__id": "b68e3bc2-810f-491b-b284-8430be6fcf45",
           "platform": "facebook",
-          "platform_id": "841630609353767",
+          "_id": "841630609353767",
           "program_title": "",
           "url": "https://www.facebook.com/841630609353767",
           "img": "https://graph.facebook.com/nan/picture",
@@ -836,9 +840,9 @@
           "id": 51
         },
         {
-          "_id": "1e631f6e-5ab5-41bd-a3f9-0cbb2422dfe7",
+          "__id": "1e631f6e-5ab5-41bd-a3f9-0cbb2422dfe7",
           "platform": "facebook",
-          "platform_id": "251721144883740",
+          "_id": "251721144883740",
           "program_title": "",
           "url": "https://www.facebook.com/251721144883740",
           "img": "https://graph.facebook.com/MukhaOak/picture",
@@ -851,9 +855,9 @@
           "id": 52
         },
         {
-          "_id": "6168a04b-4c79-4ccf-8f64-69cd143d7fd8",
+          "__id": "6168a04b-4c79-4ccf-8f64-69cd143d7fd8",
           "platform": "facebook",
-          "platform_id": "112850047106293",
+          "_id": "112850047106293",
           "program_title": "",
           "url": "https://www.facebook.com/112850047106293",
           "img": "https://graph.facebook.com/nan/picture",
@@ -866,9 +870,9 @@
           "id": 53
         },
         {
-          "_id": "d06c0eca-2d7d-4add-bb60-1902bb17e2ce",
+          "__id": "d06c0eca-2d7d-4add-bb60-1902bb17e2ce",
           "platform": "facebook",
-          "platform_id": "502433709944447",
+          "_id": "502433709944447",
           "program_title": "",
           "url": "https://www.facebook.com/502433709944447",
           "img": "https://graph.facebook.com/nan/picture",
@@ -881,9 +885,9 @@
           "id": 54
         },
         {
-          "_id": "8582e2dd-0edf-47e2-a1b5-bb4cfb9638dc",
+          "__id": "8582e2dd-0edf-47e2-a1b5-bb4cfb9638dc",
           "platform": "facebook",
-          "platform_id": "104962607671414",
+          "_id": "104962607671414",
           "program_title": "",
           "url": "https://www.facebook.com/104962607671414",
           "img": "https://graph.facebook.com/geochinalegal/picture",
@@ -896,9 +900,9 @@
           "id": 55
         },
         {
-          "_id": "2fc6df49-50e0-4499-bc60-527a481f4049",
+          "__id": "2fc6df49-50e0-4499-bc60-527a481f4049",
           "platform": "facebook",
-          "platform_id": "100535714834301",
+          "_id": "100535714834301",
           "program_title": "",
           "url": "https://www.facebook.com/100535714834301",
           "img": "https://graph.facebook.com/pingvinidavardi/picture",
@@ -911,9 +915,9 @@
           "id": 56
         },
         {
-          "_id": "a769fe15-cb6b-4b33-94d4-74a22654b718",
+          "__id": "a769fe15-cb6b-4b33-94d4-74a22654b718",
           "platform": "facebook",
-          "platform_id": "324154705033521",
+          "_id": "324154705033521",
           "program_title": "",
           "url": "https://www.facebook.com/324154705033521",
           "img": "https://graph.facebook.com/ADMINISTRACIA555LIVEGEORGIA/picture",
@@ -926,9 +930,9 @@
           "id": 57
         },
         {
-          "_id": "5813405d-5526-4705-8a6c-74d98179eb67",
+          "__id": "5813405d-5526-4705-8a6c-74d98179eb67",
           "platform": "facebook",
-          "platform_id": "109835813960876",
+          "_id": "109835813960876",
           "program_title": "",
           "url": "https://www.facebook.com/109835813960876",
           "img": "https://graph.facebook.com/nan/picture",
@@ -941,9 +945,9 @@
           "id": 58
         },
         {
-          "_id": "222653d9-fcea-4bc5-981c-513d63b751b0",
+          "__id": "222653d9-fcea-4bc5-981c-513d63b751b0",
           "platform": "facebook",
-          "platform_id": "107025947793043",
+          "_id": "107025947793043",
           "program_title": "",
           "url": "https://www.facebook.com/107025947793043",
           "img": "https://graph.facebook.com/nan/picture",
@@ -956,9 +960,9 @@
           "id": 59
         },
         {
-          "_id": "28d5cf45-c77c-461f-b333-a2da61a19d64",
+          "__id": "28d5cf45-c77c-461f-b333-a2da61a19d64",
           "platform": "facebook",
-          "platform_id": "849769971841364",
+          "_id": "849769971841364",
           "program_title": "",
           "url": "https://www.facebook.com/849769971841364",
           "img": "https://graph.facebook.com/nan/picture",
@@ -971,9 +975,9 @@
           "id": 60
         },
         {
-          "_id": "f3db5be6-92e0-47f4-8b6f-234366c2afd2",
+          "__id": "f3db5be6-92e0-47f4-8b6f-234366c2afd2",
           "platform": "facebook",
-          "platform_id": "107594727705190",
+          "_id": "107594727705190",
           "program_title": "",
           "url": "https://www.facebook.com/107594727705190",
           "img": "https://graph.facebook.com/nan/picture",
@@ -986,9 +990,9 @@
           "id": 61
         },
         {
-          "_id": "7deee204-d62a-47d9-a12a-dbc9098f03f0",
+          "__id": "7deee204-d62a-47d9-a12a-dbc9098f03f0",
           "platform": "facebook",
-          "platform_id": "625716414738360",
+          "_id": "625716414738360",
           "program_title": "",
           "url": "https://www.facebook.com/625716414738360",
           "img": "https://graph.facebook.com/saqartveloshiundagatendes5/picture",
@@ -1001,9 +1005,9 @@
           "id": 62
         },
         {
-          "_id": "b908a0c5-e51e-4d20-b4f9-1685194c1f0f",
+          "__id": "b908a0c5-e51e-4d20-b4f9-1685194c1f0f",
           "platform": "facebook",
-          "platform_id": "401733353928268",
+          "_id": "401733353928268",
           "program_title": "",
           "url": "https://www.facebook.com/401733353928268",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1016,9 +1020,9 @@
           "id": 63
         },
         {
-          "_id": "4fd5b531-3cdd-4824-b1b4-7e536eca70ea",
+          "__id": "4fd5b531-3cdd-4824-b1b4-7e536eca70ea",
           "platform": "facebook",
-          "platform_id": "830363143715736",
+          "_id": "830363143715736",
           "program_title": "",
           "url": "https://www.facebook.com/830363143715736",
           "img": "https://graph.facebook.com/shemoxaze.44/picture",
@@ -1031,9 +1035,9 @@
           "id": 64
         },
         {
-          "_id": "f739d2a7-71c3-4527-9b19-4149a2f2534f",
+          "__id": "f739d2a7-71c3-4527-9b19-4149a2f2534f",
           "platform": "facebook",
-          "platform_id": "101183782205426",
+          "_id": "101183782205426",
           "program_title": "",
           "url": "https://www.facebook.com/101183782205426",
           "img": "https://graph.facebook.com/SinamdvileshiGD/picture",
@@ -1046,9 +1050,9 @@
           "id": 65
         },
         {
-          "_id": "cd9945dc-c4fa-49ba-9780-59633c1a5a19",
+          "__id": "cd9945dc-c4fa-49ba-9780-59633c1a5a19",
           "platform": "facebook",
-          "platform_id": "110767304774280",
+          "_id": "110767304774280",
           "program_title": "",
           "url": "https://www.facebook.com/110767304774280",
           "img": "https://graph.facebook.com/altnews2/picture",
@@ -1061,9 +1065,9 @@
           "id": 66
         },
         {
-          "_id": "6eb50551-6178-4294-b50b-241d02022c65",
+          "__id": "6eb50551-6178-4294-b50b-241d02022c65",
           "platform": "facebook",
-          "platform_id": "139446296420571",
+          "_id": "139446296420571",
           "program_title": "",
           "url": "https://www.facebook.com/139446296420571",
           "img": "https://graph.facebook.com/wcf10/picture",
@@ -1076,9 +1080,9 @@
           "id": 67
         },
         {
-          "_id": "97b94afa-11d4-4594-b6dc-0e18dc280c88",
+          "__id": "97b94afa-11d4-4594-b6dc-0e18dc280c88",
           "platform": "facebook",
-          "platform_id": "130604456962096",
+          "_id": "130604456962096",
           "program_title": "",
           "url": "https://www.facebook.com/130604456962096",
           "img": "https://graph.facebook.com/obieqti/picture",
@@ -1091,9 +1095,9 @@
           "id": 68
         },
         {
-          "_id": "229a5638-57d8-4dd0-bea6-38615a8ac149",
+          "__id": "229a5638-57d8-4dd0-bea6-38615a8ac149",
           "platform": "facebook",
-          "platform_id": "783645688347894",
+          "_id": "783645688347894",
           "program_title": "",
           "url": "https://www.facebook.com/783645688347894",
           "img": "https://graph.facebook.com/PoliticanoGeorgia/picture",
@@ -1106,9 +1110,9 @@
           "id": 69
         },
         {
-          "_id": "84f6223b-f09d-4e38-b6bf-ca134965e037",
+          "__id": "84f6223b-f09d-4e38-b6bf-ca134965e037",
           "platform": "facebook",
-          "platform_id": "217114512148619",
+          "_id": "217114512148619",
           "program_title": "",
           "url": "https://www.facebook.com/217114512148619",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1121,9 +1125,9 @@
           "id": 70
         },
         {
-          "_id": "34ba9e90-1a3b-4cb5-8ef7-fb1efd044a4a",
+          "__id": "34ba9e90-1a3b-4cb5-8ef7-fb1efd044a4a",
           "platform": "facebook",
-          "platform_id": "110866021417785",
+          "_id": "110866021417785",
           "program_title": "",
           "url": "https://www.facebook.com/110866021417785",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1136,9 +1140,9 @@
           "id": 71
         },
         {
-          "_id": "2fad6291-3583-4d4a-9605-411712d844f1",
+          "__id": "2fad6291-3583-4d4a-9605-411712d844f1",
           "platform": "facebook",
-          "platform_id": "1183718718339254",
+          "_id": "1183718718339254",
           "program_title": "",
           "url": "https://www.facebook.com/1183718718339254",
           "img": "https://graph.facebook.com/dedakalaki/picture",
@@ -1151,9 +1155,9 @@
           "id": 72
         },
         {
-          "_id": "b821a8d6-35ce-46a3-b2f5-894df5004b6e",
+          "__id": "b821a8d6-35ce-46a3-b2f5-894df5004b6e",
           "platform": "facebook",
-          "platform_id": "1745286642251051",
+          "_id": "1745286642251051",
           "program_title": "",
           "url": "https://www.facebook.com/1745286642251051",
           "img": "https://graph.facebook.com/qartveli.xalxis.dzala/picture",
@@ -1166,9 +1170,9 @@
           "id": 73
         },
         {
-          "_id": "887876bc-b33a-4c21-b5c7-5f6ad04a7ec6",
+          "__id": "887876bc-b33a-4c21-b5c7-5f6ad04a7ec6",
           "platform": "facebook",
-          "platform_id": "2114551732146264",
+          "_id": "2114551732146264",
           "program_title": "",
           "url": "https://www.facebook.com/2114551732146264",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1181,9 +1185,9 @@
           "id": 74
         },
         {
-          "_id": "207d6ad0-5061-435f-8c3e-f0c319663247",
+          "__id": "207d6ad0-5061-435f-8c3e-f0c319663247",
           "platform": "facebook",
-          "platform_id": "100986558351288",
+          "_id": "100986558351288",
           "program_title": "",
           "url": "https://www.facebook.com/100986558351288",
           "img": "https://graph.facebook.com/AlternativeWorld11/picture",
@@ -1196,9 +1200,9 @@
           "id": 75
         },
         {
-          "_id": "7e744741-e944-4ac2-8c9d-578ea9d2972f",
+          "__id": "7e744741-e944-4ac2-8c9d-578ea9d2972f",
           "platform": "facebook",
-          "platform_id": "2029505250478169",
+          "_id": "2029505250478169",
           "program_title": "",
           "url": "https://www.facebook.com/2029505250478169",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1211,9 +1215,9 @@
           "id": 76
         },
         {
-          "_id": "d481a455-e76d-4f62-b6b1-b835030acd98",
+          "__id": "d481a455-e76d-4f62-b6b1-b835030acd98",
           "platform": "facebook",
-          "platform_id": "343131969439897",
+          "_id": "343131969439897",
           "program_title": "",
           "url": "https://www.facebook.com/343131969439897",
           "img": "https://graph.facebook.com/ForGeorgiaForGeorgians/picture",
@@ -1226,9 +1230,9 @@
           "id": 77
         },
         {
-          "_id": "4ecc3da4-6cad-4532-85a0-051b55c500c5",
+          "__id": "4ecc3da4-6cad-4532-85a0-051b55c500c5",
           "platform": "facebook",
-          "platform_id": "319066468458621",
+          "_id": "319066468458621",
           "program_title": "",
           "url": "https://www.facebook.com/319066468458621",
           "img": "https://graph.facebook.com/FORKLIFT.GE/picture",
@@ -1241,9 +1245,9 @@
           "id": 78
         },
         {
-          "_id": "beddcb9c-8d8d-4ddb-9905-35300d67aa12",
+          "__id": "beddcb9c-8d8d-4ddb-9905-35300d67aa12",
           "platform": "facebook",
-          "platform_id": "224722004358249",
+          "_id": "224722004358249",
           "program_title": "",
           "url": "https://www.facebook.com/224722004358249",
           "img": "https://graph.facebook.com/www.isari.ge/picture",
@@ -1256,9 +1260,9 @@
           "id": 79
         },
         {
-          "_id": "e224b61a-0482-401f-ac02-489950e0660d",
+          "__id": "e224b61a-0482-401f-ac02-489950e0660d",
           "platform": "facebook",
-          "platform_id": "789751564445062",
+          "_id": "789751564445062",
           "program_title": "",
           "url": "https://www.facebook.com/789751564445062",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1271,9 +1275,9 @@
           "id": 80
         },
         {
-          "_id": "200f198a-9cf6-4f4e-9ffb-21bbffea6358",
+          "__id": "200f198a-9cf6-4f4e-9ffb-21bbffea6358",
           "platform": "facebook",
-          "platform_id": "102761568607823",
+          "_id": "102761568607823",
           "program_title": "",
           "url": "https://www.facebook.com/102761568607823",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1286,9 +1290,9 @@
           "id": 81
         },
         {
-          "_id": "e29c23de-49d8-4c0b-b2ea-2614bcda177e",
+          "__id": "e29c23de-49d8-4c0b-b2ea-2614bcda177e",
           "platform": "facebook",
-          "platform_id": "303848683145350",
+          "_id": "303848683145350",
           "program_title": "",
           "url": "https://www.facebook.com/303848683145350",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1301,9 +1305,9 @@
           "id": 82
         },
         {
-          "_id": "d8994229-a1ac-4ff1-936b-7df15ff85290",
+          "__id": "d8994229-a1ac-4ff1-936b-7df15ff85290",
           "platform": "facebook",
-          "platform_id": "102288005440147",
+          "_id": "102288005440147",
           "program_title": "",
           "url": "https://www.facebook.com/102288005440147",
           "img": "https://graph.facebook.com/beqassazogadoeba/picture",
@@ -1316,9 +1320,9 @@
           "id": 83
         },
         {
-          "_id": "a387881d-41ce-4d69-b8b4-382e03eac971",
+          "__id": "a387881d-41ce-4d69-b8b4-382e03eac971",
           "platform": "facebook",
-          "platform_id": "2370440083237938",
+          "_id": "2370440083237938",
           "program_title": "",
           "url": "https://www.facebook.com/2370440083237938",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1332,9 +1336,9 @@
           "id": 84
         },
         {
-          "_id": "294cee31-2c95-41ff-aa90-6e897a4cea7c",
+          "__id": "294cee31-2c95-41ff-aa90-6e897a4cea7c",
           "platform": "facebook",
-          "platform_id": "1220893034631853",
+          "_id": "1220893034631853",
           "program_title": "",
           "url": "https://www.facebook.com/1220893034631853",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1347,9 +1351,9 @@
           "id": 85
         },
         {
-          "_id": "4a535cde-c791-4fe8-8849-81e14918f284",
+          "__id": "4a535cde-c791-4fe8-8849-81e14918f284",
           "platform": "facebook",
-          "platform_id": "107692938260573",
+          "_id": "107692938260573",
           "program_title": "",
           "url": "https://www.facebook.com/107692938260573",
           "img": "https://graph.facebook.com/archivegeo/picture",
@@ -1362,9 +1366,9 @@
           "id": 86
         },
         {
-          "_id": "5a5f2468-13ec-4b58-81f1-924f95108573",
+          "__id": "5a5f2468-13ec-4b58-81f1-924f95108573",
           "platform": "facebook",
-          "platform_id": "365807634291022",
+          "_id": "365807634291022",
           "program_title": "",
           "url": "https://www.facebook.com/365807634291022",
           "img": "https://graph.facebook.com/sircxviliskoridori/picture",
@@ -1377,9 +1381,9 @@
           "id": 87
         },
         {
-          "_id": "2a08ecd7-3524-4acf-b066-61e9de25cace",
+          "__id": "2a08ecd7-3524-4acf-b066-61e9de25cace",
           "platform": "facebook",
-          "platform_id": "109234980712256",
+          "_id": "109234980712256",
           "program_title": "",
           "url": "https://www.facebook.com/109234980712256",
           "img": "https://graph.facebook.com/AdjaraNews/picture",
@@ -1392,9 +1396,9 @@
           "id": 88
         },
         {
-          "_id": "85c35ef2-0db3-4bb2-bffe-e8dfb5e1407a",
+          "__id": "85c35ef2-0db3-4bb2-bffe-e8dfb5e1407a",
           "platform": "facebook",
-          "platform_id": "108652531483661",
+          "_id": "108652531483661",
           "program_title": "",
           "url": "https://www.facebook.com/108652531483661",
           "img": "https://graph.facebook.com/kartuliotsnebachemiarchevania/picture",
@@ -1407,9 +1411,9 @@
           "id": 89
         },
         {
-          "_id": "03c724cf-7bac-4288-b269-7ab838b38462",
+          "__id": "03c724cf-7bac-4288-b269-7ab838b38462",
           "platform": "facebook",
-          "platform_id": "2220044331551918",
+          "_id": "2220044331551918",
           "program_title": "",
           "url": "https://www.facebook.com/2220044331551918",
           "img": "https://graph.facebook.com/FBleader41/picture",
@@ -1422,9 +1426,9 @@
           "id": 90
         },
         {
-          "_id": "3d57240c-a3f7-4ef5-a531-71c0b34c1eeb",
+          "__id": "3d57240c-a3f7-4ef5-a531-71c0b34c1eeb",
           "platform": "facebook",
-          "platform_id": "1801752189891333",
+          "_id": "1801752189891333",
           "program_title": "",
           "url": "https://www.facebook.com/1801752189891333",
           "img": "https://graph.facebook.com/KoveldgiuriMovlenebi/picture",
@@ -1437,9 +1441,9 @@
           "id": 91
         },
         {
-          "_id": "5b18432c-9467-4958-a1cf-17f44843eeb0",
+          "__id": "5b18432c-9467-4958-a1cf-17f44843eeb0",
           "platform": "facebook",
-          "platform_id": "794085760789269",
+          "_id": "794085760789269",
           "program_title": "",
           "url": "https://www.facebook.com/794085760789269",
           "img": "https://graph.facebook.com/BidzinaIvanishvilli/picture",
@@ -1452,9 +1456,9 @@
           "id": 92
         },
         {
-          "_id": "9e8cb142-4b73-43a3-b674-518eef9151a7",
+          "__id": "9e8cb142-4b73-43a3-b674-518eef9151a7",
           "platform": "facebook",
-          "platform_id": "102454004957063",
+          "_id": "102454004957063",
           "program_title": "",
           "url": "https://www.facebook.com/102454004957063",
           "img": "https://graph.facebook.com/SamegreloOfficial/picture",
@@ -1467,9 +1471,9 @@
           "id": 93
         },
         {
-          "_id": "db8d019e-2d74-40f2-9b03-9bb86b1dd3c7",
+          "__id": "db8d019e-2d74-40f2-9b03-9bb86b1dd3c7",
           "platform": "facebook",
-          "platform_id": "395907340756572",
+          "_id": "395907340756572",
           "program_title": "",
           "url": "https://www.facebook.com/395907340756572",
           "img": "https://graph.facebook.com/Zhruanteli/picture",
@@ -1482,9 +1486,9 @@
           "id": 94
         },
         {
-          "_id": "9715ba19-a1a9-4634-909d-28f2b96d0a50",
+          "__id": "9715ba19-a1a9-4634-909d-28f2b96d0a50",
           "platform": "facebook",
-          "platform_id": "758522870940459",
+          "_id": "758522870940459",
           "program_title": "",
           "url": "https://www.facebook.com/758522870940459",
           "img": "https://graph.facebook.com/GuriaTimes/picture",
@@ -1497,9 +1501,9 @@
           "id": 95
         },
         {
-          "_id": "d133ea02-300a-40a3-b2b7-ef7b35c4fffb",
+          "__id": "d133ea02-300a-40a3-b2b7-ef7b35c4fffb",
           "platform": "facebook",
-          "platform_id": "122635296660483",
+          "_id": "122635296660483",
           "program_title": "",
           "url": "https://www.facebook.com/122635296660483",
           "img": "https://graph.facebook.com/terentigldaneli2/picture",
@@ -1512,9 +1516,9 @@
           "id": 96
         },
         {
-          "_id": "517461c2-c148-4036-8c42-fab9170a71b5",
+          "__id": "517461c2-c148-4036-8c42-fab9170a71b5",
           "platform": "facebook",
-          "platform_id": "103886053115074",
+          "_id": "103886053115074",
           "program_title": "",
           "url": "https://www.facebook.com/103886053115074",
           "img": "https://graph.facebook.com/pirvelwyaro/picture",
@@ -1527,9 +1531,9 @@
           "id": 97
         },
         {
-          "_id": "7dad24df-047d-4916-aa65-a7830fc96fea",
+          "__id": "7dad24df-047d-4916-aa65-a7830fc96fea",
           "platform": "facebook",
-          "platform_id": "107835507272396",
+          "_id": "107835507272396",
           "program_title": "",
           "url": "https://www.facebook.com/107835507272396",
           "img": "https://graph.facebook.com/Saqartveloshi.Unda.Gatendes/picture",
@@ -1542,9 +1546,9 @@
           "id": 98
         },
         {
-          "_id": "32eb6900-963c-4cd9-a48e-eec1f57ce967",
+          "__id": "32eb6900-963c-4cd9-a48e-eec1f57ce967",
           "platform": "facebook",
-          "platform_id": "109914290585644",
+          "_id": "109914290585644",
           "program_title": "",
           "url": "https://www.facebook.com/109914290585644",
           "img": "https://graph.facebook.com/sindisisgantavisupalimedia/picture",
@@ -1557,9 +1561,9 @@
           "id": 99
         },
         {
-          "_id": "4f70223c-7e1d-4371-be8d-a47b3c9f4f08",
+          "__id": "4f70223c-7e1d-4371-be8d-a47b3c9f4f08",
           "platform": "facebook",
-          "platform_id": "289163798600835",
+          "_id": "289163798600835",
           "program_title": "",
           "url": "https://www.facebook.com/289163798600835",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1572,9 +1576,9 @@
           "id": 100
         },
         {
-          "_id": "b185dd84-b6e1-4e2e-a2bc-b9a556636f7e",
+          "__id": "b185dd84-b6e1-4e2e-a2bc-b9a556636f7e",
           "platform": "facebook",
-          "platform_id": "257545604294720",
+          "_id": "257545604294720",
           "program_title": "",
           "url": "https://www.facebook.com/257545604294720",
           "img": "https://graph.facebook.com/GvesroleMeteori/picture",
@@ -1587,9 +1591,9 @@
           "id": 101
         },
         {
-          "_id": "e83edd55-2667-4185-b0a3-a80182038565",
+          "__id": "e83edd55-2667-4185-b0a3-a80182038565",
           "platform": "facebook",
-          "platform_id": "102136128859716",
+          "_id": "102136128859716",
           "program_title": "",
           "url": "https://www.facebook.com/102136128859716",
           "img": "https://graph.facebook.com/VoiceOfImereti.ge/picture",
@@ -1602,9 +1606,9 @@
           "id": 102
         },
         {
-          "_id": "16ec2da0-4f1c-49d6-9cbb-4b71d08216c5",
+          "__id": "16ec2da0-4f1c-49d6-9cbb-4b71d08216c5",
           "platform": "facebook",
-          "platform_id": "586360244718779",
+          "_id": "586360244718779",
           "program_title": "",
           "url": "https://www.facebook.com/586360244718779",
           "img": "https://graph.facebook.com/mmdaaa/picture",
@@ -1617,9 +1621,9 @@
           "id": 103
         },
         {
-          "_id": "6d4af02b-63fc-4886-b668-b6ffda976fd1",
+          "__id": "6d4af02b-63fc-4886-b668-b6ffda976fd1",
           "platform": "facebook",
-          "platform_id": "102816377952156",
+          "_id": "102816377952156",
           "program_title": "",
           "url": "https://www.facebook.com/102816377952156",
           "img": "https://graph.facebook.com/namdviliopoziciapage/picture",
@@ -1632,9 +1636,9 @@
           "id": 104
         },
         {
-          "_id": "2ba655b3-5a30-4a6c-87d1-78ff57cfc447",
+          "__id": "2ba655b3-5a30-4a6c-87d1-78ff57cfc447",
           "platform": "facebook",
-          "platform_id": "100947952262913",
+          "_id": "100947952262913",
           "program_title": "",
           "url": "https://www.facebook.com/100947952262913",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1647,9 +1651,9 @@
           "id": 105
         },
         {
-          "_id": "8d5f6471-3d61-45ad-8c5f-1542788c4770",
+          "__id": "8d5f6471-3d61-45ad-8c5f-1542788c4770",
           "platform": "facebook",
-          "platform_id": "1505159526363639",
+          "_id": "1505159526363639",
           "program_title": "",
           "url": "https://www.facebook.com/1505159526363639",
           "img": "https://graph.facebook.com/politvektori/picture",
@@ -1662,9 +1666,9 @@
           "id": 106
         },
         {
-          "_id": "19398b7d-5c74-4124-acef-77f7fe5ef600",
+          "__id": "19398b7d-5c74-4124-acef-77f7fe5ef600",
           "platform": "facebook",
-          "platform_id": "105608390900542",
+          "_id": "105608390900542",
           "program_title": "",
           "url": "https://www.facebook.com/105608390900542",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1677,9 +1681,9 @@
           "id": 107
         },
         {
-          "_id": "92e32340-039f-4909-8068-aab569a700e3",
+          "__id": "92e32340-039f-4909-8068-aab569a700e3",
           "platform": "facebook",
-          "platform_id": "303881767067238",
+          "_id": "303881767067238",
           "program_title": "",
           "url": "https://www.facebook.com/303881767067238",
           "img": "https://graph.facebook.com/iphonetaoba/picture",
@@ -1692,9 +1696,9 @@
           "id": 108
         },
         {
-          "_id": "cc906784-6d2f-45ae-b9b6-626b494cdb1d",
+          "__id": "cc906784-6d2f-45ae-b9b6-626b494cdb1d",
           "platform": "facebook",
-          "platform_id": "280221829277187",
+          "_id": "280221829277187",
           "program_title": "",
           "url": "https://www.facebook.com/280221829277187",
           "img": "https://graph.facebook.com/salomesDicktionary/picture",
@@ -1707,9 +1711,9 @@
           "id": 109
         },
         {
-          "_id": "a981c4e5-879a-4f45-8d96-e4c7114a71d4",
+          "__id": "a981c4e5-879a-4f45-8d96-e4c7114a71d4",
           "platform": "facebook",
-          "platform_id": "1474956646147131",
+          "_id": "1474956646147131",
           "program_title": "",
           "url": "https://www.facebook.com/1474956646147131",
           "img": "https://graph.facebook.com/VendettaKa/picture",
@@ -1722,9 +1726,9 @@
           "id": 110
         },
         {
-          "_id": "8c76a8c5-5927-42f9-aaf9-0f1831a08c52",
+          "__id": "8c76a8c5-5927-42f9-aaf9-0f1831a08c52",
           "platform": "facebook",
-          "platform_id": "435161097015997",
+          "_id": "435161097015997",
           "program_title": "",
           "url": "https://www.facebook.com/435161097015997",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1737,9 +1741,9 @@
           "id": 111
         },
         {
-          "_id": "8598ba3b-7499-457f-80f4-5f1124f8212a",
+          "__id": "8598ba3b-7499-457f-80f4-5f1124f8212a",
           "platform": "facebook",
-          "platform_id": "266044340102232",
+          "_id": "266044340102232",
           "program_title": "",
           "url": "https://www.facebook.com/266044340102232",
           "img": "https://graph.facebook.com/B.Ivanishvili/picture",
@@ -1752,9 +1756,9 @@
           "id": 112
         },
         {
-          "_id": "41f4a1b0-2f28-4907-88c5-88c1f9dea06d",
+          "__id": "41f4a1b0-2f28-4907-88c5-88c1f9dea06d",
           "platform": "facebook",
-          "platform_id": "622916794719633",
+          "_id": "622916794719633",
           "program_title": "",
           "url": "https://www.facebook.com/622916794719633",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1767,9 +1771,9 @@
           "id": 113
         },
         {
-          "_id": "fbc2b904-3ff3-4044-ad6a-8a450224f4ce",
+          "__id": "fbc2b904-3ff3-4044-ad6a-8a450224f4ce",
           "platform": "facebook",
-          "platform_id": "327921831121418",
+          "_id": "327921831121418",
           "program_title": "",
           "url": "https://www.facebook.com/327921831121418",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1782,9 +1786,9 @@
           "id": 114
         },
         {
-          "_id": "41654321-a137-4b4d-ac3b-bf3f655d5248",
+          "__id": "41654321-a137-4b4d-ac3b-bf3f655d5248",
           "platform": "facebook",
-          "platform_id": "1661807773872342",
+          "_id": "1661807773872342",
           "program_title": "",
           "url": "https://www.facebook.com/1661807773872342",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1797,9 +1801,9 @@
           "id": 115
         },
         {
-          "_id": "b0cbe82e-f07e-4d7e-9bb3-70a5c5f87847",
+          "__id": "b0cbe82e-f07e-4d7e-9bb3-70a5c5f87847",
           "platform": "facebook",
-          "platform_id": "217550438412640",
+          "_id": "217550438412640",
           "program_title": "",
           "url": "https://www.facebook.com/217550438412640",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1812,9 +1816,9 @@
           "id": 116
         },
         {
-          "_id": "5737ad6d-34b9-4656-ad2f-04afa3fe5d1c",
+          "__id": "5737ad6d-34b9-4656-ad2f-04afa3fe5d1c",
           "platform": "facebook",
-          "platform_id": "244454536211424",
+          "_id": "244454536211424",
           "program_title": "",
           "url": "https://www.facebook.com/244454536211424",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1827,9 +1831,9 @@
           "id": 117
         },
         {
-          "_id": "0d81d7da-e439-4a57-ab5d-52e5f113b881",
+          "__id": "0d81d7da-e439-4a57-ab5d-52e5f113b881",
           "platform": "facebook",
-          "platform_id": "351959711530576",
+          "_id": "351959711530576",
           "program_title": "",
           "url": "https://www.facebook.com/351959711530576",
           "img": "https://graph.facebook.com/Shizo1234/picture",
@@ -1842,9 +1846,9 @@
           "id": 118
         },
         {
-          "_id": "2d00b9ef-f1a8-4811-a86f-5645053e7f90",
+          "__id": "2d00b9ef-f1a8-4811-a86f-5645053e7f90",
           "platform": "facebook",
-          "platform_id": "620494868052582",
+          "_id": "620494868052582",
           "program_title": "",
           "url": "https://www.facebook.com/620494868052582",
           "img": "https://graph.facebook.com/TrakisMimcemi/picture",
@@ -1857,9 +1861,9 @@
           "id": 119
         },
         {
-          "_id": "15183d01-9d0e-42ed-bdb1-cedbf0674a21",
+          "__id": "15183d01-9d0e-42ed-bdb1-cedbf0674a21",
           "platform": "facebook",
-          "platform_id": "1499974593589850",
+          "_id": "1499974593589850",
           "program_title": "",
           "url": "https://www.facebook.com/1499974593589850",
           "img": "https://graph.facebook.com/tipitip.tiptip.5/picture",
@@ -1872,9 +1876,9 @@
           "id": 120
         },
         {
-          "_id": "704b93f6-5b82-4566-9791-f90d423afe7f",
+          "__id": "704b93f6-5b82-4566-9791-f90d423afe7f",
           "platform": "facebook",
-          "platform_id": "703207113388321",
+          "_id": "703207113388321",
           "program_title": "",
           "url": "https://www.facebook.com/703207113388321",
           "img": "https://graph.facebook.com/Idontvoteforviolence/picture",
@@ -1887,9 +1891,9 @@
           "id": 121
         },
         {
-          "_id": "05573d2f-5a64-4da2-8993-30d958222dfd",
+          "__id": "05573d2f-5a64-4da2-8993-30d958222dfd",
           "platform": "facebook",
-          "platform_id": "289043011731297",
+          "_id": "289043011731297",
           "program_title": "",
           "url": "https://www.facebook.com/289043011731297",
           "img": "https://graph.facebook.com/Peoplesvoicekhalxisxma/picture",
@@ -1902,9 +1906,9 @@
           "id": 122
         },
         {
-          "_id": "9026dee1-7108-4a51-bc3b-166961e8ce1a",
+          "__id": "9026dee1-7108-4a51-bc3b-166961e8ce1a",
           "platform": "facebook",
-          "platform_id": "149713882146470",
+          "_id": "149713882146470",
           "program_title": "",
           "url": "https://www.facebook.com/149713882146470",
           "img": "https://graph.facebook.com/politikuritianshani/picture",
@@ -1917,9 +1921,9 @@
           "id": 123
         },
         {
-          "_id": "aea5d97f-27c2-4fef-88e6-f851671d703e",
+          "__id": "aea5d97f-27c2-4fef-88e6-f851671d703e",
           "platform": "facebook",
-          "platform_id": "114165896811676",
+          "_id": "114165896811676",
           "program_title": "",
           "url": "https://www.facebook.com/114165896811676",
           "img": "https://graph.facebook.com/memeatures/picture",
@@ -1932,9 +1936,9 @@
           "id": 124
         },
         {
-          "_id": "9d41fafa-f7e9-413e-a54f-9ba75594f4dd",
+          "__id": "9d41fafa-f7e9-413e-a54f-9ba75594f4dd",
           "platform": "facebook",
-          "platform_id": "107956387384709",
+          "_id": "107956387384709",
           "program_title": "",
           "url": "https://www.facebook.com/107956387384709",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1947,9 +1951,9 @@
           "id": 125
         },
         {
-          "_id": "47a01334-40b3-423a-a3b5-5b8b48e88f54",
+          "__id": "47a01334-40b3-423a-a3b5-5b8b48e88f54",
           "platform": "facebook",
-          "platform_id": "410560459135063",
+          "_id": "410560459135063",
           "program_title": "",
           "url": "https://www.facebook.com/410560459135063",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1962,9 +1966,9 @@
           "id": 126
         },
         {
-          "_id": "70a63478-a0ec-4573-ac15-52ee4401d3d6",
+          "__id": "70a63478-a0ec-4573-ac15-52ee4401d3d6",
           "platform": "facebook",
-          "platform_id": "105863834375450",
+          "_id": "105863834375450",
           "program_title": "",
           "url": "https://www.facebook.com/105863834375450",
           "img": "https://graph.facebook.com/asociocdaatze/picture",
@@ -1977,9 +1981,9 @@
           "id": 127
         },
         {
-          "_id": "ae08c00a-70ed-4676-9762-10fd9e4690cc",
+          "__id": "ae08c00a-70ed-4676-9762-10fd9e4690cc",
           "platform": "facebook",
-          "platform_id": "107750074095037",
+          "_id": "107750074095037",
           "program_title": "",
           "url": "https://www.facebook.com/107750074095037",
           "img": "https://graph.facebook.com/nan/picture",
@@ -1992,9 +1996,9 @@
           "id": 128
         },
         {
-          "_id": "2aee1af5-0348-4f2f-8d48-234b5b5ae99d",
+          "__id": "2aee1af5-0348-4f2f-8d48-234b5b5ae99d",
           "platform": "facebook",
-          "platform_id": "101466204984299",
+          "_id": "101466204984299",
           "program_title": "",
           "url": "https://www.facebook.com/101466204984299",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2007,9 +2011,9 @@
           "id": 129
         },
         {
-          "_id": "a5000127-fc9b-4840-a919-87f71f7ae141",
+          "__id": "a5000127-fc9b-4840-a919-87f71f7ae141",
           "platform": "facebook",
-          "platform_id": "653834361679180",
+          "_id": "653834361679180",
           "program_title": "",
           "url": "https://www.facebook.com/653834361679180",
           "img": "https://graph.facebook.com/Triitriii.milisti/picture",
@@ -2022,9 +2026,9 @@
           "id": 130
         },
         {
-          "_id": "0eb28330-041a-4997-a3a6-1ac7612c7ef0",
+          "__id": "0eb28330-041a-4997-a3a6-1ac7612c7ef0",
           "platform": "facebook",
-          "platform_id": "378491105897637",
+          "_id": "378491105897637",
           "program_title": "",
           "url": "https://www.facebook.com/378491105897637",
           "img": "https://graph.facebook.com/Tianetismatsne/picture",
@@ -2037,9 +2041,9 @@
           "id": 131
         },
         {
-          "_id": "41065b65-9be3-4d42-bcfc-1964b5e1d64f",
+          "__id": "41065b65-9be3-4d42-bcfc-1964b5e1d64f",
           "platform": "facebook",
-          "platform_id": "110046817304369",
+          "_id": "110046817304369",
           "program_title": "",
           "url": "https://www.facebook.com/110046817304369",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2052,9 +2056,9 @@
           "id": 132
         },
         {
-          "_id": "ed181ed3-26f9-4140-9a14-d426e134712f",
+          "__id": "ed181ed3-26f9-4140-9a14-d426e134712f",
           "platform": "facebook",
-          "platform_id": "110045728041963",
+          "_id": "110045728041963",
           "program_title": "",
           "url": "https://www.facebook.com/110045728041963",
           "img": "https://graph.facebook.com/politicss1/picture",
@@ -2067,9 +2071,9 @@
           "id": 133
         },
         {
-          "_id": "6d4290d6-e3b5-4d6c-8bba-991531b81c8d",
+          "__id": "6d4290d6-e3b5-4d6c-8bba-991531b81c8d",
           "platform": "facebook",
-          "platform_id": "105980081616072",
+          "_id": "105980081616072",
           "program_title": "",
           "url": "https://www.facebook.com/105980081616072",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2082,9 +2086,9 @@
           "id": 134
         },
         {
-          "_id": "78365f03-28a4-4791-9f04-0f7167fb8de3",
+          "__id": "78365f03-28a4-4791-9f04-0f7167fb8de3",
           "platform": "facebook",
-          "platform_id": "101511398789964",
+          "_id": "101511398789964",
           "program_title": "",
           "url": "https://www.facebook.com/101511398789964",
           "img": "https://graph.facebook.com/ChkhartishviliStrategy/picture",
@@ -2097,9 +2101,9 @@
           "id": 135
         },
         {
-          "_id": "8e255d08-46e6-4658-85c5-681acd65a1cc",
+          "__id": "8e255d08-46e6-4658-85c5-681acd65a1cc",
           "platform": "facebook",
-          "platform_id": "100067668802997",
+          "_id": "100067668802997",
           "program_title": "",
           "url": "https://www.facebook.com/100067668802997",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2112,9 +2116,9 @@
           "id": 136
         },
         {
-          "_id": "7c3ed06d-337e-4db0-adb3-55e69dde8e05",
+          "__id": "7c3ed06d-337e-4db0-adb3-55e69dde8e05",
           "platform": "facebook",
-          "platform_id": "101714294509230",
+          "_id": "101714294509230",
           "program_title": "",
           "url": "https://www.facebook.com/101714294509230",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2127,9 +2131,9 @@
           "id": 137
         },
         {
-          "_id": "7441ad71-2a61-4b14-8ee2-2337f347f3cc",
+          "__id": "7441ad71-2a61-4b14-8ee2-2337f347f3cc",
           "platform": "facebook",
-          "platform_id": "101495418943031",
+          "_id": "101495418943031",
           "program_title": "",
           "url": "https://www.facebook.com/101495418943031",
           "img": "https://graph.facebook.com/modi.archevnebze/picture",
@@ -2142,9 +2146,9 @@
           "id": 138
         },
         {
-          "_id": "a8118296-dbc4-4c43-9f97-9f17394c92b5",
+          "__id": "a8118296-dbc4-4c43-9f97-9f17394c92b5",
           "platform": "facebook",
-          "platform_id": "100050651522029",
+          "_id": "100050651522029",
           "program_title": "",
           "url": "https://www.facebook.com/100050651522029",
           "img": "https://graph.facebook.com/ReformsTeam/picture",
@@ -2157,9 +2161,9 @@
           "id": 139
         },
         {
-          "_id": "84ccdffc-d36b-44af-b629-2cd59b64aa7b",
+          "__id": "84ccdffc-d36b-44af-b629-2cd59b64aa7b",
           "platform": "facebook",
-          "platform_id": "1427879674119726",
+          "_id": "1427879674119726",
           "program_title": "",
           "url": "https://www.facebook.com/1427879674119726",
           "img": "https://graph.facebook.com/ggcomforti/picture",
@@ -2172,9 +2176,9 @@
           "id": 140
         },
         {
-          "_id": "2b2d4b58-8d03-4231-88f4-d60102d1ca96",
+          "__id": "2b2d4b58-8d03-4231-88f4-d60102d1ca96",
           "platform": "facebook",
-          "platform_id": "1016325075045830",
+          "_id": "1016325075045830",
           "program_title": "",
           "url": "https://www.facebook.com/1016325075045830",
           "img": "https://graph.facebook.com/Sputnikabkhazia/picture",
@@ -2187,9 +2191,9 @@
           "id": 141
         },
         {
-          "_id": "5a4a06b7-ac6f-4236-a1b9-7e340c275194",
+          "__id": "5a4a06b7-ac6f-4236-a1b9-7e340c275194",
           "platform": "facebook",
-          "platform_id": "112059183768225",
+          "_id": "112059183768225",
           "program_title": "",
           "url": "https://www.facebook.com/112059183768225",
           "img": "https://graph.facebook.com/coronacoviddd/picture",
@@ -2202,9 +2206,9 @@
           "id": 142
         },
         {
-          "_id": "b62fc369-3fae-40ee-944c-68e71ffc8e13",
+          "__id": "b62fc369-3fae-40ee-944c-68e71ffc8e13",
           "platform": "facebook",
-          "platform_id": "103790002148106",
+          "_id": "103790002148106",
           "program_title": "",
           "url": "https://www.facebook.com/103790002148106",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2217,9 +2221,9 @@
           "id": 143
         },
         {
-          "_id": "3ee66b96-82e5-4a02-99fa-d3f9cf83cbe6",
+          "__id": "3ee66b96-82e5-4a02-99fa-d3f9cf83cbe6",
           "platform": "facebook",
-          "platform_id": "407952326616393",
+          "_id": "407952326616393",
           "program_title": "",
           "url": "https://www.facebook.com/407952326616393",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2232,9 +2236,9 @@
           "id": 144
         },
         {
-          "_id": "944b65f7-3948-41bf-97a8-dd7a43db1006",
+          "__id": "944b65f7-3948-41bf-97a8-dd7a43db1006",
           "platform": "facebook",
-          "platform_id": "133433490557782",
+          "_id": "133433490557782",
           "program_title": "",
           "url": "https://www.facebook.com/133433490557782",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2247,9 +2251,9 @@
           "id": 145
         },
         {
-          "_id": "88267ab2-2d09-4fc9-b015-7aea218bdb7a",
+          "__id": "88267ab2-2d09-4fc9-b015-7aea218bdb7a",
           "platform": "facebook",
-          "platform_id": "264206696928162",
+          "_id": "264206696928162",
           "program_title": "",
           "url": "https://www.facebook.com/264206696928162",
           "img": "https://graph.facebook.com/saertogazeti.ge/picture",
@@ -2262,9 +2266,9 @@
           "id": 146
         },
         {
-          "_id": "4d6b1237-d020-47c2-a742-208fbf3c6f6b",
+          "__id": "4d6b1237-d020-47c2-a742-208fbf3c6f6b",
           "platform": "facebook",
-          "platform_id": "385680921559835",
+          "_id": "385680921559835",
           "program_title": "",
           "url": "https://www.facebook.com/385680921559835",
           "img": "https://graph.facebook.com/dzlevai.sakvirveli/picture",
@@ -2277,9 +2281,9 @@
           "id": 147
         },
         {
-          "_id": "63c150ff-1990-4bb6-a7b6-bb2e6a96ab38",
+          "__id": "63c150ff-1990-4bb6-a7b6-bb2e6a96ab38",
           "platform": "facebook",
-          "platform_id": "491714121314982",
+          "_id": "491714121314982",
           "program_title": "",
           "url": "https://www.facebook.com/491714121314982",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2292,9 +2296,9 @@
           "id": 148
         },
         {
-          "_id": "47f21ec1-f9f0-4940-9e0d-aedc9ada305f",
+          "__id": "47f21ec1-f9f0-4940-9e0d-aedc9ada305f",
           "platform": "facebook",
-          "platform_id": "684248915008602",
+          "_id": "684248915008602",
           "program_title": "",
           "url": "https://www.facebook.com/684248915008602",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2307,9 +2311,9 @@
           "id": 149
         },
         {
-          "_id": "f25a642c-5bbb-4472-8695-9d0c66e082d8",
+          "__id": "f25a642c-5bbb-4472-8695-9d0c66e082d8",
           "platform": "facebook",
-          "platform_id": "103208272006193",
+          "_id": "103208272006193",
           "program_title": "",
           "url": "https://www.facebook.com/103208272006193",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2322,9 +2326,9 @@
           "id": 150
         },
         {
-          "_id": "2510bedc-0de6-4b27-86a6-0c322003418b",
+          "__id": "2510bedc-0de6-4b27-86a6-0c322003418b",
           "platform": "facebook",
-          "platform_id": "100568855211156",
+          "_id": "100568855211156",
           "program_title": "",
           "url": "https://www.facebook.com/100568855211156",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2337,9 +2341,9 @@
           "id": 151
         },
         {
-          "_id": "72569122-97be-4839-af82-ba570d779f4b",
+          "__id": "72569122-97be-4839-af82-ba570d779f4b",
           "platform": "facebook",
-          "platform_id": "102389835426540",
+          "_id": "102389835426540",
           "program_title": "",
           "url": "https://www.facebook.com/102389835426540",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2352,9 +2356,9 @@
           "id": 152
         },
         {
-          "_id": "10cc5adf-0d61-4c33-b17f-af5921da08f4",
+          "__id": "10cc5adf-0d61-4c33-b17f-af5921da08f4",
           "platform": "facebook",
-          "platform_id": "1510968955872507",
+          "_id": "1510968955872507",
           "program_title": "",
           "url": "https://www.facebook.com/1510968955872507",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2367,9 +2371,9 @@
           "id": 153
         },
         {
-          "_id": "af08e399-5ab6-49f9-9ff9-02a0b430ea51",
+          "__id": "af08e399-5ab6-49f9-9ff9-02a0b430ea51",
           "platform": "facebook",
-          "platform_id": "583371801996801",
+          "_id": "583371801996801",
           "program_title": "",
           "url": "https://www.facebook.com/583371801996801",
           "img": "https://graph.facebook.com/EmigrantTV/picture",
@@ -2382,9 +2386,9 @@
           "id": 154
         },
         {
-          "_id": "ca50624a-f0b6-4a59-b7dd-bddc7583f31a",
+          "__id": "ca50624a-f0b6-4a59-b7dd-bddc7583f31a",
           "platform": "facebook",
-          "platform_id": "168972509838588",
+          "_id": "168972509838588",
           "program_title": "",
           "url": "https://www.facebook.com/168972509838588",
           "img": "https://graph.facebook.com/geworld.ge/picture",
@@ -2397,9 +2401,9 @@
           "id": 155
         },
         {
-          "_id": "4e177761-6be5-4bc2-9948-99bd8c15fe9c",
+          "__id": "4e177761-6be5-4bc2-9948-99bd8c15fe9c",
           "platform": "facebook",
-          "platform_id": "718815714898401",
+          "_id": "718815714898401",
           "program_title": "",
           "url": "https://www.facebook.com/718815714898401",
           "img": "https://graph.facebook.com/PHSEVDOKRATIA/picture",
@@ -2412,9 +2416,9 @@
           "id": 156
         },
         {
-          "_id": "4636b002-66a9-4d6d-a68c-56c37f7e4213",
+          "__id": "4636b002-66a9-4d6d-a68c-56c37f7e4213",
           "platform": "facebook",
-          "platform_id": "139802409900775",
+          "_id": "139802409900775",
           "program_title": "",
           "url": "https://www.facebook.com/139802409900775",
           "img": "https://graph.facebook.com/GeorgianNationalAwakening/picture",
@@ -2427,9 +2431,9 @@
           "id": 157
         },
         {
-          "_id": "934bfe91-813b-41e5-bbbf-1f1989f53af3",
+          "__id": "934bfe91-813b-41e5-bbbf-1f1989f53af3",
           "platform": "facebook",
-          "platform_id": "1832642990356803",
+          "_id": "1832642990356803",
           "program_title": "",
           "url": "https://www.facebook.com/1832642990356803",
           "img": "https://graph.facebook.com/erovnebaqartveli/picture",
@@ -2442,9 +2446,9 @@
           "id": 158
         },
         {
-          "_id": "57a425ca-1a88-4290-b6bf-b0cd6885d0f3",
+          "__id": "57a425ca-1a88-4290-b6bf-b0cd6885d0f3",
           "platform": "facebook",
-          "platform_id": "700550180083121",
+          "_id": "700550180083121",
           "program_title": "",
           "url": "https://www.facebook.com/700550180083121",
           "img": "https://graph.facebook.com/FarnavaZiani/picture",
@@ -2457,9 +2461,9 @@
           "id": 159
         },
         {
-          "_id": "8e67a3ca-d44d-461f-8384-76c3bdaf9e07",
+          "__id": "8e67a3ca-d44d-461f-8384-76c3bdaf9e07",
           "platform": "facebook",
-          "platform_id": "110671210679338",
+          "_id": "110671210679338",
           "program_title": "",
           "url": "https://www.facebook.com/110671210679338",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2472,9 +2476,9 @@
           "id": 160
         },
         {
-          "_id": "a6fe0013-cc45-48f4-869a-791b143d4e17",
+          "__id": "a6fe0013-cc45-48f4-869a-791b143d4e17",
           "platform": "facebook",
-          "platform_id": "101398734894094",
+          "_id": "101398734894094",
           "program_title": "",
           "url": "https://www.facebook.com/101398734894094",
           "img": "https://graph.facebook.com/DIDISAMAMULO.GE/picture",
@@ -2487,9 +2491,9 @@
           "id": 161
         },
         {
-          "_id": "1d1aed09-46e3-40de-a052-7af064e3f7a6",
+          "__id": "1d1aed09-46e3-40de-a052-7af064e3f7a6",
           "platform": "facebook",
-          "platform_id": "415937238819481",
+          "_id": "415937238819481",
           "program_title": "",
           "url": "https://www.facebook.com/415937238819481",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2502,9 +2506,9 @@
           "id": 162
         },
         {
-          "_id": "deccc9be-260e-4726-8c3b-33c6057202c0",
+          "__id": "deccc9be-260e-4726-8c3b-33c6057202c0",
           "platform": "facebook",
-          "platform_id": "100124512176478",
+          "_id": "100124512176478",
           "program_title": "",
           "url": "https://www.facebook.com/100124512176478",
           "img": "https://graph.facebook.com/WithPalavandishvili/picture",
@@ -2517,9 +2521,9 @@
           "id": 163
         },
         {
-          "_id": "46a88a99-1b4e-4173-baf0-b6b92e093db3",
+          "__id": "46a88a99-1b4e-4173-baf0-b6b92e093db3",
           "platform": "facebook",
-          "platform_id": "393739407915453",
+          "_id": "393739407915453",
           "program_title": "",
           "url": "https://www.facebook.com/393739407915453",
           "img": "https://graph.facebook.com/spnews.io/picture",
@@ -2533,9 +2537,9 @@
           "id": 164
         },
         {
-          "_id": "88e44398-ec0d-4e43-93a9-c376c997a52c",
+          "__id": "88e44398-ec0d-4e43-93a9-c376c997a52c",
           "platform": "facebook",
-          "platform_id": "102900535262451",
+          "_id": "102900535262451",
           "program_title": "",
           "url": "https://www.facebook.com/102900535262451",
           "img": "https://graph.facebook.com/taonews.ge/picture",
@@ -2549,9 +2553,9 @@
           "id": 165
         },
         {
-          "_id": "12c29b2f-a531-4465-b3b9-af3f181d9f46",
+          "__id": "12c29b2f-a531-4465-b3b9-af3f181d9f46",
           "platform": "facebook",
-          "platform_id": "105178244234354",
+          "_id": "105178244234354",
           "program_title": "",
           "url": "https://www.facebook.com/105178244234354",
           "img": "https://graph.facebook.com/MiliTaristic190NaTion/picture",
@@ -2564,9 +2568,9 @@
           "id": 166
         },
         {
-          "_id": "d222c733-c324-4b4c-bfac-88914c349835",
+          "__id": "d222c733-c324-4b4c-bfac-88914c349835",
           "platform": "facebook",
-          "platform_id": "1570054473256325",
+          "_id": "1570054473256325",
           "program_title": "",
           "url": "https://www.facebook.com/1570054473256325",
           "img": "https://graph.facebook.com/Church.Georgia/picture",
@@ -2579,9 +2583,9 @@
           "id": 167
         },
         {
-          "_id": "660a9439-72c8-4462-883e-5030ebee1a84",
+          "__id": "660a9439-72c8-4462-883e-5030ebee1a84",
           "platform": "facebook",
-          "platform_id": "100181678019290",
+          "_id": "100181678019290",
           "program_title": "",
           "url": "https://www.facebook.com/100181678019290",
           "img": "https://graph.facebook.com/qartuliideaa/picture",
@@ -2594,9 +2598,9 @@
           "id": 168
         },
         {
-          "_id": "d8b9f507-c4f6-4cc1-b953-554b604b8ada",
+          "__id": "d8b9f507-c4f6-4cc1-b953-554b604b8ada",
           "platform": "facebook",
-          "platform_id": "293141757525205",
+          "_id": "293141757525205",
           "program_title": "",
           "url": "https://www.facebook.com/293141757525205",
           "img": "https://graph.facebook.com/bbivanishvili/picture",
@@ -2609,9 +2613,9 @@
           "id": 169
         },
         {
-          "_id": "44b5ff23-e760-46d0-b15d-f9180d0da13d",
+          "__id": "44b5ff23-e760-46d0-b15d-f9180d0da13d",
           "platform": "facebook",
-          "platform_id": "127774219478087",
+          "_id": "127774219478087",
           "program_title": "",
           "url": "https://www.facebook.com/127774219478087",
           "img": "https://graph.facebook.com/ufaloshegviwyalen11/picture",
@@ -2624,9 +2628,9 @@
           "id": 170
         },
         {
-          "_id": "76c539d1-3623-4ddd-a95b-8e49a2edaddb",
+          "__id": "76c539d1-3623-4ddd-a95b-8e49a2edaddb",
           "platform": "facebook",
-          "platform_id": "196520447903760",
+          "_id": "196520447903760",
           "program_title": "",
           "url": "https://www.facebook.com/196520447903760",
           "img": "https://graph.facebook.com/seqtaa/picture",
@@ -2639,9 +2643,9 @@
           "id": 171
         },
         {
-          "_id": "026a3d3d-ac29-4e9a-824e-28cea52d9cb8",
+          "__id": "026a3d3d-ac29-4e9a-824e-28cea52d9cb8",
           "platform": "facebook",
-          "platform_id": "107911068405988",
+          "_id": "107911068405988",
           "program_title": "",
           "url": "https://www.facebook.com/107911068405988",
           "img": "https://graph.facebook.com/walenjixisarmimdinareproektebi/picture",
@@ -2654,9 +2658,9 @@
           "id": 172
         },
         {
-          "_id": "70792a70-c713-4e08-a85a-d3f0c8d03149",
+          "__id": "70792a70-c713-4e08-a85a-d3f0c8d03149",
           "platform": "facebook",
-          "platform_id": "100228529055792",
+          "_id": "100228529055792",
           "program_title": "",
           "url": "https://www.facebook.com/100228529055792",
           "img": "https://graph.facebook.com/kartulisulii/picture",
@@ -2669,9 +2673,9 @@
           "id": 173
         },
         {
-          "_id": "c3b28cac-7101-4eb2-910a-281b4ee0ea12",
+          "__id": "c3b28cac-7101-4eb2-910a-281b4ee0ea12",
           "platform": "facebook",
-          "platform_id": "100864589029792",
+          "_id": "100864589029792",
           "program_title": "",
           "url": "https://www.facebook.com/100864589029792",
           "img": "https://graph.facebook.com/mishasakartveloshi/picture",
@@ -2684,9 +2688,9 @@
           "id": 174
         },
         {
-          "_id": "d5d56494-fe46-472a-9bbb-3b6b19c0588e",
+          "__id": "d5d56494-fe46-472a-9bbb-3b6b19c0588e",
           "platform": "facebook",
-          "platform_id": "181567281945112",
+          "_id": "181567281945112",
           "program_title": "",
           "url": "https://www.facebook.com/181567281945112",
           "img": "https://graph.facebook.com/GeorgianPP/picture",
@@ -2699,9 +2703,9 @@
           "id": 175
         },
         {
-          "_id": "b24617f0-96f3-4a34-b898-61039c72cd89",
+          "__id": "b24617f0-96f3-4a34-b898-61039c72cd89",
           "platform": "facebook",
-          "platform_id": "106861348374815",
+          "_id": "106861348374815",
           "program_title": "",
           "url": "https://www.facebook.com/106861348374815",
           "img": "https://graph.facebook.com/infoimereti.com.ge/picture",
@@ -2714,9 +2718,9 @@
           "id": 176
         },
         {
-          "_id": "8765c311-6322-4fd4-a7cd-eaabc67491e9",
+          "__id": "8765c311-6322-4fd4-a7cd-eaabc67491e9",
           "platform": "facebook",
-          "platform_id": "100319661329439",
+          "_id": "100319661329439",
           "program_title": "",
           "url": "https://www.facebook.com/100319661329439",
           "img": "https://graph.facebook.com/ForGeorgia1/picture",
@@ -2729,9 +2733,9 @@
           "id": 177
         },
         {
-          "_id": "17b4f721-8ce9-4850-ad7c-bb2c483e75a1",
+          "__id": "17b4f721-8ce9-4850-ad7c-bb2c483e75a1",
           "platform": "facebook",
-          "platform_id": "239219396599898",
+          "_id": "239219396599898",
           "program_title": "",
           "url": "https://www.facebook.com/239219396599898",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2744,9 +2748,9 @@
           "id": 178
         },
         {
-          "_id": "f132400c-7e4c-442d-8419-c84dc2988994",
+          "__id": "f132400c-7e4c-442d-8419-c84dc2988994",
           "platform": "facebook",
-          "platform_id": "216787411791015",
+          "_id": "216787411791015",
           "program_title": "",
           "url": "https://www.facebook.com/216787411791015",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2759,9 +2763,9 @@
           "id": 179
         },
         {
-          "_id": "b5d79a0b-90a1-4a9a-a6f8-0aa99a4cac71",
+          "__id": "b5d79a0b-90a1-4a9a-a6f8-0aa99a4cac71",
           "platform": "facebook",
-          "platform_id": "1869210026641088",
+          "_id": "1869210026641088",
           "program_title": "",
           "url": "https://www.facebook.com/1869210026641088",
           "img": "https://graph.facebook.com/Realoba2/picture",
@@ -2774,9 +2778,9 @@
           "id": 180
         },
         {
-          "_id": "f08ad5ae-3442-4f19-9bc7-e819c357458c",
+          "__id": "f08ad5ae-3442-4f19-9bc7-e819c357458c",
           "platform": "facebook",
-          "platform_id": "321616111726475",
+          "_id": "321616111726475",
           "program_title": "",
           "url": "https://www.facebook.com/321616111726475",
           "img": "https://graph.facebook.com/raketdeba/picture",
@@ -2789,9 +2793,9 @@
           "id": 181
         },
         {
-          "_id": "9c5eebae-f18b-4ae7-bef4-fe231eff5ae9",
+          "__id": "9c5eebae-f18b-4ae7-bef4-fe231eff5ae9",
           "platform": "facebook",
-          "platform_id": "283362679191583",
+          "_id": "283362679191583",
           "program_title": "",
           "url": "https://www.facebook.com/283362679191583",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2804,9 +2808,9 @@
           "id": 182
         },
         {
-          "_id": "6bffde53-a36c-4b6a-8336-a813b4144732",
+          "__id": "6bffde53-a36c-4b6a-8336-a813b4144732",
           "platform": "facebook",
-          "platform_id": "703692466643434",
+          "_id": "703692466643434",
           "program_title": "",
           "url": "https://www.facebook.com/703692466643434",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2819,9 +2823,9 @@
           "id": 183
         },
         {
-          "_id": "289b2c84-66d3-43aa-9783-4fcadf39856a",
+          "__id": "289b2c84-66d3-43aa-9783-4fcadf39856a",
           "platform": "facebook",
-          "platform_id": "181933129076792",
+          "_id": "181933129076792",
           "program_title": "",
           "url": "https://www.facebook.com/181933129076792",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2834,9 +2838,9 @@
           "id": 184
         },
         {
-          "_id": "25b2efd8-c940-477c-b473-763ae83ad465",
+          "__id": "25b2efd8-c940-477c-b473-763ae83ad465",
           "platform": "facebook",
-          "platform_id": "1674015882664220",
+          "_id": "1674015882664220",
           "program_title": "",
           "url": "https://www.facebook.com/1674015882664220",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2849,9 +2853,9 @@
           "id": 185
         },
         {
-          "_id": "1991065e-79a9-4888-b182-e8d5fbd207c2",
+          "__id": "1991065e-79a9-4888-b182-e8d5fbd207c2",
           "platform": "facebook",
-          "platform_id": "156915378317419",
+          "_id": "156915378317419",
           "program_title": "",
           "url": "https://www.facebook.com/156915378317419",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2864,9 +2868,9 @@
           "id": 186
         },
         {
-          "_id": "aca40104-cfc5-45a5-9aee-829a448b30ca",
+          "__id": "aca40104-cfc5-45a5-9aee-829a448b30ca",
           "platform": "facebook",
-          "platform_id": "486428105212898",
+          "_id": "486428105212898",
           "program_title": "",
           "url": "https://www.facebook.com/486428105212898",
           "img": "https://graph.facebook.com/itstimetonotice/picture",
@@ -2879,9 +2883,9 @@
           "id": 187
         },
         {
-          "_id": "bcd045f8-6f90-4b8a-bb3c-db08b47afc31",
+          "__id": "bcd045f8-6f90-4b8a-bb3c-db08b47afc31",
           "platform": "facebook",
-          "platform_id": "551810241946560",
+          "_id": "551810241946560",
           "program_title": "",
           "url": "https://www.facebook.com/551810241946560",
           "img": "https://graph.facebook.com/GregoryVashadzeFuns/picture",
@@ -2894,9 +2898,9 @@
           "id": 188
         },
         {
-          "_id": "051f69e9-6699-48cc-8387-466de76ac127",
+          "__id": "051f69e9-6699-48cc-8387-466de76ac127",
           "platform": "facebook",
-          "platform_id": "1374728269520641",
+          "_id": "1374728269520641",
           "program_title": "",
           "url": "https://www.facebook.com/1374728269520641",
           "img": "https://graph.facebook.com/ZirsBidzinaIvanasvili/picture",
@@ -2909,9 +2913,9 @@
           "id": 189
         },
         {
-          "_id": "baf27aa8-faf8-4784-a5f8-a4525aa9d6f0",
+          "__id": "baf27aa8-faf8-4784-a5f8-a4525aa9d6f0",
           "platform": "facebook",
-          "platform_id": "510205812792450",
+          "_id": "510205812792450",
           "program_title": "",
           "url": "https://www.facebook.com/510205812792450",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2924,9 +2928,9 @@
           "id": 190
         },
         {
-          "_id": "e71b0742-26bb-41e9-880d-235d35e63d55",
+          "__id": "e71b0742-26bb-41e9-880d-235d35e63d55",
           "platform": "facebook",
-          "platform_id": "433763500126319",
+          "_id": "433763500126319",
           "program_title": "",
           "url": "https://www.facebook.com/433763500126319",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2939,9 +2943,9 @@
           "id": 191
         },
         {
-          "_id": "8247ab0a-ae54-4209-af43-af41075492ad",
+          "__id": "8247ab0a-ae54-4209-af43-af41075492ad",
           "platform": "facebook",
-          "platform_id": "269378699886496",
+          "_id": "269378699886496",
           "program_title": "",
           "url": "https://www.facebook.com/269378699886496",
           "img": "https://graph.facebook.com/vakepark/picture",
@@ -2954,9 +2958,9 @@
           "id": 192
         },
         {
-          "_id": "bdfe1d40-4eb8-42a0-a166-87b78523b603",
+          "__id": "bdfe1d40-4eb8-42a0-a166-87b78523b603",
           "platform": "facebook",
-          "platform_id": "103954744338928",
+          "_id": "103954744338928",
           "program_title": "",
           "url": "https://www.facebook.com/103954744338928",
           "img": "https://graph.facebook.com/nan/picture",
@@ -2969,9 +2973,9 @@
           "id": 193
         },
         {
-          "_id": "f4039d42-103e-42ee-aa52-8664c8a87d79",
+          "__id": "f4039d42-103e-42ee-aa52-8664c8a87d79",
           "platform": "facebook",
-          "platform_id": "114090973478717",
+          "_id": "114090973478717",
           "program_title": "",
           "url": "https://www.facebook.com/114090973478717",
           "img": "https://graph.facebook.com/jorjissoro/picture",
@@ -2984,9 +2988,9 @@
           "id": 194
         },
         {
-          "_id": "f98dc492-9da0-4a1a-81f2-395474e18cfd",
+          "__id": "f98dc492-9da0-4a1a-81f2-395474e18cfd",
           "platform": "facebook",
-          "platform_id": "109387387305860",
+          "_id": "109387387305860",
           "program_title": "",
           "url": "https://www.facebook.com/109387387305860",
           "img": "https://graph.facebook.com/dzaanpolitika/picture",
@@ -2999,9 +3003,9 @@
           "id": 195
         },
         {
-          "_id": "83ea5c5d-52bf-4e7b-9905-74749edcaee2",
+          "__id": "83ea5c5d-52bf-4e7b-9905-74749edcaee2",
           "platform": "facebook",
-          "platform_id": "111219563866411",
+          "_id": "111219563866411",
           "program_title": "",
           "url": "https://www.facebook.com/111219563866411",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3014,9 +3018,9 @@
           "id": 196
         },
         {
-          "_id": "f91b2d08-9679-4993-ac34-a5bae6725786",
+          "__id": "f91b2d08-9679-4993-ac34-a5bae6725786",
           "platform": "facebook",
-          "platform_id": "100430098228036",
+          "_id": "100430098228036",
           "program_title": "",
           "url": "https://www.facebook.com/100430098228036",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3029,9 +3033,9 @@
           "id": 197
         },
         {
-          "_id": "80ff8f58-7348-43a9-90a1-ca71baa73b4f",
+          "__id": "80ff8f58-7348-43a9-90a1-ca71baa73b4f",
           "platform": "facebook",
-          "platform_id": "870948259594117",
+          "_id": "870948259594117",
           "program_title": "",
           "url": "https://www.facebook.com/870948259594117",
           "img": "https://graph.facebook.com/Gamosirebulo/picture",
@@ -3044,9 +3048,9 @@
           "id": 198
         },
         {
-          "_id": "b0b44209-651f-476d-a449-6e5942fcebe9",
+          "__id": "b0b44209-651f-476d-a449-6e5942fcebe9",
           "platform": "facebook",
-          "platform_id": "112655033885724",
+          "_id": "112655033885724",
           "program_title": "",
           "url": "https://www.facebook.com/112655033885724",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3059,9 +3063,9 @@
           "id": 199
         },
         {
-          "_id": "96dce9b5-07bb-4647-bfee-045999ac1db4",
+          "__id": "96dce9b5-07bb-4647-bfee-045999ac1db4",
           "platform": "facebook",
-          "platform_id": "100679268403033",
+          "_id": "100679268403033",
           "program_title": "",
           "url": "https://www.facebook.com/100679268403033",
           "img": "https://graph.facebook.com/ubeduripolitikosi/picture",
@@ -3074,9 +3078,9 @@
           "id": 200
         },
         {
-          "_id": "8c03318c-956e-4eeb-8510-9e3ad97d33ba",
+          "__id": "8c03318c-956e-4eeb-8510-9e3ad97d33ba",
           "platform": "facebook",
-          "platform_id": "100705168162029",
+          "_id": "100705168162029",
           "program_title": "",
           "url": "https://www.facebook.com/100705168162029",
           "img": "https://graph.facebook.com/PMGaribashvili/picture",
@@ -3089,9 +3093,9 @@
           "id": 201
         },
         {
-          "_id": "d5308a35-e0ff-484a-a75a-b9bf465455ee",
+          "__id": "d5308a35-e0ff-484a-a75a-b9bf465455ee",
           "platform": "facebook",
-          "platform_id": "105000947815284",
+          "_id": "105000947815284",
           "program_title": "",
           "url": "https://www.facebook.com/105000947815284",
           "img": "https://graph.facebook.com/daumorchileblebi/picture",
@@ -3104,9 +3108,9 @@
           "id": 202
         },
         {
-          "_id": "66ede1be-2b44-4f7d-aa50-2ab712228780",
+          "__id": "66ede1be-2b44-4f7d-aa50-2ab712228780",
           "platform": "facebook",
-          "platform_id": "3152057268153160",
+          "_id": "3152057268153160",
           "program_title": "",
           "url": "https://www.facebook.com/3152057268153160",
           "img": "https://graph.facebook.com/GirchiCommentSection/picture",
@@ -3119,9 +3123,9 @@
           "id": 203
         },
         {
-          "_id": "c86cc477-2742-445d-9bef-9a1bdacebc81",
+          "__id": "c86cc477-2742-445d-9bef-9a1bdacebc81",
           "platform": "facebook",
-          "platform_id": "619623788694926",
+          "_id": "619623788694926",
           "program_title": "",
           "url": "https://www.facebook.com/619623788694926",
           "img": "https://graph.facebook.com/gaerttvianebuliopozicia/picture",
@@ -3134,9 +3138,9 @@
           "id": 204
         },
         {
-          "_id": "c0a307c2-0c47-416c-ba61-cce5ef01499f",
+          "__id": "c0a307c2-0c47-416c-ba61-cce5ef01499f",
           "platform": "facebook",
-          "platform_id": "263336291116171",
+          "_id": "263336291116171",
           "program_title": "",
           "url": "https://www.facebook.com/263336291116171",
           "img": "https://graph.facebook.com/namdviliopoziciapatriotebi/picture",
@@ -3149,9 +3153,9 @@
           "id": 205
         },
         {
-          "_id": "1bf373c1-af9e-4ffb-93d1-96dbe529a330",
+          "__id": "1bf373c1-af9e-4ffb-93d1-96dbe529a330",
           "platform": "facebook",
-          "platform_id": "1579032562312368",
+          "_id": "1579032562312368",
           "program_title": "",
           "url": "https://www.facebook.com/1579032562312368",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3164,9 +3168,9 @@
           "id": 206
         },
         {
-          "_id": "8325a8ae-6363-42a4-bf86-097a97cc54f4",
+          "__id": "8325a8ae-6363-42a4-bf86-097a97cc54f4",
           "platform": "facebook",
-          "platform_id": "100289584874948",
+          "_id": "100289584874948",
           "program_title": "",
           "url": "https://www.facebook.com/100289584874948",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3179,9 +3183,9 @@
           "id": 207
         },
         {
-          "_id": "cfbe4792-45d4-4a13-988a-e974a2358f2a",
+          "__id": "cfbe4792-45d4-4a13-988a-e974a2358f2a",
           "platform": "facebook",
-          "platform_id": "637819643520316",
+          "_id": "637819643520316",
           "program_title": "",
           "url": "https://www.facebook.com/637819643520316",
           "img": "https://graph.facebook.com/aseaes6/picture",
@@ -3194,9 +3198,9 @@
           "id": 208
         },
         {
-          "_id": "6a873b85-6426-487b-81fa-a4470b803f2b",
+          "__id": "6a873b85-6426-487b-81fa-a4470b803f2b",
           "platform": "facebook",
-          "platform_id": "107875974406710",
+          "_id": "107875974406710",
           "program_title": "",
           "url": "https://www.facebook.com/107875974406710",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3209,9 +3213,9 @@
           "id": 209
         },
         {
-          "_id": "344a7884-683c-4575-ae96-3e8dfdef87c8",
+          "__id": "344a7884-683c-4575-ae96-3e8dfdef87c8",
           "platform": "facebook",
-          "platform_id": "106540071222412",
+          "_id": "106540071222412",
           "program_title": "",
           "url": "https://www.facebook.com/106540071222412",
           "img": "https://graph.facebook.com/davitgarejisakartveloaa/picture",
@@ -3224,9 +3228,9 @@
           "id": 210
         },
         {
-          "_id": "b97b866d-ec89-4cce-b22a-e51fb651293e",
+          "__id": "b97b866d-ec89-4cce-b22a-e51fb651293e",
           "platform": "facebook",
-          "platform_id": "434332216638236",
+          "_id": "434332216638236",
           "program_title": "",
           "url": "https://www.facebook.com/434332216638236",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3239,9 +3243,9 @@
           "id": 211
         },
         {
-          "_id": "e08d5a42-7a09-45f7-9c48-00401c542e1f",
+          "__id": "e08d5a42-7a09-45f7-9c48-00401c542e1f",
           "platform": "facebook",
-          "platform_id": "113455720828693",
+          "_id": "113455720828693",
           "program_title": "",
           "url": "https://www.facebook.com/113455720828693",
           "img": "https://graph.facebook.com/ratomayleeb/picture",
@@ -3254,9 +3258,9 @@
           "id": 212
         },
         {
-          "_id": "d36db952-0dc1-46f0-988f-3eabbaeb2e97",
+          "__id": "d36db952-0dc1-46f0-988f-3eabbaeb2e97",
           "platform": "facebook",
-          "platform_id": "103264648636506",
+          "_id": "103264648636506",
           "program_title": "",
           "url": "https://www.facebook.com/103264648636506",
           "img": "https://graph.facebook.com/mogalategakharia/picture",
@@ -3269,9 +3273,9 @@
           "id": 213
         },
         {
-          "_id": "8c4f23a9-fdcc-45cd-aa1f-02cbdd369493",
+          "__id": "8c4f23a9-fdcc-45cd-aa1f-02cbdd369493",
           "platform": "facebook",
-          "platform_id": "102862142035991",
+          "_id": "102862142035991",
           "program_title": "",
           "url": "https://www.facebook.com/102862142035991",
           "img": "https://graph.facebook.com/pufebii/picture",
@@ -3284,9 +3288,9 @@
           "id": 214
         },
         {
-          "_id": "8c53d56a-3223-4456-ac4d-c37e1e1fabe7",
+          "__id": "8c53d56a-3223-4456-ac4d-c37e1e1fabe7",
           "platform": "facebook",
-          "platform_id": "113056701034523",
+          "_id": "113056701034523",
           "program_title": "",
           "url": "https://www.facebook.com/113056701034523",
           "img": "https://graph.facebook.com/LiberastebiDown/picture",
@@ -3299,9 +3303,9 @@
           "id": 215
         },
         {
-          "_id": "f66ffeb0-ed63-4052-955a-a56a095fc117",
+          "__id": "f66ffeb0-ed63-4052-955a-a56a095fc117",
           "platform": "facebook",
-          "platform_id": "399870333413271",
+          "_id": "399870333413271",
           "program_title": "",
           "url": "https://www.facebook.com/399870333413271",
           "img": "https://graph.facebook.com/daitsavisakartvelo/picture",
@@ -3314,9 +3318,9 @@
           "id": 216
         },
         {
-          "_id": "247690a7-661e-4895-a923-0c5e2dd9b6fd",
+          "__id": "247690a7-661e-4895-a923-0c5e2dd9b6fd",
           "platform": "facebook",
-          "platform_id": "104293511895233",
+          "_id": "104293511895233",
           "program_title": "",
           "url": "https://www.facebook.com/104293511895233",
           "img": "https://graph.facebook.com/PotiSevdadaTkivili/picture",
@@ -3329,9 +3333,9 @@
           "id": 217
         },
         {
-          "_id": "1a561bc7-c278-4bcf-9ff3-944f9e75c7ac",
+          "__id": "1a561bc7-c278-4bcf-9ff3-944f9e75c7ac",
           "platform": "facebook",
-          "platform_id": "114159920282892",
+          "_id": "114159920282892",
           "program_title": "",
           "url": "https://www.facebook.com/114159920282892",
           "img": "https://graph.facebook.com/NikaNozadze88/picture",
@@ -3344,9 +3348,9 @@
           "id": 218
         },
         {
-          "_id": "d6cb27e0-0dda-48e6-b0b4-c1e1bbd7ccd7",
+          "__id": "d6cb27e0-0dda-48e6-b0b4-c1e1bbd7ccd7",
           "platform": "facebook",
-          "platform_id": "1572409432995155",
+          "_id": "1572409432995155",
           "program_title": "",
           "url": "https://www.facebook.com/1572409432995155",
           "img": "https://graph.facebook.com/reclaimgeo/picture",
@@ -3359,9 +3363,9 @@
           "id": 219
         },
         {
-          "_id": "292aaaf9-cbfc-4a4d-bee5-ff96fb4cf5ee",
+          "__id": "292aaaf9-cbfc-4a4d-bee5-ff96fb4cf5ee",
           "platform": "facebook",
-          "platform_id": "101565758601337",
+          "_id": "101565758601337",
           "program_title": "",
           "url": "https://www.facebook.com/101565758601337",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3374,9 +3378,9 @@
           "id": 220
         },
         {
-          "_id": "7bb93207-a9e2-4abc-8c6a-425666e588af",
+          "__id": "7bb93207-a9e2-4abc-8c6a-425666e588af",
           "platform": "facebook",
-          "platform_id": "411860572313461",
+          "_id": "411860572313461",
           "program_title": "",
           "url": "https://www.facebook.com/411860572313461",
           "img": "https://graph.facebook.com/sputnikgeorgia/picture",
@@ -3389,9 +3393,9 @@
           "id": 221
         },
         {
-          "_id": "5e608152-fb25-49c2-9e52-1a1db5518a5b",
+          "__id": "5e608152-fb25-49c2-9e52-1a1db5518a5b",
           "platform": "facebook",
-          "platform_id": "414513188731593",
+          "_id": "414513188731593",
           "program_title": "",
           "url": "https://www.facebook.com/414513188731593",
           "img": "https://graph.facebook.com/sputnikossetia/picture",
@@ -3404,9 +3408,9 @@
           "id": 222
         },
         {
-          "_id": "fa45afbe-6d41-4df1-8bc3-453a14475fc0",
+          "__id": "fa45afbe-6d41-4df1-8bc3-453a14475fc0",
           "platform": "facebook",
-          "platform_id": "1996602023898472",
+          "_id": "1996602023898472",
           "program_title": "",
           "url": "https://www.facebook.com/1996602023898472",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3419,9 +3423,9 @@
           "id": 223
         },
         {
-          "_id": "ba074bdc-a20d-4574-bfe3-ac30a12c441c",
+          "__id": "ba074bdc-a20d-4574-bfe3-ac30a12c441c",
           "platform": "facebook",
-          "platform_id": "208294643239280",
+          "_id": "208294643239280",
           "program_title": "",
           "url": "https://www.facebook.com/208294643239280",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3434,9 +3438,9 @@
           "id": 224
         },
         {
-          "_id": "5444b3a9-36c4-4621-b5fc-4ce78faed612",
+          "__id": "5444b3a9-36c4-4621-b5fc-4ce78faed612",
           "platform": "facebook",
-          "platform_id": "110329203997203",
+          "_id": "110329203997203",
           "program_title": "",
           "url": "https://www.facebook.com/110329203997203",
           "img": "https://graph.facebook.com/zneoba.ge.new/picture",
@@ -3449,9 +3453,9 @@
           "id": 225
         },
         {
-          "_id": "ade14ceb-696a-4807-99de-1056ce11d55b",
+          "__id": "ade14ceb-696a-4807-99de-1056ce11d55b",
           "platform": "facebook",
-          "platform_id": "267188220859097",
+          "_id": "267188220859097",
           "program_title": "",
           "url": "https://www.facebook.com/267188220859097",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3464,9 +3468,9 @@
           "id": 226
         },
         {
-          "_id": "ad40c4ab-8b9f-45d9-8809-24e20cc7e317",
+          "__id": "ad40c4ab-8b9f-45d9-8809-24e20cc7e317",
           "platform": "facebook",
-          "platform_id": "530912393970614",
+          "_id": "530912393970614",
           "program_title": "",
           "url": "https://www.facebook.com/530912393970614",
           "img": "https://graph.facebook.com/StopTurkishOccupation/picture",
@@ -3479,9 +3483,9 @@
           "id": 227
         },
         {
-          "_id": "29ca5751-d5af-40c4-971f-bdacab5ae6a4",
+          "__id": "29ca5751-d5af-40c4-971f-bdacab5ae6a4",
           "platform": "facebook",
-          "platform_id": "286876991327272",
+          "_id": "286876991327272",
           "program_title": "",
           "url": "https://www.facebook.com/286876991327272",
           "img": "https://graph.facebook.com/GRUZINFORM/picture",
@@ -3494,9 +3498,9 @@
           "id": 228
         },
         {
-          "_id": "1c49d142-30c7-47b1-a16f-35c7df3797aa",
+          "__id": "1c49d142-30c7-47b1-a16f-35c7df3797aa",
           "platform": "facebook",
-          "platform_id": "912011055658883",
+          "_id": "912011055658883",
           "program_title": "",
           "url": "https://www.facebook.com/912011055658883",
           "img": "https://graph.facebook.com/Kartuliazri/picture",
@@ -3509,9 +3513,9 @@
           "id": 229
         },
         {
-          "_id": "c900ef10-f180-47a9-b8ac-15d1da554628",
+          "__id": "c900ef10-f180-47a9-b8ac-15d1da554628",
           "platform": "facebook",
-          "platform_id": "1063797520329047",
+          "_id": "1063797520329047",
           "program_title": "",
           "url": "https://www.facebook.com/1063797520329047",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3524,9 +3528,9 @@
           "id": 230
         },
         {
-          "_id": "a2617563-5dbb-4fee-bfef-eddce3232acf",
+          "__id": "a2617563-5dbb-4fee-bfef-eddce3232acf",
           "platform": "facebook",
-          "platform_id": "267028267422865",
+          "_id": "267028267422865",
           "program_title": "",
           "url": "https://www.facebook.com/267028267422865",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3539,9 +3543,9 @@
           "id": 231
         },
         {
-          "_id": "c68ce342-4c03-401b-9db3-f81d7a2c5c31",
+          "__id": "c68ce342-4c03-401b-9db3-f81d7a2c5c31",
           "platform": "facebook",
-          "platform_id": "859624777514328",
+          "_id": "859624777514328",
           "program_title": "",
           "url": "https://www.facebook.com/859624777514328",
           "img": "https://graph.facebook.com/chemibrzola/picture",
@@ -3554,9 +3558,9 @@
           "id": 232
         },
         {
-          "_id": "6c84055d-be9c-44f7-9040-105e92df5e9e",
+          "__id": "6c84055d-be9c-44f7-9040-105e92df5e9e",
           "platform": "facebook",
-          "platform_id": "416728645005961",
+          "_id": "416728645005961",
           "program_title": "",
           "url": "https://www.facebook.com/416728645005961",
           "img": "https://graph.facebook.com/iveroncorp/picture",
@@ -3569,9 +3573,9 @@
           "id": 233
         },
         {
-          "_id": "7ce00f9b-769a-405b-8110-c343ee3c8011",
+          "__id": "7ce00f9b-769a-405b-8110-c343ee3c8011",
           "platform": "facebook",
-          "platform_id": "904888692939665",
+          "_id": "904888692939665",
           "program_title": "",
           "url": "https://www.facebook.com/904888692939665",
           "img": "https://graph.facebook.com/Qartveloba1/picture",
@@ -3584,9 +3588,9 @@
           "id": 234
         },
         {
-          "_id": "c2812760-2b3e-4f9b-8faa-b3630419b13a",
+          "__id": "c2812760-2b3e-4f9b-8faa-b3630419b13a",
           "platform": "facebook",
-          "platform_id": "328255007802524",
+          "_id": "328255007802524",
           "program_title": "",
           "url": "https://www.facebook.com/328255007802524",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3599,9 +3603,9 @@
           "id": 235
         },
         {
-          "_id": "1f90b4ed-5565-4258-b10a-0e6c34140200",
+          "__id": "1f90b4ed-5565-4258-b10a-0e6c34140200",
           "platform": "facebook",
-          "platform_id": "362709927126825",
+          "_id": "362709927126825",
           "program_title": "",
           "url": "https://www.facebook.com/362709927126825",
           "img": "https://graph.facebook.com/zneoba/picture",
@@ -3614,9 +3618,9 @@
           "id": 236
         },
         {
-          "_id": "15ea7f43-6f90-426a-8413-337e139309e9",
+          "__id": "15ea7f43-6f90-426a-8413-337e139309e9",
           "platform": "facebook",
-          "platform_id": "105640681604468",
+          "_id": "105640681604468",
           "program_title": "",
           "url": "https://www.facebook.com/105640681604468",
           "img": "https://graph.facebook.com/beqasniusebi/picture",
@@ -3629,9 +3633,9 @@
           "id": 237
         },
         {
-          "_id": "5133edef-5ff3-4790-9a66-54d338d64fb0",
+          "__id": "5133edef-5ff3-4790-9a66-54d338d64fb0",
           "platform": "facebook",
-          "platform_id": "403402626421763",
+          "_id": "403402626421763",
           "program_title": "",
           "url": "https://www.facebook.com/403402626421763",
           "img": "https://graph.facebook.com/frontofgeorgia/picture",
@@ -3644,9 +3648,9 @@
           "id": 238
         },
         {
-          "_id": "afb8e503-751a-4dc3-b7df-ccec5de57350",
+          "__id": "afb8e503-751a-4dc3-b7df-ccec5de57350",
           "platform": "facebook",
-          "platform_id": "1561851950749458",
+          "_id": "1561851950749458",
           "program_title": "",
           "url": "https://www.facebook.com/1561851950749458",
           "img": "https://graph.facebook.com/Georgianmission/picture",
@@ -3659,9 +3663,9 @@
           "id": 239
         },
         {
-          "_id": "b4356830-24ab-4e38-ae8e-55da390e02d9",
+          "__id": "b4356830-24ab-4e38-ae8e-55da390e02d9",
           "platform": "facebook",
-          "platform_id": "110834644602815",
+          "_id": "110834644602815",
           "program_title": "",
           "url": "https://www.facebook.com/110834644602815",
           "img": "https://graph.facebook.com/antiliberalurikoalicia/picture",
@@ -3674,9 +3678,9 @@
           "id": 240
         },
         {
-          "_id": "4b59104d-4a63-4732-9ed9-2e6b3ce1f12c",
+          "__id": "4b59104d-4a63-4732-9ed9-2e6b3ce1f12c",
           "platform": "facebook",
-          "platform_id": "105199174200573",
+          "_id": "105199174200573",
           "program_title": "",
           "url": "https://www.facebook.com/105199174200573",
           "img": "https://graph.facebook.com/abesadzeramin/picture",
@@ -3689,9 +3693,9 @@
           "id": 241
         },
         {
-          "_id": "c6c6cffb-9d89-46b7-bbea-0e172dddae4a",
+          "__id": "c6c6cffb-9d89-46b7-bbea-0e172dddae4a",
           "platform": "facebook",
-          "platform_id": "107034578358462",
+          "_id": "107034578358462",
           "program_title": "",
           "url": "https://www.facebook.com/107034578358462",
           "img": "https://graph.facebook.com/politikurisatira/picture",
@@ -3704,9 +3708,9 @@
           "id": 242
         },
         {
-          "_id": "65fea5d5-3e2e-4a8b-b214-07be700c094c",
+          "__id": "65fea5d5-3e2e-4a8b-b214-07be700c094c",
           "platform": "facebook",
-          "platform_id": "1427267720749793",
+          "_id": "1427267720749793",
           "program_title": "",
           "url": "https://www.facebook.com/1427267720749793",
           "img": "https://graph.facebook.com/NacebisDasacini/picture",
@@ -3719,9 +3723,9 @@
           "id": 243
         },
         {
-          "_id": "392fcce0-197d-45ad-801c-e51cf27700ba",
+          "__id": "392fcce0-197d-45ad-801c-e51cf27700ba",
           "platform": "facebook",
-          "platform_id": "204718192872097",
+          "_id": "204718192872097",
           "program_title": "",
           "url": "https://www.facebook.com/204718192872097",
           "img": "https://graph.facebook.com/KhashuriMunicipalityGeorgia/picture",
@@ -3734,9 +3738,9 @@
           "id": 244
         },
         {
-          "_id": "3eae7c24-e406-465e-a4aa-29d745b0a452",
+          "__id": "3eae7c24-e406-465e-a4aa-29d745b0a452",
           "platform": "facebook",
-          "platform_id": "108019154915381",
+          "_id": "108019154915381",
           "program_title": "",
           "url": "https://www.facebook.com/108019154915381",
           "img": "https://graph.facebook.com/blognews11/picture",
@@ -3749,9 +3753,9 @@
           "id": 245
         },
         {
-          "_id": "0e5cb54f-ea4f-42ef-9c8a-75146001875b",
+          "__id": "0e5cb54f-ea4f-42ef-9c8a-75146001875b",
           "platform": "facebook",
-          "platform_id": "939671702785173",
+          "_id": "939671702785173",
           "program_title": "",
           "url": "https://www.facebook.com/939671702785173",
           "img": "https://graph.facebook.com/inews.ge/picture",
@@ -3764,9 +3768,9 @@
           "id": 246
         },
         {
-          "_id": "5e6ce906-cf50-43e2-a4c8-f909c58721ec",
+          "__id": "5e6ce906-cf50-43e2-a4c8-f909c58721ec",
           "platform": "facebook",
-          "platform_id": "254870331218231",
+          "_id": "254870331218231",
           "program_title": "",
           "url": "https://www.facebook.com/254870331218231",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3779,9 +3783,9 @@
           "id": 247
         },
         {
-          "_id": "7d76e718-8d1f-4d7a-82a8-31c834c121e8",
+          "__id": "7d76e718-8d1f-4d7a-82a8-31c834c121e8",
           "platform": "facebook",
-          "platform_id": "1642241549183302",
+          "_id": "1642241549183302",
           "program_title": "",
           "url": "https://www.facebook.com/1642241549183302",
           "img": "https://graph.facebook.com/forgeorgiaa/picture",
@@ -3794,9 +3798,9 @@
           "id": 248
         },
         {
-          "_id": "809a401c-7bf0-424f-8b7e-02543fe2aaf7",
+          "__id": "809a401c-7bf0-424f-8b7e-02543fe2aaf7",
           "platform": "facebook",
-          "platform_id": "433407350169932",
+          "_id": "433407350169932",
           "program_title": "",
           "url": "https://www.facebook.com/433407350169932",
           "img": "https://graph.facebook.com/Misha.Dabrundi/picture",
@@ -3809,9 +3813,9 @@
           "id": 249
         },
         {
-          "_id": "a8cb2d38-59c4-4f50-a284-5192f1f11668",
+          "__id": "a8cb2d38-59c4-4f50-a284-5192f1f11668",
           "platform": "facebook",
-          "platform_id": "715945991861422",
+          "_id": "715945991861422",
           "program_title": "",
           "url": "https://www.facebook.com/715945991861422",
           "img": "https://graph.facebook.com/npg.ge/picture",
@@ -3824,9 +3828,9 @@
           "id": 250
         },
         {
-          "_id": "a28232b3-465d-4dfd-a88b-1a3630387d53",
+          "__id": "a28232b3-465d-4dfd-a88b-1a3630387d53",
           "platform": "facebook",
-          "platform_id": "100898268873671",
+          "_id": "100898268873671",
           "program_title": "",
           "url": "https://www.facebook.com/100898268873671",
           "img": "https://graph.facebook.com/solidarity.peace.movement/picture",
@@ -3839,9 +3843,9 @@
           "id": 251
         },
         {
-          "_id": "2ab914dc-8af1-441c-85f8-c64c555fde74",
+          "__id": "2ab914dc-8af1-441c-85f8-c64c555fde74",
           "platform": "facebook",
-          "platform_id": "105832888428587",
+          "_id": "105832888428587",
           "program_title": "",
           "url": "https://www.facebook.com/105832888428587",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3854,9 +3858,9 @@
           "id": 252
         },
         {
-          "_id": "7d69c40d-ef78-4c55-8ed2-be8503f47087",
+          "__id": "7d69c40d-ef78-4c55-8ed2-be8503f47087",
           "platform": "facebook",
-          "platform_id": "116105003273220",
+          "_id": "116105003273220",
           "program_title": "",
           "url": "https://www.facebook.com/116105003273220",
           "img": "https://graph.facebook.com/politikosebi1laridan/picture",
@@ -3869,9 +3873,9 @@
           "id": 253
         },
         {
-          "_id": "92709eb8-9088-42b1-b865-cdb7d4dbd1c9",
+          "__id": "92709eb8-9088-42b1-b865-cdb7d4dbd1c9",
           "platform": "facebook",
-          "platform_id": "304430243009865",
+          "_id": "304430243009865",
           "program_title": "",
           "url": "https://www.facebook.com/304430243009865",
           "img": "https://graph.facebook.com/tzona.org/picture",
@@ -3884,9 +3888,9 @@
           "id": 254
         },
         {
-          "_id": "69d20092-43f8-4e11-9c91-6eef05d7e402",
+          "__id": "69d20092-43f8-4e11-9c91-6eef05d7e402",
           "platform": "facebook",
-          "platform_id": "615263905241922",
+          "_id": "615263905241922",
           "program_title": "",
           "url": "https://www.facebook.com/615263905241922",
           "img": "https://graph.facebook.com/Naciaklavs/picture",
@@ -3899,9 +3903,9 @@
           "id": 255
         },
         {
-          "_id": "320d353e-ecc5-47a6-9028-35d59329e1df",
+          "__id": "320d353e-ecc5-47a6-9028-35d59329e1df",
           "platform": "facebook",
-          "platform_id": "944789842232474",
+          "_id": "944789842232474",
           "program_title": "",
           "url": "https://www.facebook.com/944789842232474",
           "img": "https://graph.facebook.com/MaikingInSamegrelo/picture",
@@ -3914,9 +3918,9 @@
           "id": 256
         },
         {
-          "_id": "7b6b8f27-07e4-405a-b351-eaab6b69e8cd",
+          "__id": "7b6b8f27-07e4-405a-b351-eaab6b69e8cd",
           "platform": "facebook",
-          "platform_id": "1980933498658787",
+          "_id": "1980933498658787",
           "program_title": "",
           "url": "https://www.facebook.com/1980933498658787",
           "img": "https://graph.facebook.com/meskhetinews/picture",
@@ -3929,9 +3933,9 @@
           "id": 257
         },
         {
-          "_id": "0bd08d94-344c-4b67-ae1a-867b6562e373",
+          "__id": "0bd08d94-344c-4b67-ae1a-867b6562e373",
           "platform": "facebook",
-          "platform_id": "176579149696722",
+          "_id": "176579149696722",
           "program_title": "",
           "url": "https://www.facebook.com/176579149696722",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3944,9 +3948,9 @@
           "id": 258
         },
         {
-          "_id": "2b0d9df8-23b2-481e-bbcf-1da06a16ed25",
+          "__id": "2b0d9df8-23b2-481e-bbcf-1da06a16ed25",
           "platform": "facebook",
-          "platform_id": "252121205609290",
+          "_id": "252121205609290",
           "program_title": "",
           "url": "https://www.facebook.com/252121205609290",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3959,9 +3963,9 @@
           "id": 259
         },
         {
-          "_id": "708e7769-b6e3-4a40-9a02-cc90ec27bf2b",
+          "__id": "708e7769-b6e3-4a40-9a02-cc90ec27bf2b",
           "platform": "facebook",
-          "platform_id": "369962813100078",
+          "_id": "369962813100078",
           "program_title": "",
           "url": "https://www.facebook.com/369962813100078",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3974,9 +3978,9 @@
           "id": 260
         },
         {
-          "_id": "66ded785-78a9-4034-bf36-61d4cf155ad0",
+          "__id": "66ded785-78a9-4034-bf36-61d4cf155ad0",
           "platform": "facebook",
-          "platform_id": "342737026222390",
+          "_id": "342737026222390",
           "program_title": "",
           "url": "https://www.facebook.com/342737026222390",
           "img": "https://graph.facebook.com/nan/picture",
@@ -3989,9 +3993,9 @@
           "id": 261
         },
         {
-          "_id": "57936ba1-d80b-41df-a682-4c44678f4879",
+          "__id": "57936ba1-d80b-41df-a682-4c44678f4879",
           "platform": "facebook",
-          "platform_id": "1012465325464451",
+          "_id": "1012465325464451",
           "program_title": "",
           "url": "https://www.facebook.com/1012465325464451",
           "img": "https://graph.facebook.com/20LarianebisBrbo/picture",
@@ -4004,9 +4008,9 @@
           "id": 262
         },
         {
-          "_id": "8eb65c7a-9128-46f7-8fde-e215a391e262",
+          "__id": "8eb65c7a-9128-46f7-8fde-e215a391e262",
           "platform": "facebook",
-          "platform_id": "109312640481698",
+          "_id": "109312640481698",
           "program_title": "",
           "url": "https://www.facebook.com/109312640481698",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4019,9 +4023,9 @@
           "id": 263
         },
         {
-          "_id": "5e8be222-3480-4fea-a247-30ff52f1e3e2",
+          "__id": "5e8be222-3480-4fea-a247-30ff52f1e3e2",
           "platform": "facebook",
-          "platform_id": "712191752467429",
+          "_id": "712191752467429",
           "program_title": "",
           "url": "https://www.facebook.com/712191752467429",
           "img": "https://graph.facebook.com/nacebi.chveni.kveknisa1/picture",
@@ -4034,9 +4038,9 @@
           "id": 264
         },
         {
-          "_id": "c33a4882-6bd3-4b51-8e82-98b5aae3ca97",
+          "__id": "c33a4882-6bd3-4b51-8e82-98b5aae3ca97",
           "platform": "facebook",
-          "platform_id": "376337812907345",
+          "_id": "376337812907345",
           "program_title": "",
           "url": "https://www.facebook.com/376337812907345",
           "img": "https://graph.facebook.com/aranatsizms/picture",
@@ -4049,9 +4053,9 @@
           "id": 265
         },
         {
-          "_id": "df14ab18-98b5-45dc-9392-777dc0479c22",
+          "__id": "df14ab18-98b5-45dc-9392-777dc0479c22",
           "platform": "facebook",
-          "platform_id": "104139037916416",
+          "_id": "104139037916416",
           "program_title": "",
           "url": "https://www.facebook.com/104139037916416",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4064,9 +4068,9 @@
           "id": 266
         },
         {
-          "_id": "7678ce85-1c5b-4584-99fd-c9c26f3a9ce8",
+          "__id": "7678ce85-1c5b-4584-99fd-c9c26f3a9ce8",
           "platform": "facebook",
-          "platform_id": "102112524873533",
+          "_id": "102112524873533",
           "program_title": "",
           "url": "https://www.facebook.com/102112524873533",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4079,9 +4083,9 @@
           "id": 267
         },
         {
-          "_id": "606dd239-2717-490d-a241-e9d241ec6105",
+          "__id": "606dd239-2717-490d-a241-e9d241ec6105",
           "platform": "facebook",
-          "platform_id": "111451686924680",
+          "_id": "111451686924680",
           "program_title": "",
           "url": "https://www.facebook.com/111451686924680",
           "img": "https://graph.facebook.com/armedforces/picture",
@@ -4094,9 +4098,9 @@
           "id": 268
         },
         {
-          "_id": "5e0c89da-6087-4668-8eba-9cd77f49fe24",
+          "__id": "5e0c89da-6087-4668-8eba-9cd77f49fe24",
           "platform": "facebook",
-          "platform_id": "113129460101839",
+          "_id": "113129460101839",
           "program_title": "",
           "url": "https://www.facebook.com/113129460101839",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4109,9 +4113,9 @@
           "id": 269
         },
         {
-          "_id": "fbb930fb-d3d3-4949-87a8-c98e6239f162",
+          "__id": "fbb930fb-d3d3-4949-87a8-c98e6239f162",
           "platform": "facebook",
-          "platform_id": "106688146858478",
+          "_id": "106688146858478",
           "program_title": "",
           "url": "https://www.facebook.com/106688146858478",
           "img": "https://graph.facebook.com/DZALAKHMASHIA/picture",
@@ -4124,9 +4128,9 @@
           "id": 270
         },
         {
-          "_id": "2b4d1d01-3ae1-4aa0-b893-d7c297db90bd",
+          "__id": "2b4d1d01-3ae1-4aa0-b893-d7c297db90bd",
           "platform": "facebook",
-          "platform_id": "112246767136598",
+          "_id": "112246767136598",
           "program_title": "",
           "url": "https://www.facebook.com/112246767136598",
           "img": "https://graph.facebook.com/SupportersofGiorgiVashadze/picture",
@@ -4139,9 +4143,9 @@
           "id": 271
         },
         {
-          "_id": "3bca2fe0-7f06-4eae-aed6-c2751859ccf3",
+          "__id": "3bca2fe0-7f06-4eae-aed6-c2751859ccf3",
           "platform": "facebook",
-          "platform_id": "263333011190148",
+          "_id": "263333011190148",
           "program_title": "",
           "url": "https://www.facebook.com/263333011190148",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4154,9 +4158,9 @@
           "id": 272
         },
         {
-          "_id": "e1415941-4b64-4451-9ccf-f4f61ba15821",
+          "__id": "e1415941-4b64-4451-9ccf-f4f61ba15821",
           "platform": "facebook",
-          "platform_id": "784967484990188",
+          "_id": "784967484990188",
           "program_title": "",
           "url": "https://www.facebook.com/784967484990188",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4169,9 +4173,9 @@
           "id": 273
         },
         {
-          "_id": "6934d311-cbfd-426e-9a5a-ba34226fd89d",
+          "__id": "6934d311-cbfd-426e-9a5a-ba34226fd89d",
           "platform": "facebook",
-          "platform_id": "100408144648906",
+          "_id": "100408144648906",
           "program_title": "",
           "url": "https://www.facebook.com/100408144648906",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4184,9 +4188,9 @@
           "id": 274
         },
         {
-          "_id": "d7bed26b-7f3e-47de-8d88-8bc88ffe08eb",
+          "__id": "d7bed26b-7f3e-47de-8d88-8bc88ffe08eb",
           "platform": "facebook",
-          "platform_id": "101827468258842",
+          "_id": "101827468258842",
           "program_title": "",
           "url": "https://www.facebook.com/101827468258842",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4199,9 +4203,9 @@
           "id": 275
         },
         {
-          "_id": "a673b064-dbc0-4f8d-b8cc-603a9234fa4f",
+          "__id": "a673b064-dbc0-4f8d-b8cc-603a9234fa4f",
           "platform": "facebook",
-          "platform_id": "110633723911099",
+          "_id": "110633723911099",
           "program_title": "",
           "url": "https://www.facebook.com/110633723911099",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4214,9 +4218,9 @@
           "id": 276
         },
         {
-          "_id": "b88fb4a9-8864-4df5-bee6-327552090d03",
+          "__id": "b88fb4a9-8864-4df5-bee6-327552090d03",
           "platform": "facebook",
-          "platform_id": "588039874663091",
+          "_id": "588039874663091",
           "program_title": "",
           "url": "https://www.facebook.com/588039874663091",
           "img": "https://graph.facebook.com/Chiaturis.saati/picture",
@@ -4229,9 +4233,9 @@
           "id": 277
         },
         {
-          "_id": "e7b7dbf8-d47c-4cce-a1ef-c13526161640",
+          "__id": "e7b7dbf8-d47c-4cce-a1ef-c13526161640",
           "platform": "facebook",
-          "platform_id": "101205788170619",
+          "_id": "101205788170619",
           "program_title": "",
           "url": "https://www.facebook.com/101205788170619",
           "img": "https://graph.facebook.com/IrakliGh/picture",
@@ -4244,9 +4248,9 @@
           "id": 278
         },
         {
-          "_id": "4703cb19-7d49-4758-8d74-0bd7bc50727d",
+          "__id": "4703cb19-7d49-4758-8d74-0bd7bc50727d",
           "platform": "facebook",
-          "platform_id": "100683438878783",
+          "_id": "100683438878783",
           "program_title": "",
           "url": "https://www.facebook.com/100683438878783",
           "img": "https://graph.facebook.com/The.voice.of.politic/picture",
@@ -4259,9 +4263,9 @@
           "id": 279
         },
         {
-          "_id": "41819769-f4e7-4008-9639-87d7ad147525",
+          "__id": "41819769-f4e7-4008-9639-87d7ad147525",
           "platform": "facebook",
-          "platform_id": "100936088717076",
+          "_id": "100936088717076",
           "program_title": "",
           "url": "https://www.facebook.com/100936088717076",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4274,9 +4278,9 @@
           "id": 280
         },
         {
-          "_id": "8c1e9543-86d2-41f6-84a4-9c13f9cf87f1",
+          "__id": "8c1e9543-86d2-41f6-84a4-9c13f9cf87f1",
           "platform": "facebook",
-          "platform_id": "713082186190229",
+          "_id": "713082186190229",
           "program_title": "",
           "url": "https://www.facebook.com/713082186190229",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4289,9 +4293,9 @@
           "id": 281
         },
         {
-          "_id": "449c39e5-9a12-4a2f-ba54-c9bfee5ba16f",
+          "__id": "449c39e5-9a12-4a2f-ba54-c9bfee5ba16f",
           "platform": "facebook",
-          "platform_id": "106588408388305",
+          "_id": "106588408388305",
           "program_title": "",
           "url": "https://www.facebook.com/106588408388305",
           "img": "https://graph.facebook.com/mzetunaxavi999/picture",
@@ -4304,9 +4308,9 @@
           "id": 282
         },
         {
-          "_id": "96d0e681-a41d-4e29-ad85-58473ead2fe6",
+          "__id": "96d0e681-a41d-4e29-ad85-58473ead2fe6",
           "platform": "facebook",
-          "platform_id": "113069691031110",
+          "_id": "113069691031110",
           "program_title": "",
           "url": "https://www.facebook.com/113069691031110",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4319,9 +4323,9 @@
           "id": 283
         },
         {
-          "_id": "5ba9ac16-0cef-4210-b269-0e0485ce7c97",
+          "__id": "5ba9ac16-0cef-4210-b269-0e0485ce7c97",
           "platform": "facebook",
-          "platform_id": "110776807424194",
+          "_id": "110776807424194",
           "program_title": "",
           "url": "https://www.facebook.com/110776807424194",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4334,9 +4338,9 @@
           "id": 284
         },
         {
-          "_id": "df04bb00-367d-4b69-8d67-86c690c1c337",
+          "__id": "df04bb00-367d-4b69-8d67-86c690c1c337",
           "platform": "facebook",
-          "platform_id": "350514535110949",
+          "_id": "350514535110949",
           "program_title": "",
           "url": "https://www.facebook.com/350514535110949",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4349,9 +4353,9 @@
           "id": 285
         },
         {
-          "_id": "5a8ac82a-dca6-46f2-b4f0-179aefcd9efa",
+          "__id": "5a8ac82a-dca6-46f2-b4f0-179aefcd9efa",
           "platform": "facebook",
-          "platform_id": "479574228862020",
+          "_id": "479574228862020",
           "program_title": "",
           "url": "https://www.facebook.com/479574228862020",
           "img": "https://graph.facebook.com/SputnikGeorgiaRu/picture",
@@ -4364,9 +4368,9 @@
           "id": 286
         },
         {
-          "_id": "daa9bb25-3a2b-4ab5-b637-c980ac9e30f9",
+          "__id": "daa9bb25-3a2b-4ab5-b637-c980ac9e30f9",
           "platform": "facebook",
-          "platform_id": "101938051711616",
+          "_id": "101938051711616",
           "program_title": "",
           "url": "https://www.facebook.com/101938051711616",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4379,9 +4383,9 @@
           "id": 287
         },
         {
-          "_id": "cd01fd81-31c8-4486-89c4-ce6ca0588ce5",
+          "__id": "cd01fd81-31c8-4486-89c4-ce6ca0588ce5",
           "platform": "facebook",
-          "platform_id": "105015811420430",
+          "_id": "105015811420430",
           "program_title": "",
           "url": "https://www.facebook.com/105015811420430",
           "img": "https://graph.facebook.com/maskaradii/picture",
@@ -4394,9 +4398,9 @@
           "id": 288
         },
         {
-          "_id": "33c6d4b7-1783-4d3f-b2da-afd73ca2bae2",
+          "__id": "33c6d4b7-1783-4d3f-b2da-afd73ca2bae2",
           "platform": "facebook",
-          "platform_id": "100345988561171",
+          "_id": "100345988561171",
           "program_title": "",
           "url": "https://www.facebook.com/100345988561171",
           "img": "https://graph.facebook.com/coronacebi/picture",
@@ -4409,9 +4413,9 @@
           "id": 289
         },
         {
-          "_id": "58963c4e-edc8-4d53-bb53-bb1d45b9d909",
+          "__id": "58963c4e-edc8-4d53-bb53-bb1d45b9d909",
           "platform": "facebook",
-          "platform_id": "110242957822246",
+          "_id": "110242957822246",
           "program_title": "",
           "url": "https://www.facebook.com/110242957822246",
           "img": "https://graph.facebook.com/gakharianews/picture",
@@ -4424,9 +4428,9 @@
           "id": 290
         },
         {
-          "_id": "3485a7e4-9961-475d-85e1-4e245c285fb4",
+          "__id": "3485a7e4-9961-475d-85e1-4e245c285fb4",
           "platform": "facebook",
-          "platform_id": "102880908549166",
+          "_id": "102880908549166",
           "program_title": "",
           "url": "https://www.facebook.com/102880908549166",
           "img": "https://graph.facebook.com/WeAreFakeDetector/picture",
@@ -4439,9 +4443,9 @@
           "id": 291
         },
         {
-          "_id": "309ec825-30c4-4e86-91b6-dc501ae1a7b8",
+          "__id": "309ec825-30c4-4e86-91b6-dc501ae1a7b8",
           "platform": "facebook",
-          "platform_id": "162190070572201",
+          "_id": "162190070572201",
           "program_title": "",
           "url": "https://www.facebook.com/162190070572201",
           "img": "https://graph.facebook.com/IdeebiSakartvelosGanvitarebistvis/picture",
@@ -4454,9 +4458,9 @@
           "id": 292
         },
         {
-          "_id": "1c162164-1148-43b5-9758-49f7f7396596",
+          "__id": "1c162164-1148-43b5-9758-49f7f7396596",
           "platform": "facebook",
-          "platform_id": "123291642950680",
+          "_id": "123291642950680",
           "program_title": "",
           "url": "https://www.facebook.com/123291642950680",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4469,9 +4473,9 @@
           "id": 293
         },
         {
-          "_id": "922eb332-7f46-4d98-a8b9-8565ff70df2b",
+          "__id": "922eb332-7f46-4d98-a8b9-8565ff70df2b",
           "platform": "facebook",
-          "platform_id": "104170981615329",
+          "_id": "104170981615329",
           "program_title": "",
           "url": "https://www.facebook.com/104170981615329",
           "img": "https://graph.facebook.com/RioniValleyYouth/picture",
@@ -4484,9 +4488,9 @@
           "id": 294
         },
         {
-          "_id": "65a1c02e-ebc4-49d3-b389-f137a2ca9a9d",
+          "__id": "65a1c02e-ebc4-49d3-b389-f137a2ca9a9d",
           "platform": "facebook",
-          "platform_id": "105666898265157",
+          "_id": "105666898265157",
           "program_title": "",
           "url": "https://www.facebook.com/105666898265157",
           "img": "https://graph.facebook.com/juurnalistebi/picture",
@@ -4499,9 +4503,9 @@
           "id": 295
         },
         {
-          "_id": "9e0a07c7-ac90-4d55-a123-75b908f7e9d0",
+          "__id": "9e0a07c7-ac90-4d55-a123-75b908f7e9d0",
           "platform": "facebook",
-          "platform_id": "106346231525620",
+          "_id": "106346231525620",
           "program_title": "",
           "url": "https://www.facebook.com/106346231525620",
           "img": "https://graph.facebook.com/Epic.Journalists/picture",
@@ -4514,9 +4518,9 @@
           "id": 296
         },
         {
-          "_id": "b70a3531-2edd-4895-b700-ac60274465d1",
+          "__id": "b70a3531-2edd-4895-b700-ac60274465d1",
           "platform": "facebook",
-          "platform_id": "104172171727804",
+          "_id": "104172171727804",
           "program_title": "",
           "url": "https://www.facebook.com/104172171727804",
           "img": "https://graph.facebook.com/mxolodvideo/picture",
@@ -4529,9 +4533,9 @@
           "id": 297
         },
         {
-          "_id": "19361cc7-7aaa-4198-b0d2-7147c5645343",
+          "__id": "19361cc7-7aaa-4198-b0d2-7147c5645343",
           "platform": "facebook",
-          "platform_id": "109393517898020",
+          "_id": "109393517898020",
           "program_title": "",
           "url": "https://www.facebook.com/109393517898020",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4544,9 +4548,9 @@
           "id": 298
         },
         {
-          "_id": "04442d25-3e2f-44ae-a6b3-225ef9fe6598",
+          "__id": "04442d25-3e2f-44ae-a6b3-225ef9fe6598",
           "platform": "facebook",
-          "platform_id": "1687218654858746",
+          "_id": "1687218654858746",
           "program_title": "",
           "url": "https://www.facebook.com/1687218654858746",
           "img": "https://graph.facebook.com/namdvilisaqartvelo/picture",
@@ -4559,9 +4563,9 @@
           "id": 299
         },
         {
-          "_id": "07aa1ef3-7694-40bd-829c-d0854add77e6",
+          "__id": "07aa1ef3-7694-40bd-829c-d0854add77e6",
           "platform": "facebook",
-          "platform_id": "107490771649032",
+          "_id": "107490771649032",
           "program_title": "",
           "url": "https://www.facebook.com/107490771649032",
           "img": "https://graph.facebook.com/geopresss/picture",
@@ -4574,9 +4578,9 @@
           "id": 300
         },
         {
-          "_id": "6cae2172-612f-48a0-aa2c-e0aa46cb8cfe",
+          "__id": "6cae2172-612f-48a0-aa2c-e0aa46cb8cfe",
           "platform": "facebook",
-          "platform_id": "103249792097136",
+          "_id": "103249792097136",
           "program_title": "",
           "url": "https://www.facebook.com/103249792097136",
           "img": "https://graph.facebook.com/nan/picture",
@@ -4589,9 +4593,9 @@
           "id": 301
         },
         {
-          "_id": "803a276f-27d4-4dcd-80e1-41529b7d0b3b",
+          "__id": "803a276f-27d4-4dcd-80e1-41529b7d0b3b",
           "platform": "facebook",
-          "platform_id": "103472974509693",
+          "_id": "103472974509693",
           "program_title": "",
           "url": "https://www.facebook.com/103472974509693",
           "img": "https://graph.facebook.com/simartlemtsareaa/picture",
@@ -4604,9 +4608,9 @@
           "id": 302
         },
         {
-          "_id": "8b38c9cb-7a67-4618-8c7c-9c7ff72aa010",
+          "__id": "8b38c9cb-7a67-4618-8c7c-9c7ff72aa010",
           "platform": "facebook",
-          "platform_id": "168197118643629",
+          "_id": "168197118643629",
           "program_title": "",
           "url": "https://www.facebook.com/168197118643629",
           "img": "https://graph.facebook.com/SamegreloTime/picture",
@@ -4619,9 +4623,9 @@
           "id": 303
         },
         {
-          "_id": "7c68c2df-a73c-4e69-94ed-4c53e4079239",
+          "__id": "7c68c2df-a73c-4e69-94ed-4c53e4079239",
           "platform": "facebook",
-          "platform_id": "105598088546870",
+          "_id": "105598088546870",
           "program_title": "",
           "url": "https://www.facebook.com/105598088546870",
           "img": "https://graph.facebook.com/zonderband/picture",

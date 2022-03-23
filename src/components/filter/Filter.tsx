@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 import moment from "moment";
 import { addParamsToUrl, getParamsAsObject } from '../../shared/Utils';
+import { type } from 'os';
 
 export function Filter() {
   const { data }: { data: FilterElement[] } = require('../../data/filter.json')
@@ -21,12 +22,24 @@ export function Filter() {
 
   const getFilters = (): Object => {
     const paramsFromUrl = getParamsAsObject();
+    ['platform', 'author_platform_id', 'topics', 'persons', 'locations'].forEach((filterName:string) => {
+      const curFilter:any = paramsFromUrl[filterName]
+      if(curFilter){
+        const filterElement: any = data.find(k => k.id.toString() == filterName)
 
-    const defaultFilters = reduce({}, (acc, cur: FilterElement) => (
-      { ...acc, [cur.id]: cur.value }
+        paramsFromUrl[filterName] = curFilter.map((k: string) => filterElement.values.find((l:any) => l._id == k))
+
+        // console.log(444444, values.values.find)
+         // paramsFromUrl[i] = i.split(',').map(k => data[i].values.find((l) => l._id == k))
+      }
+    })
+
+    const defaultFilters = reduce({}, (acc:any, cur: FilterElement) => (
+      acc[cur.id] ? acc : { ...acc, [cur.id]: cur.value }
     ))(data);
 
     return { ...defaultFilters, ...paramsFromUrl };
+    // return {...defaultFilters}
   };
 
   useEffect(() => setFilters(getFilters()), [])
@@ -38,7 +51,9 @@ export function Filter() {
 
     const onChange = (item: any) => {
       setGlobalState('filters', { ...filters, [el.id]: item });
-      addParamsToUrl({ [el.id]: JSON.stringify(item) });
+      let str_param = item.length ? item.map((i:any) => i._id).join(',') : item
+      console.log(item, str_param)
+      addParamsToUrl({ [el.id]: str_param });
     }
 
     return match(el.type)
@@ -62,7 +77,7 @@ export function Filter() {
               <div className="col-12">
                 <div className="row">
                   {data.map(el => (
-                    <div className="col-2">
+                    <div className="col-2" key={el.id}>
                       <p className="font--xs font--gray-3 mb-5">{el.label}</p>
                       <div className="form__item">
                         {getElem(el)}
