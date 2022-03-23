@@ -34,7 +34,7 @@ export function Sidebar() {
               
               { fetching ? (
                 <li>Loading...</li>
-              ) : (data.map(  (monitor: any) => (<li> <a href='/results/{monitor.id}'> {monitor.title}</a> </li>)))}
+              ) : (data.map(  (monitor: any) => (<li> <a href={`/results?monitor_id=${monitor._id}`}> {monitor.title}</a> </li>)))}
               <li><a className="" href="/taxonomy-init">+ Create</a></li>
             </ul>
           </li>
