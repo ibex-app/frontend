@@ -12,6 +12,7 @@ export function Sidebar() {
   const navigate = useNavigate();
 
   const routeChange = (monitorId: string) => {
+    // setGlobalState('filters', {});
     setGlobalState('monitorId', monitorId)
     navigate(`results?monitor_id=${monitorId}`);
   }

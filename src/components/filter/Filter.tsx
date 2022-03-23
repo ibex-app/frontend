@@ -26,11 +26,7 @@ export function Filter() {
       const curFilter:any = paramsFromUrl[filterName]
       if(curFilter){
         const filterElement: any = data.find(k => k.id.toString() == filterName)
-
         paramsFromUrl[filterName] = curFilter.map((k: string) => filterElement.values.find((l:any) => l._id == k))
-
-        // console.log(444444, values.values.find)
-         // paramsFromUrl[i] = i.split(',').map(k => data[i].values.find((l) => l._id == k))
       }
     })
 
@@ -39,7 +35,6 @@ export function Filter() {
     ))(data);
 
     return { ...defaultFilters, ...paramsFromUrl };
-    // return {...defaultFilters}
   };
 
   useEffect(() => setFilters(getFilters()), [])

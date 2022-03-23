@@ -111,7 +111,7 @@ export function Table() {
 
           return (
             <>
-              <tr {...row.getRowProps()} className="table--item" onClick={() => routeChange(_id.$oid)}>
+              <tr {...row.getRowProps()} key={_id.$oid} className="table--item" onClick={() => routeChange(_id.$oid)}>
                 <td className="table--row">
                   <div >
                     {<div {...row.cells[3].getCellProps()} className="title"> {
