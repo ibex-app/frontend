@@ -7,7 +7,7 @@ export type PromiseResponse<T> = Promise<Response<T>>;
 
 export const get: any = async (path: string, params: Object) => pipe(
   TE.tryCatch(
-    () => fetch(`http://161.35.73.100:8888/${path}`, {
+    () => fetch(`https://ibex-app.com/${path}`, {
       method: 'post',
       headers: new Headers({
         'Content-Type': 'application/json',
