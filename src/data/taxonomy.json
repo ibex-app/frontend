@@ -3,15 +3,16 @@
     {
       "title": "Create Report",
       "path": "init",
+      "redirect": "/taxonomy/params",
       "data": [
         {
-          "id": "report_name",
+          "id": "title",
           "title": "What is the name of the report?",
           "value": "",
           "type": "text"
         },
         {
-          "id": "report_description",
+          "id": "description",
           "title": "What is the report about?",
           "value": "",
           "type": "textbox"
@@ -21,21 +22,22 @@
     {
       "title": "Data Collection",
       "path": "params",
+      "redirect": "/taxonomy/results",
       "data": [
         {
-          "id": "date_range",
+          "id": "date",
           "title": "Date Range",
           "type": "date_interval",
           "value": ""
         },
         {
-          "id": "keywords",
+          "id": "search_terms",
           "title": "Keywords",
           "type": "textbox",
           "value": ""
         },
         {
-          "id": "accounts_platforms",
+          "id": "accounts",
           "title": "Accounts / Platforms",
           "type": "checkbox",
           "value": ""

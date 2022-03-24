@@ -1,12 +1,12 @@
 import moment from "moment";
 import { match } from "ts-pattern";
-import { FilterElement } from "../../../types/form";
-import { DateInterval } from "../../date-interval/DateInterval";
-import { Checkbox } from "./Checkbox";
-import { Date } from "./Date";
-import { Tag } from "./Tag";
-import { Text } from "./Text";
-import { TextBox } from "./Textbox";
+import { FilterElement } from "../../types/form";
+import { DateInterval } from "./inputs/DateInterval";
+import { Checkbox } from "./inputs/Checkbox";
+import { Date } from "./inputs/Date";
+import { Tag } from "./inputs/Tag";
+import { Text } from "./inputs/Text";
+import { TextBox } from "./inputs/Textbox";
 
 export const getElem = (el: FilterElement, onChange: any) => {
   if (el.value === 'today') {

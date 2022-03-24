@@ -22,6 +22,8 @@ export function TaxonomyResults() {
 
   useEffect(() => {
     if (isObjectEmpty(form)) navigate('/taxonomy/init');
+
+    console.log(form);
   }, []);
 
   const el: FilterElement = {

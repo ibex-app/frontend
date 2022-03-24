@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { match } from 'ts-pattern';
+import React, { useEffect } from 'react';
 import { FilterElement } from '../../types/form';
 import { setGlobalState, useGlobalState } from '../../app/store';
 import { reduce } from 'fp-ts/lib/Array';
-import { Tag } from '../form/inputs/Tag';
-import { Checkbox } from '../form/inputs/Checkbox';
-import { Text } from '../form/inputs/Text';
-import { Date } from '../form/inputs/Date';
-import { DateInterval } from '../date-interval/DateInterval';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faFolderArrowDown } from "@fortawesome/free-brands-svg-icons"
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 import moment from "moment";
 import { addParamsToUrl, getParamsAsObject } from '../../shared/Utils';
-import { getElem } from '../form/inputs/Form';
+import { getElem } from '../form/Form';
 
 export function Filter() {
   const { data }: { data: FilterElement[] } = require('../../data/filter.json')

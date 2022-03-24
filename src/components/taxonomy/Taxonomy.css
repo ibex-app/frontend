@@ -80,6 +80,7 @@ border-radius: 30px;
 
 .tax-full{
     /* background: #e2e2e2; */
+    overflow: auto;
     width: 100%;
 }
 
