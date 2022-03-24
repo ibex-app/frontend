@@ -9,7 +9,7 @@ import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-i
 // import { } from "@fortawesome/free-brands-svg-icons"
 import { match } from 'ts-pattern';
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
-import { Tag } from "../inputs/Tag";
+import { Tag } from "../form/inputs/Tag";
 import { FilterElement } from "../../types/form";
 import './details.css';
 

@@ -3,17 +3,17 @@ import { match } from 'ts-pattern';
 import { FilterElement } from '../../types/form';
 import { setGlobalState, useGlobalState } from '../../app/store';
 import { reduce } from 'fp-ts/lib/Array';
-import { Tag } from '../inputs/Tag';
-import { Checkbox } from '../inputs/Checkbox';
-import { Text } from '../inputs/Text';
-import { Date } from '../inputs/Date';
+import { Tag } from '../form/inputs/Tag';
+import { Checkbox } from '../form/inputs/Checkbox';
+import { Text } from '../form/inputs/Text';
+import { Date } from '../form/inputs/Date';
 import { DateInterval } from '../date-interval/DateInterval';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faFolderArrowDown } from "@fortawesome/free-brands-svg-icons"
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 import moment from "moment";
 import { addParamsToUrl, getParamsAsObject } from '../../shared/Utils';
-import { type } from 'os';
+import { getElem } from '../form/inputs/Form';
 
 export function Filter() {
   const { data }: { data: FilterElement[] } = require('../../data/filter.json')
@@ -22,45 +22,29 @@ export function Filter() {
 
   const getFilters = (): Object => {
     const paramsFromUrl = getParamsAsObject();
-    ['platform', 'author_platform_id', 'topics', 'persons', 'locations'].forEach((filterName:string) => {
-      const curFilter:any = paramsFromUrl[filterName]
-      if(curFilter){
+    ['platform', 'author_platform_id', 'topics', 'persons', 'locations'].forEach((filterName: string) => {
+      const curFilter: any = paramsFromUrl[filterName]
+      if (curFilter) {
         const filterElement: any = data.find(k => k.id.toString() == filterName)
-        paramsFromUrl[filterName] = curFilter.map((k: string) => filterElement.values.find((l:any) => l._id == k))
+        paramsFromUrl[filterName] = curFilter.map((k: string) => filterElement.values.find((l: any) => l._id == k))
       }
     })
 
-    const defaultFilters = reduce({}, (acc:any, cur: FilterElement) => (
+    const defaultFilters = reduce({}, (acc: any, cur: FilterElement) => (
       acc[cur.id] ? acc : { ...acc, [cur.id]: cur.value }
     ))(data);
 
     return { ...defaultFilters, ...paramsFromUrl };
   };
 
-  useEffect(() => setFilters(getFilters()), [])
 
-  const getElem = (el: FilterElement) => {
-    if (el.value === 'today') {
-      el.value = moment().format("YYYY-MM-DD")
-    }
-
-    const onChange = (item: any) => {
-      setGlobalState('filters', { ...filters, [el.id]: item });
-      let str_param = item.length ? item.map((i:any) => i._id).join(',') : item
-      addParamsToUrl({ [el.id]: str_param });
-    }
-
-    return match(el.type)
-      .with("data-interval", () => <DateInterval data={el} onChange={onChange} />)
-      .with("tag", () => <Tag data={el} onChange={onChange} />)
-      .with("date", () => <Date data={el} onChange={onChange} />)
-      .with("text", () => <Text data={el} onChange={onChange} />)
-      .with("checkbox", () => <Checkbox data={el} onChange={onChange} />)
-      .otherwise(() => {
-        console.error(`Invalid component name ${el.type}`);
-        return <></>
-      })
+  const onChange = (el: any) => (item: any) => {
+    setGlobalState('filters', { ...filters, [el.id]: item });
+    let str_param = item.length ? item.map((i: any) => i._id).join(',') : item
+    addParamsToUrl({ [el.id]: str_param });
   }
+
+  useEffect(() => setFilters(getFilters()), [])
 
   return (
     <section className="filter">
@@ -74,7 +58,7 @@ export function Filter() {
                     <div className="col-2" key={el.id}>
                       <p className="font--xs font--gray-3 mb-5">{el.label}</p>
                       <div className="form__item">
-                        {getElem(el)}
+                        {getElem(el, onChange(el))}
                       </div>
                     </div>
                   ))}
