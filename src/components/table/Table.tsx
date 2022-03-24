@@ -4,14 +4,14 @@ import { usePagination, useSortBy, useTable } from 'react-table';
 import cols from '../../data/columns.json';
 import { get, Response, transform_filters_to_request } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
-import { useGlobalState, setGlobalState } from '../../app/store';
+import { useGlobalState } from '../../app/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 // import { } from "@fortawesome/free-brands-svg-icons"
 
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
 import { match } from 'ts-pattern';
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import './table.css';
 
 
@@ -20,16 +20,9 @@ export function Table() {
   const [fetching, setFetching]: any = useState(false);
 
   const [filters, _]: any = useGlobalState('filters');
-  const [monitorId, setMonitorId]: any = useGlobalState('monitorId');
   const columns: any = useMemo(() => cols.data, []);
   let start_index = 0;
   let count = 40;
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const monitorIdFromQueryString:string | null = searchParams.get("monitor_id")
-  if(monitorId != monitorIdFromQueryString){
-    setGlobalState('monitorId', monitorIdFromQueryString)
-  }
 
   const navigate = useNavigate();
   const routeChange = (postId: string) => navigate(`/details/${postId}`);
@@ -40,13 +33,12 @@ export function Table() {
     start_index = si || start_index;
     count = c || count;
     
-    if (!monitorId) return;
+    if (!filters.monitor_id) return;
 
     const fetchData = get('posts', {
       ...transform_filters_to_request(filters),
       "count": count,
-      "start_index": start_index,
-      "monitor_id": monitorId
+      "start_index": start_index
     });
 
     fetchData.then((_data: Response<any>) => {
@@ -68,9 +60,7 @@ export function Table() {
     });
   }
 
-  useEffect(() => {
-    if (Object.keys(filters).length && monitorId) loadData();
-  }, [filters, monitorId]);
+  useEffect(() => loadData(), [filters]);
 
   const {
     getTableProps,

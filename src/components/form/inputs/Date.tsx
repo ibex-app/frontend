@@ -1,9 +1,6 @@
-import { FilterElementInput } from '../../types/form';
-import { useGlobalState } from '../../app/store';
+import { FilterElementInput } from '../../../types/form';
 
 export const Date = ({ data, onChange }: FilterElementInput) => {
-  const [filters, setFilters] = useGlobalState('filters');
-
   return <input
     type="date"
     onChange={({ target }) => onChange(target.value)}

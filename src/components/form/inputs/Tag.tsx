@@ -1,6 +1,6 @@
 import { Typeahead } from 'react-bootstrap-typeahead';
-import { useGlobalState } from '../../app/store';
-import { FilterElementInput } from '../../types/form';
+import { useGlobalState } from '../../../app/store';
+import { FilterElementInput } from '../../../types/form';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 

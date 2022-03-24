@@ -1,5 +1,5 @@
 import { DateRange } from 'react-date-range';
-import { useGlobalState, setGlobalState } from '../../app/store';
+import { useGlobalState } from '../../app/store';
 import { FilterElementInput } from '../../types/form';
 
 import 'react-date-range/dist/styles.css';

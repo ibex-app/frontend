@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "title": "Create Report",
+      "path": "init",
+      "data": [
+        {
+          "id": "report_name",
+          "title": "What is the name of the report?",
+          "value": "",
+          "type": "text"
+        },
+        {
+          "id": "report_description",
+          "title": "What is the report about?",
+          "value": "",
+          "type": "textbox"
+        }
+      ]
+    },
+    {
+      "title": "Data Collection",
+      "path": "params",
+      "data": [
+        {
+          "id": "date_range",
+          "title": "Date Range",
+          "type": "date_interval",
+          "value": ""
+        },
+        {
+          "id": "keywords",
+          "title": "Keywords",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "id": "accounts_platforms",
+          "title": "Accounts / Platforms",
+          "type": "checkbox",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}
