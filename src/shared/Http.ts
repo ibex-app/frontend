@@ -7,7 +7,7 @@ export type PromiseResponse<T> = Promise<Response<T>>;
 
 export const get: any = async (path: string, params: Object) => pipe(
   TE.tryCatch(
-    () => fetch(`http://161.35.73.100:8888/${path}`, {
+    () => fetch(`https://ibex-app.com/${path}`, {
       method: 'post',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -32,5 +32,6 @@ export const transform_filters_to_request = (filters_: any) => {
     filters.locations = filters.locations .map((a: any) => a._id)
     filters.persons = filters.persons .map((a: any) => a._id)
   }
+  console.log(filters)
   return filters
 }

@@ -8,13 +8,13 @@ import { useGlobalState, setGlobalState } from '../../app/store';
 export function Sidebar() {
   const [data, setData]: any = useState([]);
   const [fetching, setFetching]: any = useState(true);
+  const [filters, setFilters] = useGlobalState('filters');
 
   const navigate = useNavigate();
 
   const routeChange = (monitorId: string) => {
-    // setGlobalState('filters', {});
-    setGlobalState('monitorId', monitorId)
-    navigate(`results?monitor_id=${monitorId}`);
+    setGlobalState('filters', {...filters, 'monitor_id': monitorId});
+    navigate(`/frontend/results?monitor_id=${monitorId}`);
   }
 
   useEffect(() => {
@@ -57,11 +57,11 @@ export function Sidebar() {
       <nav className="main-nav">
         <ul>
           <li className="inactive"> . </li>
-          <li><a href="/results/bar" >Bar</a></li>
-          <li><a href="/results/line" >Line</a></li>
-          <li><a href="/results/map" >Map</a></li>
-          <li><a className="inactive" href="/results/graph" >Graph</a></li>
-          <li><a className="inactive" href="/results/bubble" >Bubble</a></li>
+          <li><a href="/frontend/results/bar" >Bar</a></li>
+          <li><a href="/frontend/results/line" >Line</a></li>
+          <li><a href="/frontend/results/map" >Map</a></li>
+          <li><a className="inactive" href="/frontend/results/graph" >Graph</a></li>
+          <li><a className="inactive" href="/frontend/results/bubble" >Bubble</a></li>
         </ul>
       </nav>
       <nav className="main-nav bottom">
