@@ -8,12 +8,12 @@ import { useGlobalState, setGlobalState } from '../../app/store';
 export function Sidebar() {
   const [data, setData]: any = useState([]);
   const [fetching, setFetching]: any = useState(true);
+  const [filters, setFilters] = useGlobalState('filters');
 
   const navigate = useNavigate();
 
   const routeChange = (monitorId: string) => {
-    // setGlobalState('filters', {});
-    setGlobalState('monitorId', monitorId)
+    setGlobalState('filters', {...filters, 'monitor_id': monitorId});
     navigate(`/frontend/results?monitor_id=${monitorId}`);
   }
 
