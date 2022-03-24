@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/frontend/static/css/main.042367e5.css",
+    "main.js": "/frontend/static/js/main.878136e5.js",
+    "static/media/FiraGO-Bold.ttf": "/frontend/static/media/FiraGO-Bold.6873f2abdb06d26ed2be.ttf",
+    "static/media/FiraGO-Medium.ttf": "/frontend/static/media/FiraGO-Medium.c20fbd9f06e6da20dccf.ttf",
+    "static/media/FiraGO-Regular.ttf": "/frontend/static/media/FiraGO-Regular.efd740cb5d33df44d91b.ttf",
+    "static/media/FiraGO-Bold.woff": "/frontend/static/media/FiraGO-Bold.4eef7d96f7d6ac00bc86.woff",
+    "static/media/FiraGO-Medium.woff": "/frontend/static/media/FiraGO-Medium.32a70eb9595364b39587.woff",
+    "static/media/FiraGO-Regular.woff": "/frontend/static/media/FiraGO-Regular.d4fb4c8a0328371ec572.woff",
+    "static/media/FiraGO-Bold.eot": "/frontend/static/media/FiraGO-Bold.1b85295b4d257a444cc2.eot",
+    "static/media/FiraGO-Medium.eot": "/frontend/static/media/FiraGO-Medium.3bcc3d3a36027a562362.eot",
+    "static/media/FiraGO-Regular.eot": "/frontend/static/media/FiraGO-Regular.bbaa46a5a4b8143c9d4c.eot",
+    "static/media/FiraGO-Bold.svg": "/frontend/static/media/FiraGO-Bold.15979e9df7e6cb7fa3c3.svg",
+    "static/media/FiraGO-Medium.svg": "/frontend/static/media/FiraGO-Medium.57ad5f3273e4a414bf70.svg",
+    "static/media/FiraGO-Regular.svg": "/frontend/static/media/FiraGO-Regular.1d088c660ea33c99a581.svg",
+    "index.html": "/frontend/index.html",
+    "main.042367e5.css.map": "/frontend/static/css/main.042367e5.css.map",
+    "main.878136e5.js.map": "/frontend/static/js/main.878136e5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.042367e5.css",
+    "static/js/main.878136e5.js"
+  ]
+}
