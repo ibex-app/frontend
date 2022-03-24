@@ -9,8 +9,6 @@ export function TaxonomyForm({ formData }: any) {
   const { form, update } = useContext(TaxonomyContext);
   const { title, data } = formData;
 
-  console.log(formData);
-
   return (
     <div className="tax-full">
       <div className="tax-title-line">
@@ -23,7 +21,7 @@ export function TaxonomyForm({ formData }: any) {
             <br /><br />
             {el.title}
             <br /><br />
-            {getElem(el, () => { })}
+            {getElem(el, update(el))}
           </>
         ))}
         <Link to="/taxonomy/params" className="">

@@ -1,7 +1,7 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { TaxonomyContext } from "./Context";
 import { TaxonomyForm } from "./TaxonomyForm";
-import { TaxonomyParams } from "./TaxonomyParams";
 
 export function Taxonomy() {
   const { data }: { data: any[] } = require('../../data/taxonomy.json');
@@ -11,11 +11,22 @@ export function Taxonomy() {
     return { ...acc, ...items };
   }, {});
 
+  const update = (el: any) => (value: any) => {
+    setState({ ...form, [el.id]: value });
+    return null;
+  }
+
+  const [form, setState] = useState(defaultData);
+
+  useEffect(() => {
+    console.log(form);
+  }, [form]);
+
   return (
-    <TaxonomyContext.Provider value={defaultData}>
+    <TaxonomyContext.Provider value={{ form, update }}>
       <Routes>
+        <Route path="/" element={<Navigate to="/taxonomy/init" />}></Route>
         {data.map(item => <Route path={item.path} element={<TaxonomyForm formData={item} />} />)}
-        {/* <Route path="params" element={<TaxonomyParams />} /> */}
       </Routes>
     </TaxonomyContext.Provider>
   )
