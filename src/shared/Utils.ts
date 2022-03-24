@@ -1,5 +1,4 @@
-import { pipe } from "fp-ts/lib/function";
-import { FilterElement } from '../types/form';
+import { reduce } from "fp-ts/lib/Array";
 
 const parse = (val: string) => {
   try { return JSON.parse(val) }
@@ -32,9 +31,12 @@ export const addParamsToUrl = (params: { [key: string]: string }) => {
   const url = new URL(window.location.href);
   Object.keys(params).forEach(key =>
     (Array.isArray(params[key]) ? params[key].length : params[key])
-    ? url.searchParams.set(key, params[key]) 
-    : url.searchParams.delete(key)
-    );
+      ? url.searchParams.set(key, params[key])
+      : url.searchParams.delete(key)
+  );
 
   window.history.replaceState({}, "", url.toString());
 }
+
+export const isObjectEmpty = (obj: { [key: string]: any }) =>
+  reduce(true, (acc, key: string) => acc && !obj[key])(Object.keys(obj))

@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import { Tag } from '../form/inputs/Tag';
 import { FilterElement } from '../../types/form';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Table } from '../table/Table';
+import { TaxonomyContext } from './Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
@@ -10,12 +12,17 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
+import { isObjectEmpty } from '../../shared/Utils';
 
-export function Taxonomy() {
+export function TaxonomyResults() {
   const [keywordTag, setKeywordTag] = useState('input')
   const [accountTag, setAccountTag] = useState('input')
+  const { form, update } = useContext(TaxonomyContext);
+  const navigate = useNavigate();
 
-
+  useEffect(() => {
+    if (isObjectEmpty(form)) navigate('/taxonomy/init');
+  }, []);
 
   const el: FilterElement = {
     // "id": "dataSource",
@@ -25,10 +32,6 @@ export function Taxonomy() {
     "value": [],
     "values": []
   }
-  // el.values.push({
-  //   "id": 1,
-  //   "label": "RadioPirveli"
-  // })
 
   return (
     <div>

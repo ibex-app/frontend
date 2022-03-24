@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { TaxonomyContext } from "./Context";
+import { TaxonomyResults } from "./Results";
 import { TaxonomyForm } from "./TaxonomyForm";
 
 export function Taxonomy() {
@@ -18,15 +19,12 @@ export function Taxonomy() {
 
   const [form, setState] = useState(defaultData);
 
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
-
   return (
     <TaxonomyContext.Provider value={{ form, update }}>
       <Routes>
         <Route path="/" element={<Navigate to="/taxonomy/init" />}></Route>
         {data.map(item => <Route path={item.path} element={<TaxonomyForm formData={item} />} />)}
+        <Route path="/results" element={<TaxonomyResults></TaxonomyResults>}></Route>
       </Routes>
     </TaxonomyContext.Provider>
   )
