@@ -6,6 +6,8 @@ import { Taxonomy } from './components/taxonomy/Taxonomy';
 import { Sources } from './components/sources/Sources';
 import { Details } from './components/details/Details';
 import { Sidebar } from './components/sidebar/Sidebar';
+import { Login } from './components/login/Login';
+import { PrivateRoutes } from './components/private-routes/PrivateRoutes';
 
 import './App.css';
 
@@ -19,11 +21,14 @@ function App() {
       </HelmetProvider>
       <Sidebar />
       <Routes>
-        <Route path="frontend/" element={<Results />} />
-        <Route path="frontend/results/*" element={<Results />} />
-        <Route path="frontend/taxonomy/*" element={<Taxonomy />} />
-        <Route path="frontend/sources" element={<Sources />} />
-        <Route path="frontend/details/:postId" element={<Details />} />
+        <Route path="/" element={<PrivateRoutes />} >
+          <Route path="frontend/" element={<Results />} />
+          <Route path="frontend/results/*" element={<Results />} />
+          <Route path="frontend/taxonomy/*" element={<Taxonomy />} />
+          <Route path="frontend/sources" element={<Sources />} />
+          <Route path="frontend/details/:postId" element={<Details />} />
+        </Route>
+        <Route path="frontend/login" element={<Login />} />
       </Routes>
     </main>
   );
