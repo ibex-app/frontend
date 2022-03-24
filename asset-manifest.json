@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/frontend/static/css/main.042367e5.css",
-    "main.js": "/frontend/static/js/main.878136e5.js",
+    "main.js": "/frontend/static/js/main.1f04bd9e.js",
     "static/media/FiraGO-Bold.ttf": "/frontend/static/media/FiraGO-Bold.6873f2abdb06d26ed2be.ttf",
     "static/media/FiraGO-Medium.ttf": "/frontend/static/media/FiraGO-Medium.c20fbd9f06e6da20dccf.ttf",
     "static/media/FiraGO-Regular.ttf": "/frontend/static/media/FiraGO-Regular.efd740cb5d33df44d91b.ttf",
@@ -16,10 +16,10 @@
     "static/media/FiraGO-Regular.svg": "/frontend/static/media/FiraGO-Regular.1d088c660ea33c99a581.svg",
     "index.html": "/frontend/index.html",
     "main.042367e5.css.map": "/frontend/static/css/main.042367e5.css.map",
-    "main.878136e5.js.map": "/frontend/static/js/main.878136e5.js.map"
+    "main.1f04bd9e.js.map": "/frontend/static/js/main.1f04bd9e.js.map"
   },
   "entrypoints": [
     "static/css/main.042367e5.css",
-    "static/js/main.878136e5.js"
+    "static/js/main.1f04bd9e.js"
   ]
 }
