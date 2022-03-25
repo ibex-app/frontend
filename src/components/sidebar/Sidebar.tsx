@@ -9,6 +9,8 @@ export function Sidebar() {
   const [data, setData]: any = useState([]);
   const [fetching, setFetching]: any = useState(true);
   const [filters, setFilters] = useGlobalState('filters');
+  const [user, _] = useGlobalState('user');
+
 
   const navigate = useNavigate();
 
@@ -28,7 +30,10 @@ export function Sidebar() {
       setFetching(false)
     });
   }, [])
-  // loadData()
+  
+  const logout = () => {
+    
+  }
   return (
     <aside className="sidebar">
       <div className="logo">
@@ -66,7 +71,10 @@ export function Sidebar() {
       </nav>
       <nav className="main-nav bottom">
         <ul>
-          <li><a href="#" >Log out</a></li>
+          <li> {
+            user ? <a href="#" >Log in</a> : <a onClick={logout} >Log out</a>
+            }
+            </li>
         </ul>
       </nav>
       {/* <button className="btn btn--show-hide"><span>Hide sidebar</span><i className="icn icn--double-chevron-up"></i>

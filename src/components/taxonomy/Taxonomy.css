@@ -94,6 +94,7 @@ border-bottom: 2px solid #d0d0d0;
 .tax-mid{
     width: 70%;
     margin: 0 auto;
+    position: relative;
 }
 
 .tax-title-line > .tax-mid{

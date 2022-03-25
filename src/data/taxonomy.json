@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "title": "Create Report",
+      "title": "Data Collection",
       "path": "init",
       "redirect": "/frontend/taxonomy/params",
       "data": [
