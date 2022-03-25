@@ -30,4 +30,14 @@ export interface FormInput {
   submitter: (event: FormEvent<HTMLFormElement>) => void;
 };
 
+export interface TaxonomyForm {
+  title: string,
+  descr: string,
+  date_from: Date,
+  date_to?: Date,
+  search_terms: string,
+  accounts: any[],
+  platforms?: any[]
+}
+
 export type FormData = Record<string, any>;

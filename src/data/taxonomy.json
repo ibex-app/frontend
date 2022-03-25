@@ -3,7 +3,7 @@
     {
       "title": "Data Collection",
       "path": "init",
-      "redirect": "/frontend/taxonomy/params",
+      "redirect": "../params",
       "data": [
         {
           "id": "title",
@@ -12,7 +12,7 @@
           "type": "text"
         },
         {
-          "id": "description",
+          "id": "descr",
           "title": "What is the report about?",
           "value": "",
           "type": "textbox"
@@ -22,7 +22,7 @@
     {
       "title": "Data Collection",
       "path": "params",
-      "redirect": "/frontend/taxonomy/results",
+      "redirect": "../results",
       "data": [
         {
           "id": "date",
