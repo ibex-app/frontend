@@ -1,11 +1,23 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { setGlobalState, useGlobalState } from '../../app/store';
 
 export const PrivateRoutes = () => {
   const location = useLocation();
-  const [user, _] = useGlobalState('user');
+  const [user, setUser] = useGlobalState('user');
   const authLogin = false
-  console.log("authLogin", user);
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get("code")
+// state
+// code
+// scope
+// authuser
+// prompt
+  console.log("authLogin", token);
+  
+  if(token && !Object.keys(user).length){
+    setUser({token: token})
+  }
 
   return Object.keys(user).length 
     ? <Outlet />

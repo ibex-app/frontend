@@ -78,7 +78,7 @@ export const options = {
 export function BarChart() {
   const [filters, _]: any = useGlobalState('filters');
   useEffect(() => {
-    if (Object.keys(filters).length) loadData('persons');
+    if (Object.keys(filters).length) loadData('platform');
   }, [filters]);
 
   const [fetching, setFetching] = useState(false);
@@ -196,7 +196,7 @@ export function BarChart() {
   return (
     <div className="results">
       <select onChange={change}>
-        {['persons', 'locations', 'platform', 'topics', 'datasources'].map(d => <option key={d}>{d}</option>)}
+        {['platform', 'persons', 'locations', 'topics', 'datasources'].map(d => <option key={d}>{d}</option>)}
       </select>
       <select onChange={change}>
         {['count', 'hate-speech', 'reach-out', 'likes', 'shares', 'sentiment', 'comments'].map(d => <option key={d}>{d}</option>)}

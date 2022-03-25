@@ -9,7 +9,7 @@ export function Sidebar() {
   const [data, setData]: any = useState([]);
   const [fetching, setFetching]: any = useState(true);
   const [filters, setFilters] = useGlobalState('filters');
-  const [user, _] = useGlobalState('user');
+  const [user, setUser] = useGlobalState('user');
 
 
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export function Sidebar() {
   }, [])
   
   const logout = () => {
-    
+    setUser({})
   }
   return (
     <aside className="sidebar">
@@ -62,17 +62,17 @@ export function Sidebar() {
       <nav className="main-nav">
         <ul>
           <li className="inactive"> . </li>
-          <li><a href="/frontend/results/bar" >Bar</a></li>
-          <li><a href="/frontend/results/line" >Line</a></li>
-          <li><a href="/frontend/results/map" >Map</a></li>
-          <li><a className="inactive" href="/frontend/results/graph" >Graph</a></li>
-          <li><a className="inactive" href="/frontend/results/bubble" >Bubble</a></li>
+          <li><Link to="/frontend/results/bar" >Bar</Link></li>
+          <li><Link to="/frontend/results/line" >Line</Link></li>
+          <li><Link to="/frontend/results/map" >Map</Link></li>
+          <li><Link className="inactive" to="/frontend/results/graph" >Graph</Link></li>
+          <li><Link className="inactive" to="/frontend/results/bubble" >Bubble</Link></li>
         </ul>
       </nav>
       <nav className="main-nav bottom">
         <ul>
           <li> {
-            user ? <a href="#" >Log in</a> : <a onClick={logout} >Log out</a>
+            Object.keys(user).length  ? <a onClick={logout} >Log out</a> : <Link to="/frontend/login" >Log in</Link>
             }
             </li>
         </ul>
