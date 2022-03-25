@@ -13,17 +13,29 @@ import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
 import { isObjectEmpty } from '../../shared/Utils';
+import { useGlobalState } from '../../app/store';
+import { get, Response } from '../../shared/Http';
 
 export function TaxonomyResults() {
   const [keywordTag, setKeywordTag] = useState('input')
   const [accountTag, setAccountTag] = useState('input')
   const { form, update } = useContext(TaxonomyContext);
   const navigate = useNavigate();
+  const [filters, setFilters]: any = useGlobalState('filters');
 
   useEffect(() => {
-    if (isObjectEmpty(form)) navigate('/taxonomy/init');
+    if (form && isObjectEmpty(form)) navigate('../init');
 
-    console.log(form);
+    if (form) {
+      const fetchData = get('create_monitor', {
+        ...form,
+        search_terms: form.search_terms.trim().split(',')
+      });
+
+      fetchData.then((_data: Response<any>) => {
+        console.log(_data);
+      });
+    }
   }, []);
 
   const el: FilterElement = {
@@ -101,7 +113,7 @@ export function TaxonomyResults() {
         {/* <button >Run</button> */}
 
       </div>
-      {<Table />}
+      <Table />
     </div>
   );
 }

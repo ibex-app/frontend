@@ -1,20 +1,10 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { TaxonomyContext } from "./Context";
+import { data, initForm, TaxonomyContext } from "./Context";
 import { TaxonomyResults } from "./Results";
 import { TaxonomyForm } from "./TaxonomyForm";
 
 export function Taxonomy() {
-  const { data }: { data: any[] } = require('../../data/taxonomy.json');
-
-  const defaultData = data.reduce((acc, { data }) => {
-    const items = data.reduce((acc: any, { id, value }: any) => {
-      if (id != "date") return { ...acc, [id]: value };
-    }, {});
-
-    return { ...acc, ...items };
-  }, {});
-
   const update = (el: any) => (value: any) => {
     setState(Object.keys(value).includes('date')
       ? { ...form, ...value.date }
@@ -22,7 +12,7 @@ export function Taxonomy() {
     return null;
   }
 
-  const [form, setState] = useState(defaultData);
+  const [form, setState] = useState(initForm);
 
   return (
     <TaxonomyContext.Provider value={{ form, update }}>
