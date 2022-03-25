@@ -45,7 +45,7 @@ export function Sidebar() {
                 <li>Loading...</li>
               ) : (data.map((monitor: any) => (<li key={monitor._id}> <a onClick={() => routeChange(monitor._id)}> {monitor.title}</a> </li>)))}
               <li>
-                <Link to="/taxonomy/init">
+                <Link to="/frontend/taxonomy/init">
                   + Create
                 </Link>
               </li>

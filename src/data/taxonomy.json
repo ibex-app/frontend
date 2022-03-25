@@ -3,7 +3,7 @@
     {
       "title": "Create Report",
       "path": "init",
-      "redirect": "/taxonomy/params",
+      "redirect": "/frontend/taxonomy/params",
       "data": [
         {
           "id": "title",
@@ -22,7 +22,7 @@
     {
       "title": "Data Collection",
       "path": "params",
-      "redirect": "/taxonomy/results",
+      "redirect": "/frontend/taxonomy/results",
       "data": [
         {
           "id": "date",

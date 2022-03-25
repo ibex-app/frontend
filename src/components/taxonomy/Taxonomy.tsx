@@ -27,7 +27,7 @@ export function Taxonomy() {
   return (
     <TaxonomyContext.Provider value={{ form, update }}>
       <Routes>
-        <Route path="/" element={<Navigate to="/taxonomy/init" />}></Route>
+        <Route path="/" element={<Navigate to="/frontend/taxonomy/init" />}></Route>
         {data.map((item, i) => <Route key={`${item.id}_${i}`} path={item.path} element={
           <TaxonomyForm formData={item} />
         } />)}
