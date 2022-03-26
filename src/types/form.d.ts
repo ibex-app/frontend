@@ -17,6 +17,7 @@ export interface FilterElement {
   label: string;
   value: any;
   values: any[];
+  tip?: string;
   onChange?: (event: FormEvent<HTMLFormElement>) => void;
 }
 

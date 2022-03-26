@@ -44,9 +44,15 @@
         },
         {
           "id": "accounts",
-          "title": "Accounts / Platforms",
-          "type": "checkbox",
-          "value": ""
+          "title": "Platform",
+          "type": "tag",
+          "value": [
+            "Twitter",
+            "Facebook",
+            "YouTube"
+          ],
+          "values": [],
+          "tip": "Your data will be collected from the platform(s) you've selected."
         }
       ]
     }

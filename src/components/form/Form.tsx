@@ -14,7 +14,7 @@ export const getElem = (el: FilterElement, onChange: any) => {
     el.value = moment().format("YYYY-MM-DD")
   }
 
-  return match(el.type)
+  const component = match(el.type)
     .with("date_interval", () => <DateInterval data={el} onChange={onChange} />)
     .with("tag", () => <Tag data={el} onChange={onChange} />)
     .with("date", () => <Date data={el} onChange={onChange} />)
@@ -26,4 +26,10 @@ export const getElem = (el: FilterElement, onChange: any) => {
       console.error(`Invalid component name ${el.type}`);
       return <></>
     })
+
+  return el.tip
+    ? <>{component}
+      <div>{el.tip}</div>
+    </>
+    : component
 }
