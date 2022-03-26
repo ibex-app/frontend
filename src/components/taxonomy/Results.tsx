@@ -1,3 +1,4 @@
+import * as E from "fp-ts/lib/Either";
 import { useNavigate } from 'react-router-dom';
 import { Tag } from '../form/inputs/Tag';
 import { FilterElement } from '../../types/form';
@@ -29,11 +30,17 @@ export function TaxonomyResults() {
     if (form) {
       const fetchData = get('create_monitor', {
         ...form,
-        search_terms: form.search_terms.trim().split(',')
+        search_terms: form.search_terms.trim().split(','),
+        accounts: [{ "title": 'asdasd', 'platform': 'facebook', 'platform_id': 'ksadjfhkajsdf' }]
       });
 
       fetchData.then((_data: Response<any>) => {
-        console.log(_data);
+        let maybeData: any = E.getOrElse(() => [])(_data);
+        setFilters({
+          time_interval_to: maybeData.date_to,
+          time_interval_from: maybeData.date_from,
+          monitor_id: maybeData._id
+        });
       });
     }
   }, []);
@@ -113,7 +120,7 @@ export function TaxonomyResults() {
         {/* <button >Run</button> */}
 
       </div>
-      <Table />
+      <Table mapFilter={false} />
     </div>
   );
 }
