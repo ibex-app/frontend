@@ -37,6 +37,12 @@
           "value": ""
         },
         {
+          "id": "search_terms_upload",
+          "title": "Upload Keywords",
+          "type": "file_upload",
+          "value": ""
+        },
+        {
           "id": "accounts",
           "title": "Accounts / Platforms",
           "type": "checkbox",
