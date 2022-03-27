@@ -1,8 +1,7 @@
 
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { get, PromiseResponse } from '../../shared/Http';
-import { PostDetail } from '../../types/detail';
+import { Link, useParams } from "react-router-dom";
+import { get } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
@@ -108,7 +107,7 @@ export function Details() {
                       <div className="title"> {post.title}</div>
                       {<div className="sub-title"> {post.created_at} | chanell name </div>}
                       <div className="description"> {post.text} </div>
-                      {<div className="platform"> <a target="_blank" href={post.url}> {post.platform} {post.url}</a> </div>}
+                      {<Link className="platform" to={post.url}> {post.platform} {post.url}</Link>}
                       {<div className="scores">
                         <FontAwesomeIcon icon={faThumbsUp} /> {post.scores?.likes}
                         <FontAwesomeIcon icon={faThumbsDown} /> {post.scores?.sad}

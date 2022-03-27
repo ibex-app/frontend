@@ -11,7 +11,7 @@ import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-i
 
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
 import { match } from 'ts-pattern';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './table.css';
 
 
@@ -111,7 +111,7 @@ export function Table({ mapFilter = true }) {
                     {<div {...row.cells[0].getCellProps()} className="sub-title"> {row.cells[0].render('Cell')} | chanell name </div>}
                     <div className="description"> {row.cells[3].render('Cell')} </div>
 
-                    {<div {...row.cells[1].getCellProps()} className="platform"> {row.cells[1].render('Cell')} <a target="_blank" href={row.cells[4].value}>{row.cells[4].render('Cell')}</a> </div>}
+                    {<div {...row.cells[1].getCellProps()} className="platform"> {row.cells[1].render('Cell')} <Link to={row.cells[4].value}>{row.cells[4].render('Cell')}</Link> </div>}
                     {<div className="scores">
                       <FontAwesomeIcon icon={faThumbsUp} /> {row.cells[6].value}
                       <FontAwesomeIcon icon={faThumbsDown} /> {row.cells[7].value}
