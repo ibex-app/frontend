@@ -43,3 +43,6 @@ export const isObjectEmpty = (obj: { [key: string]: any }) =>
 
 export const tagItemsToArray = (tagItems: { label: string }[]): string[] =>
   tagItems.map(({ label }) => label)
+
+export const formatDate = (date: string) =>
+  date += date.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''

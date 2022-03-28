@@ -4,7 +4,7 @@ import { Tag } from '../form/inputs/Tag';
 import { FilterElement } from '../../types/form';
 import { useContext, useEffect, useState } from 'react';
 import { Table } from '../table/Table';
-import { data, TaxonomyContext } from './Context';
+import { TaxonomyContext } from './Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
@@ -27,7 +27,7 @@ export function TaxonomyResults() {
   const finalize_form = (form: any) => {
     const data = {
       ...form,
-      ...form.date,
+      accounts: [{ "title": 'asdasd', 'platform': 'facebook', 'platform_id': 'ksadjfhkajsdf' }],
       search_terms: tagItemsToArray(form.search_terms)
     }
 
@@ -36,25 +36,28 @@ export function TaxonomyResults() {
   }
 
   useEffect(() => {
-    console.log(finalize_form(form));
-    // if (form && isObjectEmpty(form)) navigate('../init');
+    if (form && isObjectEmpty(form)) navigate('../init');
 
-    // if (form) {
-    //   const fetchData = get('create_monitor', {
-    //     ...form,
-    //     search_terms: form.search_terms.trim().split(','),
-    //     accounts: [{ "title": 'asdasd', 'platform': 'facebook', 'platform_id': 'ksadjfhkajsdf' }]
-    //   });
+    if (form) {
+      console.log(finalize_form(form))
+      const fetchData = get('create_monitor', finalize_form(form));
 
-    //   fetchData.then((_data: Response<any>) => {
-    //     let maybeData: any = E.getOrElse(() => [])(_data);
-    //     setFilters({
-    //       time_interval_to: maybeData.date_to,
-    //       time_interval_from: maybeData.date_from,
-    //       monitor_id: maybeData._id
-    //     });
-    //   });
-    // }
+      fetchData.then((_data: Response<any>) => {
+        const { _id, date_to, date_from }: any = E.getOrElse(() => [])(_data);
+
+        Promise.all([
+          get('collect_sample', { id: _id }),
+          get('get_hits_count', { id: _id })
+        ]).then(console.log)
+
+        setFilters({
+          ...(date_to && { time_interval_to: date_to }),
+          time_interval_from: date_from,
+          monitor_id: _id
+        });
+
+      });
+    }
   }, []);
 
   const el: FilterElement = {
