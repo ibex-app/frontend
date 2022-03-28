@@ -26,12 +26,12 @@
       "path": "params",
       "redirect": "../results",
       "data": [
-       
         {
           "id": "search_terms",
           "title": "Keywords",
           "type": "tag",
-          "value": "",
+          "value": [],
+          "values": [],
           "tip": "You may also use boolean operators (AND, OR, NOT) to refine your search. See how this works in action"
         },
         {
@@ -40,7 +40,6 @@
           "type": "file_upload",
           "value": ""
         },
-        
         {
           "id": "date",
           "title": "Date Range",

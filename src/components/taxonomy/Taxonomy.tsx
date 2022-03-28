@@ -6,6 +6,7 @@ import { TaxonomyForm } from "./TaxonomyForm";
 
 export function Taxonomy() {
   const update = (el: any) => (value: any) => {
+    el.value = value;
     setState(Object.keys(value).includes('date')
       ? { ...form, ...value.date }
       : { ...form, [el.id]: value });
@@ -21,7 +22,7 @@ export function Taxonomy() {
         {data.map((item, i) => <Route key={`${item.id}_${i}`} path={item.path} element={
           <TaxonomyForm formData={item} />
         } />)}
-        <Route path="/results" element={<TaxonomyResults></TaxonomyResults>}></Route>
+        <Route path="/results" element={<TaxonomyResults />}></Route>
       </Routes>
     </TaxonomyContext.Provider>
   )

@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { pipe } from 'fp-ts/lib/function';
 
 export const DateInterval = ({ data, onChange }: FilterElementInput) => {
 
@@ -32,25 +31,18 @@ export const DateInterval = ({ data, onChange }: FilterElementInput) => {
     }
   });
 
-  
-  const toggleEndDate = (element: HTMLInputElement ) => {
-    setIsOnGoing(element.checked)
-    console.log(isOnGoing)
-  }
-
   return <div>
-       <label className="container"> On-going monitor?
-        <input type="checkbox" onChange={(event) => toggleEndDate(event.target)}></input>
-          <span className="checkmark"></span>
-      </label>
-      <input type="date" ></input>
-      {
-        isOnGoing 
-          ? <div className="disabled-input">End date not required</div>
-          : <input type="date" ></input>
-      }
-      
-    </div>
+    <label className="container"> On-going monitor?
+      <span className={`checkmark ${isOnGoing ? 'checked' : ''}`} onClick={() => setIsOnGoing(!isOnGoing)}></span>
+    </label>
+    <input type="date" ></input>
+    {
+      isOnGoing
+        ? <div className="disabled-input">End date not required</div>
+        : <input type="date" ></input>
+    }
+
+  </div>
   // return <DateRange
   //   ranges={filters[data.id] || [selectionRange]}
   //   editableDateInputs={true}
