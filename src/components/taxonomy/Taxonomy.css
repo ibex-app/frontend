@@ -225,7 +225,7 @@ input[type="radio"], input[type="checkbox"]{
   
   /* When the checkbox is checked, add a blue background */
   .container input:checked ~ .checkmark {
-    background-color: #2196F3;
+    background-color: #4670be;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -237,18 +237,25 @@ input[type="radio"], input[type="checkbox"]{
   
   /* Show the checkmark when checked */
   .container input:checked ~ .checkmark:after {
-    left: 4px;
-    right: auto;
+    content: "┘";
+    right: 4px;
+    left: auto;
     background: white;
+    
   }
   
   /* Style the checkmark/indicator */
   .container .checkmark:after {
-    right: 4px;
+    left: 4px;
     top: 3px;
     width: 19px;
     height: 19px;
     background: #a0a0a0;
     border-radius: 100%;
     transition: .2s;
+    transform: rotate(37deg);
+    display: flex;
+    justify-content: space-around;
+    font-size: 19px;
+    padding-top: 2px;
   }
