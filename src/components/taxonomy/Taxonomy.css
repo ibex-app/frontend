@@ -21,7 +21,7 @@ border: 1px solid #ddd;
 margin-left: 5%;
 }
 
-.tax-full input, .tax-full textarea, .leftbox input, .leftbox textarea, .leftbox .select-tags .rbt .rbt-input-wrapper{
+.tax-full input, .tax-full textarea, .leftbox input, .leftbox textarea, .leftbox .select-tags .rbt .rbt-input-wrapper, .disabled-input{
     width: 100%;
     margin-bottom: 14px;
     background: #fff;
@@ -57,12 +57,14 @@ margin-left: 5%;
 
 .leftbox > button, .tax-full button, .round-btn-transp {
     background: #4670be;
-border: none;
-/* margin-left: 55px; */
-margin-top: 20px;
-color: #fff;
-padding: 10px 20px;
-border-radius: 30px;
+    border: none;
+    margin-top: 20px;
+    color: #fff;
+    padding: 11px 23px;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
 
 .leftbox .sugg{
@@ -180,10 +182,15 @@ input[type="radio"], input[type="checkbox"]{
     padding: 10px;
     margin: 16px 0;
     border-radius: 10px;
-    padding-left: 40px;
+    padding-left: 15px;
+}
+.tax-tip svg{
+    margin-right: 15px;
 }
 
-
+.tax-tip svg *{
+    fill: #eddd5e
+}
 /* checkbox{} */
 .tax-full .container {
     display: block;
@@ -269,6 +276,7 @@ input[type="radio"], input[type="checkbox"]{
     border: dashed 2px #b9b9b9;
     background: white;
     border-radius: 10px;
+    /* margin-bottom: 17px; */
   }
 
   .tax-full  .kiHXWb svg{
@@ -298,4 +306,10 @@ input[type="radio"], input[type="checkbox"]{
     text-align: center;
     font-size: 16px;
     left: calc(50% - 75px)
+  }
+
+  .disabled-input{
+    width: 48%;
+    display: inline-block;
+    background: #e5e5e5ab;
   }

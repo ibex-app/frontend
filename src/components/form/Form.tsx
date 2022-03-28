@@ -8,6 +8,8 @@ import { Tag } from "./inputs/Tag";
 import { Text } from "./inputs/Text";
 import { TextBox } from "./inputs/Textbox";
 import FileUpload from "./inputs/FileUpload";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
 
 export const getElem = (el: FilterElement, onChange: any) => {
   if (el.value === 'today') {
@@ -29,7 +31,7 @@ export const getElem = (el: FilterElement, onChange: any) => {
 
   return el.tip
     ? <>{component}
-      <div className="tax-tip">{el.tip}</div>
+      <div className="tax-tip"><FontAwesomeIcon icon={faLightbulb} />{el.tip}</div>
     </>
     : component
 }

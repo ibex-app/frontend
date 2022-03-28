@@ -26,6 +26,21 @@
       "path": "params",
       "redirect": "../results",
       "data": [
+       
+        {
+          "id": "search_terms",
+          "title": "Keywords",
+          "type": "tag",
+          "value": "",
+          "tip": "You may also use boolean operators (AND, OR, NOT) to refine your search. See how this works in action"
+        },
+        {
+          "id": "search_terms_upload",
+          "title": "Upload Keywords",
+          "type": "file_upload",
+          "value": ""
+        },
+        
         {
           "id": "date",
           "title": "Date Range",
@@ -34,20 +49,8 @@
           "value": ""
         },
         {
-          "id": "search_terms",
-          "title": "Keywords",
-          "type": "textbox",
-          "value": ""
-        },
-        {
-          "id": "search_terms_upload",
-          "title": "Upload Keywords",
-          "type": "file_upload",
-          "value": ""
-        },
-        {
-          "id": "accounts",
-          "title": "Platform",
+          "id": "platforms",
+          "title": "Platforms",
           "type": "tag",
           "required": true,
           "value": [
@@ -57,6 +60,27 @@
           ],
           "values": [],
           "tip": "Your data will be collected from the platform(s) you've selected."
+        },
+        {
+          "id": "accounts",
+          "title": "Do you have specific accounts you would like to collect posts from?",
+          "type": "file_upload",
+          "value": ""
+        },
+        {
+          "id": "languages",
+          "title": "What are the languages uesd in your data sources?",
+          "type": "tag",
+          "required": true,
+          "value": [
+            "Armenian",
+            "Georgian",
+            "Azerbaijani",
+            "Russian",
+            "English"
+          ],
+          "values": [],
+          "tip": "Identifing the languages used in your datasources yields better quelity results."
         }
       ]
     }
