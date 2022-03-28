@@ -7,9 +7,11 @@ import { TaxonomyForm } from "./TaxonomyForm";
 export function Taxonomy() {
   const update = (el: any) => (value: any) => {
     el.value = value;
-    setState(Object.keys(value).includes('date')
-      ? { ...form, ...value.date }
+
+    setState(typeof value == 'object' && !value.length
+      ? { ...form, ...value }
       : { ...form, [el.id]: value });
+
     return null;
   }
 

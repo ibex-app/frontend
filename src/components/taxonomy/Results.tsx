@@ -4,7 +4,7 @@ import { Tag } from '../form/inputs/Tag';
 import { FilterElement } from '../../types/form';
 import { useContext, useEffect, useState } from 'react';
 import { Table } from '../table/Table';
-import { TaxonomyContext } from './Context';
+import { data, TaxonomyContext } from './Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
@@ -13,7 +13,7 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
-import { isObjectEmpty } from '../../shared/Utils';
+import { isObjectEmpty, tagItemsToArray } from '../../shared/Utils';
 import { useGlobalState } from '../../app/store';
 import { get, Response } from '../../shared/Http';
 
@@ -24,25 +24,37 @@ export function TaxonomyResults() {
   const navigate = useNavigate();
   const [filters, setFilters]: any = useGlobalState('filters');
 
-  useEffect(() => {
-    if (form && isObjectEmpty(form)) navigate('../init');
-
-    if (form) {
-      const fetchData = get('create_monitor', {
-        ...form,
-        search_terms: form.search_terms.trim().split(','),
-        accounts: [{ "title": 'asdasd', 'platform': 'facebook', 'platform_id': 'ksadjfhkajsdf' }]
-      });
-
-      fetchData.then((_data: Response<any>) => {
-        let maybeData: any = E.getOrElse(() => [])(_data);
-        setFilters({
-          time_interval_to: maybeData.date_to,
-          time_interval_from: maybeData.date_from,
-          monitor_id: maybeData._id
-        });
-      });
+  const finalize_form = (form: any) => {
+    const data = {
+      ...form,
+      ...form.date,
+      search_terms: tagItemsToArray(form.search_terms)
     }
+
+    delete data['date'];
+    return data;
+  }
+
+  useEffect(() => {
+    console.log(finalize_form(form));
+    // if (form && isObjectEmpty(form)) navigate('../init');
+
+    // if (form) {
+    //   const fetchData = get('create_monitor', {
+    //     ...form,
+    //     search_terms: form.search_terms.trim().split(','),
+    //     accounts: [{ "title": 'asdasd', 'platform': 'facebook', 'platform_id': 'ksadjfhkajsdf' }]
+    //   });
+
+    //   fetchData.then((_data: Response<any>) => {
+    //     let maybeData: any = E.getOrElse(() => [])(_data);
+    //     setFilters({
+    //       time_interval_to: maybeData.date_to,
+    //       time_interval_from: maybeData.date_from,
+    //       monitor_id: maybeData._id
+    //     });
+    //   });
+    // }
   }, []);
 
   const el: FilterElement = {
