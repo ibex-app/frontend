@@ -16,7 +16,7 @@ function FileUpload() {
   };
 
   return (
-    <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+    <FileUploader handleChange={handleChange} name="file" types={fileTypes} label="Drag & drop your file here" />
   );
 }
 
