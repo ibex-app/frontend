@@ -37,10 +37,22 @@
           "value": ""
         },
         {
-          "id": "accounts",
-          "title": "Accounts / Platforms",
-          "type": "checkbox",
+          "id": "search_terms_upload",
+          "title": "Upload Keywords",
+          "type": "file_upload",
           "value": ""
+        },
+        {
+          "id": "accounts",
+          "title": "Platform",
+          "type": "tag",
+          "value": [
+            "Twitter",
+            "Facebook",
+            "YouTube"
+          ],
+          "values": [],
+          "tip": "Your data will be collected from the platform(s) you've selected."
         }
       ]
     }

@@ -11,11 +11,11 @@ import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-i
 
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
 import { match } from 'ts-pattern';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './table.css';
 
 
-export function Table() {
+export function Table({ mapFilter = true }) {
   const [data, setData]: any = useState([]);
   const [fetching, setFetching]: any = useState(false);
 
@@ -29,14 +29,16 @@ export function Table() {
 
   const loadData = (si?: number, c?: number, append?: boolean) => {
     setFetching(true)
-    if(!append) setData([])
+    if (!append) setData([])
     start_index = si || start_index;
     count = c || count;
-    
+
     if (!filters.monitor_id) return;
 
+    const _filters = mapFilter ? { ...transform_filters_to_request(filters) } : filters;
+
     const fetchData = get('posts', {
-      ...transform_filters_to_request(filters),
+      ..._filters,
       "count": count,
       "start_index": start_index
     });
@@ -52,7 +54,7 @@ export function Table() {
           .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
           .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
           .otherwise(() => <span>Invalid Icon</span>)
-          row.key = row._id
+        row.key = row._id
       })
       setData(append ? [...data, ...maybeData] : [...maybeData])
 
@@ -108,8 +110,8 @@ export function Table() {
                       row.cells[3].value.length < 100 ? row.cells[3].value : row.cells[3].value.slice(0, 220)} </div>}
                     {<div {...row.cells[0].getCellProps()} className="sub-title"> {row.cells[0].render('Cell')} | chanell name </div>}
                     <div className="description"> {row.cells[3].render('Cell')} </div>
-                    
-                    {<div {...row.cells[1].getCellProps()} className="platform"> {row.cells[1].render('Cell')} <a target="_blank" href={row.cells[4].value}>{row.cells[4].render('Cell')}</a> </div>}
+
+                    {<div {...row.cells[1].getCellProps()} className="platform"> {row.cells[1].render('Cell')} <Link to={row.cells[4].value}>{row.cells[4].render('Cell')}</Link> </div>}
                     {<div className="scores">
                       <FontAwesomeIcon icon={faThumbsUp} /> {row.cells[6].value}
                       <FontAwesomeIcon icon={faThumbsDown} /> {row.cells[7].value}

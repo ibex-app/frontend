@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom";
+
 export const Header = () => (
   <header className="header">
     <nav className="nav">
       {/* <a className="is-active" href="/results" >Table</a> */}
-      <a href="/results" >Table</a>
-      <a href="/results/bar" >Bar</a>
-      <a href="/results/graph" >Graph</a>
-      <a href="/results/line" >Line</a>
-      <a href="/results/bubble" >Bubble</a>
-      <a href="/results/map" >Map</a>
+      <Link to="/results" >Table</Link>
+      <Link to="/results/bar" >Bar</Link>
+      <Link to="/results/graph" >Graph</Link>
+      <Link to="/results/line" >Line</Link>
+      <Link to="/results/bubble" >Bubble</Link>
+      <Link to="/results/map" >Map</Link>
     </nav>
     <div className="tools">
       <i className="icn icn--save"></i>
