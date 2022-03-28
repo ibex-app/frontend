@@ -32,7 +32,7 @@ export const PrivateRoutes = () => {
     getJWTToken()
   }
 
-  return Object.keys(user).length 
+  return 1 //Object.keys(user).length 
     ? <Outlet />
     : <Navigate to="frontend/login" replace state={{ from: location }} />;
 }

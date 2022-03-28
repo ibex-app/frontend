@@ -29,7 +29,7 @@ export const getElem = (el: FilterElement, onChange: any) => {
 
   return el.tip
     ? <>{component}
-      <div>{el.tip}</div>
+      <div className="tax-tip">{el.tip}</div>
     </>
     : component
 }

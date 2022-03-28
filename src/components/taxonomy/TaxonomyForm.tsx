@@ -16,13 +16,11 @@ export function TaxonomyForm({ formData }: any) {
         <div className="tax-mid">{title}</div>
       </div>
       <div className="tax-mid">
-        <br />
         {data.map((el: any) => (
           <div key={el.id}>
-            <br /><br />
-            {el.title}
-            <br /><br />
+            <div className="tax-label">{el.title} {el.required ? <span>*</span> : ''}</div>
             {getElem(el, update(el))}
+            <div className="tax-line"></div>
           </div>
         ))}
         <Link to={redirect}>

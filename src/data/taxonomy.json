@@ -9,13 +9,15 @@
           "id": "title",
           "title": "What is the name of the report?",
           "value": "",
-          "type": "text"
+          "type": "text",
+          "required": true
         },
         {
           "id": "descr",
           "title": "What is the report about?",
           "value": "",
-          "type": "textbox"
+          "type": "textbox",
+          "required": true
         }
       ]
     },
@@ -27,6 +29,7 @@
         {
           "id": "date",
           "title": "Date Range",
+          "required": true,
           "type": "date_interval",
           "value": ""
         },
@@ -46,6 +49,7 @@
           "id": "accounts",
           "title": "Platform",
           "type": "tag",
+          "required": true,
           "value": [
             "Twitter",
             "Facebook",

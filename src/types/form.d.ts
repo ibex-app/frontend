@@ -18,6 +18,7 @@ export interface FilterElement {
   value: any;
   values: any[];
   tip?: string;
+  required?: boolean;
   onChange?: (event: FormEvent<HTMLFormElement>) => void;
 }
 

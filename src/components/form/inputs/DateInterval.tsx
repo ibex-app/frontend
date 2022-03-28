@@ -28,12 +28,15 @@ export const DateInterval = ({ data, onChange }: FilterElementInput) => {
       date_to: endDate
     }
   });
-
-  return <DateRange
-    ranges={filters[data.id] || [selectionRange]}
-    editableDateInputs={true}
-    onChange={({ date }: any) => pipe(date, getDate, onChange)}
-    moveRangeOnFirstSelection={false}
-    showDateDisplay={false}
-  />
+  return <div>
+      <div>On-going monitor? </div>
+      <input type="date" ></input><input type="date" ></input>
+    </div>
+  // return <DateRange
+  //   ranges={filters[data.id] || [selectionRange]}
+  //   editableDateInputs={true}
+  //   onChange={({ date }: any) => pipe(date, getDate, onChange)}
+  //   moveRangeOnFirstSelection={false}
+  //   showDateDisplay={false}
+  // />
 }
