@@ -29,7 +29,10 @@ export const DateInterval = ({ data, onChange }: FilterElementInput) => {
     }
   });
   return <div>
-      <div>On-going monitor? </div>
+       <label className="container"> On-going monitor?
+        <input type="checkbox"></input>
+          <span className="checkmark"></span>
+      </label>
       <input type="date" ></input><input type="date" ></input>
     </div>
   // return <DateRange
