@@ -267,7 +267,7 @@ input[type="radio"], input[type="checkbox"]{
   }
 
   /* file upload */
- .tax-full  .kiHXWb {
+ .tax-full  label[for="file"] {
     min-width: 100%;
     height: 110px;
     border: dashed 2px #b9b9b9;
@@ -276,21 +276,21 @@ input[type="radio"], input[type="checkbox"]{
     /* margin-bottom: 17px; */
   }
 
-  .tax-full  .kiHXWb svg{
+  .tax-full  label[for="file"] svg{
     display: none;
   }
 
-  .tax-full  .kiHXWb  > div > span:first-child{
+  .tax-full  label[for="file"]  > div > span:first-child{
     width: 100%;
     text-align: center; 
     font-size: 16px;
     margin-top: -26px;
   }
 
-  .tax-full  .kiHXWb  > div > span:nth-child(2){
+  .tax-full  label[for="file"]  > div > span:nth-child(2){
       color: transparent;
   }
-  .tax-full  .kiHXWb  > div > span:nth-child(2):after{
+  .tax-full  label[for="file"]  > div > span:nth-child(2):after{
     position: absolute;
     content: "Browse file";
     background: #4670be;
