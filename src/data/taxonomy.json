@@ -26,21 +26,6 @@
       "path": "params",
       "redirect": "../results",
       "data": [
-       
-        {
-          "id": "search_terms",
-          "title": "Keywords",
-          "type": "tag",
-          "value": "",
-          "tip": "You may also use boolean operators (AND, OR, NOT) to refine your search. See how this works in action"
-        },
-        {
-          "id": "search_terms_upload",
-          "title": "Upload Keywords",
-          "type": "file_upload",
-          "value": ""
-        },
-        
         {
           "id": "date",
           "title": "Date Range",
@@ -62,11 +47,43 @@
           "tip": "Your data will be collected from the platform(s) you've selected."
         },
         {
-          "id": "accounts",
-          "title": "Do you have specific accounts you would like to collect posts from?",
-          "type": "file_upload",
-          "value": ""
+          "id": "search_terms",
+          "data": [
+            {
+              "id": "search_terms",
+              "title": "Input Keywords",
+              "type": "tag",
+              "value": "",
+              "tip": "You may use boolean operators (AND, OR, NOT) to refine your search. See how this works in action"
+            },
+            {
+              "id": "search_terms_upload",
+              "title": "Upload Keywords",
+              "type": "file_upload",
+              "value": ""
+            }
+          ]
         },
+        {
+          "id": "accounts",
+          "data": [
+            {
+              "id": "search_terms",
+              "title": "Input Accounts",
+              "type": "tag",
+              "value": "",
+              "tip": "Start typing the account name, and select ones you want to search."
+            },
+            {
+              "id": "search_terms_upload",
+              "title": "Upload Accounts",
+              "type": "file_upload",
+              "value": ""
+            }
+          ]
+        },
+        
+
         {
           "id": "languages",
           "title": "What are the languages uesd in your data sources?",

@@ -313,3 +313,28 @@ input[type="radio"], input[type="checkbox"]{
     display: inline-block;
     background: #e5e5e5ab;
   }
+
+.tax-large-title{
+    font-size: 22px;
+    padding-top: 30px;
+}
+
+.tax-toggle-cont{
+    padding-left: 15px;
+    border-left: 1.5px solid #c7c3c3;
+    transition: .2s;
+    max-height:0;
+    overflow: hidden;
+}
+
+.tax-toggle-cont.tax-toggle-cont-show{
+    max-height:2000px;
+
+}
+
+.tax-toggle-cont div:first-child .tax-label{
+    padding-top: 10px;
+}
+.tax-toggle-cont .tax-line:last-child{
+    /* display: none; */
+}

@@ -16,7 +16,7 @@ export const DateInterval = ({ data, onChange }: FilterElementInput) => {
   }
 
   const [filters, setFilters] = useGlobalState('filters');
-  const [isOnGoing, setIsOnGoing] = useState(true);
+  const [isOnGoing, setIsOnGoing] = useState(false);
 
 
   const selectionRange = {
@@ -35,7 +35,6 @@ export const DateInterval = ({ data, onChange }: FilterElementInput) => {
   
   const toggleEndDate = (element: HTMLInputElement ) => {
     setIsOnGoing(element.checked)
-    console.log(isOnGoing)
   }
 
   return <div>
