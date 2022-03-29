@@ -230,25 +230,16 @@ input[type="radio"], input[type="checkbox"]{
     /* background-color: #ccc; */
   }
   
-  /* When the checkbox is checked, add a blue background */
-  .container input:checked ~ .checkmark {
-    background-color: #4670be;
-  }
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
     content: "";
     position: absolute;
     /* display: none; */
   }
-  
-  /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
-    content: "┘";
-    right: 4px;
-    left: auto;
-    background: white;
-    
+
+  /* When the checkbox is checked, add a blue background */
+  .container .checked {
+    background-color: #4670be;
   }
   
   /* Style the checkmark/indicator */
@@ -267,7 +258,13 @@ input[type="radio"], input[type="checkbox"]{
     padding-top: 2px;
   }
 
-
+  /* Show the checkmark when checked */
+  .container .checked:after {
+    content: "┘";
+    right: 4px;
+    left: auto;
+    background: white; 
+  }
 
   /* file upload */
  .tax-full  .kiHXWb {

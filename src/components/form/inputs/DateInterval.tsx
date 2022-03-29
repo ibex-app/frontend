@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { pipe } from 'fp-ts/lib/function';
+import { formatDate } from '../../../shared/Utils';
 
 export const DateInterval = ({ data, onChange }: FilterElementInput) => {
 
@@ -18,6 +18,7 @@ export const DateInterval = ({ data, onChange }: FilterElementInput) => {
   const [filters, setFilters] = useGlobalState('filters');
   const [isOnGoing, setIsOnGoing] = useState(false);
 
+  const _onChange = (key: string) => ({ target }: any) => onChange({ [key]: formatDate(target.value) });
 
   const selectionRange = {
     startDate: new Date(),
@@ -38,18 +39,16 @@ export const DateInterval = ({ data, onChange }: FilterElementInput) => {
   }
 
   return <div>
-       <label className="container"> On-going monitor?
-        <input type="checkbox" onChange={(event) => toggleEndDate(event.target)}></input>
-          <span className="checkmark"></span>
-      </label>
-      <input type="date" ></input>
-      {
-        isOnGoing 
-          ? <div className="disabled-input">End date not required</div>
-          : <input type="date" ></input>
-      }
-      
-    </div>
+    <label className="container"> On-going monitor?
+      <span className={`checkmark ${isOnGoing ? 'checked' : ''}`} onClick={() => setIsOnGoing(!isOnGoing)}></span>
+    </label>
+    <input type="date" onChange={_onChange('date_from')}></input>
+    {
+      isOnGoing
+        ? <div className="disabled-input">End date not required</div>
+        : <input type="date" onChange={_onChange('date_to')}></input>
+    }
+  </div>
   // return <DateRange
   //   ranges={filters[data.id] || [selectionRange]}
   //   editableDateInputs={true}

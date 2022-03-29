@@ -13,7 +13,7 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
-import { isObjectEmpty } from '../../shared/Utils';
+import { isObjectEmpty, tagItemsToArray } from '../../shared/Utils';
 import { useGlobalState } from '../../app/store';
 import { get, Response } from '../../shared/Http';
 
@@ -24,23 +24,38 @@ export function TaxonomyResults() {
   const navigate = useNavigate();
   const [filters, setFilters]: any = useGlobalState('filters');
 
+  const finalize_form = (form: any) => {
+    const data = {
+      ...form,
+      accounts: [{ "title": 'asdasd', 'platform': 'facebook', 'platform_id': 'ksadjfhkajsdf' }],
+      search_terms: tagItemsToArray(form.search_terms)
+    }
+
+    delete data['date'];
+    return data;
+  }
+
   useEffect(() => {
     if (form && isObjectEmpty(form)) navigate('../init');
 
     if (form) {
-      const fetchData = get('create_monitor', {
-        ...form,
-        search_terms: form.search_terms.trim().split(','),
-        accounts: [{ "title": 'asdasd', 'platform': 'facebook', 'platform_id': 'ksadjfhkajsdf' }]
-      });
+      console.log(finalize_form(form))
+      const fetchData = get('create_monitor', finalize_form(form));
 
       fetchData.then((_data: Response<any>) => {
-        let maybeData: any = E.getOrElse(() => [])(_data);
+        const { _id, date_to, date_from }: any = E.getOrElse(() => [])(_data);
+
+        Promise.all([
+          get('collect_sample', { id: _id }),
+          get('get_hits_count', { id: _id })
+        ]).then(console.log)
+
         setFilters({
-          time_interval_to: maybeData.date_to,
-          time_interval_from: maybeData.date_from,
-          monitor_id: maybeData._id
+          ...(date_to && { time_interval_to: date_to }),
+          time_interval_from: date_from,
+          monitor_id: _id
         });
+
       });
     }
   }, []);

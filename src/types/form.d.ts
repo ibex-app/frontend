@@ -37,7 +37,7 @@ export interface TaxonomyForm {
   descr: string,
   date_from: Date,
   date_to?: Date,
-  search_terms: string,
+  search_terms: any[],
   accounts: any[],
   platforms?: any[]
 }

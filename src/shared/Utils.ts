@@ -40,3 +40,9 @@ export const addParamsToUrl = (params: { [key: string]: string }) => {
 
 export const isObjectEmpty = (obj: { [key: string]: any }) =>
   reduce(true, (acc, key: string) => acc && !obj[key])(Object.keys(obj))
+
+export const tagItemsToArray = (tagItems: { label: string }[]): string[] =>
+  tagItems.map(({ label }) => label)
+
+export const formatDate = (date: string) =>
+  date += date.indexOf('T00:00:00.000Z') == -1 ? 'T00:00:00.000Z' : ''

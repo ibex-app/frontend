@@ -39,9 +39,9 @@
           "type": "tag",
           "required": true,
           "value": [
-            "Twitter",
-            "Facebook",
-            "YouTube"
+            "twitter",
+            "facebook",
+            "youtube"
           ],
           "values": [],
           "tip": "Your data will be collected from the platform(s) you've selected."
