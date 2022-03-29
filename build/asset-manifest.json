@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/frontend/static/css/main.c9cb7a76.css",
-    "main.js": "/frontend/static/js/main.3282b13f.js",
+    "main.css": "/frontend/static/css/main.7be7ca63.css",
+    "main.js": "/frontend/static/js/main.c191c43e.js",
     "static/media/FiraGO-Bold.ttf": "/frontend/static/media/FiraGO-Bold.6873f2abdb06d26ed2be.ttf",
     "static/media/FiraGO-Medium.ttf": "/frontend/static/media/FiraGO-Medium.c20fbd9f06e6da20dccf.ttf",
     "static/media/FiraGO-Regular.ttf": "/frontend/static/media/FiraGO-Regular.efd740cb5d33df44d91b.ttf",
@@ -15,11 +15,11 @@
     "static/media/FiraGO-Medium.svg": "/frontend/static/media/FiraGO-Medium.57ad5f3273e4a414bf70.svg",
     "static/media/FiraGO-Regular.svg": "/frontend/static/media/FiraGO-Regular.1d088c660ea33c99a581.svg",
     "index.html": "/frontend/index.html",
-    "main.c9cb7a76.css.map": "/frontend/static/css/main.c9cb7a76.css.map",
-    "main.3282b13f.js.map": "/frontend/static/js/main.3282b13f.js.map"
+    "main.7be7ca63.css.map": "/frontend/static/css/main.7be7ca63.css.map",
+    "main.c191c43e.js.map": "/frontend/static/js/main.c191c43e.js.map"
   },
   "entrypoints": [
-    "static/css/main.c9cb7a76.css",
-    "static/js/main.3282b13f.js"
+    "static/css/main.7be7ca63.css",
+    "static/js/main.c191c43e.js"
   ]
 }
