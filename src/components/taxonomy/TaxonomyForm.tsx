@@ -1,5 +1,5 @@
 import { el } from 'date-fns/locale';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getElem } from '../form/Form';
 import { TaxonomyContext } from './Context';
@@ -11,6 +11,8 @@ import './Taxonomy.css';
 export function TaxonomyForm({ formData }: any) {
   const { form, update } = useContext(TaxonomyContext);
   const { title, data, redirect } = formData;
+
+  useEffect(() => console.log(form), [form]);
 
   return (
     <div className="tax-full">

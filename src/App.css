@@ -1518,10 +1518,11 @@ border-radius: 8px;
 .rbt-token .rbt-token-remove-button span{
   color: whitesmoke;
 }
-.rbt-token .rbt-token-remove-button{
+
+.rbt-token button.rbt-token-remove-button {
   background: none;
-  border:none
-  
+  border: none;
+  margin-top: 0;
 }
 
 .sr-only.visually-hidden{
@@ -1790,9 +1791,14 @@ font-size: 14px;
   opacity: .7;
   /* display: none; */
 }
-.rbt-token.rbt-token-removeable {
-  margin-top: 5px;
+.rbt-token.rbt-token-removeable, .rbt-input-wrapper > div {
+  margin-top: 7px;
   margin-bottom: 0px;
+}
+
+.rbt-input-multi input.rbt-input-main {
+  margin-bottom: 0px;
+
 }
 
 .rbt-input-hint, .rbt-input-main{

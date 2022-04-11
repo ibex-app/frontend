@@ -11,7 +11,7 @@ export type PromiseResponse<T> = Promise<Response<T>>;
 
 
 
-export const get: any = async (path: string, params: Object) => {
+export const Get: any = async (path: string, params: Object) => {
     // const [user, setUser] = useGlobalState('user');
     
     const token = window.localStorage.getItem('jwt')
@@ -26,7 +26,7 @@ export const get: any = async (path: string, params: Object) => {
             'Content-Type': 'application/json',
         })
     }
-    const logout = () => {
+    const Logout = () => {
         window.localStorage.removeItem('jwt')
         const navigate = useNavigate();
         navigate("/frontend/login");
@@ -42,7 +42,7 @@ export const get: any = async (path: string, params: Object) => {
                 body: JSON.stringify(params),
             }).then((res:any) => {
                     if(res.status === 401){
-                        logout()
+                        Logout()
                     }
                     return res.json()
                 }), 

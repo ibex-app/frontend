@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { get } from '../../shared/Http';
+import { Get } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
@@ -64,7 +64,7 @@ export function Details() {
   };
 
   useEffect(() => {
-    const fetchData = get('post', {
+    const fetchData = Get('post', {
       id: postId
     });
 

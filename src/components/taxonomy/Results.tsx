@@ -15,7 +15,7 @@ import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
 import './Taxonomy.css';
 import { isObjectEmpty, tagItemsToArray } from '../../shared/Utils';
 import { useGlobalState } from '../../app/store';
-import { get, Response } from '../../shared/Http';
+import { Get, Response } from '../../shared/Http';
 
 export function TaxonomyResults() {
   const [keywordTag, setKeywordTag] = useState('input')
@@ -40,14 +40,14 @@ export function TaxonomyResults() {
 
     if (form) {
       console.log(finalize_form(form))
-      const fetchData = get('create_monitor', finalize_form(form));
+      const fetchData = Get('create_monitor', finalize_form(form));
 
       fetchData.then((_data: Response<any>) => {
         const { _id, date_to, date_from }: any = E.getOrElse(() => [])(_data);
 
         Promise.all([
-          get('collect_sample', { id: _id }),
-          get('get_hits_count', { id: _id })
+          Get('collect_sample', { id: _id }),
+          Get('get_hits_count', { id: _id })
         ]).then(console.log)
 
         setFilters({

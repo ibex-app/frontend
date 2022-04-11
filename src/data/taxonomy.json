@@ -38,12 +38,14 @@
           "title": "Platforms",
           "type": "tag",
           "required": true,
-          "value": [
+          "value": [],
+          "values": [
             "twitter",
             "facebook",
-            "youtube"
+            "youtube",
+            "telegram",
+            "vkontakte"
           ],
-          "values": [],
           "tip": "Your data will be collected from the platform(s) you've selected."
         },
         {
@@ -53,7 +55,8 @@
               "id": "search_terms",
               "title": "Input Keywords",
               "type": "tag",
-              "value": "",
+              "value": [],
+              "values": [],
               "tip": "You may use boolean operators (AND, OR, NOT) to refine your search. See how this works in action"
             },
             {
@@ -68,14 +71,15 @@
           "id": "accounts",
           "data": [
             {
-              "id": "search_terms",
+              "id": "accounts",
               "title": "Input Accounts",
               "type": "tag",
-              "value": "",
+              "value": [],
+              "values": [],
               "tip": "Start typing the account name, and select ones you want to search."
             },
             {
-              "id": "search_terms_upload",
+              "id": "accounts_upload",
               "title": "Upload Accounts",
               "type": "file_upload",
               "value": ""
@@ -89,14 +93,14 @@
           "title": "What are the languages uesd in your data sources?",
           "type": "tag",
           "required": true,
-          "value": [
+          "value": [],
+          "values": [
             "Armenian",
             "Georgian",
             "Azerbaijani",
             "Russian",
             "English"
           ],
-          "values": [],
           "tip": "Identifing the languages used in your datasources yields better quelity results."
         }
       ]

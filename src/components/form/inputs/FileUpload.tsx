@@ -5,16 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileLines } from '@fortawesome/free-solid-svg-icons'
 
 import './FileUpload.css';
+import { FilterElementInput } from "../../../types/form";
 
 const fileTypes = ["csv"];
 
-function FileUpload() {
+export function FileUpload({ data, onChange }: FilterElementInput) {
+  
   const handleChange = (file: any) => {
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
       complete: (results: any) => {
-        console.log(results.data)
+        onChange(results.data)
       },
     });
   };

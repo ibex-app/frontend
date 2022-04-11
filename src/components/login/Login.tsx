@@ -19,7 +19,7 @@ export function Login() {
 
 
   const submit = async (data: FormData) => {
-    // const res: AuthResponse = await Https.get('/login');
+    // const res: AuthResponse = await Https.Get('/login');
     // login(res);
   };
 

@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import {CRS} from 'leaflet'
 import L from 'leaflet';
-import { get, Response, transform_filters_to_request } from '../../../shared/Http';
+import { Get, Response, transform_filters_to_request } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 
 import {
@@ -84,7 +84,7 @@ export function MapChart() {
   const loadData = (labelType: string) => {
       setFetching(true)
       labelType = 'locations'
-      const fetchData = get('posts_aggregated', {
+      const fetchData = Get('posts_aggregated', {
           post_request_params: transform_filters_to_request(filters),
           axisX: labelType
       });

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { get, Response } from '../../shared/Http';
+import { Get, Response } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalState, setGlobalState } from '../../app/store';
@@ -20,7 +20,7 @@ export function Sidebar() {
   }
 
   useEffect(() => {
-    const fetchData = get('get_monitors', { tag: '*' });
+    const fetchData = Get('get_monitors', { tag: '*' });
 
     fetchData.then((_data: Response<any>) => {
       let maybeData = E.getOrElse(() => [])(_data)

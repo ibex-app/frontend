@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { usePagination, useSortBy, useTable } from 'react-table';
 import cols from '../../data/columns.json';
-import { get, Response, transform_filters_to_request } from '../../shared/Http';
+import { Get, Response, transform_filters_to_request } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { useGlobalState } from '../../app/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -37,7 +37,7 @@ export function Table({ mapFilter = true }) {
 
     const _filters = mapFilter ? { ...transform_filters_to_request(filters) } : filters;
 
-    const fetchData = get('posts', {
+    const fetchData = Get('posts', {
       ..._filters,
       "count": count,
       "start_index": start_index

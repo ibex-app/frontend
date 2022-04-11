@@ -23,7 +23,7 @@ export const getElem = (el: FilterElement, onChange: any) => {
     .with("text", () => <Text data={el} onChange={onChange} />)
     .with("textbox", () => <TextBox data={el} onChange={onChange} />)
     .with("checkbox", () => <Checkbox data={el} onChange={onChange} />)
-    .with("file_upload", () => <FileUpload />)
+    .with("file_upload", () => <FileUpload  data={el} onChange={onChange} />)
     .otherwise(() => {
       console.error(`Invalid component name ${el.type}`);
       return <></>
