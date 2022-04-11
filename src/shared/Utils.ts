@@ -14,6 +14,7 @@ export const getParamsAsObject = () => {
   if (!params[0]) return paramsObject
   params
     .map(key => key.split('='))
+    .filter(([key, value]) => key !== 'access_token' && key !== 'user')
     .forEach(([key, value]) => {
       let _value: string | Array<string> = decodeURIComponent(value)
 

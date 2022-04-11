@@ -31,7 +31,7 @@ export const PrivateRoutes = () => {
   if(token && !Object.keys(user).length){
     window.localStorage.setItem('jwt', token);
     // window.localStorage.setItem('refresh', req.response["refresh_token"]);
-    setUser({email: searchParams.get("user")})
+    setUser({email: searchParams.get("user"), jwt: token})
   }
 
   return Object.keys(user).length 

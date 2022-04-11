@@ -8,10 +8,18 @@ import { Details } from './components/details/Details';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { Login } from './components/login/Login';
 import { PrivateRoutes } from './components/private-routes/PrivateRoutes';
+import { setGlobalState, useGlobalState } from './app/store';
 
 import './App.css';
 
 function App() {
+  const [user, setUser] = useGlobalState('user');
+    
+  const token = window.localStorage.getItem('jwt')
+  if(token && !Object.keys(user).length ) {
+    setUser({jwt: token})
+  }
+
   return (
     <main className="main">
       <HelmetProvider>

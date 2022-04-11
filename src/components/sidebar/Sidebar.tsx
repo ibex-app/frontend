@@ -24,7 +24,7 @@ export function Sidebar() {
 
     fetchData.then((_data: Response<any>) => {
       let maybeData = E.getOrElse(() => [])(_data)
-      if (!maybeData.forEach) return
+      if (!maybeData  || !maybeData.forEach) return
       maybeData.forEach((k: any) => k.key = k._id)
       setData(maybeData)
       setFetching(false)
@@ -47,7 +47,7 @@ export function Sidebar() {
             <ul>
 
               {fetching ? (
-                <li>Loading...</li>
+                <li> <a className="inactive" href="/">Loading...</a></li>
               ) : (data.map((monitor: any) => (<li key={monitor._id}> <a onClick={() => routeChange(monitor._id)}> {monitor.title}</a> </li>)))}
               <li>
                 <Link to="/frontend/taxonomy/init">
