@@ -10,8 +10,16 @@ export function Accounts({ formData }: any) {
     const [show, setShow] = useState(false);
 
     const load_uploaded = (e : any) => {
-        if(e.length && e[0] && e[0]['search term']) {
-            update(data[0])(e.map((a: any) => a['search term']));   
+        if(e.length && e[0] && e[0]['platform_id']) {
+            update(data[0])(e.map((account: any, index: number) => ({ 
+                id: index, 
+                label: account.title + ' - ' + account.platform, 
+                _id: account.platform_id,
+
+                platform: account.platform, 
+                platform_id: account.platform_id,
+                title: account.title
+            })));   
         } else {
             update(data[0])(e);   
         }

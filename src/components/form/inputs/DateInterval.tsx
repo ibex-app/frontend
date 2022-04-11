@@ -16,7 +16,7 @@ export const DateInterval = ({ data, onChange }: FilterElementInput) => {
   }
 
   const [filters, setFilters] = useGlobalState('filters');
-  const [isOnGoing, setIsOnGoing] = useState(false);
+  const [isOnGoing, setIsOnGoing] = useState(true);
 
   const _onChange = (key: string) => ({ target }: any) => onChange({ [key]: formatDate(target.value) });
 

@@ -31,7 +31,9 @@
           "title": "Date Range",
           "required": true,
           "type": "date_interval",
-          "value": ""
+          "value": "",
+          "tip": "On-going monitor would add newly created posts to the report in real-time"
+
         },
         {
           "id": "platforms",
@@ -86,7 +88,6 @@
             }
           ]
         },
-        
 
         {
           "id": "languages",

@@ -12,7 +12,7 @@ export function TaxonomyForm({ formData }: any) {
   const { form, update } = useContext(TaxonomyContext);
   const { title, data, redirect } = formData;
 
-  useEffect(() => console.log(form), [form]);
+  // useEffect(() => console.log(form), [form]);
 
   return (
     <div className="tax-full">
