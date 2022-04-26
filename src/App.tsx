@@ -30,13 +30,13 @@ function App() {
       <Sidebar />
       <Routes>
         <Route path="/" element={<PrivateRoutes />} >
-          <Route path="frontend/" element={<Results />} />
-          <Route path="frontend/results/*" element={<Results />} />
-          <Route path="frontend/taxonomy/*" element={<Taxonomy />} />
-          <Route path="frontend/sources" element={<Sources />} />
-          <Route path="frontend/details/:postId" element={<Details />} />
+          <Route path="/" element={<Results />} />
+          <Route path="/results/*" element={<Results />} />
+          <Route path="/taxonomy/*" element={<Taxonomy />} />
+          <Route path="/sources" element={<Sources />} />
+          <Route path="/details/:postId" element={<Details />} />
         </Route>
-        <Route path="frontend/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </main>
   );

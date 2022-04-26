@@ -36,5 +36,5 @@ export const PrivateRoutes = () => {
 
   return Object.keys(user).length 
     ? <Outlet />
-    : <Navigate to="frontend/login" replace state={{ from: location }} />;
+    : <Navigate to="login" replace state={{ from: location }} />;
 }

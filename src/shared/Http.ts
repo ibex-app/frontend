@@ -28,8 +28,8 @@ export const Get: any = async (path: string, params: Object) => {
     }
     const Logout = () => {
         window.localStorage.removeItem('jwt')
-        if(window.location.href.indexOf('/frontend/login') === -1){
-            window.location.href = '/frontend/login'
+        if(window.location.href.indexOf('/login') === -1){
+            window.location.href = '/login'
         }
         const kkk:any = {}
         return T.of(kkk);

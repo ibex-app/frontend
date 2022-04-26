@@ -16,7 +16,7 @@ export function Sidebar() {
 
   const routeChange = (monitorId: string) => {
     setGlobalState('filters', {...filters, 'monitor_id': monitorId});
-    navigate(`/frontend/results?monitor_id=${monitorId}`);
+    navigate(`/results?monitor_id=${monitorId}`);
   }
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export function Sidebar() {
                 <li> <a className="inactive" href="/">Loading...</a></li>
               ) : (data.map((monitor: any) => (<li key={monitor._id}> <a onClick={() => routeChange(monitor._id)}> {monitor.title}</a> </li>)))}
               <li>
-                <Link to="/frontend/taxonomy/init">
+                <Link to="/taxonomy/init">
                   + Create
                 </Link>
               </li>
@@ -62,17 +62,17 @@ export function Sidebar() {
       <nav className="main-nav">
         <ul>
           <li className="inactive"> . </li>
-          <li><Link to="/frontend/results/bar" >Bar</Link></li>
-          <li><Link to="/frontend/results/line" >Line</Link></li>
-          <li><Link to="/frontend/results/map" >Map</Link></li>
-          <li><Link className="inactive" to="/frontend/results/graph" >Graph</Link></li>
-          <li><Link className="inactive" to="/frontend/results/bubble" >Bubble</Link></li>
+          <li><Link to="/results/bar" >Bar</Link></li>
+          <li><Link to="/results/line" >Line</Link></li>
+          <li><Link to="/results/map" >Map</Link></li>
+          <li><Link className="inactive" to="/results/graph" >Graph</Link></li>
+          <li><Link className="inactive" to="/results/bubble" >Bubble</Link></li>
         </ul>
       </nav>
       <nav className="main-nav bottom">
         <ul>
           <li> {
-            Object.keys(user).length  ? <a onClick={logout} >Log out</a> : <Link to="/frontend/login" >Log in</Link>
+            Object.keys(user).length  ? <a onClick={logout} >Log out</a> : <Link to="/login" >Log in</Link>
             }
             </li>
         </ul>

@@ -26,7 +26,7 @@ export function Table({ mapFilter = true }) {
   let count = 40;
 
   const navigate = useNavigate();
-  const routeChange = (postId: string) => navigate(`/frontend/details/${postId}`);
+  const routeChange = (postId: string) => navigate(`/details/${postId}`);
 
   const loadData = (si?: number, c?: number, append?: boolean) => {
     setFetching(true)
