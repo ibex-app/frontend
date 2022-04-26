@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faFolderArrowDown } from "@fortawesome/free-brands-svg-icons"
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 import moment from "moment";
-import { addParamsToUrl, getParamsAsObject } from '../../shared/Utils';
+import { addParamsToUrl, getParamsAsObject, getFilters } from '../../shared/Utils';
 import { getElem } from '../form/Form';
 
 export function Filter() {
@@ -14,31 +14,13 @@ export function Filter() {
 
   const [filters, setFilters] = useGlobalState('filters');
 
-  const getFilters = (): Object => {
-    const paramsFromUrl = getParamsAsObject();
-    ['platform', 'author_platform_id', 'topics', 'persons', 'locations'].forEach((filterName: string) => {
-      const curFilter: any = paramsFromUrl[filterName]
-      if (curFilter) {
-        const filterElement: any = data.find(k => k.id.toString() == filterName)
-        paramsFromUrl[filterName] = curFilter.map((k: string) => filterElement.values.find((l: any) => l._id == k))
-      }
-    })
-
-    const defaultFilters = reduce({}, (acc: any, cur: FilterElement) => (
-      acc[cur.id] ? acc : { ...acc, [cur.id]: cur.value }
-    ))(data);
-
-    return { ...defaultFilters, ...paramsFromUrl };
-  };
-
-
   const onChange = (el: any) => (item: any) => {
     setGlobalState('filters', { ...filters, [el.id]: item });
     let str_param = item.length ? item.map((i: any) => i._id).join(',') : item
     addParamsToUrl({ [el.id]: str_param });
   }
 
-  useEffect(() => setFilters(getFilters()), [])
+  useEffect(() => setFilters(getFilters(data)), [])
 
   return (
     <section className="filter">

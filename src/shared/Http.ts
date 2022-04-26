@@ -28,8 +28,9 @@ export const Get: any = async (path: string, params: Object) => {
     }
     const Logout = () => {
         window.localStorage.removeItem('jwt')
-        const navigate = useNavigate();
-        navigate("/frontend/login");
+        if(window.location.href.indexOf('/frontend/login') === -1){
+            window.location.href = '/frontend/login'
+        }
         const kkk:any = {}
         return T.of(kkk);
     }
@@ -41,7 +42,8 @@ export const Get: any = async (path: string, params: Object) => {
                 headers: headers,
                 body: JSON.stringify(params),
             }).then((res:any) => {
-                    if(res.status === 401){
+                    if(res.status === 401 ){
+                        console.log(4444, res.status)
                         Logout()
                     }
                     return res.json()
@@ -56,14 +58,14 @@ export const Get: any = async (path: string, params: Object) => {
 
 export const transform_filters_to_request = (filters_: any) => {
     let filters = JSON.parse(JSON.stringify(filters_));
-
     if (filters.time_interval_from && filters.time_interval_to) {
         filters.time_interval_from = formatDate(filters.time_interval_from);
         filters.time_interval_to = formatDate(filters.time_interval_to);
-        filters.platform = filters.platform.map((a: any) => a._id || a)
-        filters.author_platform_id = filters.author_platform_id.map((a: any) => a._id)
-        filters.locations = filters.locations.map((a: any) => a._id)
-        filters.persons = filters.persons.map((a: any) => a._id)
     }
+    if (filters.platform)               filters.platform = filters.platform.map((a: any) => a._id || a)
+    if (filters.author_platform_id)     filters.author_platform_id = filters.author_platform_id.map((a: any) => a._id)
+    if (filters.locations)              filters.locations = filters.locations.map((a: any) => a._id)
+    if (filters.persons)                filters.persons = filters.persons.map((a: any) => a._id)
+
     return filters
 }

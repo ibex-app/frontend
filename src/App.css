@@ -1550,7 +1550,9 @@ font-family: "FiraGO", sans-serif;
   /* min-height: 38px; */
   padding-top: 0px;
 padding-bottom: 5px;
+
 }
+
 .rbt-input-multi.focus{
   border:none;
   box-shadow: inset 0 0 0 0.1rem rgba(165, 165, 165, 0.25);
@@ -1803,6 +1805,7 @@ font-size: 14px;
 
 .rbt-input-hint, .rbt-input-main{
   min-height: 25px !important;
+  padding-left: 7px !important;
 }
 
 .results select{
@@ -1820,3 +1823,13 @@ font-size: 14px;
   height: 100%;
 }
 
+
+.fa-telegram{
+  color: #30b7e7;
+  fill: #30b7e7;
+}
+
+.dropdown-item.active {
+  background: #4670be;
+  color: white;
+}

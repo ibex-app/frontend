@@ -10,6 +10,7 @@ import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-i
 // import { } from "@fortawesome/free-brands-svg-icons"
 
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
+
 import { match } from 'ts-pattern';
 import { Link, useNavigate } from "react-router-dom";
 import './table.css';
@@ -34,8 +35,8 @@ export function Table({ mapFilter = true }) {
     count = c || count;
 
     if (!filters.monitor_id) return;
-
     const _filters = mapFilter ? { ...transform_filters_to_request(filters) } : filters;
+    console.log()
 
     const fetchData = Get('posts', {
       ..._filters,
