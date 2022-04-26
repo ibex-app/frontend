@@ -27,7 +27,7 @@ export function Login() {
     <div className="tax-full">
       <div className="tax-title-line">
         <div className="tax-mid">Please Sign In
-          <a href="https://ibex-app.com/login" className="google-btn">
+          <a href="https://ibex-app.com/api/login" className="google-btn">
             <div className="google-icon-wrapper">
               <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
             </div>

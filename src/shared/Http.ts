@@ -37,7 +37,7 @@ export const Get: any = async (path: string, params: Object) => {
 
     return pipe(
         TE.tryCatch(
-            () => fetch(`https://ibex-app.com/${path}`, {
+            () => fetch(`https://ibex-app.com/api/${path}`, {
                 method: 'post',
                 headers: headers,
                 body: JSON.stringify(params),
