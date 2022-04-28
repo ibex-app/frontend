@@ -9,7 +9,7 @@ import moment from "moment";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube, faTelegram } from "@fortawesome/free-brands-svg-icons"
-import { faSliders } from '@fortawesome/free-solid-svg-icons'
+import { faSliders, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
 import { isObjectEmpty, tagItemsToArray } from '../../shared/Utils';
@@ -191,6 +191,10 @@ export function TaxonomyResults() {
                     </table>
                     
                     
+                </div>
+
+                <div className="leftbox-inner leftbox-inner-recomm">
+                    <div className="leftbox-title leftbox-title-blue"> Recommended keywords <FontAwesomeIcon icon={faAngleUp} /></div>
                 </div>
                 {/* <button className='left-m-5'>Get Semple</button> */}
                 {/* <button >Run</button> */}

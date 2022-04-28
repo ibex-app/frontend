@@ -426,3 +426,18 @@ padding: 9px 10px;
 .tax-keywords-table tbody td{
     border-bottom: 1px solid gainsboro;
 }
+
+.leftbox-inner.leftbox-inner-recomm{
+    margin-top: 30px;
+    padding: 0 25px;
+}
+
+.leftbox-inner.leftbox-inner-recomm .leftbox-title{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.leftbox-inner.leftbox-inner-recomm .leftbox-title svg{
+    transform: none;
+}
