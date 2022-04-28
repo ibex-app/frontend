@@ -27,6 +27,25 @@
       "redirect": "../results",
       "data": [
         {
+          "id": "search_terms",
+          "data": [
+            {
+              "id": "search_terms",
+              "title": "Input Keywords",
+              "type": "tag",
+              "value": [],
+              "values": [],
+              "tip": "You may use boolean operators (AND, OR, NOT) to refine your search. See how this works in action"
+            },
+            {
+              "id": "search_terms_upload",
+              "title": "Upload Keywords",
+              "type": "file_upload",
+              "value": ""
+            }
+          ]
+        },
+        {
           "id": "date",
           "title": "Date Range",
           "required": true,
@@ -50,25 +69,7 @@
           ],
           "tip": "Your data will be collected from the platform(s) you've selected."
         },
-        {
-          "id": "search_terms",
-          "data": [
-            {
-              "id": "search_terms",
-              "title": "Input Keywords",
-              "type": "tag",
-              "value": [],
-              "values": [],
-              "tip": "You may use boolean operators (AND, OR, NOT) to refine your search. See how this works in action"
-            },
-            {
-              "id": "search_terms_upload",
-              "title": "Upload Keywords",
-              "type": "file_upload",
-              "value": ""
-            }
-          ]
-        },
+       
         {
           "id": "accounts",
           "data": [

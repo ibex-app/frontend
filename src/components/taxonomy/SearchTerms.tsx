@@ -7,7 +7,7 @@ import { Checkbox } from "../form/inputs/Checkbox";
 export function SearchTerms({ formData }: any, onChange: any) {
     const { form, update } = useContext(TaxonomyContext);
     const { title, data, redirect } = formData;
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true );
 
     const load_uploaded = (e : any) => {
         if(e.length && e[0] && e[0]['search term']) {
@@ -23,7 +23,7 @@ export function SearchTerms({ formData }: any, onChange: any) {
             <div></div>
             <label className="container"> 
                 <span className="tax-label"> Do you have specific keywords you would like to collect posts with?</span>
-                <input type="checkbox" onChange={(event) => setShow(event.target.checked)}></input>
+                <input type="checkbox" onChange={(event) => setShow(event.target.checked)} checked={show}></input>
                 <span className={`checkmark ${show ? 'checked' : '' }`}></span>
             </label>
             <div className={`tax-toggle-cont ${show ? 'tax-toggle-cont-show' : '' }`} >
