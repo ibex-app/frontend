@@ -52,7 +52,6 @@
           "type": "date_interval",
           "value": "",
           "tip": "On-going monitor would add newly created posts to the report in real-time"
-
         },
         {
           "id": "platforms",
@@ -69,7 +68,6 @@
           ],
           "tip": "Your data will be collected from the platform(s) you've selected."
         },
-       
         {
           "id": "accounts",
           "data": [
@@ -89,13 +87,13 @@
             }
           ]
         },
-
         {
           "id": "languages",
-          "title": "What are the languages uesd in your data sources?",
+          "title": "What are the languages used in your data sources?",
           "type": "tag",
           "required": true,
           "value": [],
+          "allowNew": false,
           "values": [
             "Armenian",
             "Georgian",

@@ -9,6 +9,10 @@ type Tag = { id: number, label: string };
 export function Tag({ data, onChange }: FilterElementInput) {
   const [filters, setFilters] = useGlobalState('filters');
 
+  const onKeydown = (e: Event) => {
+    if (data.allowNew === false) e.preventDefault();
+  };
+
   return (
     <div className="select-tags">
       <Typeahead
@@ -17,7 +21,8 @@ export function Tag({ data, onChange }: FilterElementInput) {
         onChange={onChange}
         options={data.values}
         // placeholder={data.id}
-        allowNew={true}
+        onKeyDown={onKeydown}
+        allowNew={data.allowNew ?? true}
         selected={filters[data.id] || data.value}
       />
     </div>
