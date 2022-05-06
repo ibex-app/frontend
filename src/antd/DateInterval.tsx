@@ -3,10 +3,10 @@ import { useState } from 'react';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DatePicker, Row, Space } from 'antd';
-import { FilterElement } from '../types/form';
+import { FormElement } from '../types/form';
 import { getElem } from './utils/ElementGetter';
 
-export const DateInterval = ({ children }: { children: FilterElement[] }) => {
+export const DateInterval = ({ children }: { children: FormElement[] }) => {
 
   const [isOnGoing, setIsOnGoing] = useState(true);
 
@@ -17,7 +17,7 @@ export const DateInterval = ({ children }: { children: FilterElement[] }) => {
     <Row>
       <Space size='middle'>
         {getElem(children[0])}
-        {getElem({ ...children[1], disabled: isOnGoing, placeHolder: isOnGoing ? 'End date not required' : 'Select date' })}
+        {getElem({ ...children[1], disabled: isOnGoing, placeholder: isOnGoing ? 'End date not required' : 'Select date' })}
       </Space>
     </Row>
   </Space>

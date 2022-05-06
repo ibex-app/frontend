@@ -1,33 +1,35 @@
 import { Rule } from "antd/lib/form";
 import { string } from "fp-ts";
 
-// export interface FormElementItem {
-//   id: number | string;
-//   component: string;  // 'input' | 'typeahead';
-//   type: string; // 'text' | 'password' | 'input'
-//   name: string;
-//   label: string;
-//   value: any; // string | number | any[]
-//   typeahead?: any[];
-//   onChange?: (event: FormEvent<HTMLFormElement>) => void;
-// };
-
-export interface FilterElement {
+interface FormCommon {
   id: number,
   type: string;
-  label: string;
   title?: string;
-  value: any;
-  values: any[];
+  children?: FormElement[];
+  value?: any;
+  required?: boolean;
+  rules?: Rule[];
   tip?: string;
-  allowNew?: boolean;
-  placeHolder?: string;
-  onChange?: (event: FormEvent<HTMLFormElement>) => void;
-  children?: FilterElement[],
-  rules?: Rule[],
-  disabled?: boolean,
-  checked?: boolean
+  disabled?: boolean;
+  placeholder?: string;
 }
+
+interface FormItemGroup {
+  label: string;
+  children: FormElement[];
+}
+
+interface Checkbox {
+  checked: boolean
+}
+
+interface Tag {
+  allowNew?: boolean,
+  list: string[]
+}
+
+export type FormElement =
+  FormCommon & (Checkbox & Tag & FormItemGroup);
 
 export interface FilterElementInput {
   data: FilterElement,

@@ -214,6 +214,10 @@ button {
   margin-left: auto;
 }
 
+.block {
+  display: block !important;
+}
+
 .row {
   display: -webkit-box;
   display: -webkit-flex;

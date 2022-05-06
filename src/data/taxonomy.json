@@ -47,7 +47,8 @@
               "title": "Input Keywords",
               "type": "tag",
               "tip": "You may use boolean operators (AND, OR, NOT) to refine your search. See how this works in action",
-              "values": []
+              "list": [],
+              "allowNew": true
             },
             {
               "id": "search_terms_upload",
@@ -123,8 +124,7 @@
               "id": "accounts",
               "title": "Input Accounts",
               "type": "tag",
-              "value": [],
-              "values": [],
+              "list": [],
               "tip": "Start typing the account name, and select ones you want to search."
             },
             {
@@ -142,7 +142,7 @@
           "required": true,
           "value": [],
           "allowNew": false,
-          "values": [
+          "list": [
             "Armenian",
             "Georgian",
             "Azerbaijani",

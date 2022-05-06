@@ -1,4 +1,4 @@
-import { FilterElement } from '../../types/form';
+import { FormElement } from '../../types/form';
 import { useEffect, useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
@@ -11,21 +11,6 @@ import './Taxonomy.css';
 export function TaxonomyParams() {
   const [keywordTag, setKeywordTag] = useState('input')
   const [accountTag, setAccountTag] = useState('upload')
-
-
-
-  const el: FilterElement = {
-    // "id": "dataSource",
-    "id": 33,
-    "type": "tag",
-    "label": "Data source",
-    "value": [],
-    "values": []
-  }
-  // el.values.push({
-  //   "id": 1,
-  //   "label": "RadioPirveli"
-  // })
 
   return (
     <div className="tax-full">

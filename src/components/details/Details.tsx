@@ -8,7 +8,7 @@ import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-i
 // import { } from "@fortawesome/free-brands-svg-icons"
 import { match } from 'ts-pattern';
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
-import { FilterElement } from "../../types/form";
+import { FormElement } from "../../types/form";
 import './details.css';
 
 export function Details() {
@@ -19,31 +19,6 @@ export function Details() {
     autoplay: 0,
     second: 0
   });
-
-  const tags: FilterElement = {
-    "id": 0,
-    "label": "Tags",
-    "type": "tag",
-    "value": [],
-    "values": [
-      {
-        "id": "fb",
-        "label": "Pro-Russian"
-      },
-      {
-        "id": "tw",
-        "label": "China"
-      },
-      {
-        "id": "yt",
-        "label": "Chemical Weapon"
-      },
-      {
-        "id": "gtv",
-        "label": "Anti-war Protest"
-      }
-    ]
-  }
 
   const toTime = (second: number) => {
     let min = Math.floor(second / 60)

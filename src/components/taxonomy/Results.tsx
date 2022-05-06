@@ -1,6 +1,6 @@
 import * as E from "fp-ts/lib/Either";
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { FilterElement } from '../../types/form';
+import { FormElement } from '../../types/form';
 import { useContext, useEffect, useState } from 'react';
 import { Table } from '../table/Table';
 import moment from "moment";
@@ -15,10 +15,7 @@ import { useGlobalState } from '../../app/store';
 import { Get, Response } from '../../shared/Http';
 import { getFilters } from '../../shared/Utils';
 
-export function TaxonomyResults() {
-    // const [keywordTag, setKeywordTag] = useState('input')
-    // const [accountTag, setAccountTag] = useState('input')
-    // const { form, update } = useContext(TaxonomyContext);
+export function TaxonomyResults({ form }: any) {
     const [hitsCount, setHitsCount]: any = useState();
     const [monitor, setMonitor]: any = useState();
     const [existing, setExisting]: any = useState(false);
@@ -26,7 +23,7 @@ export function TaxonomyResults() {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [filters, setFilters]: any = useGlobalState('filters');
-    const { data }: { data: FilterElement[] } = require('../../data/filter.json')
+    const { data }: { data: FormElement[] } = require('../../data/filter.json')
 
 
     const finalize_form = (form: any) => {
@@ -96,17 +93,17 @@ export function TaxonomyResults() {
                 // update({ "id": "title" })(maybeData.monitor.title)
             });
         } else {
-            // if (!form || monitor) return
-            // if (isObjectEmpty(form)) navigate('../init');
-            // const finalForm: any = finalize_form(form)
-            // estimateTime(finalForm)
-            // const createMonitor = Get('create_monitor', finalForm);
+            if (!form || monitor) return
+            if (isObjectEmpty(form)) navigate('../init');
+            const finalForm: any = finalize_form(form)
+            estimateTime(finalForm)
+            const createMonitor = Get('create_monitor', finalForm);
 
-            // createMonitor.then((_data: Response<any>) => {
-            //     let _monitor: any = E.getOrElse(() => [])(_data);
-            //     setSearchParams({ 'monitor_id': _monitor._id })
-            //     setMonitor(_monitor)
-            // });
+            createMonitor.then((_data: Response<any>) => {
+                let _monitor: any = E.getOrElse(() => [])(_data);
+                setSearchParams({ 'monitor_id': _monitor._id })
+                setMonitor(_monitor)
+            });
         }
     }, [])
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FilterElement } from '../../types/form';
+import { FormElement } from '../../types/form';
 import { setGlobalState, useGlobalState } from '../../app/store';
 import { reduce } from 'fp-ts/lib/Array';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,7 +10,7 @@ import { addParamsToUrl, getParamsAsObject, getFilters } from '../../shared/Util
 import { getElem } from '../../antd/utils/ElementGetter';
 
 export function Filter() {
-  const { data }: { data: FilterElement[] } = require('../../data/filter.json')
+  const { data }: { data: FormElement[] } = require('../../data/filter.json')
 
   const [filters, setFilters] = useGlobalState('filters');
 

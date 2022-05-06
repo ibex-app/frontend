@@ -1,8 +1,8 @@
 import { getElem } from './utils/ElementGetter';
 import { useState } from 'react';
-import { FilterElement } from '../types/form';
+import { FormElement } from '../types/form';
 
-export function Uploader({ element }: { element: FilterElement }) {
+export function Uploader({ element }: { element: FormElement }) {
     const [show, setShow] = useState(false);
     const { children, label, tip } = element;
 

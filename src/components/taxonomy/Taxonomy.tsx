@@ -18,7 +18,7 @@ export function Taxonomy() {
       {data.map((item, i) => <Route key={`${item.id}_${i}`} path={item.path} element={
         <FormComponent store={setForm} formData={item} formValues={form} />
       } />)}
-      <Route path="/results" element={<TaxonomyResults />}></Route>
+      <Route path="/results" element={<TaxonomyResults form={form} />}></Route>
     </Routes>
   )
 }

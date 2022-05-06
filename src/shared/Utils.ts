@@ -1,12 +1,12 @@
 import { reduce } from "fp-ts/lib/Array";
-import { FilterElement } from '../types/form';
+import { FormElement } from '../types/form';
 
 const parse = (val: string) => {
   try { return JSON.parse(val) }
   catch (e) { return val }
 }
 
-export const getFilters = (data: FilterElement[]): Object => {
+export const getFilters = (data: FormElement[]): Object => {
   const paramsFromUrl = getParamsAsObject();
   ['platform', 'author_platform_id', 'topics', 'persons', 'locations'].forEach((filterName: string) => {
     const curFilter: any = paramsFromUrl[filterName]
@@ -16,7 +16,7 @@ export const getFilters = (data: FilterElement[]): Object => {
     }
   })
 
-  const defaultFilters = reduce({}, (acc: any, cur: FilterElement) => (
+  const defaultFilters = reduce({}, (acc: any, cur: FormElement) => (
     acc[cur.id] ? acc : { ...acc, [cur.id]: cur.value }
   ))(data);
 
@@ -64,9 +64,9 @@ export const tagItemsToArray = (tagItems: { label: string }[]): string[] =>
   tagItems.map(({ label }) => label)
 
 export const formatDate = (date: string) => {
-  console.log(date, date.indexOf('T00:00:00.000Z') == -1,   ('T00:00:00+00:00'))
+  console.log(date, date.indexOf('T00:00:00.000Z') == -1, ('T00:00:00+00:00'))
 
-  date += date.indexOf('T00:00:00.000Z') == -1 && date.indexOf('T00:00:00')  == -1 ? 'T00:00:00+00:00' : ''
+  date += date.indexOf('T00:00:00.000Z') == -1 && date.indexOf('T00:00:00') == -1 ? 'T00:00:00+00:00' : ''
 
   return date
 }
