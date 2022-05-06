@@ -1,4 +1,3 @@
-import { Tag } from '../form/inputs/Tag';
 import { FilterElement } from '../../types/form';
 import { useEffect, useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

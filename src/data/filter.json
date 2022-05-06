@@ -47571,7 +47571,7 @@
       "id": "hasVideo",
       "type": "checkbox",
       "label": "Has video",
-      "value": false
+      "checked": false
     }
   ]
 }

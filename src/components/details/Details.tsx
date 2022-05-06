@@ -8,7 +8,6 @@ import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-i
 // import { } from "@fortawesome/free-brands-svg-icons"
 import { match } from 'ts-pattern';
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
-import { Tag } from "../form/inputs/Tag";
 import { FilterElement } from "../../types/form";
 import './details.css';
 
@@ -118,7 +117,7 @@ export function Details() {
                       }
 
                     </div>
-                    <Tag data={tags} onChange={() => console.log("TODO JANEZ")} />
+                    {/* <Tag data={tags} onChange={() => console.log("TODO JANEZ")} /> */}
 
                     <div className="table--extra-row"><i className="icn icn--type-video"></i>
                       <div className="table--item-tags">

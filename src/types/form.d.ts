@@ -25,7 +25,8 @@ export interface FilterElement {
   onChange?: (event: FormEvent<HTMLFormElement>) => void;
   children?: FilterElement[],
   rules?: Rule[],
-  disabled?: boolean
+  disabled?: boolean,
+  checked?: boolean
 }
 
 export interface FilterElementInput {

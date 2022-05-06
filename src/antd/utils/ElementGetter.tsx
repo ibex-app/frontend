@@ -3,10 +3,10 @@ import FormItem from "antd/lib/form/FormItem";
 import TextArea from "antd/lib/input/TextArea";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { match } from "ts-pattern";
-import FileUpload from "../../components/form/inputs/FileUpload";
+import FileUpload from "../FileUpload";
 import { FilterElement } from "../../types/form";
 import "antd/es/date-picker/style/css";
-import { DateInterval } from "../../components/form/inputs/DateInterval";
+import { DateInterval } from "../DateInterval";
 import { Uploader } from "../Uploader";
 
 export const getElem = (element: FilterElement): any => {
@@ -19,6 +19,7 @@ export const getElem = (element: FilterElement): any => {
       .with("tag", () => <Typeahead multiple options={values} />)
       .with("text", () => <Input />)
       .with("textbox", () => <TextArea />)
+      .with("checkbox", () => <Checkbox />)
       .with("checkbox-group", () =>
         <Checkbox.Group>
           {children!.map(({ id, label }) => <Checkbox value={id}>{label}</Checkbox>)}

@@ -3,8 +3,8 @@ import { useState } from 'react';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DatePicker, Row, Space } from 'antd';
-import { FilterElement } from '../../../types/form';
-import { getElem } from '../../../antd/utils/ElementGetter';
+import { FilterElement } from '../types/form';
+import { getElem } from './utils/ElementGetter';
 
 export const DateInterval = ({ children }: { children: FilterElement[] }) => {
 

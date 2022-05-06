@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 import moment from "moment";
 import { addParamsToUrl, getParamsAsObject, getFilters } from '../../shared/Utils';
-import { getElem } from '../form/Form';
+import { getElem } from '../../antd/utils/ElementGetter';
 
 export function Filter() {
   const { data }: { data: FilterElement[] } = require('../../data/filter.json')
@@ -34,7 +34,7 @@ export function Filter() {
                     <div className="col-2" key={el.id}>
                       <p className="font--xs font--gray-3 mb-5">{el.label}</p>
                       <div className="form__item">
-                        {getElem(el, onChange(el))}
+                        {getElem(el)}
                       </div>
                     </div>
                   ))}

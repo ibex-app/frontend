@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <Row>
+    <Row style={{ height: "100vh" }}>
       <HelmetProvider>
         <Helmet>
           <title>{"ibex"}</title>

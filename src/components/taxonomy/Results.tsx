@@ -1,10 +1,8 @@
 import * as E from "fp-ts/lib/Either";
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Tag } from '../form/inputs/Tag';
 import { FilterElement } from '../../types/form';
 import { useContext, useEffect, useState } from 'react';
 import { Table } from '../table/Table';
-import { TaxonomyContext } from './Context';
 import moment from "moment";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,11 +18,11 @@ import { getFilters } from '../../shared/Utils';
 export function TaxonomyResults() {
     // const [keywordTag, setKeywordTag] = useState('input')
     // const [accountTag, setAccountTag] = useState('input')
-    const { form, update } = useContext(TaxonomyContext);
-    const [ hitsCount, setHitsCount ]: any = useState();
-    const [ monitor, setMonitor ]: any = useState();
-    const [ existing, setExisting ]: any = useState(false);
-    const [ timeLeft, setTimeLeft ]: any = useState(null);
+    // const { form, update } = useContext(TaxonomyContext);
+    const [hitsCount, setHitsCount]: any = useState();
+    const [monitor, setMonitor]: any = useState();
+    const [existing, setExisting]: any = useState(false);
+    const [timeLeft, setTimeLeft]: any = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [filters, setFilters]: any = useGlobalState('filters');
@@ -34,9 +32,9 @@ export function TaxonomyResults() {
     const finalize_form = (form: any) => {
         form.accounts = form.accounts || []
         form.search_terms = form.search_terms || []
-        form.search_terms = form.search_terms.map((search_term:any) => search_term.customOption ? search_term.label : search_term)
-        
-        form.accounts = form.accounts.map((account:any) => ({
+        form.search_terms = form.search_terms.map((search_term: any) => search_term.customOption ? search_term.label : search_term)
+
+        form.accounts = form.accounts.map((account: any) => ({
             platform: account.platform,
             platform_id: account.platform_id,
             title: account.title
@@ -44,7 +42,7 @@ export function TaxonomyResults() {
 
         const data = {
             ...form,
-            accounts: form.accounts.map((account:any) => ({
+            accounts: form.accounts.map((account: any) => ({
                 platform: account.platform,
                 platform_id: account.platform_id,
                 title: account.title
@@ -57,75 +55,75 @@ export function TaxonomyResults() {
     }
 
     const estimateTime = (form: any) => {
-        const timeLeft = (form.search_terms.length || 1 )* 8 * form.platforms.length
+        const timeLeft = (form.search_terms.length || 1) * 8 * form.platforms.length
         console.log('estimateTime', timeLeft)
         setTimeLeft(timeLeft)
         return timeLeft
     }
-    
+
     useEffect(() => {
-        if(timeLeft===0){
-           console.log("TIME LEFT IS 0");
-           setTimeLeft(null)
+        if (timeLeft === 0) {
+            console.log("TIME LEFT IS 0");
+            setTimeLeft(null)
         }
-    
+
         // exit early when we reach 0
         if (!timeLeft) return;
-    
+
         // save intervalId to clear the interval when the
         // component re-renders
         const intervalId = setInterval(() => {
-    
-          setTimeLeft(timeLeft - 1);
+
+            setTimeLeft(timeLeft - 1);
         }, 1000);
-    
+
         // clear interval on re-render to avoid memory leaks
         return () => clearInterval(intervalId);
         // add timeLeft as a dependency to re-rerun the effect
         // when we update it
-      }, [timeLeft]);
+    }, [timeLeft]);
 
     useEffect(() => {
         setFilters({})
-        let urlFilters:any = getFilters(data)
-        if(urlFilters.monitor_id){
+        let urlFilters: any = getFilters(data)
+        if (urlFilters.monitor_id) {
             setExisting(true)
             const fetchData = Get('get_monitor', { id: urlFilters.monitor_id });
             fetchData.then((_data: Response<any>) => {
                 let maybeData: any = E.getOrElse(() => [])(_data)
                 if (!maybeData) return
                 setMonitor(maybeData.monitor)
-                update({"id": "title"})(maybeData.monitor.title)
+                // update({ "id": "title" })(maybeData.monitor.title)
             });
         } else {
-            if (!form || monitor) return
-            if (isObjectEmpty(form)) navigate('../init');
-            const finalForm:any = finalize_form(form)
-            estimateTime(finalForm)
-            const createMonitor = Get('create_monitor', finalForm);
+            // if (!form || monitor) return
+            // if (isObjectEmpty(form)) navigate('../init');
+            // const finalForm: any = finalize_form(form)
+            // estimateTime(finalForm)
+            // const createMonitor = Get('create_monitor', finalForm);
 
-            createMonitor.then((_data: Response<any>) => {
-                let _monitor: any = E.getOrElse(() => [])(_data);
-                setSearchParams({'monitor_id': _monitor._id}) 
-                setMonitor(_monitor)
-            }); 
+            // createMonitor.then((_data: Response<any>) => {
+            //     let _monitor: any = E.getOrElse(() => [])(_data);
+            //     setSearchParams({ 'monitor_id': _monitor._id })
+            //     setMonitor(_monitor)
+            // });
         }
     }, [])
 
     const timeOut = (time: number) => new Promise((resolve, reject) => {
         setTimeout(() => resolve(true), time)
     })
-    
+
     useEffect(() => {
         console.log(timeLeft)
     }, [timeLeft])
-    
+
     useEffect(() => {
-        if(!monitor) return;
+        if (!monitor) return;
         const collectSample = !existing ? Get('collect_sample', { id: monitor._id }) : new Promise((resolve, reject) => resolve(true))
-        
+
         const _timeLeft: number = !existing ? timeLeft : 0
-        
+
         setTimeLeft(_timeLeft)
 
         collectSample
@@ -145,14 +143,14 @@ export function TaxonomyResults() {
     }, [monitor])
 
     const formatNum = (num: number): string => {
-        if(num < 10000) return num.toLocaleString()
-        return Math.floor(num/1000).toLocaleString() + 'K'
+        if (num < 10000) return num.toLocaleString()
+        return Math.floor(num / 1000).toLocaleString() + 'K'
     }
 
     return (
         <div className='results-full'>
             <div className="leftbox">
-                <div className="leftbox-title"> <span>{form.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
+                {/* <div className="leftbox-title"> <span>{form.title}</span> <FontAwesomeIcon icon={faSliders} /></div> */}
                 <div className="leftbox-title leftbox-title-blue"> Taxonomy editor </div>
                 <div className="leftbox-inner">
                     <input type="text" className="tax-search"></input>
@@ -169,28 +167,28 @@ export function TaxonomyResults() {
                             </tr>
                         </thead>
                         <tbody>
-                                {
-                                    hitsCount 
-                                        ? 
-                                            
-                                            Object.keys(hitsCount).map((hitsCountTerm: any) => {
-                                                return <tr>
-                                                    <td><input type="checkbox" ></input></td>
-                                                    <td>{hitsCountTerm}</td>
-                                                    { hitsCount[hitsCountTerm].facebook ? <td> {formatNum(hitsCount[hitsCountTerm].facebook) || 0}</td> : <td></td> }
-                                                    { hitsCount[hitsCountTerm].twitter ? <td> {formatNum(hitsCount[hitsCountTerm].twitter) || 0}</td> : <td></td> } 
-                                                    { hitsCount[hitsCountTerm].youtube ? <td> {formatNum(hitsCount[hitsCountTerm].youtube) || 0}</td> : <td></td> } 
-                                                    {/* { hitsCount[hitsCountTerm].telegram ? <td> {hitsCount[hitsCountTerm].telegram.toLocaleString() || 0}</td> : <td></td> }      */}
-                                                </tr>
-                                            
-                                        }) 
-                                    
-                                        : <td></td>
-                                } 
+                            {
+                                hitsCount
+                                    ?
+
+                                    Object.keys(hitsCount).map((hitsCountTerm: any) => {
+                                        return <tr>
+                                            <td><input type="checkbox" ></input></td>
+                                            <td>{hitsCountTerm}</td>
+                                            {hitsCount[hitsCountTerm].facebook ? <td> {formatNum(hitsCount[hitsCountTerm].facebook) || 0}</td> : <td></td>}
+                                            {hitsCount[hitsCountTerm].twitter ? <td> {formatNum(hitsCount[hitsCountTerm].twitter) || 0}</td> : <td></td>}
+                                            {hitsCount[hitsCountTerm].youtube ? <td> {formatNum(hitsCount[hitsCountTerm].youtube) || 0}</td> : <td></td>}
+                                            {/* { hitsCount[hitsCountTerm].telegram ? <td> {hitsCount[hitsCountTerm].telegram.toLocaleString() || 0}</td> : <td></td> }      */}
+                                        </tr>
+
+                                    })
+
+                                    : <td></td>
+                            }
                         </tbody>
                     </table>
-                    
-                    
+
+
                 </div>
 
                 <div className="leftbox-inner leftbox-inner-recomm">
@@ -199,7 +197,7 @@ export function TaxonomyResults() {
                 {/* <button className='left-m-5'>Get Semple</button> */}
                 {/* <button >Run</button> */}
 
-            </div> 
+            </div>
             <div className='tax-right-block'>
                 {/* <div className='hits-count'>
                     {
@@ -213,10 +211,10 @@ export function TaxonomyResults() {
                             </div> : ''
                     }
                 </div> */}
-                { timeLeft > 0 ? <div className='hits-count'> Please wait {timeLeft} seconds...</div> : <Table/> }
+                {timeLeft > 0 ? <div className='hits-count'> Please wait {timeLeft} seconds...</div> : <Table />}
             </div>
             {/* <Table mapFilter={false} /> */}
-            
+
         </div>
     );
 }

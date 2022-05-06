@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { FormComponent } from "../../antd/Form";
 import { TaxonomyResults } from "./Results";
-import { TaxonomyForm } from "./TaxonomyForm";
 export const { data }: { data: any[] } = require('../../data/taxonomy.json');
 
 export function Taxonomy() {
