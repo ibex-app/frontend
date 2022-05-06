@@ -1,10 +1,8 @@
-import { el } from 'date-fns/locale';
-import { useContext, useState, useEffect } from 'react';
+import { pipe } from 'fp-ts/lib/function';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getElem } from '../form/Form';
 import { TaxonomyContext } from './Context';
-import { SearchTerms } from './SearchTerms';
-import { Accounts } from './Accounts';
 
 import './Taxonomy.css';
 
@@ -12,7 +10,7 @@ export function TaxonomyForm({ formData }: any) {
   const { form, update } = useContext(TaxonomyContext);
   const { title, data, redirect } = formData;
 
-  // useEffect(() => console.log(form), [form]);
+  useEffect(() => console.log(form), [form]);
 
   return (
     <div className="tax-full">
@@ -22,15 +20,11 @@ export function TaxonomyForm({ formData }: any) {
       <div className="tax-mid">
 
         {data.map((el: any) => (
-          el.id == 'search_terms'
-            ? <SearchTerms key={el.id} formData={el}></SearchTerms>
-              : el.id == 'accounts'
-                ? <Accounts key={el.id} formData={el}></Accounts>
-                : <div key={el.id}>
-                    <div className="tax-label">{el.title} {el.required ? <span>*</span> : ''}</div>
-                    {getElem(el, update(el))}
-                    <div className="tax-line"></div>
-                  </div>
+          <div key={el.id}>
+            <div className="tax-label">{el.title} {el.required ? <span>*</span> : ''}</div>
+            {getElem(el, update)}
+            <div className="tax-line"></div>
+          </div>
         ))}
         <Link to={redirect}>
           <button>Next</button>

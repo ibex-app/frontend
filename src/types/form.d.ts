@@ -1,3 +1,4 @@
+import { Rule } from "antd/lib/form";
 import { string } from "fp-ts";
 
 // export interface FormElementItem {
@@ -15,12 +16,16 @@ export interface FilterElement {
   id: number,
   type: string;
   label: string;
+  title?: string;
   value: any;
   values: any[];
   tip?: string;
-  required?: boolean;
   allowNew?: boolean;
+  placeHolder?: string;
   onChange?: (event: FormEvent<HTMLFormElement>) => void;
+  children?: FilterElement[],
+  rules?: Rule[],
+  disabled?: boolean
 }
 
 export interface FilterElementInput {

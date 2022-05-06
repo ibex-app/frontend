@@ -1,5 +1,4 @@
-
-.file-upload-wrapper{
+.file-upload-wrapper {
     background: #f4f4f5;
     padding: 30px;
     margin-bottom: 18px;
@@ -7,12 +6,13 @@
     box-shadow: 0 1px 1px 2px #dfdedeb5;
 }
 
-.file-upload-title{
+.file-upload-title {
     width: 100%;
     text-align: center;
     margin-bottom: 23px;
 }
-.file-upload-template{
+
+.file-upload-template {
     width: 100%;
     text-align: center;
     margin-bottom: 30px;

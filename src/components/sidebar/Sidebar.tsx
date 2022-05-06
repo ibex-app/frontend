@@ -4,6 +4,7 @@ import { Get, Response } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalState, setGlobalState } from '../../app/store';
+import { Col } from 'antd';
 
 export function Sidebar() {
   const [data, setData]: any = useState([]);
@@ -15,7 +16,7 @@ export function Sidebar() {
   const navigate = useNavigate();
 
   const routeChange = (monitorId: string) => {
-    setGlobalState('filters', {...filters, 'monitor_id': monitorId});
+    setGlobalState('filters', { ...filters, 'monitor_id': monitorId });
     navigate(`/results?monitor_id=${monitorId}`);
   }
 
@@ -24,18 +25,18 @@ export function Sidebar() {
 
     fetchData.then((_data: Response<any>) => {
       let maybeData = E.getOrElse(() => [])(_data)
-      if (!maybeData  || !maybeData.forEach) return
+      if (!maybeData || !maybeData.forEach) return
       maybeData.forEach((k: any) => k.key = k._id)
       setData(maybeData)
       setFetching(false)
     });
   }, [])
-  
+
   const logout = () => {
     setUser({})
   }
   return (
-    <aside className="sidebar">
+    <Col span={3} className="sidebar">
       <div className="logo">
         <h1></h1>
       </div>
@@ -72,14 +73,14 @@ export function Sidebar() {
       <nav className="main-nav bottom">
         <ul>
           <li> {
-            Object.keys(user).length  ? <a onClick={logout} >Log out</a> : <Link to="/login" >Log in</Link>
-            }
-            </li>
+            Object.keys(user).length ? <a onClick={logout} >Log out</a> : <Link to="/login" >Log in</Link>
+          }
+          </li>
         </ul>
       </nav>
       {/* <button className="btn btn--show-hide"><span>Hide sidebar</span><i className="icn icn--double-chevron-up"></i>
       </button> */}
-    </aside>
+    </Col>
   );
 }
 

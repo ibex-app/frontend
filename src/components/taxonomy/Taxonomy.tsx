@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { data, initForm, TaxonomyContext } from "./Context";
+import { FormComponent } from "../../antd/Form";
 import { TaxonomyResults } from "./Results";
 import { TaxonomyForm } from "./TaxonomyForm";
+export const { data }: { data: any[] } = require('../../data/taxonomy.json');
 
 export function Taxonomy() {
-  const update = (el: any) => (value: any) => {
-    el.value = value;
 
-    setState(typeof value == 'object' && !value.length
-      ? { ...form, ...value }
-      : { ...form, [el.id]: value });
+  const [form, setForm] = useState({});
 
-    return null;
-  }
-
-  const [form, setState] = useState(initForm);
+  useEffect(() => {
+    console.log(form);
+  }, [form]);
 
   return (
-    <TaxonomyContext.Provider value={{ form, update }}>
-      <Routes>
-        <Route path="/" element={<Navigate to="/taxonomy/init" />}></Route>
-        {data.map((item, i) => <Route key={`${item.id}_${i}`} path={item.path} element={
-          <TaxonomyForm formData={item} />
-        } />)}
-        <Route path="/results" element={<TaxonomyResults />}></Route>
-      </Routes>
-    </TaxonomyContext.Provider>
+    <Routes>
+      <Route path="/" element={<Navigate to="/taxonomy/init" />}></Route>
+      {data.map((item, i) => <Route key={`${item.id}_${i}`} path={item.path} element={
+        <FormComponent store={setForm} formData={item} formValues={form} />
+      } />)}
+      <Route path="/results" element={<TaxonomyResults />}></Route>
+    </Routes>
   )
 }

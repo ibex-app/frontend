@@ -1,41 +1,53 @@
 {
   "data": [
     {
+      "id": "form1",
       "title": "Data Collection",
       "path": "init",
       "redirect": "../params",
-      "data": [
+      "children": [
         {
           "id": "title",
           "title": "What is the name of the report?",
           "value": "",
           "type": "text",
-          "required": true
+          "rules": [
+            {
+              "required": true
+            }
+          ]
         },
         {
           "id": "descr",
           "title": "What is the report about?",
           "value": "",
           "type": "textbox",
-          "required": true
+          "rules": [
+            {
+              "required": true
+            }
+          ]
         }
       ]
     },
     {
+      "id": "form2",
       "title": "Data Collection",
       "path": "params",
       "redirect": "../results",
-      "data": [
+      "children": [
         {
           "id": "search_terms",
-          "data": [
+          "type": "uploader",
+          "label": "Keywords",
+          "tip": "Do you have specific keywords you would like to collect posts with?",
+          "children": [
             {
               "id": "search_terms",
               "title": "Input Keywords",
               "type": "tag",
-              "value": [],
-              "values": [],
-              "tip": "You may use boolean operators (AND, OR, NOT) to refine your search. See how this works in action"
+              "tip": "You may use boolean operators (AND, OR, NOT) to refine your search. See how this works in action",
+              "values": []
             },
             {
               "id": "search_terms_upload",
@@ -50,27 +62,63 @@
           "title": "Date Range",
           "required": true,
           "type": "date_interval",
-          "value": "",
-          "tip": "On-going monitor would add newly created posts to the report in real-time"
+          "tip": "On-going monitor would add newly created posts to the report in real-time",
+          "children": [
+            {
+              "id": "date_start",
+              "type": "date"
+            },
+            {
+              "id": "date_end",
+              "type": "date"
+            }
+          ]
         },
         {
           "id": "platforms",
           "title": "Platforms",
-          "type": "tag",
+          "type": "checkbox-group",
           "required": true,
-          "value": [],
-          "values": [
-            "twitter",
-            "facebook",
-            "youtube",
-            "telegram",
-            "vkontakte"
+          "children": [
+            {
+              "id": "twitter",
+              "type": "checkbox",
+              "label": "Twitter",
+              "value": false
+            },
+            {
+              "id": "facebook",
+              "type": "checkbox",
+              "label": "Facebook",
+              "value": false
+            },
+            {
+              "id": "youtube",
+              "type": "checkbox",
+              "label": "YouTube",
+              "value": false
+            },
+            {
+              "id": "telegram",
+              "type": "checkbox",
+              "label": "Telegram",
+              "value": false
+            },
+            {
+              "id": "vkontakte",
+              "type": "checkbox",
+              "label": "VKontakte",
+              "value": false
+            }
           ],
           "tip": "Your data will be collected from the platform(s) you've selected."
         },
         {
           "id": "accounts",
-          "data": [
+          "type": "uploader",
+          "label": "Accounts",
+          "tip": "Do you have specific accounts you would like to collect posts with?",
+          "children": [
             {
               "id": "accounts",
               "title": "Input Accounts",

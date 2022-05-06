@@ -16,18 +16,26 @@ export const getElem = (el: FilterElement, onChange: any) => {
     el.value = moment().format("YYYY-MM-DD")
   }
 
-  const component = match(el.type)
-    .with("date_interval", () => <DateInterval data={el} onChange={onChange} />)
+  const getComponent = (el: FilterElement): any => match(el.type)
+    .with("list", () => el.children!.map((elem) => {
+      return (<span>
+        {getComponent(elem)} {elem.label}
+      </span>)
+    }))
+    // .with("date_interval", () => <DateInterval data={el} onChange={onChange} />)
     .with("tag", () => <Tag data={el} onChange={onChange} />)
     .with("date", () => <Date data={el} onChange={onChange} />)
     .with("text", () => <Text data={el} onChange={onChange} />)
     .with("textbox", () => <TextBox data={el} onChange={onChange} />)
-    .with("checkbox", () => <Checkbox data={el} onChange={onChange} />)
-    .with("file_upload", () => <FileUpload  data={el} onChange={onChange} />)
+    .with("checkbox", () => <Checkbox data={el} onChange={(val) => onChange(el)(val)} />)
+    // .with("file_upload", () => <FileUpload data={el} onChange={onChange} />)
+    // .with("search_terms", () => <SearchTerms formData={el} />)
     .otherwise(() => {
       console.error(`Invalid component name ${el.type}`);
       return <></>
     })
+
+  const component = getComponent(el);
 
   return el.tip
     ? <>{component}

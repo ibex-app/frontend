@@ -1,27 +1,32 @@
-.leftbox{
+.leftbox {
     width: 30%;
 }
 
-.leftbox > .leftbox-inner{
+.leftbox>.leftbox-inner {
     width: 90%;
-margin-left: 5%;
-border-radius: 20px;
-background-color: #fff;
-/* margin-top: 20px; */
-/* box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.14); */
-/* padding: 22px; */
-/* margin-top: 20px; */
-display: block;
-position: relative;
-cursor: pointer;
-border-radius: 13px;
-padding: 25px;
-border: 1px solid #ddd;
-/* width: 80%; */
-margin-left: 5%;
+    margin-left: 5%;
+    border-radius: 20px;
+    background-color: #fff;
+    /* margin-top: 20px; */
+    /* box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.14); */
+    /* padding: 22px; */
+    /* margin-top: 20px; */
+    display: block;
+    position: relative;
+    cursor: pointer;
+    border-radius: 13px;
+    padding: 25px;
+    border: 1px solid #ddd;
+    /* width: 80%; */
+    margin-left: 5%;
 }
 
-.tax-full input, .tax-full textarea, .leftbox input, .leftbox textarea, .leftbox .select-tags .rbt .rbt-input-wrapper, .disabled-input{
+.tax-full input,
+.tax-full textarea,
+.leftbox input,
+.leftbox textarea,
+.leftbox .select-tags .rbt .rbt-input-wrapper,
+.disabled-input {
     width: 100%;
     margin-bottom: 14px;
     background: #fff;
@@ -35,9 +40,10 @@ margin-left: 5%;
     box-shadow: inset 0 0 1px 1px #A5A7AB;
 }
 
-.tax-full textarea{
+.tax-full textarea {
     min-height: 90px;
 }
+
 .tab {
     font-size: 13px;
     display: inline-block;
@@ -50,12 +56,14 @@ margin-left: 5%;
     margin-bottom: 5px;
 }
 
-.leftbox h3{
+.leftbox h3 {
     margin-top: 30px;
     font-size: 18px;
 }
 
-.leftbox > button, .tax-full button, .round-btn-transp {
+.leftbox>button,
+.tax-full button,
+.round-btn-transp {
     background: #4670be;
     border: none;
     margin-top: 20px;
@@ -67,11 +75,12 @@ margin-left: 5%;
     margin-bottom: 40px;
 }
 
-.round-btn-transp.round-btn-transparent{
+.round-btn-transp.round-btn-transparent {
     background: none;
     color: gray;
 }
-.leftbox .sugg{
+
+.leftbox .sugg {
     font-size: 13px;
     margin-top: 11px;
 }
@@ -79,122 +88,129 @@ margin-left: 5%;
 .leftbox thead {
     color: gray;
     font-size: 13px;
-    
+
 }
 
-.leftbox thead td{ padding-bottom: 7px;}
+.leftbox thead td {
+    padding-bottom: 7px;
+}
 
 
-.tax-full{
+.tax-full {
     /* background: #e2e2e2; */
     overflow: auto;
     width: 100%;
 }
 
-.tax-title-line{
+.tax-title-line {
     width: 100%;
-height: 61px;
-background: #fff;
-border-bottom: 2px solid #d0d0d0;
+    height: 61px;
+    background: #fff;
+    border-bottom: 2px solid #d0d0d0;
 }
 
-.tax-mid{
+.tax-mid {
     width: 70%;
     margin: 0 auto;
     position: relative;
 }
 
-.tax-title-line > .tax-mid{
+.tax-title-line>.tax-mid {
     display: flex;
-    align-items:center;
+    align-items: center;
     height: 100%;
     font-size: 19px;
 }
 
-input[type="radio"], input[type="checkbox"]{
-    width:15px;
+input[type="radio"],
+input[type="checkbox"] {
+    width: 15px;
     min-height: 6px;
-    height:14px;
+    height: 14px;
     -webkit-appearance: radio;
     appearance: radio;
 }
 
-.tax-mid input[type="date"]{
+.tax-mid input[type="date"] {
     width: 48.5%;
     margin-right: 3%;
 }
 
-.tax-mid input[type="date"]:last-child{
+.tax-mid input[type="date"]:last-child {
     margin-right: 0;
 }
-.fa-facebook{
+
+.fa-facebook {
     color: #4064ac;
 }
 
-.fa-twitter{
+.fa-twitter {
     color: #1c9cea
 }
 
-.fa-youtube{
+.fa-youtube {
     color: #f70000
 }
 
-.fa-trash-can{
-    color:rgba(0, 0, 0, 0.14)
+.fa-trash-can {
+    color: rgba(0, 0, 0, 0.14)
 }
 
-.account{
+.account {
     width: 70%;
 }
 
-.account .fa-facebook, .account .fa-twitter, .account .fa-youtube {
+.account .fa-facebook,
+.account .fa-twitter,
+.account .fa-youtube {
     width: 18px
 }
 
-.account .fa-trash-can{
+.account .fa-trash-can {
     float: right
 }
 
-.upload-btn{
+.upload-btn {
     cursor: pointer
 }
 
-.left-m-5{
+.left-m-5 {
     margin-left: 5%;
 }
 
 
-.leftbox td:first-child{
+.leftbox td:first-child {
     /* width: 100%; */
 }
 
-.tax-label{
+.tax-label {
     color: #4670be;
-    padding-bottom: 10px;
-    padding-top: 40px;
 }
 
-.tax-label span{
+.tax-label span {
     color: red;
 }
+
 .tax-line {
     border-bottom: 1px solid #bcbcbc66;
 }
 
-.tax-tip{
+.tax-tip {
     background: #eef2f9;
     padding: 10px;
     margin: 16px 0;
     border-radius: 10px;
     padding-left: 15px;
 }
-.tax-tip svg{
+
+.tax-tip svg {
     margin-right: 15px;
 }
 
-.tax-tip svg *{
+.tax-tip svg * {
     fill: #eddd5e
 }
+
 /* checkbox{} */
 .tax-full .container {
     display: block;
@@ -205,49 +221,48 @@ input[type="radio"], input[type="checkbox"]{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
-  
-  /* Hide the browser's default checkbox */
-  .container input {
+}
+
+/* Hide the browser's default checkbox */
+.container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
+}
+
+/* Create a custom checkbox */
+.checkmark {
     display: inline-block;
     position: relative;
     height: 25px;
     width: 45px;
     background-color: #eee;
-    transform: translateY(6px);
     margin-left: 8px;
     border-radius: 20px;
     transition: .2s
-  }
-  
-  /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input~.checkmark {
     /* background-color: #ccc; */
-  }
-  
+}
+
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
     content: "";
     position: absolute;
     /* display: none; */
-  }
+}
 
-  /* When the checkbox is checked, add a blue background */
-  .container .checked {
+/* When the checkbox is checked, add a blue background */
+.container .checked {
     background-color: #4670be;
-  }
-  
-  /* Style the checkmark/indicator */
-  .container .checkmark:after {
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
     left: 4px;
     top: 3px;
     width: 19px;
@@ -260,41 +275,42 @@ input[type="radio"], input[type="checkbox"]{
     justify-content: space-around;
     font-size: 19px;
     padding-top: 2px;
-  }
+}
 
-  /* Show the checkmark when checked */
-  .container .checked:after {
+/* Show the checkmark when checked */
+.container .checked:after {
     content: "┘";
     right: 4px;
     left: auto;
-    background: white; 
-  }
+    background: white;
+}
 
-  /* file upload */
- .tax-full  label[for="file"] {
+/* file upload */
+.tax-full label[for="file"] {
     min-width: 100%;
     height: 110px;
     border: dashed 2px #b9b9b9;
     background: white;
     border-radius: 10px;
     /* margin-bottom: 17px; */
-  }
+}
 
-  .tax-full  label[for="file"] svg{
+.tax-full label[for="file"] svg {
     display: none;
-  }
+}
 
-  .tax-full  label[for="file"]  > div > span:first-child{
+.tax-full label[for="file"]>div>span:first-child {
     width: 100%;
-    text-align: center; 
+    text-align: center;
     font-size: 16px;
     margin-top: -26px;
-  }
+}
 
-  .tax-full  label[for="file"]  > div > span:nth-child(2){
-      color: transparent;
-  }
-  .tax-full  label[for="file"]  > div > span:nth-child(2):after{
+.tax-full label[for="file"]>div>span:nth-child(2) {
+    color: transparent;
+}
+
+.tax-full label[for="file"]>div>span:nth-child(2):after {
     position: absolute;
     content: "Browse file";
     background: #4670be;
@@ -307,53 +323,53 @@ input[type="radio"], input[type="checkbox"]{
     text-align: center;
     font-size: 16px;
     left: calc(50% - 75px)
-  }
+}
 
-  .disabled-input{
+.disabled-input {
     width: 48%;
     display: inline-block;
     background: #e5e5e5ab;
-  }
-
-.tax-large-title{
-    font-size: 22px;
-    padding-top: 30px;
 }
 
-.tax-toggle-cont{
+.tax-large-title {
+    font-size: 22px;
+}
+
+.tax-toggle-cont {
     padding-left: 15px;
     border-left: 1.5px solid #c7c3c3;
     transition: .2s;
-    max-height:0;
+    max-height: 0;
     overflow: hidden;
 }
 
-.tax-toggle-cont.tax-toggle-cont-show{
-    max-height:2000px;
+.tax-toggle-cont.tax-toggle-cont-show {
+    max-height: 2000px;
 
 }
 
-.tax-toggle-cont div:first-child .tax-label{
+.tax-toggle-cont div:first-child .tax-label {
     padding-top: 10px;
 }
-.tax-toggle-cont .tax-line:last-child{
+
+.tax-toggle-cont .tax-line:last-child {
     /* display: none; */
 }
 
 
-.results-full{
+.results-full {
     width: 100%;
     display: flex;
 }
 
-.tax-right-block{
+.tax-right-block {
     width: 70%;
     display: flex;
     flex-flow: column;
     background: #f4f4f5;
 }
 
-.hits-count{
+.hits-count {
     height: 80px;
     border-bottom: 2px solid #d8d8d8;
     padding: 25px;
@@ -364,25 +380,26 @@ input[type="radio"], input[type="checkbox"]{
     margin-top: 20px;
 }
 
-.hits-count img, .hits-count svg{
+.hits-count img,
+.hits-count svg {
     height: 20px;
     margin-left: 20px;
 }
 
-.leftbox-title{
+.leftbox-title {
     width: 90%;
-margin-left: 5%;
-height: 60px;
-margin-bottom: 20px;
-display: flex;
-align-items: center;
-padding-left: 5%;
-font-size: 20px;
-color: #b1b1b1;
-border-bottom: 2px solid gainsboro;
-margin-top: 20px;
-font-weight: 500;
-justify-content: space-between;
+    margin-left: 5%;
+    height: 60px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+    font-size: 20px;
+    color: #b1b1b1;
+    border-bottom: 2px solid gainsboro;
+    margin-top: 20px;
+    font-weight: 500;
+    justify-content: space-between;
 }
 
 .leftbox-title svg {
@@ -390,54 +407,56 @@ justify-content: space-between;
     transform: rotate(-90deg);
 }
 
-.leftbox-title.leftbox-title-blue{
+.leftbox-title.leftbox-title-blue {
     color: #4670beba;
     border-bottom: none;
     margin-bottom: 0px;
 }
 
-.tax-keywords-table thead td{
+.tax-keywords-table thead td {
     border-bottom: 2px solid gainsboro;
     /* text-align: center; */
 }
 
 table {
-    table-layout:fixed;
+    table-layout: fixed;
     border-spacing: 0;
 }
 
-.tax-keywords-table td:nth-child(2){
+.tax-keywords-table td:nth-child(2) {
     width: 50%;
     text-align: left;
 }
-.tax-keywords-table td:nth-child(1){
+
+.tax-keywords-table td:nth-child(1) {
     width: 8%;
     text-align: left;
 }
-.tax-keywords-table td{
+
+.tax-keywords-table td {
     width: 12%;
-overflow: hidden;
-text-align: right;
-font-size: 17px;
-padding: 9px 10px;
+    overflow: hidden;
+    text-align: right;
+    font-size: 17px;
+    padding: 9px 10px;
 }
 
 
-.tax-keywords-table tbody td{
+.tax-keywords-table tbody td {
     border-bottom: 1px solid gainsboro;
 }
 
-.leftbox-inner.leftbox-inner-recomm{
+.leftbox-inner.leftbox-inner-recomm {
     margin-top: 30px;
     padding: 0 25px;
 }
 
-.leftbox-inner.leftbox-inner-recomm .leftbox-title{
+.leftbox-inner.leftbox-inner-recomm .leftbox-title {
     margin: 0;
     padding: 0;
     width: 100%;
 }
 
-.leftbox-inner.leftbox-inner-recomm .leftbox-title svg{
+.leftbox-inner.leftbox-inner-recomm .leftbox-title svg {
     transform: none;
 }
