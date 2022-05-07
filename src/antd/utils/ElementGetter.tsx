@@ -1,7 +1,6 @@
-import { Checkbox, DatePicker, Input, Select, Upload } from "antd";
+import { Checkbox, DatePicker, Input } from "antd";
 import FormItem from "antd/lib/form/FormItem";
 import TextArea from "antd/lib/input/TextArea";
-import { Typeahead } from "react-bootstrap-typeahead";
 import { match } from "ts-pattern";
 import FileUpload from "../FileUpload";
 import { FormElement } from "../../types/form";
@@ -10,15 +9,16 @@ import { DateInterval } from "../DateInterval";
 import { Uploader } from "../Uploader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { Tag } from "../Select/Select";
 
 export const getElem = (element: FormElement): any => {
-  const { type, id, rules, children, placeholder, disabled, title, tip, list } = element;
+  const { type, id, rules, children, placeholder, disabled, title, label, tip, list } = element;
 
-  return <FormItem label={title} rules={rules}>
+  return <FormItem label={title || label} rules={rules} style={{ marginBottom: "5px" }}>
     {match(type)
       .with("date_interval", () => children && <DateInterval children={children} />)
       .with("date", () => <DatePicker placeholder={placeholder} disabled={disabled} />)
-      .with("tag", () => <Typeahead id={id} multiple options={list} allowNew={element.allowNew} />)
+      .with("tag", () => <Tag el={element} />)
       .with("text", () => <Input />)
       .with("textbox", () => <TextArea />)
       .with("checkbox", () => <Checkbox />)

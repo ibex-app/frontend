@@ -17,7 +17,7 @@
       "type": "tag",
       "label": "Platform",
       "value": [],
-      "values": [
+      "list": [
         {
           "id": 0,
           "label": "facebook",
@@ -45,7 +45,7 @@
       "type": "tag",
       "label": "Data source",
       "value": [],
-      "values": [
+      "list": [
         {
           "__id": "50281cf2-a8af-4745-9dc6-3dc8650ee1cb",
           "label": "Altinfo News",
@@ -4644,7 +4644,7 @@
       "type": "tag",
       "label": "Topics",
       "value": [],
-      "values": [
+      "list": [
         {
           "id": 0,
           "label": "Anti west"
@@ -4676,7 +4676,7 @@
       "type": "tag",
       "label": "Persons",
       "value": [],
-      "values": [
+      "list": [
         {
           "_id": "9af1a169-30f9-49fc-a4ca-29da097baf47",
           "type": "person",
@@ -5878,7 +5878,7 @@
       "type": "tag",
       "label": "Locations",
       "value": [],
-      "values": [
+      "list": [
         {
           "_id": "6a490e80-f209-421b-81b8-9f7a473357f2",
           "type": "location",

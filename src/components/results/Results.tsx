@@ -9,12 +9,12 @@ import { GraphChart } from '../charts/graph/GraphChart';
 import { LineChart } from '../charts/line/LineChart';
 import { MapChart } from '../charts/map/MapChart';
 import { BubbleChart } from '../charts/bubble/BubbleChart';
+import { Space } from "antd";
 
 export function Results() {
   return (
-    <div className="main-dashboard">
+    <Space>
       <Filter />
-      {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Table />} />
         <Route path="bar" element={<BarChart />} />
@@ -23,6 +23,6 @@ export function Results() {
         <Route path="map" element={<MapChart />} />
         <Route path="bubble" element={<BubbleChart />} />
       </Routes>
-    </div>
+    </Space>
   );
 }

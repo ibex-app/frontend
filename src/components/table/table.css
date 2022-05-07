@@ -4,11 +4,11 @@
     font-size: 13px;
 }
 
-.table{
+.table {
     background-color: #f4f4f5;
 }
 
-.platform a{
+.platform a {
     font-size: 13px;
     color: gray;
 }
@@ -35,52 +35,51 @@
     margin-left: 5px;
 }
 
-.table--row{
+.table--row {
     line-height: 1.3em;
     flex-wrap: wrap;
 }
 
-.form__item.btn-small{
-    position: absolute;
-bottom: 0;
-right: 15px;
-padding: 8px;
-min-height: 38px;
-display: flex;
-align-items: center;
-background: #f2f2f2;
-border-radius: 8px;
-color: #727272;
-cursor: pointer;
+.form__item.btn-small {
+    margin: auto 15px 0 auto;
+    padding: 8px;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    background: #f2f2f2;
+    border-radius: 8px;
+    color: #727272;
+    cursor: pointer;
 }
 
-.round-btn-transp{
+.round-btn-transp {
     width: 210px;
-text-align: center;
-margin-bottom: 20px;
-margin: 10px auto 20px auto;
-background: none;
-color: #4670be;
-box-shadow: inset 0px 0px 1px 1px #4670be;
-cursor: pointer;
+    text-align: center;
+    margin-bottom: 20px;
+    margin: 10px auto 20px auto;
+    background: none;
+    color: #4670be;
+    box-shadow: inset 0px 0px 1px 1px #4670be;
+    cursor: pointer;
 }
 
-.round-btn-transp:hover{
+.round-btn-transp:hover {
     background: #4670be;
     color: #f2f2f2;
 }
 
-.button-tr{
+.button-tr {
     display: flex;
-width: 100%;
-justify-content: center;
-align-items: center;
-} 
-.button-tr .round-btn-transp{
-margin-left: 0px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
-.table--row .table--extra-row{
+.button-tr .round-btn-transp {
+    margin-left: 0px;
+}
+
+.table--row .table--extra-row {
     width: 100%;
     position: relative;
     bottom: 0px;
