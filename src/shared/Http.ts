@@ -8,7 +8,8 @@ export type Response<T> = E.Either<Error, T>;
 
 export const Get = async <T>(path: string, params: Object): Promise<Response<T>> => {
     const token = window.localStorage.getItem('jwt')
-
+    const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
+    
     const Logout = () => {
         window.localStorage.removeItem('jwt')
         if (window.location.href.indexOf('/login') === -1) {
@@ -20,7 +21,7 @@ export const Get = async <T>(path: string, params: Object): Promise<Response<T>>
 
     return pipe(
         TE.tryCatch(
-            () => fetch(`https://ibex-app.com/api/${path}`, {
+            () => fetch(`https://${subdomain}.ibex-app.com/api/${path}`, {
                 method: 'post',
                 headers: new Headers(token ? {
                     'Content-Type': 'application/json',
