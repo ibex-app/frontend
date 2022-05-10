@@ -13,7 +13,7 @@ export type PromiseResponse<T> = Promise<Response<T>>;
 
 export const Get: any = async (path: string, params: Object) => {
     // const [user, setUser] = useGlobalState('user');
-    
+    const subdomain = window.location.href.split('.ibex-app.com/login')[0].split('//')[1]
     const token = window.localStorage.getItem('jwt')
     let headers: any
     if(token){
@@ -37,7 +37,7 @@ export const Get: any = async (path: string, params: Object) => {
 
     return pipe(
         TE.tryCatch(
-            () => fetch(`https://ibex-app.com/api/${path}`, {
+            () => fetch(`https://${subdomain}.ibex-app.com/api/${path}`, {
                 method: 'post',
                 headers: headers,
                 body: JSON.stringify(params),
