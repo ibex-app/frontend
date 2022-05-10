@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { FormComponent } from "../../antd/Form";
 import { TaxonomyResults } from "./Results";
-export const { data }: { data: any[] } = require('../../data/taxonomy.json');
+export const { data }: { data: any[] } = require('../../data/taxonomy/taxonomy.json');
 
 export function Taxonomy() {
 
@@ -18,7 +18,7 @@ export function Taxonomy() {
       {data.map((item, i) => <Route key={`${item.id}_${i}`} path={item.path} element={
         <FormComponent store={setForm} formData={item} formValues={form} />
       } />)}
-      <Route path="/results" element={<TaxonomyResults form={form} />}></Route>
+      <Route path="/results" element={<TaxonomyResults />}></Route>
     </Routes>
   )
 }

@@ -9,7 +9,6 @@ import { Login } from './components/login/Login';
 import { PrivateRoutes } from './components/private-routes/PrivateRoutes';
 import { useGlobalState } from './app/store';
 
-import 'antd/dist/antd.min.css';
 import './App.css';
 import { Col, Row } from "antd";
 

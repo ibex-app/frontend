@@ -6,16 +6,19 @@ import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { addParamsToUrl, getFilters } from '../../shared/Utils';
 import { getElem } from '../../antd/utils/ElementGetter';
 import { Form, Space } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
 
 export function Filter() {
   const { data }: { data: FormElement[] } = require('../../data/filter.json')
 
   const [filters, setFilters] = useGlobalState('filters');
 
-  useEffect(() => setFilters(getFilters(data)), [])
+  const [form] = useForm();
+
+  useEffect(() => setFilters(getFilters(data)), []);
 
   return (
-    <Form layout="vertical">
+    <Form layout="vertical" onValuesChange={(changedValues, values) => console.log(changedValues, values)}>
       <Space wrap>
         {data.map(getElem)}
         <div className="form__item btn-small">

@@ -1,10 +1,13 @@
 import { reduce } from "fp-ts/lib/Array";
+import { addIndex, map } from "ramda";
 import { FormElement } from '../types/form';
 
 const parse = (val: string) => {
   try { return JSON.parse(val) }
   catch (e) { return val }
 }
+
+export const dateFormat = "DD.MM.YYYY";
 
 export const getFilters = (data: FormElement[]): Object => {
   const paramsFromUrl = getParamsAsObject();
@@ -70,3 +73,5 @@ export const formatDate = (date: string) => {
 
   return date
 }
+
+export const mapIndexed = addIndex(map)

@@ -10,14 +10,22 @@ import { Uploader } from "../Uploader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Tag } from "../Select/Select";
+import { dateFormat } from "../../shared/Utils";
+import moment from "antd/node_modules/moment";
 
 export const getElem = (element: FormElement): any => {
-  const { type, id, rules, children, placeholder, disabled, title, label, tip, list } = element;
+  const { type, id, rules, children, placeholder, disabled, title, label, tip, value, list } = element;
 
-  return <FormItem label={title || label} rules={rules} style={{ marginBottom: "5px" }}>
+  return <FormItem name={id} label={title || label} rules={rules} style={{ marginBottom: "5px" }}>
     {match(type)
       .with("date_interval", () => children && <DateInterval children={children} />)
-      .with("date", () => <DatePicker placeholder={placeholder} disabled={disabled} />)
+      .with("date", () =>
+        <DatePicker
+          placeholder={placeholder}
+          disabled={disabled}
+          defaultValue={value ? moment(value, dateFormat) : moment()}
+          format={dateFormat} />
+      )
       .with("tag", () => <Tag el={element} />)
       .with("text", () => <Input />)
       .with("textbox", () => <TextArea />)
