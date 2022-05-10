@@ -12,7 +12,7 @@ import './Login.css';
 import { Link } from 'react-router-dom';
 
 export function Login() {
-  const subdomain = window.location.href.split('.ibex-app.com/login')[0].split('//')[1]
+  const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com/login')[0].split('//')[1]
   const loginUrl = `https://${subdomain}.ibex-app.com/api/login`
   const login = E.fold(
     (error: string) => console.log('User not logged in!'),
