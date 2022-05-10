@@ -12,6 +12,8 @@ import './Login.css';
 import { Link } from 'react-router-dom';
 
 export function Login() {
+  const subdomain = window.location.href.split('.ibex-app.com/login')[0].split('//')[1]
+  const loginUrl = `https://${subdomain}.ibex-app.com/api/login`
   const login = E.fold(
     (error: string) => console.log('User not logged in!'),
     (data: UserInfo) => setGlobalState('user', data)
@@ -27,7 +29,7 @@ export function Login() {
     <div className="tax-full">
       <div className="tax-title-line">
         <div className="tax-mid">Please Sign In
-          <a href="https://ibex-app.com/api/login" className="google-btn">
+          <a href={loginUrl} className="google-btn">
             <div className="google-icon-wrapper">
               <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
             </div>
