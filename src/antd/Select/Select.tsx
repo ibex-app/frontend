@@ -5,7 +5,7 @@ import { map } from "ramda";
 import './Select.css';
 
 export const Tag = ({ el }: { el: FormElement }) => {
-  const { id, list, allowNew } = el;
+  const { id, list, allowNew, placeholder } = el;
 
   const newChecker = (results: Array<Object | string>, props: any) => {
     const selected = map<{ label: string }, string>(({ label }) => label)(props.selected);
@@ -17,6 +17,7 @@ export const Tag = ({ el }: { el: FormElement }) => {
     id={id}
     multiple
     options={list}
+    placeholder={placeholder}
     allowNew={allowNew ? newChecker : false}
   />
 }
