@@ -8,7 +8,7 @@ export type Response<T> = E.Either<Error, T>;
 
 export const Get = async <T>(path: string, params: Object): Promise<Response<T>> => {
     const token = window.localStorage.getItem('jwt')
-    const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com/login')[0].split('//')[1]
+    const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
     
     const Logout = () => {
         window.localStorage.removeItem('jwt')
