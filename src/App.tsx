@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useSearchParams } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Results } from './components/results/Results';
 import { Taxonomy } from './components/taxonomy/Taxonomy';
@@ -16,9 +16,17 @@ import { Col, Row } from "antd";
 function App() {
   const [user, setUser] = useGlobalState('user');
 
-  const token = window.localStorage.getItem('jwt')
-  if (token && !Object.keys(user).length) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token_param = searchParams.get("access_token")
+  const storage_token = window.localStorage.getItem('jwt')
+  const token = token_param || storage_token
+
+  if(token && !Object.keys(user).length){
     setUser({ jwt: token })
+
+    if(!storage_token) window.localStorage.setItem('jwt', token);
+    // window.localStorage.setItem('refresh', req.response["refresh_token"]);
+    // setUser({email: searchParams.get("user"), jwt: token})
   }
 
   return (
