@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Tag } from "../Select/Select";
 import { dateFormat } from "../../shared/Utils";
-import moment from "antd/node_modules/moment";
+import moment from "moment";
 
 export const getElem = (element: FormElement): any => {
   const { type, id, rules, children, placeholder, disabled, title, label, tip, value, list } = element;
