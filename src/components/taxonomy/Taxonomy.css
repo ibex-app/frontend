@@ -453,3 +453,9 @@ table {
     font-size: 12px;
     padding: 2px 6px;
 }
+
+.ant-table-pagination>* {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

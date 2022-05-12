@@ -1,0 +1,38 @@
+.post-container {
+  display: flex;
+  padding: 0 20px 0 0;
+}
+
+.post {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.post h1 {
+  font-size: 19px;
+  line-height: 25px;
+  color: #323335;
+  font-weight: 600;
+}
+
+.post h3 {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: #717478;
+}
+
+.post a {
+  color: #717478;
+}
+
+.post .show-more {
+  color: #4670BE;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  text-decoration-line: underline;
+}
