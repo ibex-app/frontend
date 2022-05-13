@@ -6,8 +6,7 @@ export const PrivateRoutes = () => {
   const [user, setUser] = useGlobalState('user');
   const authLogin = false
   
-  const [searchParams, setSearchParams] = useSearchParams();
-  const token = searchParams.get("access_token")
+  
 
 //   const getJWTToken = () => {
 //       var req = new XMLHttpRequest();
@@ -27,12 +26,6 @@ export const PrivateRoutes = () => {
 //       req.open("get", "https://ibex-app.com/token?"+window.location.search.substr(1), true);
 //       req.send("");
 //   }
-
-  if(token && !Object.keys(user).length){
-    window.localStorage.setItem('jwt', token);
-    // window.localStorage.setItem('refresh', req.response["refresh_token"]);
-    setUser({email: searchParams.get("user"), jwt: token})
-  }
 
   return Object.keys(user).length 
     ? <Outlet />
