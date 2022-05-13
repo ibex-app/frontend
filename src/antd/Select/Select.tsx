@@ -4,7 +4,13 @@ import { map } from "ramda";
 
 import './Select.css';
 
-export const Tag = ({ el }: { el: FormElement }) => {
+type CustomFormItemProps = {
+  el: FormElement,
+  value?: any;
+  onChange?: (val: any) => void
+};
+
+export const Tag = ({ el, onChange }: CustomFormItemProps) => {
   const { id, list, allowNew, placeholder } = el;
 
   const newChecker = (results: Array<Object | string>, props: any) => {
@@ -19,5 +25,6 @@ export const Tag = ({ el }: { el: FormElement }) => {
     options={list}
     placeholder={placeholder}
     allowNew={allowNew ? newChecker : false}
+    onChange={onChange}
   />
 }

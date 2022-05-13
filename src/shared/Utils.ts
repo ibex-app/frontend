@@ -74,4 +74,9 @@ export const formatDate = (date: string) => {
   return date
 }
 
-export const mapIndexed = addIndex(map)
+export const mapIndexed = addIndex(map);
+
+export const formatNum = (num: number): string => {
+  if (num < 10000) return num.toLocaleString()
+  return Math.floor(num / 1000).toLocaleString() + 'K'
+}

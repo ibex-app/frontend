@@ -3,19 +3,19 @@
     {
       "id": "time_interval_from",
       "type": "date",
-      "label": "Date from",
+      "title": "Date from",
       "value": "01/02/2022"
     },
     {
       "id": "time_interval_to",
       "type": "date",
-      "label": "Date to",
+      "title": "Date to",
       "value": ""
     },
     {
       "id": "platform",
       "type": "tag",
-      "label": "Platform",
+      "title": "Platform",
       "value": [],
       "list": [
         {
@@ -43,7 +43,7 @@
     {
       "id": "author_platform_id",
       "type": "tag",
-      "label": "Data source",
+      "title": "Data source",
       "value": [],
       "list": [
         {
@@ -4642,7 +4642,7 @@
     {
       "id": "topics",
       "type": "tag",
-      "label": "Topics",
+      "title": "Topics",
       "value": [],
       "list": [
         {
@@ -4674,7 +4674,7 @@
     {
       "id": "persons",
       "type": "tag",
-      "label": "Persons",
+      "title": "Persons",
       "value": [],
       "list": [
         {
@@ -5876,7 +5876,7 @@
     {
       "id": "locations",
       "type": "tag",
-      "label": "Locations",
+      "title": "Locations",
       "value": [],
       "list": [
         {
@@ -47564,13 +47564,13 @@
     {
       "id": "postContains",
       "type": "text",
-      "label": "Post contains",
+      "title": "Post contains",
       "value": ""
     },
     {
       "id": "hasVideo",
       "type": "checkbox",
-      "label": "Has video",
+      "title": "Has video",
       "checked": false
     }
   ]

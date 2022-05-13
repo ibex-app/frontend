@@ -1,24 +1,25 @@
-import React, { useEffect } from 'react';
 import { FormElement } from '../../types/form';
-import { setGlobalState, useGlobalState } from '../../app/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
-import { addParamsToUrl, getFilters } from '../../shared/Utils';
 import { getElem } from '../../antd/utils/ElementGetter';
 import { Form, Space } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
+import { pipe } from 'ramda';
+import { transform_filters_to_request } from '../../shared/Http';
 
-export function Filter() {
+type Input = {
+  onChange: (filter: Filter) => void;
+}
+
+export function Filter({ onChange }: Input) {
   const { data }: { data: FormElement[] } = require('../../data/filter.json')
 
-  const [filters, setFilters] = useGlobalState('filters');
-
-  const [form] = useForm();
-
-  useEffect(() => setFilters(getFilters(data)), []);
+  const setFilters = pipe(
+    transform_filters_to_request,
+    onChange
+  )
 
   return (
-    <Form layout="vertical" onValuesChange={(changedValues, values) => console.log(changedValues, values)}>
+    <Form layout="vertical" onValuesChange={(changed, values) => setFilters(values)}>
       <Space wrap>
         {data.map(getElem)}
         <div className="form__item btn-small">

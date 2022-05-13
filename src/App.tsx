@@ -28,7 +28,7 @@ function App() {
         </Helmet>
       </HelmetProvider>
       <Sidebar />
-      <Col span={21}>
+      <Col span={21} style={{ marginBottom: "40px" }}>
         <Routes>
           <Route path="/" element={<PrivateRoutes />} >
             <Route path="/" element={<Results />} />
