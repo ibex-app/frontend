@@ -9,7 +9,7 @@ export type Response<T> = E.Either<Error, T>;
 export const Get = async <T>(path: string, params: Object): Promise<Response<T>> => {
     const token = window.localStorage.getItem('jwt')
     const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
-    
+
     const Logout = () => {
         window.localStorage.removeItem('jwt')
         if (window.location.href.indexOf('/login') === -1) {
@@ -43,7 +43,7 @@ export const Get = async <T>(path: string, params: Object): Promise<Response<T>>
 };
 
 
-export const transform_filters_to_request = (filters_: any) => {
+export const transform_filters_to_request = (filters_: Filter) => {
     let filters = JSON.parse(JSON.stringify(filters_));
     if (filters.time_interval_from && filters.time_interval_to) {
         filters.time_interval_from = formatDate(filters.time_interval_from);

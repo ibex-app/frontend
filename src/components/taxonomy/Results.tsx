@@ -7,9 +7,9 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
 import { Get } from '../../shared/Http';
-import { map } from "ramda";
+import { join, map, pipe } from "ramda";
 import { Col, Collapse, Row, Space, Table } from "antd";
-import { Monitor, MonitorRespose } from "../../types/taxonomy";
+import { HitsCountTableItem, Monitor, MonitorRespose } from "../../types/taxonomy";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Posts } from "../../antd/Posts";
 import { HitsCount, HitsCountOutput } from "../../antd/taxonomy/HitsCount";
@@ -20,6 +20,7 @@ export const TaxonomyResults = () => {
   const { search } = useLocation();
   const [monitor, setMonitor] = useState<Monitor>();
   const [hitsCount, setHitsCount] = useState<HitsCountOutput>();
+  const [keywordsFilter, setKeywordsFilter] = useState<string>();
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
@@ -27,6 +28,15 @@ export const TaxonomyResults = () => {
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
       .then(E.fold(console.error, ({ monitor }) => setMonitor(monitor)));
   }, [monitor_id]);
+
+  useEffect(() => {
+    hitsCount?.selected.length ?
+      pipe(
+        map(({ search_term }: HitsCountTableItem) => search_term),
+        join(','),
+        setKeywordsFilter
+      )(hitsCount.selected) : setKeywordsFilter('');
+  }, [hitsCount])
 
   return (
     <Row>
@@ -45,7 +55,7 @@ export const TaxonomyResults = () => {
         {hitsCount?.selected.length && <Space className="flex search-header">
           Search results for {map(drawFilterItem, hitsCount.selected)}
         </Space>}
-        <Posts filter={{ monitor_id }} />
+        <Posts key="postsTaxonomy" filter={{ monitor_id, post_contains: keywordsFilter }} />
       </Col>
     </Row>
   )

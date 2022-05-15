@@ -6,6 +6,6 @@ type Filter = {
   topics?: string[],
   persons?: string[],
   locations?: string[],
-  postContains?: string,
+  post_contains?: string,
   hasVideo?: boolean
 }

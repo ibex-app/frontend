@@ -47562,7 +47562,7 @@
       ]
     },
     {
-      "id": "postContains",
+      "id": "post_contains",
       "type": "text",
       "title": "Post contains",
       "value": ""

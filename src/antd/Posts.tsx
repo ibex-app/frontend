@@ -11,15 +11,26 @@ type Input = {
   filter: Filter
 }
 
+const defaultPagination = { start_index: 0, count: 10 };
+
 export const Posts = ({ filter }: Input) => {
   const [posts, setPosts] = useState<Response<PostType[]>>(left(Error('Not fetched')));
-  const [pagination, setPagination] = useState({ start_index: 0, count: 10 });
+  const [pagination, setPagination] = useState(defaultPagination);
+  const [filters, setFilters] = useState<Filter>();
 
   const onLoadMore = () => setPagination({ start_index: pagination.count, count: 2 * pagination.count });
 
   useEffect(() => {
-    Get<PostType[]>('posts', { ...filter, ...pagination }).then(setPosts);
-  }, [filter, pagination]);
+    if (pagination) Get<PostType[]>('posts', { ...filter, ...pagination }).then(setPosts);
+  }, [pagination]);
+
+  useEffect(() => {
+    if (JSON.stringify(filters) !== JSON.stringify(filter)) {
+      setFilters(filter);
+      Get<PostType[]>('posts', { ...filter, ...pagination }).then(setPosts);
+      setPagination(defaultPagination);
+    }
+  }, [filter]);
 
   return fold(
     () => <span>No posts to show</span>,
