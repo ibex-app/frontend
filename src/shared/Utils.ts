@@ -1,34 +1,9 @@
-import { reduce } from "fp-ts/lib/Array";
-import { addIndex, map } from "ramda";
-import { FormElement } from '../types/form';
-
-const parse = (val: string) => {
-  try { return JSON.parse(val) }
-  catch (e) { return val }
-}
+import { addIndex, map, reduce } from "ramda";
+import { FilterElemPartial } from "../types/taxonomy";
 
 export const dateFormat = "DD.MM.YYYY";
 
-export const getFilters = (data: FormElement[]): Object => {
-  const paramsFromUrl = getParamsAsObject();
-  ['platform', 'author_platform_id', 'topics', 'persons', 'locations'].forEach((filterName: string) => {
-    const curFilter: any = paramsFromUrl[filterName]
-    if (curFilter) {
-      const filterElement: any = data.find(k => k.id.toString() == filterName)
-      paramsFromUrl[filterName] = curFilter.map((k: string) => filterElement.values.find((l: any) => l._id == k))
-    }
-  })
-
-  const defaultFilters = reduce({}, (acc: any, cur: FormElement) => (
-    acc[cur.id] ? acc : { ...acc, [cur.id]: cur.value }
-  ))(data);
-
-  return { ...defaultFilters, ...paramsFromUrl };
-};
-
 export const getParamsAsObject = () => {
-  // const { data }: { data: FilterElement[] } = require('/data/filter.json')
-
   const params = window.location.search.substring(1).split('&');
   let paramsObject: { [key: string]: string | Array<string> } = {};
 
@@ -61,7 +36,7 @@ export const addParamsToUrl = (params: { [key: string]: string }) => {
 }
 
 export const isObjectEmpty = (obj: { [key: string]: any }) =>
-  reduce(true, (acc, key: string) => acc && !obj[key])(Object.keys(obj))
+  reduce((acc, key: string) => acc && !obj[key], true, Object.keys(obj))
 
 export const tagItemsToArray = (tagItems: { label: string }[]): string[] =>
   tagItems.map(({ label }) => label)
@@ -80,3 +55,11 @@ export const formatNum = (num: number): string => {
   if (num < 10000) return num.toLocaleString()
   return Math.floor(num / 1000).toLocaleString() + 'K'
 }
+
+export const boolOperators = ['and', 'or', 'not', 'and not', 'or not'];
+
+export const filterHasOperator = (s: string) => reduce((acc: FilterElemPartial, op: string) => {
+  const str = s.toLowerCase();
+  const hasOp = str.includes(op);
+  return hasOp ? { hasOp, op, s } : acc;
+}, { s } as FilterElemPartial, boolOperators);

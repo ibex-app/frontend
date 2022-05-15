@@ -15,21 +15,25 @@ interface FormCommon {
 }
 
 interface FormItemGroup {
-  label: string;
-  children: FormElement[];
+  label?: string;
+  children?: FormElement[];
 }
 
 interface Checkbox {
-  checked: boolean
+  checked?: boolean
 }
 
 interface Tag {
   allowNew?: boolean,
-  list: string[]
+  list?: string[]
+}
+
+interface Input {
+  prefix?: JSX.Element
 }
 
 export type FormElement =
-  FormCommon & (Checkbox & Tag & FormItemGroup);
+  FormCommon & (Checkbox & Tag & FormItemGroup & Input);
 
 export interface FilterElementInput {
   data: FilterElement,

@@ -1,20 +1,15 @@
 import { Space } from "antd";
-import { pipe, prop, reduce, trim } from "ramda";
-
-type FilterElemPartial = { hasOp: boolean, op: string, s: string };
-type FilterElem = { hasOp: boolean, left: string, right?: string, op?: string };
-
-const operators = ["AND", "OR", "NOT"];
-
-export const filterHasOperator = (s: string) => reduce((acc, op) => {
-  const hasOp = s.includes(op);
-  return hasOp ? { hasOp, op, s } : acc;
-}, { s } as FilterElemPartial, operators);
+import { pipe, prop, trim } from "ramda";
+import { FilterElem, FilterElemPartial } from "../../types/taxonomy";
+import { filterHasOperator } from "../Utils";
 
 export const createFilterElem = ({ hasOp, s, op }: FilterElemPartial): FilterElem => {
   if (!hasOp) return { hasOp, left: s };
-  const [left, right] = s.split(op);
-  return { hasOp, left: trim(left), right: trim(right), op };
+  const opStartIndex = s.toLowerCase().indexOf(op);
+  const left = s.substring(0, opStartIndex);
+  const right = s.substring(opStartIndex + op.length);
+
+  return { hasOp, left: trim(left), right: trim(right), op: op.toUpperCase() };
 }
 
 // input HitsCountTableData
@@ -26,8 +21,8 @@ export const drawFilterItem = pipe<any, string, FilterElemPartial, FilterElem, J
     hasOp ? <Space>
       <span className="keyword">{left}</span>
       <span className="op">{op}</span>
-      <span className="keyword">{right}</span>,
-    </Space> : <span className="keyword">{left}</span>,
+      <span className="keyword">{right}</span>
+    </Space> : <span className="keyword">{left}</span>
 )
 
 // const [monitor, setMonitor]: any = useState();

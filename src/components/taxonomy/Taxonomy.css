@@ -3,8 +3,6 @@
 }
 
 .leftbox-inner {
-    width: 90%;
-    margin-left: 5%;
     border-radius: 20px;
     background-color: #fff;
     display: block;
@@ -12,7 +10,7 @@
     border-radius: 13px;
     padding: 25px;
     border: 1px solid #ddd;
-    margin-left: 5%;
+    margin: 0 5%;
 }
 
 .tax-full textarea {
@@ -446,7 +444,7 @@ table {
     color: #DD7A1E;
 }
 
-.search-header .op {
+.op {
     background: #616468;
     border-radius: 4px;
     color: #FFFFFF;

@@ -1,4 +1,4 @@
-import { Checkbox, DatePicker, Form, Input } from "antd";
+import { Button, Checkbox, DatePicker, Form, Input } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { match } from "ts-pattern";
 import FileUpload from "../FileUpload";
@@ -13,10 +13,10 @@ import { dateFormat } from "../../shared/Utils";
 import moment from "moment";
 
 export const getElem = (element: FormElement): any => {
-  const { type, id, rules, placeholder, disabled, title, tip, value, children, checked } = element;
+  const { type, id, rules, placeholder, disabled, title, label, tip, value, children, checked } = element;
 
   return <div>
-    <Form.Item name={`${id}`} label={`${title}`} rules={rules || []} style={{ marginBottom: "5px" }}>
+    <Form.Item name={`${id}`} label={title ? `${title}` : undefined} rules={rules || []} style={{ marginBottom: "5px" }}>
       {match(type)
         .with("date_interval", () => children && <DateInterval children={children} />)
         .with("date", () =>
@@ -27,7 +27,7 @@ export const getElem = (element: FormElement): any => {
             format={dateFormat} />
         )
         .with("tag", () => <Tag el={element} />)
-        .with("text", () => <Input />)
+        .with("text", () => <Input placeholder={placeholder} />)
         .with("textbox", () => <TextArea />)
         .with("checkbox", () => <Checkbox checked={checked} />)
         .with("checkbox-group", () =>
@@ -37,6 +37,7 @@ export const getElem = (element: FormElement): any => {
         )
         .with("file_upload", () => <FileUpload />)
         .with("uploader", () => <Uploader element={element} />)
+        .with("button", () => <Button type="primary" htmlType="submit">{label}</Button>) // TODO make dynamic
         .otherwise(() => {
           console.error(`Invalid component name ${type}`);
           return <></>

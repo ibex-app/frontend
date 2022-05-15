@@ -22,7 +22,7 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
   return <Typeahead
     id={id}
     multiple
-    options={list}
+    options={list!}
     placeholder={placeholder}
     allowNew={allowNew ? newChecker : false}
     onChange={onChange}

@@ -1,4 +1,4 @@
-export type HitsCountTableData = {
+export type HitsCountTableItem = {
   key: string,
   search_term: string,
   facebook: string,
@@ -6,18 +6,20 @@ export type HitsCountTableData = {
   twitter: string
 }
 
-export type HitsCountTable = {
-  columns: Array<any>,
-  data: Array<any>
-}
-
 export type HitsCountItem = {
   search_term: string,
-  facebook: number,
-  twitter: number,
-  youtube: number,
-  vkontakte: number,
-  telegram: number
+  facebook?: number,
+  twitter?: number,
+  youtube?: number,
+  vkontakte?: number,
+  telegram?: number
+};
+
+export interface HitsCountItemWithKey extends HitsCountItem {
+  key: string,
+  facebook: string,
+  twitter: string,
+  youtube: string
 };
 
 export type HitsCountResponse = Array<HitsCountItem>;
@@ -42,3 +44,7 @@ export type MonitorRespose = {
   search_term: SearchTerm[],
   accounts: Account[]
 }
+
+export type FilterElem = { hasOp: boolean, left: string, right?: string, op?: string };
+
+export type FilterElemPartial = { hasOp: boolean, op: string, s: string };

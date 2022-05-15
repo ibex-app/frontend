@@ -20,10 +20,10 @@ function App() {
   const storage_token = window.localStorage.getItem('jwt')
   const token = token_param || storage_token
 
-  if(token && !Object.keys(user).length){
+  if (token && !Object.keys(user).length) {
     setUser({ jwt: token })
 
-    if(!storage_token) window.localStorage.setItem('jwt', token);
+    if (!storage_token) window.localStorage.setItem('jwt', token);
     // window.localStorage.setItem('refresh', req.response["refresh_token"]);
     // setUser({email: searchParams.get("user"), jwt: token})
   }
