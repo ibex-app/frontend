@@ -63,7 +63,12 @@ export const filterHasOperator = (s: string) => reduce((acc: FilterElemPartial, 
   const str = s.toLowerCase();
   const hasOp = str.includes(op);
   return hasOp ? { hasOp, op, s } : acc;
-}, { s } as FilterElemPartial, boolOperators);
+}, { hasOp: false, s } as FilterElemPartial, boolOperators);
+
+export const filterOperatorUpper = ({ hasOp, s, op }: FilterElemPartial): string => {
+  if (!hasOp || !op) return s;
+  return s.replace(op, op.toUpperCase());
+}
 
 export const useDebounce = (value: any, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);

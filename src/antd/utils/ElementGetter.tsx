@@ -13,7 +13,9 @@ import { dateFormat } from "../../shared/Utils";
 import moment from "moment";
 
 export const getElem = (element: FormElement): any => {
-  const { type, id, rules, placeholder, disabled, title, label, tip, value, children, checked } = element;
+  const {
+    type, id, rules, placeholder, disabled, title, label, tip, value, children, checked
+  } = element;
 
   return <div>
     <Form.Item name={`${id}`} label={title ? `${title}` : undefined} rules={rules || []} style={{ marginBottom: "5px" }}>

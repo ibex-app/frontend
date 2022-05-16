@@ -1,5 +1,5 @@
 import { fold } from "fp-ts/lib/Either";
-import { lensPath, pipe, set, values } from "ramda";
+import { last, lensPath, pipe, prop, set, values } from "ramda";
 import { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { FormComponent } from "../../antd/Form";
@@ -12,6 +12,7 @@ const accountLens = lensPath([1, 'children', 3, 'children', 0, 'list']);
 
 export function Taxonomy() {
   const [formData, setFormData] = useState(data);
+
   const [form, setForm] = useState({});
 
   const [platforms, setPlatforms] = useState([]);
@@ -30,7 +31,7 @@ export function Taxonomy() {
 
     if (platforms) setPlatforms(platforms);
 
-    setForm({ ...values, ...changed });
+    setForm({ ...values });
   }
 
   useEffect(() => {

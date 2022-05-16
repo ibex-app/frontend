@@ -25,7 +25,8 @@ interface Checkbox {
 
 interface Tag {
   allowNew?: boolean,
-  list?: string[]
+  list?: string[],
+  checkBoolUpper?: boolean
 }
 
 interface Input {

@@ -4,7 +4,7 @@ import { FilterElem, FilterElemPartial } from "../../types/taxonomy";
 import { filterHasOperator } from "../Utils";
 
 export const createFilterElem = ({ hasOp, s, op }: FilterElemPartial): FilterElem => {
-  if (!hasOp) return { hasOp, left: s };
+  if (!hasOp || op === undefined) return { hasOp: false, left: s };
   const opStartIndex = s.toLowerCase().indexOf(op);
   const left = s.substring(0, opStartIndex);
   const right = s.substring(opStartIndex + op.length);

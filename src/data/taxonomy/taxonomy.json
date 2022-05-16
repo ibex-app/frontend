@@ -48,7 +48,8 @@
               "type": "tag",
               "tip": "You may use boolean operators (AND, OR, NOT) to refine your search. See how this works in action",
               "list": [],
-              "allowNew": true
+              "allowNew": true,
+              "checkBoolUpper": true
             },
             {
               "id": "search_terms_upload",

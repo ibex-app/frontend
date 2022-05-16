@@ -47,4 +47,4 @@ export type MonitorRespose = {
 
 export type FilterElem = { hasOp: boolean, left: string, right?: string, op?: string };
 
-export type FilterElemPartial = { hasOp: boolean, op: string, s: string };
+export type FilterElemPartial = { hasOp?: boolean, op?: string, s: string };
