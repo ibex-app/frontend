@@ -2,13 +2,11 @@ import { Button, Form, Row, Space } from "antd";
 import { Link } from "react-router-dom";
 import { getElem } from "./utils/ElementGetter";
 
-export const FormComponent = ({ formData, className, formValues, store }: any) => {
+export const FormComponent = ({ formData, className, formValues, onValuesChange }: any) => {
   const { title, redirect, children } = formData;
 
-  const setForm = (changed: Object, all: Object) => store({ ...formValues, [formData.id]: all });
-
   return (
-    <Form className={className} onValuesChange={setForm} layout="vertical">
+    <Form className={className} onValuesChange={onValuesChange} layout="vertical">
       <div className="tax-title-line">
         <div className="tax-mid">{title}</div>
       </div>

@@ -1,4 +1,5 @@
 import { addIndex, map, reduce } from "ramda";
+import { useEffect, useState } from "react";
 import { FilterElemPartial } from "../types/taxonomy";
 
 export const dateFormat = "DD.MM.YYYY";
@@ -63,3 +64,19 @@ export const filterHasOperator = (s: string) => reduce((acc: FilterElemPartial, 
   const hasOp = str.includes(op);
   return hasOp ? { hasOp, op, s } : acc;
 }, { s } as FilterElemPartial, boolOperators);
+
+export const useDebounce = (value: any, delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(
+    () => {
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [value, delay]
+  );
+  return debouncedValue;
+}
