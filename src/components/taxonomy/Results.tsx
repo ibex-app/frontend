@@ -20,7 +20,7 @@ export const TaxonomyResults = () => {
   const { search } = useLocation();
   const [monitor, setMonitor] = useState<Monitor>();
   const [hitsCount, setHitsCount] = useState<HitsCountOutput>();
-  const [keywordsFilter, setKeywordsFilter] = useState<string>();
+  const [keywordsFilter, setKeywordsFilter] = useState<string[]>();
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
@@ -33,9 +33,8 @@ export const TaxonomyResults = () => {
     hitsCount?.selected.length ?
       pipe(
         map(({ search_term }: HitsCountTableItem) => search_term),
-        join(','),
         setKeywordsFilter
-      )(hitsCount.selected) : setKeywordsFilter('');
+      )(hitsCount.selected) : setKeywordsFilter([]);
   }, [hitsCount])
 
   return (
@@ -55,7 +54,7 @@ export const TaxonomyResults = () => {
         {hitsCount?.selected.length && <Space className="flex search-header">
           Search results for {map(drawFilterItem, hitsCount.selected)}
         </Space>}
-        <Posts key="postsTaxonomy" filter={{ monitor_id, post_contains: keywordsFilter }} />
+        <Posts key="postsTaxonomy" filter={{ monitor_id, search_terms: keywordsFilter }} />
       </Col>
     </Row>
   )
