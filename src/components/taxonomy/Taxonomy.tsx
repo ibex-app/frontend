@@ -1,5 +1,5 @@
 import { fold } from "fp-ts/lib/Either";
-import { last, lensPath, pipe, prop, set, values } from "ramda";
+import { lensPath, pipe, set } from "ramda";
 import { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { FormComponent } from "../../antd/Form";
@@ -48,7 +48,7 @@ export function Taxonomy() {
   // if platforms or debounced substring from account changes, we suggest new options
   useEffect(() => {
     Get<string[]>('search_account', { platforms, substring }).then(
-      fold(() => { }, (suggestions: string[]) => setAccountSuggestions(suggestions))
+      fold(() => { }, setAccountSuggestions)
     );
   }, [platforms, substring]);
 

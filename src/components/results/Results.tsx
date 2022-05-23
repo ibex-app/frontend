@@ -20,7 +20,7 @@ export function Results() {
     <Space direction="vertical">
       <Filter onChange={setFilter} />
       <Routes>
-        <Route path="/" element={<Posts filter={{ ...filter, monitor_id }} />} />
+        <Route path="/" element={<Posts filter={{ ...filter, monitor_id }} allowRedirect />} />
         <Route path="bar" element={<BarChart />} />
         <Route path="graph" element={<GraphChart />} />
         <Route path="line" element={<LineChart />} />

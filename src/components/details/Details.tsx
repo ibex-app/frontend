@@ -5,11 +5,10 @@ import { Get } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
-// import { } from "@fortawesome/free-brands-svg-icons"
 import { match } from 'ts-pattern';
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
-import { FormElement } from "../../types/form";
 import './details.css';
+import { Col, Row } from "antd";
 
 export function Details() {
   const { postId } = useParams();
@@ -36,6 +35,57 @@ export function Details() {
   const rewind = (second: number) => {
     setOptions({ autoplay: 1, second: Math.floor(second) });
   };
+
+  const postItem = <>
+    <section className="post--content">
+      <iframe id="ytplayer" src={`${post.url.replace("/watch?v=", "/embed/")}?start=${options.second}&autoplay=${options.autoplay}`} ></iframe>
+    </section>
+    <section className="post--content-extra">
+      <div className="table--item">
+        <div className="table--row">
+          <div >
+            <div className="title"> {post.title}</div>
+            {<div className="sub-title"> {post.created_at} | chanell name </div>}
+            <div className="description"> {post.text} </div>
+            {<Link className="platform" to={post.url}> {post.platform} {post.url}</Link>}
+            {<div className="scores">
+              <FontAwesomeIcon icon={faThumbsUp} /> {post.scores?.likes}
+              <FontAwesomeIcon icon={faThumbsDown} /> {post.scores?.sad}
+              <FontAwesomeIcon icon={faShare} /> {post.scores?.shares}
+              <FontAwesomeIcon icon={faMessage} /> {post.scores?.engagement}
+              <FontAwesomeIcon icon={faBiohazard} />
+            </div>
+            }
+
+          </div>
+          {/* <Tag data={tags} onChange={() => console.log("TODO JANEZ")} /> */}
+
+          <div className="table--extra-row"><i className="icn icn--type-video"></i>
+            <div className="table--item-tags">
+              <div className="flex">
+                {/* <span className="font-xs mr-15">Tags</span> */}
+                <div className="flex">
+                  {/* {tags.map(({ title }: any) => (<a href="£" className="badge bg-secondary">{title}</a>))} */}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </>
+
+  const transcripts =
+    <section className="transcripts">
+      {post.transcripts ? post.transcripts.map((transcript: any) => (
+
+        // <div>aaaa</div>
+        <div className="table--item" onClick={() => rewind(transcript.second)}>
+          <p> <span className="time">{toTime(transcript.second)}</span> {transcript.text}</p>
+        </div>
+      )) : <div />}
+
+    </section>
 
   useEffect(() => {
     const fetchData = Get('post', {
@@ -69,58 +119,14 @@ export function Details() {
         fetching ? (
           <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>
         ) : (
-          <>
-            <div className="col-6">
-              <section className="post--content">
-                <iframe id="ytplayer" src={`${post.url.replace("/watch?v=", "/embed/")}?start=${options.second}&autoplay=${options.autoplay}`} ></iframe>
-              </section>
-              <section className="post--content-extra">
-                <div className="table--item">
-                  <div className="table--row">
-                    <div >
-                      <div className="title"> {post.title}</div>
-                      {<div className="sub-title"> {post.created_at} | chanell name </div>}
-                      <div className="description"> {post.text} </div>
-                      {<Link className="platform" to={post.url}> {post.platform} {post.url}</Link>}
-                      {<div className="scores">
-                        <FontAwesomeIcon icon={faThumbsUp} /> {post.scores?.likes}
-                        <FontAwesomeIcon icon={faThumbsDown} /> {post.scores?.sad}
-                        <FontAwesomeIcon icon={faShare} /> {post.scores?.shares}
-                        <FontAwesomeIcon icon={faMessage} /> {post.scores?.engagement}
-                        <FontAwesomeIcon icon={faBiohazard} />
-                      </div>
-                      }
-
-                    </div>
-                    {/* <Tag data={tags} onChange={() => console.log("TODO JANEZ")} /> */}
-
-                    <div className="table--extra-row"><i className="icn icn--type-video"></i>
-                      <div className="table--item-tags">
-                        <div className="flex">
-                          {/* <span className="font-xs mr-15">Tags</span> */}
-                          <div className="flex">
-                            {/* {tags.map(({ title }: any) => (<a href="£" className="badge bg-secondary">{title}</a>))} */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div className="col-6">
-              <section className="transcripts">
-                {post.transcripts ? post.transcripts.map((transcript: any) => (
-
-                  // <div>aaaa</div>
-                  <div className="table--item" onClick={() => rewind(transcript.second)}>
-                    <p> <span className="time">{toTime(transcript.second)}</span> {transcript.text}</p>
-                  </div>
-                )) : <div />}
-
-              </section>
-            </div>
-          </>
+          <Row>
+            {post.transcripts
+              ? <>
+                <Col span={12}>{postItem}</Col> <Col span={12}>{transcripts}</Col>
+              </>
+              : <Col span={24}>{postItem}</Col>
+            }
+          </Row>
         )}
     </div>
   )

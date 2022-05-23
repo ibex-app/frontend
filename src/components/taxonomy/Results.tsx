@@ -8,13 +8,12 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons'
 import './Taxonomy.css';
 import { Get } from '../../shared/Http';
 import { join, map, pipe } from "ramda";
-import { Col, Collapse, Row, Space, Table } from "antd";
+import { Col, Row, Space } from "antd";
 import { HitsCountTableItem, Monitor, MonitorRespose } from "../../types/taxonomy";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Posts } from "../../antd/Posts";
 import { HitsCount, HitsCountOutput } from "../../antd/taxonomy/HitsCount";
-
-const { Panel } = Collapse;
+import { Recommendations } from "../../antd/taxonomy/Recomendations";
 
 export const TaxonomyResults = () => {
   const { search } = useLocation();
@@ -43,11 +42,7 @@ export const TaxonomyResults = () => {
         <Space direction="vertical" style={{ display: "flex" }}>
           <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
           <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
-          <Collapse style={{ margin: "0 5%" }}>
-            <Panel header="Recommended keywords" key={1}>
-              <Table />
-            </Panel>
-          </Collapse>
+          <Recommendations monitor_id={monitor_id} />
         </Space>
       </Col>
       <Col span={16} style={{ color: "#F4F4F5" }}>
