@@ -33,8 +33,12 @@ interface Input {
   prefix?: JSX.Element
 }
 
+interface Uploader {
+  checkboxTitle?: string;
+}
+
 export type FormElement =
-  FormCommon & (Checkbox & Tag & FormItemGroup & Input);
+  FormCommon & (Checkbox & Tag & FormItemGroup & Input & Uploader);
 
 export interface FilterElementInput {
   data: FilterElement,

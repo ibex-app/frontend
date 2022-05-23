@@ -4,14 +4,14 @@ import { FormElement } from '../types/form';
 
 export function Uploader({ element }: { element: FormElement }) {
     const [show, setShow] = useState(false);
-    const { children, label, tip } = element;
+    const { children, label, checkboxTitle } = element;
 
     return (
         <div>
             <div className="tax-large-title">{label}</div>
             <div></div>
             <label className="container flex align-middle">
-                <span className="tax-label">{tip}</span>
+                <span className="tax-label">{checkboxTitle}</span>
                 <input type="checkbox" onChange={(event) => setShow(event.target.checked)}></input>
                 <span className={`checkmark ${show ? 'checked' : ''}`}></span>
             </label>

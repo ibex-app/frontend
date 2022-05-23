@@ -38,7 +38,7 @@ export function Details() {
 
   const postItem = <>
     <section className="post--content">
-      <iframe id="ytplayer" src={`${post.url.replace("/watch?v=", "/embed/")}?start=${options.second}&autoplay=${options.autoplay}`} ></iframe>
+      <iframe id="ytplayer" src={`${post?.url?.replace("/watch?v=", "/embed/")}?start=${options.second}&autoplay=${options.autoplay}`} ></iframe>
     </section>
     <section className="post--content-extra">
       <div className="table--item">
