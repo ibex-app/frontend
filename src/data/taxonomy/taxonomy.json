@@ -40,7 +40,7 @@
           "id": "search_terms",
           "type": "uploader",
           "label": "Keywords",
-          "tip": "Do you have specific keywords you would like to collect posts with?",
+          "checkboxTitle": "Do you have specific keywords you would like to collect posts with?",
           "children": [
             {
               "id": "search_terms",
@@ -119,7 +119,8 @@
           "id": "accounts",
           "type": "uploader",
           "label": "Accounts",
-          "tip": "Do you have specific accounts you would like to collect posts with?",
+          "checkboxTitle": "Do you have specific accounts you would like to collect posts with?",
+          "tip": "Posts will be collected based on the accounts/pages/groups/channels specified.",
           "children": [
             {
               "id": "accounts",
