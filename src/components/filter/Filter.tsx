@@ -19,7 +19,7 @@ export function Filter({ onChange }: Input) {
   )
 
   return (
-    <Form layout="vertical" onValuesChange={(changed, values) => setFilters(values)}>
+    <Form className="top-filters" layout="vertical" onValuesChange={(changed, values) => setFilters(values)}>
       <Space wrap>
         {data.map(getElem)}
         <div className="form__item btn-small">
