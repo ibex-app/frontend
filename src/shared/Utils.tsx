@@ -1,6 +1,9 @@
 import { addIndex, map, reduce } from "ramda";
 import { useEffect, useState } from "react";
 import { FilterElemPartial } from "../types/taxonomy";
+import { match } from 'ts-pattern';
+import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const dateFormat = "DD.MM.YYYY";
 
@@ -85,3 +88,10 @@ export const useDebounce = (value: any, delay: number) => {
   );
   return debouncedValue;
 }
+
+export const platformIcon = (platform: string) =>
+  match(platform)
+    .with("facebook", () => <FontAwesomeIcon icon={faFacebook} />)
+    .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
+    .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
+    .otherwise(() => undefined)

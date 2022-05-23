@@ -34,7 +34,8 @@ interface Input {
 }
 
 interface Uploader {
-  checkboxTitle?: string;
+  checkboxTitle?: string,
+  isOpen?: boolean
 }
 
 export type FormElement =

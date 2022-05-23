@@ -35,7 +35,7 @@ export function Taxonomy() {
   }
 
   useEffect(() => {
-    pipe(
+    if (accountSuggestions) pipe(
       set(accountLens, accountSuggestions),
       setFormData
     )(formData);
@@ -47,7 +47,7 @@ export function Taxonomy() {
 
   // if platforms or debounced substring from account changes, we suggest new options
   useEffect(() => {
-    Get<string[]>('search_account', { platforms, substring }).then(
+    if (substring) Get<string[]>('search_account', { platforms, substring }).then(
       fold(() => { }, setAccountSuggestions)
     );
   }, [platforms, substring]);

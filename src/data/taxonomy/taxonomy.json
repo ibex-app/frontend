@@ -40,6 +40,7 @@
           "id": "search_terms",
           "type": "uploader",
           "label": "Keywords",
+          "isOpen": true,
           "checkboxTitle": "Do you have specific keywords you would like to collect posts with?",
           "children": [
             {
@@ -126,8 +127,11 @@
               "id": "accounts",
               "title": "Input Accounts",
               "type": "tag",
-              "list": [],
-              "tip": "Start typing the account name, and select ones you want to search."
+              "list": [
+                "BBC"
+              ],
+              "tip": "Start typing the account name, and select ones you want to search.",
+              "requestData": "accounts"
             },
             {
               "id": "accounts_upload",

@@ -5,15 +5,10 @@ import { PostType } from "../../types/common";
 import ReactShowMoreText from "react-show-more-text";
 
 import "./post.css";
-import { match } from "ts-pattern";
+import { platformIcon } from "../../shared/Utils";
 
 export const Post = ({ post }: { post: PostType }) => {
   const { title, text, created_at, image_url, url, platform } = post;
-  const platformIcon = match(platform)
-    .with("facebook", () => faFacebook)
-    .with("twitter", () => faTwitter)
-    .with("youtube", () => faYoutube)
-    .otherwise(() => undefined)
 
   return <Row className="post">
     <Col span={16}>
@@ -29,7 +24,7 @@ export const Post = ({ post }: { post: PostType }) => {
           className="post-text"
           anchorClass="show-more"
         >{text}</ReactShowMoreText>
-        <span>{platformIcon && <FontAwesomeIcon icon={platformIcon} />} <a href={url}>{url}</a></span>
+        <span>{platform && platformIcon(platform)} <a href={url}>{url}</a></span>
       </Space>
     </Col>
     <Col span={4} offset={4}>

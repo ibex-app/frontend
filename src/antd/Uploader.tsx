@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { FormElement } from '../types/form';
 
 export function Uploader({ element }: { element: FormElement }) {
-    const [show, setShow] = useState(false);
-    const { children, label, checkboxTitle } = element;
+    const { children, label, checkboxTitle, isOpen } = element;
+    const [show, setShow] = useState(isOpen);
 
     return (
         <div>
