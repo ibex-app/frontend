@@ -127,9 +127,7 @@
               "id": "accounts",
               "title": "Input Accounts",
               "type": "tag",
-              "list": [
-                "BBC"
-              ],
+              "list": [],
               "tip": "Start typing the account name, and select ones you want to search.",
               "requestData": "accounts"
             },
