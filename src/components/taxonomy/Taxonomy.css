@@ -80,7 +80,7 @@
     height: 61px;
     background: #fff;
     border-bottom: 2px solid #d0d0d0;
-    position: fixed;
+    /* position: fixed; */
     z-index: 7;
 }
 
@@ -458,4 +458,10 @@ table {
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+
+.tax-scroll{
+    height: calc(100vh - 61px);
+    overflow: scroll;
 }

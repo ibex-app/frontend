@@ -23,6 +23,7 @@ type CustomTokenInput = {
 const TypeaheadOverride: any = Typeahead;
 
 const CustomToken = ({ option, index, onRemove }: CustomTokenInput) => {
+  console.log(option)
   return <div className="rbt-token rbt-token-removeable" tabIndex={index}>
     {option.icon ? <>{option.icon && platformIcon(option.icon)} {option.label}</> : option.label}
     <button tabIndex={-1} aria-label="Remove" className="close rbt-close rbt-token-remove-button" type="button" onClick={() => {
@@ -76,7 +77,7 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
     onInputChange={(input: any, e: any) => onChange!(input)}
     labelKey={"label"}
     renderMenuItemChildren={(option: Option, props: any, index: number) =>
-      option.icon ? <>{option.icon && platformIcon(option.icon)} {option.label}</> : option
+      option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span></> : option
     }
     renderToken={(option: Option, props: any, index: number) =>
       <CustomToken option={option} index={index} onRemove={onRemove} />

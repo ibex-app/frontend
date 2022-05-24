@@ -10,7 +10,7 @@ export const FormComponent = ({ formData, className, formValues, onValuesChange 
       <div className="tax-title-line">
         <div className="tax-mid">{title}</div>
       </div>
-      <Row justify="center">
+      <Row justify="center" className="tax-scroll">
         <Space className="tax-mid mt-20" direction="vertical" size="middle">
           {children.map((el: any) => (
             <Space key={el.id} size="middle" direction="vertical" style={{ display: 'flex' }}>

@@ -2107,11 +2107,15 @@ button.ant-btn span{
 }
 
 .rbt .rbt-menu a.dropdown-item{
-  
+  display: flex;
+  align-items: center;
   border-radius: 4px;
   padding: 4px 11px 5px 11px;
   font-size: 1em;
   height: auto;
+}
+.rbt .rbt-menu a.dropdown-item span{
+  padding-left: 8px
 }
 .rbt .rbt-menu a.dropdown-item.active{
   color: white;
@@ -2205,4 +2209,19 @@ margin-top: 30px;
 
 .tax-toggle-cont{
   margin-top: 20px;
+}
+
+
+#root{
+  height: 100vh;
+  overflow: hidden;
+}
+.date-interval{
+  width: calc(100% - 28px);
+}
+.date-interval  div.ant-space-item{
+  width: 50%;
+}
+.date-interval  div.ant-picker{
+  width: 100%;
 }

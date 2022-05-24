@@ -15,7 +15,7 @@ export const DateInterval = ({ children }: { children: FormElement[] }) => {
       <span className={`checkmark ${isOnGoing ? 'checked' : ''}`} onClick={() => setIsOnGoing(!isOnGoing)}></span>
     </Row>
     <Row>
-      <Space size='middle'>
+      <Space size='middle' className='date-interval'>
         {getElem(children[0])}
         {getElem({ ...children[1], disabled: isOnGoing, placeholder: isOnGoing ? 'End date not required' : 'Select date' })}
       </Space>
