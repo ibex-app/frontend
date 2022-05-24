@@ -8,14 +8,14 @@ export const FormComponent = ({ formData, className, formValues, onValuesChange 
   return (
     <Form className={className} onValuesChange={onValuesChange} layout="vertical">
       <div className="tax-title-line">
-        <div className="tax-mid">{title}</div>
+        <div className="tax-mid">{title} <Link to='/'>              <Button>Exit</Button>            </Link> </div>
       </div>
       <Row justify="center" className="tax-scroll">
         <Space className="tax-mid mt-20" direction="vertical" size="middle">
           {children.map((el: any) => (
             <Space key={el.id} size="middle" direction="vertical" style={{ display: 'flex' }}>
               {getElem(el)}
-              <div className="tax-line"></div>
+              {/* <div className="tax-line"></div> */}
             </Space>
           ))
           }

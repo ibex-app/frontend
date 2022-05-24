@@ -25,7 +25,7 @@ const TypeaheadOverride: any = Typeahead;
 const CustomToken = ({ option, index, onRemove }: CustomTokenInput) => {
   console.log(option)
   return <div className="rbt-token rbt-token-removeable" tabIndex={index}>
-    {option.icon ? <>{option.icon && platformIcon(option.icon)} {option.label}</> : option.label}
+    {option.icon ? <>{option.icon && platformIcon(option.icon)} {option.label}</> : option.label || option}
     <button tabIndex={-1} aria-label="Remove" className="close rbt-close rbt-token-remove-button" type="button" onClick={() => {
       onRemove(index);
     }}>

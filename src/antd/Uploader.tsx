@@ -17,13 +17,19 @@ export function Uploader({ element }: { element: FormElement }) {
             </label>
             <div className={`tax-toggle-cont ${show ? 'tax-toggle-cont-show' : ''}`} >
                 {
-                    children && children.map((el: any) => (
-                        <div key={el.id}>
-                            {getElem(el)}
-                            <div className="tax-line"></div>
-                        </div>
-                    ))
+                    children && <div key={children[0].id}>
+                                    {getElem(children[0])}
+                                </div>
                 }
+                <div className="tax-line-cont"> 
+                    <div className="tax-line"></div> <div className="tax-line-or">OR</div>
+                </div>
+                {
+                    children && <div key={children[1].id}>
+                                    {getElem(children[1])}
+                                </div>
+                }
+
             </div>
         </div>
     );

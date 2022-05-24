@@ -1996,20 +1996,22 @@ main.main .main-dashboard {
 
 /* New Epoch */
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:wght@700;800');
+/* @import url('https://fonts.googleapis.com/css?family=Open+Sans:wght@700;800'); */
 
 *{
-  font-family: "Open Sans", sans-serif;
+  font-family: sans-serif;
 }
 
 
 .dropdown-item.active {
-  background: #4670be;
-  color: white;
+  /* background: #4670be; */
+  /* color: white; */
 }
 
-.rbt-input-wrapper{
-  height: 100%;
+.rbt-input-wrapper {
+  flex-wrap: wrap;
+  display: flex;
+  gap: 3px;
 }
 
 input.ant-input, input, textarea, textarea.ant-input, div.rbt, div.ant-picker{
@@ -2081,7 +2083,6 @@ button.ant-btn span{
   padding: 4px 25px 5px 11px;
   font-size: 1em;
   position: relative;
-  margin-right: 3px;
 }
 
 .rbt-input-main {
@@ -2090,14 +2091,14 @@ button.ant-btn span{
 }
 
 .rbt-menu.dropdown-menu{
-  margin-top: 5px;
-  background: white;
+  margin-top: 9px;
+  background: #f4f4f5;
   border-radius: 7px;
-  width: calc(100% + 4px) !important;
-  margin-left: -4px;
-  border: 2px solid #d5d5d5;
+  width: calc(100% + -3px) !important;
+  margin-left: -1px;
   padding: 0 3px;
   z-index: 5;
+  box-shadow: 0 0 4px 2px #85848475;
 }
 
 .rbt .rbt-menu a{
@@ -2117,13 +2118,12 @@ button.ant-btn span{
 .rbt .rbt-menu a.dropdown-item span{
   padding-left: 8px
 }
-.rbt .rbt-menu a.dropdown-item.active{
-  color: white;
-  background: #4670be;
+.rbt .rbt-menu a.dropdown-item.active, .rbt .rbt-menu a.dropdown-item.active span{
+  /* color: white; */
+  background: #c9d6ec;
 }
 .dropdown-item.active mark {
-  color: white;
-
+  /* color: white; */
 }
 .dropdown-item mark {
   background-color: transparent;
@@ -2134,7 +2134,7 @@ button.ant-btn span{
 
 .tax-large-title {
   margin-bottom: 20px;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 1.4em;
 }
 
@@ -2224,4 +2224,19 @@ margin-top: 30px;
 }
 .date-interval  div.ant-picker{
   width: 100%;
+}
+
+.ant-col.ant-form-item-label {
+  margin: 9px 0 6px 0;
+}
+
+.tax-title-line a {
+  height: 60%;
+}
+
+.tax-title-line button.ant-btn{
+  position: absolute;
+  right: 14px;
+  padding: 4px 27px;
+  font-size: .8em;
 }

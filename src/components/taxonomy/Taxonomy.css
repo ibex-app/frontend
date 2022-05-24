@@ -167,7 +167,7 @@ input[type="checkbox"] {
 }
 
 .tax-line {
-    border-bottom: 1px solid #bcbcbc66;
+    border-bottom: 3px solid #bcbcbc66;
 }
 
 .tax-tip {
@@ -258,6 +258,7 @@ input[type="checkbox"] {
     right: 4px;
     left: auto;
     background: white;
+    font-size: 1em;
 }
 
 /* file upload */
@@ -464,4 +465,19 @@ table {
 .tax-scroll{
     height: calc(100vh - 61px);
     overflow: scroll;
+}
+
+.tax-line-cont{
+    position: relative;
+}
+
+
+.tax-line-or {
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    background: #fafafa;
+    padding: 0 20px;
+    font-weight: bold;
+    color: #717171;
 }
