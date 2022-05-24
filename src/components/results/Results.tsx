@@ -10,6 +10,8 @@ import { BubbleChart } from '../charts/bubble/BubbleChart';
 import { Space } from "antd";
 import { useMemo, useState } from "react";
 import { Posts } from "../../antd/Posts";
+import { Sidebar } from '../sidebar/Sidebar';
+import { Col, Row } from "antd";
 
 export function Results() {
   const { search } = useLocation();
@@ -17,16 +19,23 @@ export function Results() {
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
   return (
-    <Space direction="vertical">
-      <Filter onChange={setFilter} />
-      <Routes>
-        <Route path="/" element={<Posts filter={{ ...filter, monitor_id }} allowRedirect />} />
-        <Route path="bar" element={<BarChart />} />
-        <Route path="graph" element={<GraphChart />} />
-        <Route path="line" element={<LineChart />} />
-        <Route path="map" element={<MapChart />} />
-        <Route path="bubble" element={<BubbleChart />} />
-      </Routes>
-    </Space>
+    <Row style={{ height: "100vh" }}>
+      <Col span={3}>
+        <Sidebar />
+      </Col>
+      <Col span={21}>
+        <Space direction="vertical">
+          <Filter onChange={setFilter} />
+          <Routes>
+            <Route path="/" element={<Posts filter={{ ...filter, monitor_id }} allowRedirect />} />
+            <Route path="bar" element={<BarChart />} />
+            <Route path="graph" element={<GraphChart />} />
+            <Route path="line" element={<LineChart />} />
+            <Route path="map" element={<MapChart />} />
+            <Route path="bubble" element={<BubbleChart />} />
+          </Routes>
+        </Space>
+      </Col>
+  </Row>
   );
 }

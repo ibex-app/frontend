@@ -80,6 +80,8 @@
     height: 61px;
     background: #fff;
     border-bottom: 2px solid #d0d0d0;
+    position: fixed;
+    z-index: 7;
 }
 
 .tax-mid {

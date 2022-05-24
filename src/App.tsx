@@ -4,7 +4,6 @@ import { Results } from './components/results/Results';
 import { Taxonomy } from './components/taxonomy/Taxonomy';
 import { Sources } from './components/sources/Sources';
 import { Details } from './components/details/Details';
-import { Sidebar } from './components/sidebar/Sidebar';
 import { Login } from './components/login/Login';
 import { PrivateRoutes } from './components/private-routes/PrivateRoutes';
 import { useGlobalState } from './app/store';
@@ -35,8 +34,7 @@ function App() {
           <title>{"ibex"}</title>
         </Helmet>
       </HelmetProvider>
-      <Sidebar />
-      <Col span={21} style={{ marginBottom: "40px" }}>
+      <Col span={24} style={{ marginBottom: "40px" }}>
         <Routes>
           <Route path="/" element={<PrivateRoutes />} >
             <Route path="/" element={<Results />} />

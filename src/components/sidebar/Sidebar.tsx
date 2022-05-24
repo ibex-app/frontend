@@ -36,7 +36,7 @@ export function Sidebar() {
     setUser({})
   }
   return (
-    <Col span={2} className="sidebar">
+    <Col span={21} className="sidebar">
       <div className="logo">
         <h1></h1>
       </div>

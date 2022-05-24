@@ -42,7 +42,7 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
 
   const newChecker = (results: Array<Object | string>, props: any) => {
     const selected = map<{ label: string }, string>(({ label }) => label)(props.selected);
-
+    // TODO filter accounts by platform+title
     return selected.indexOf(props.text) < 0;
   }
 
