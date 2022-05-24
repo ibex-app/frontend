@@ -1,5 +1,5 @@
 import { fold } from "fp-ts/lib/Either";
-import { lensPath, pipe, set } from "ramda";
+import { lensPath, map, pipe, set, view } from "ramda";
 import { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { FormComponent } from "../../antd/Form";
@@ -9,6 +9,8 @@ import { TaxonomyResults } from "./Results";
 export const { data }: { data: any[] } = require('../../data/taxonomy/taxonomy.json');
 
 const accountLens = lensPath([1, 'children', 3, 'children', 0, 'list']);
+const accountsSelectedLens = lensPath([1, 'children', 3, 'children', 0, 'selected']);
+const keywordsLens = lensPath([1, 'children', 0, 'children', 0, 'selected']);
 
 export function Taxonomy() {
   const [formData, setFormData] = useState(data);
@@ -22,7 +24,21 @@ export function Taxonomy() {
   const substring = useDebounce(accountSubstr, 500);
 
   const onValuesChange = (changed: any, values: any) => {
-    const { accounts, platforms } = changed;
+    const { accounts, platforms, search_terms_upload, accounts_upload } = changed;
+
+    if (search_terms_upload) {
+      pipe(
+        set(keywordsLens, search_terms_upload),
+        setFormData
+      )(formData)
+    }
+
+    if (accounts_upload) {
+      pipe(
+        set(accountsSelectedLens, accounts_upload),
+        setFormData
+      )(formData)
+    }
 
     if (accounts && typeof accounts === 'string') {
       setAccountSubstr(accounts);
@@ -40,10 +56,6 @@ export function Taxonomy() {
       setFormData
     )(formData);
   }, [accountSuggestions])
-
-  // useEffect(() => {
-  //   console.log(form);
-  // }, [form]);
 
   // if platforms or debounced substring from account changes, we suggest new options
   useEffect(() => {

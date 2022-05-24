@@ -23,10 +23,14 @@ interface Checkbox {
   checked?: boolean
 }
 
+
+export type Option = { label: string, icon?: string };
+
 interface Tag {
   allowNew?: boolean,
-  list?: string[],
-  checkBoolUpper?: boolean
+  list?: Option[],
+  checkBoolUpper?: boolean,
+  selected?: Option[]
 }
 
 interface Input {
