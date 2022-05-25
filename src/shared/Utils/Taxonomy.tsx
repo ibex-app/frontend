@@ -5,9 +5,9 @@ import { filterHasOperator } from "../Utils";
 
 export const createFilterElem = ({ hasOp, s, op }: FilterElemPartial): FilterElem => {
   if (!hasOp || op === undefined) return { hasOp: false, left: s };
-  const opStartIndex = s.toLowerCase().indexOf(op);
+  const opStartIndex = s.toLowerCase().indexOf(` ${op} `);
   const left = s.substring(0, opStartIndex);
-  const right = s.substring(opStartIndex + op.length);
+  const right = s.substring(opStartIndex + op.length + 2);
 
   return { hasOp, left: trim(left), right: trim(right), op: op.toUpperCase() };
 }
@@ -21,7 +21,7 @@ export const drawFilterItem = pipe<any, string, FilterElemPartial, FilterElem, J
     hasOp ? <Space>
       <span className="keyword">{left}</span>
       <span className="op">{op}</span>
-      <span className="keyword">{right}</span>
+      {drawFilterItem({ search_term: right })}
     </Space> : <span className="keyword">{left}</span>
 )
 

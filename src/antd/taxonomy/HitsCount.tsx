@@ -1,7 +1,8 @@
 import { Form, Input, Space, Table } from "antd";
 import { concat, pipe, prop } from "ramda";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { generateHitsCountTableData, generateHitsCountTableItem } from "../../components/taxonomy/Data";
+import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
 import { hitCountCols, hitsCountFormItem } from "../../data/taxonomy/HitCounts";
 import { Get } from "../../shared/Http";
 import { HitsCountItemWithKey, HitsCountResponse, HitsCountTableItem } from "../../types/taxonomy";
@@ -23,6 +24,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>();
   const [newHitsCount, setNewHitsCount] = useState<HitsCountItemWithKey[]>();
   const [hitCountsSelected, setHitCountSelection] = useState<HitsCountTableItem[]>([]);
+  const { userSelection } = useContext(TaxonomyContext);
 
   useEffect(() => {
     Get<HitsCountResponse>('get_hits_count', { id: monitor_id }).then(pipe(generateHitsCountTableData, setData));
@@ -55,14 +57,17 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   }
 
   const addNewHitsCount = pipe(
-    prop<"0", string>("0"),
     (keyword: string) => generateHitsCountTableItem(keyword, { search_term: keyword }),
     (item: HitsCountItemWithKey) => newHitsCount ? concat([item], newHitsCount) : [item],
     setNewHitsCount
   )
 
+  useEffect(() => {
+    userSelection && addNewHitsCount(userSelection)
+  }, [userSelection])
+
   return <div className="leftbox-inner">
-    <Form onFinish={addNewHitsCount}>
+    <Form onFinish={(obj) => addNewHitsCount(obj[0])}>
       <Space size="small">
         {getElem(hitsCountFormItem)}
         {getElem({ id: 1, type: "button", label: "Add" })}

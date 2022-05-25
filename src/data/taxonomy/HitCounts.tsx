@@ -16,7 +16,7 @@ export const hitCountCols = [
     title: "Keyword",
     dataIndex: "search_term",
     key: "search_term",
-    render: (text: string) => drawFilterItem({ search_term: text }),
+    render: (text: string) => text && drawFilterItem({ search_term: text })
   },
   {
     title: <FontAwesomeIcon icon={faFacebook} />,

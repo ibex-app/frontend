@@ -1,13 +1,16 @@
+import { Popover } from "antd";
 import { useContext, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
-import { textContainsStringFromSet } from "../../shared/Utils";
+import { stopWords, textContainsStringFromSet } from "../../shared/Utils";
+import { Suggestions } from "./Suggestions";
 
 type Input = {
   text: string
 }
 
 const lengthOfTextForShowMore = 80;
+const regex = /[a-zA-Z]/;
 
 export const Text = ({ text }: Input) => {
   const location = useLocation();
@@ -17,8 +20,16 @@ export const Text = ({ text }: Input) => {
   const splitted = text.trim().split(/\s+/);
 
   const getText = (text: string, index: number) => {
+    if (!text.match(regex) || text.match(regex)?.length == 0) return text + " ";
+    if (stopWords.includes(text.toLowerCase())) return text + " ";
+
     const highlight = isTaxonomy ? textContainsStringFromSet(text, taxonomyContext.highlightWords) : false;
-    return <span key={`${text}-${index}`} className={highlight ? "highlight" : ""}>{text} </span>
+
+    return <>
+      {isTaxonomy
+        ? <Suggestions text={text} highlight={highlight} index={index} selection={taxonomyContext.hitsCountSelection} />
+        : text + " "}
+    </>
   }
 
   const isTaxonomy = useMemo(() => {

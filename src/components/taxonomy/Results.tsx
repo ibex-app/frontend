@@ -22,6 +22,7 @@ export const TaxonomyResults = () => {
   const [monitor, setMonitor] = useState<Monitor>();
   const [hitsCount, setHitsCount] = useState<HitsCountOutput>();
   const [keywordsFilter, setKeywordsFilter] = useState<string[]>();
+  const [userSelection, setUserSelection] = useState<string>();
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
@@ -44,7 +45,12 @@ export const TaxonomyResults = () => {
   }, [hitsCount]);
 
   return (
-    <TaxonomyContext.Provider value={{ highlightWords: highlightWords }}>
+    <TaxonomyContext.Provider value={{
+      highlightWords,
+      hitsCountSelection: hitsCount?.selected,
+      userSelection,
+      setUserSelection
+    }}>
       <Row>
         <Col span={8}>
           <Space direction="vertical" style={{ display: "flex" }}>
