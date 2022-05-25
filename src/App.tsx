@@ -28,13 +28,13 @@ function App() {
   }
 
   return (
-    <Row style={{ height: "100vh" }}>
+    <Row>
       <HelmetProvider>
         <Helmet>
           <title>{"ibex"}</title>
         </Helmet>
       </HelmetProvider>
-      <Col span={24} style={{ marginBottom: "40px" }}>
+      <Col span={24}>
         <Routes>
           <Route path="/" element={<PrivateRoutes />} >
             <Route path="/" element={<Results />} />

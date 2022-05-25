@@ -1998,7 +1998,7 @@ main.main .main-dashboard {
 
 /* @import url('https://fonts.googleapis.com/css?family=Open+Sans:wght@700;800'); */
 
-*{
+* {
   font-family: sans-serif;
 }
 
@@ -2014,31 +2014,42 @@ main.main .main-dashboard {
   gap: 3px;
 }
 
-input.ant-input, input, textarea, textarea.ant-input, div.rbt, div.ant-picker{
+input.ant-input,
+input,
+textarea,
+textarea.ant-input,
+div.rbt,
+div.ant-picker {
   border-radius: 7px;
-padding: 4px 10px;
-border: 2px solid #d5d5d5;
-font-size: 1.2em;
-outline: none;
-resize: none;
+  padding: 4px 10px;
+  border: 2px solid #d5d5d5;
+  font-size: 1.2em;
+  outline: none;
+  resize: none;
 }
-div.ant-picker{
-padding: 6px 10px;
+
+div.ant-picker {
+  padding: 6px 10px;
 
 }
-div.ant-picker:hover{
+
+div.ant-picker:hover {
   border: 2px solid #d5d5d5;
 }
+
 .ant-input:hover {
   border: 2px solid #d5d5d5;
 }
-div.rbt{
+
+div.rbt {
   padding: 2px;
   height: auto;
 }
-.rbt-input-multi.form-control.rbt-input{
+
+.rbt-input-multi.form-control.rbt-input {
   width: 100%;
 }
+
 .close.rbt-close.rbt-token-remove-button {
   border: none;
   padding: 0px 6px;
@@ -2047,15 +2058,19 @@ div.rbt{
   position: absolute;
   right: 0;
 }
-.close.rbt-close.rbt-token-remove-button span{
+
+.close.rbt-close.rbt-token-remove-button span {
   color: white;
 }
-label, .ant-form label{
+
+label,
+.ant-form label {
   font-size: 1.2em;
 }
 
 
-button, button.ant-btn{
+button,
+button.ant-btn {
   border-radius: 100px;
   font-size: 1.1em;
   padding: 8px 88px;
@@ -2064,13 +2079,16 @@ button, button.ant-btn{
   color: #4670be;
   border: 2px solid #4670BEDE;
 }
-button.ant-btn:hover{
+
+button.ant-btn:hover {
   border: 2px solid #4670BEDE;
 }
-.leftbox-inner button.ant-btn{
+
+.leftbox-inner button.ant-btn {
   background-color: white;
 }
-button.ant-btn span{
+
+button.ant-btn span {
   color: #4670be;
   font-weight: bold;
   font-size: 1.1em;
@@ -2090,7 +2108,7 @@ button.ant-btn span{
   font-size: 1em;
 }
 
-.rbt-menu.dropdown-menu{
+.rbt-menu.dropdown-menu {
   margin-top: 9px;
   background: #f4f4f5;
   border-radius: 7px;
@@ -2101,13 +2119,13 @@ button.ant-btn span{
   box-shadow: 0 0 4px 2px #85848475;
 }
 
-.rbt .rbt-menu a{
+.rbt .rbt-menu a {
   background: none;
   border: none;
   margin-inline-end: 0;
 }
 
-.rbt .rbt-menu a.dropdown-item{
+.rbt .rbt-menu a.dropdown-item {
   display: flex;
   align-items: center;
   border-radius: 4px;
@@ -2115,16 +2133,21 @@ button.ant-btn span{
   font-size: 1em;
   height: auto;
 }
-.rbt .rbt-menu a.dropdown-item span{
+
+.rbt .rbt-menu a.dropdown-item span {
   padding-left: 8px
 }
-.rbt .rbt-menu a.dropdown-item.active, .rbt .rbt-menu a.dropdown-item.active span{
+
+.rbt .rbt-menu a.dropdown-item.active,
+.rbt .rbt-menu a.dropdown-item.active span {
   /* color: white; */
   background: #c9d6ec;
 }
+
 .dropdown-item.active mark {
   /* color: white; */
 }
+
 .dropdown-item mark {
   background-color: transparent;
   font-weight: bold;
@@ -2142,8 +2165,8 @@ button.ant-btn span{
   width: 19%;
 }
 
-.top-filters{
-  padding-top:10px;
+.top-filters {
+  padding-top: 10px;
 }
 
 .top-filters .ant-picker {
@@ -2155,7 +2178,7 @@ button.ant-btn span{
   font-size: 0.9em;
 }
 
-.top-filters .ant-col.ant-form-item-label label{
+.top-filters .ant-col.ant-form-item-label label {
   color: gray;
 }
 
@@ -2163,12 +2186,12 @@ button.ant-btn span{
   padding-top: 5px;
 }
 
-.tax-toggle-cont input[type="file"]{
+.tax-toggle-cont input[type="file"] {
   display: none;
 }
 
 
-.file-upload-wrapper label{
+.file-upload-wrapper label {
   background: white;
   border: none;
   border-radius: 18px;
@@ -2178,51 +2201,53 @@ button.ant-btn span{
   height: auto;
 }
 
-.file-upload-wrapper label svg{
+.file-upload-wrapper label svg {
   display: none;
 }
 
-.file-upload-wrapper label .file-types{
+.file-upload-wrapper label .file-types {
   display: none;
 
 }
 
-.file-upload-wrapper label > div > span{
+.file-upload-wrapper label>div>span {
   text-align: center;
   width: 100%;
 }
 
-.file-upload-wrapper label > div > span::after{
+.file-upload-wrapper label>div>span::after {
   content: "Browse file";
-border-radius: 100px;
-font-size: 1.1em;
-padding: 8px 8px;
-height: auto;
-font-weight: bold;
-color: white;
-background: #4670be;
-display: block;
-width: 140px;
-margin-left: calc(50% - 70px);
-margin-top: 30px;
+  border-radius: 100px;
+  font-size: 1.1em;
+  padding: 8px 8px;
+  height: auto;
+  font-weight: bold;
+  color: white;
+  background: #4670be;
+  display: block;
+  width: 140px;
+  margin-left: calc(50% - 70px);
+  margin-top: 30px;
 }
 
-.tax-toggle-cont{
+.tax-toggle-cont {
   margin-top: 20px;
 }
 
 
-#root{
+#root {
   height: 100vh;
-  overflow: hidden;
 }
-.date-interval{
+
+.date-interval {
   width: calc(100% - 28px);
 }
-.date-interval  div.ant-space-item{
+
+.date-interval div.ant-space-item {
   width: 50%;
 }
-.date-interval  div.ant-picker{
+
+.date-interval div.ant-picker {
   width: 100%;
 }
 
@@ -2234,7 +2259,7 @@ margin-top: 30px;
   height: 60%;
 }
 
-.tax-title-line button.ant-btn{
+.tax-title-line button.ant-btn {
   position: absolute;
   right: 14px;
   padding: 4px 27px;

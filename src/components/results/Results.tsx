@@ -19,8 +19,8 @@ export function Results() {
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
   return (
-    <Row style={{ height: "100vh" }}>
-      <Col span={3}>
+    <Row >
+      <Col span={3} style={{ height: "100vh", position: "sticky", top: "0" }}>
         <Sidebar />
       </Col>
       <Col span={21}>
@@ -36,6 +36,6 @@ export function Results() {
           </Routes>
         </Space>
       </Col>
-  </Row>
+    </Row>
   );
 }
