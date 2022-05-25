@@ -14,6 +14,7 @@ type Input = {
 
 export type HitsCountOutput = {
   selected: HitsCountTableItem[],
+  all?: HitsCountTableItem[],
   new?: HitsCountItemWithKey[]
 }
 
@@ -27,12 +28,20 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     Get<HitsCountResponse>('get_hits_count', { id: monitor_id }).then(pipe(generateHitsCountTableData, setData));
   }, [monitor_id]);
 
-  useEffect(() => { setHitsCountTableData(data) }, [data]);
+  useEffect(() => {
+    setHitsCountTableData(data);
+    toParent && toParent({
+      selected: hitCountsSelected,
+      new: newHitsCount,
+      all: data
+    })
+  }, [data]);
 
   useEffect(() => {
     if (toParent) toParent({
       selected: hitCountsSelected,
-      new: newHitsCount
+      new: newHitsCount,
+      all: data
     });
   }, [hitCountsSelected, newHitsCount]);
 

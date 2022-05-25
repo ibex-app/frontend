@@ -7,13 +7,15 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
 import { Get } from '../../shared/Http';
-import { join, map, pipe } from "ramda";
+import { map, pipe } from "ramda";
 import { Col, Row, Space } from "antd";
 import { HitsCountTableItem, Monitor, MonitorRespose } from "../../types/taxonomy";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Posts } from "../../antd/Posts";
 import { HitsCount, HitsCountOutput } from "../../antd/taxonomy/HitsCount";
 import { Recommendations } from "../../antd/taxonomy/Recomendations";
+import { TaxonomyContext } from "./TaxonomyContext";
+import { getAllKeywordsWithoutOperator } from "../../shared/Utils";
 
 export const TaxonomyResults = () => {
   const { search } = useLocation();
@@ -22,6 +24,11 @@ export const TaxonomyResults = () => {
   const [keywordsFilter, setKeywordsFilter] = useState<string[]>();
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
+
+  const highlightWords = useMemo(() => {
+    const searchTerms = hitsCount?.all?.map(({ search_term }) => search_term);
+    return searchTerms ? getAllKeywordsWithoutOperator(searchTerms) : [];
+  }, [hitsCount?.all]);
 
   useEffect(() => {
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
@@ -34,24 +41,26 @@ export const TaxonomyResults = () => {
         map(({ search_term }: HitsCountTableItem) => search_term),
         setKeywordsFilter
       )(hitsCount.selected) : setKeywordsFilter([]);
-  }, [hitsCount])
+  }, [hitsCount]);
 
   return (
-    <Row>
-      <Col span={8}>
-        <Space direction="vertical" style={{ display: "flex" }}>
-          <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
-          <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
-          <Recommendations monitor_id={monitor_id} />
-        </Space>
-      </Col>
-      <Col span={16} style={{ color: "#F4F4F5" }}>
-        {hitsCount?.selected.length && <Space className="flex search-header">
-          Search results for {map(drawFilterItem, hitsCount.selected)}
-        </Space>}
-        <Posts key="postsTaxonomy" filter={{ monitor_id, search_terms: keywordsFilter }} />
-      </Col>
-    </Row>
+    <TaxonomyContext.Provider value={{ highlightWords: highlightWords }}>
+      <Row>
+        <Col span={8}>
+          <Space direction="vertical" style={{ display: "flex" }}>
+            <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
+            <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
+            <Recommendations monitor_id={monitor_id} />
+          </Space>
+        </Col>
+        <Col span={16} style={{ color: "#F4F4F5" }}>
+          {hitsCount?.selected.length && <Space className="flex search-header">
+            Search results for {map(drawFilterItem, hitsCount.selected)}
+          </Space>}
+          <Posts key="postsTaxonomy" filter={{ monitor_id, search_terms: keywordsFilter }} />
+        </Col>
+      </Row>
+    </TaxonomyContext.Provider>
   )
 }
 

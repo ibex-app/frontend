@@ -36,3 +36,7 @@
   line-height: 21px;
   text-decoration-line: underline;
 }
+
+.post-content .highlight {
+  color: #DD7A1E;
+}

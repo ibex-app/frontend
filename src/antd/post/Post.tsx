@@ -1,11 +1,9 @@
-import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row, Space } from "antd";
 import { PostType } from "../../types/common";
-import ReactShowMoreText from "react-show-more-text";
 
 import "./post.css";
 import { platformIcon } from "../../shared/Utils";
+import { Text } from "./Text";
 
 export const Post = ({ post }: { post: PostType }) => {
   const { title, text, created_at, image_url, url, platform } = post;
@@ -17,13 +15,7 @@ export const Post = ({ post }: { post: PostType }) => {
           <h1>{title}</h1>
           {created_at.$date && <h3>{new Date(created_at.$date).toLocaleDateString()}</h3>}
         </div>
-        <ReactShowMoreText
-          lines={4}
-          more={"Show More"}
-          less={"Show Less"}
-          className="post-text"
-          anchorClass="show-more"
-        >{text}</ReactShowMoreText>
+        <Text text={text} />
         <span>{platform && platformIcon(platform)} <a href={url}>{url}</a></span>
       </Space>
     </Col>

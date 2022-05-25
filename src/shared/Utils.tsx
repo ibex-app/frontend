@@ -4,6 +4,7 @@ import { FilterElemPartial } from "../types/taxonomy";
 import { match } from 'ts-pattern';
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Map } from "typescript";
 
 export const dateFormat = "DD.MM.YYYY";
 
@@ -73,6 +74,11 @@ export const filterOperatorUpper = ({ hasOp, s, op }: FilterElemPartial): string
   return s.replace(op, op.toUpperCase());
 }
 
+export const getAllKeywordsWithoutOperator = (searchTerms: string[]): Array<string> =>
+  [...new Set(searchTerms.flatMap((s) =>
+    reduce((acc, op) => acc.toLowerCase().replaceAll(` ${op} `, ' '), s, boolOperators).split(" ")
+  ))];
+
 export const useDebounce = (value: any, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(
@@ -95,3 +101,6 @@ export const platformIcon = (platform: string) =>
     .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
     .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
     .otherwise(() => undefined)
+
+export const textContainsStringFromSet = (text: string, array: Array<string>) =>
+  reduce<string, boolean>((acc, s) => acc || text.toLowerCase().includes(s), false, array)
