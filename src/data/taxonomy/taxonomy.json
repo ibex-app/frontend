@@ -4,7 +4,7 @@
       "id": "form1",
       "title": "Data Collection",
       "path": "init",
-      "redirect": "../params",
+      "redirect": "/taxonomy/params",
       "children": [
         {
           "id": "title",
@@ -34,7 +34,7 @@
       "id": "form2",
       "title": "Data Collection",
       "path": "params",
-      "redirect": "../results",
+      "redirect": "/taxonomy/results",
       "children": [
         {
           "id": "search_terms",
@@ -63,12 +63,16 @@
         {
           "id": "date",
           "title": "Date Range",
-          "required": true,
+          "rules": [
+            {
+              "required": true
+            }
+          ],
           "type": "date_interval",
           "tip": "On-going monitor would add newly created posts to the report in real-time",
           "children": [
             {
-              "id": "date_start",
+              "id": "date_from",
               "type": "date"
             },
             {
@@ -81,7 +85,11 @@
           "id": "platforms",
           "title": "Platforms",
           "type": "checkbox-group",
-          "required": true,
+          "rules": [
+            {
+              "required": true
+            }
+          ],
           "children": [
             {
               "id": "twitter",
@@ -143,7 +151,11 @@
           "id": "languages",
           "title": "What are the languages used in your data sources?",
           "type": "tag",
-          "required": true,
+          "rules": [
+            {
+              "required": true
+            }
+          ],
           "value": [],
           "allowNew": false,
           "list": [

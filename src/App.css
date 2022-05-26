@@ -2078,6 +2078,7 @@ button.ant-btn {
   font-weight: bold;
   color: #4670be;
   border: 2px solid #4670BEDE;
+  background: #fff;
 }
 
 button.ant-btn:hover {

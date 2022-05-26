@@ -1,7 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import { Filter } from '../filter/Filter';
-import { Table } from '../table/Table';
 import { BarChart } from '../charts/bar/BarChart';
 import { GraphChart } from '../charts/graph/GraphChart';
 import { LineChart } from '../charts/line/LineChart';

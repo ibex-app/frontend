@@ -2,11 +2,11 @@ import { Button, Form, Row, Space } from "antd";
 import { Link } from "react-router-dom";
 import { getElem } from "./utils/ElementGetter";
 
-export const FormComponent = ({ formData, className, formValues, onValuesChange }: any) => {
+export const FormComponent = ({ formData, className, formValues, onValuesChange, onSubmit }: any) => {
   const { title, redirect, children } = formData;
 
   return (
-    <Form className={className} onValuesChange={onValuesChange} layout="vertical">
+    <Form className={className} onValuesChange={onValuesChange} layout="vertical" onFinish={onSubmit}>
       <div className="tax-title-line">
         <div className="tax-mid">{title} <Link to='/'>              <Button>Exit</Button>            </Link> </div>
       </div>
@@ -21,9 +21,9 @@ export const FormComponent = ({ formData, className, formValues, onValuesChange 
           }
 
           {redirect &&
-            <Link to={redirect}>
-              <Button>Next</Button>
-            </Link>
+            <Button type="primary" htmlType="submit">
+              Next
+            </Button>
           }
         </Space>
       </Row>

@@ -23,41 +23,28 @@ export const drawFilterItem = pipe<any, string, FilterElemPartial, FilterElem, J
       <span className="op">{op}</span>
       {drawFilterItem({ search_term: right })}
     </Space> : <span className="keyword">{left}</span>
-)
+);
+
+export const finalizeForm = ({ form1, form2 }: any) => ({
+  ...form1,
+  ...form2,
+  date_from: form2.date_from.toISOString(),
+  date_end: form2.date_end?.toISOString(),
+  search_terms: form2.search_terms.map((search_term: any) => search_term.label),
+  accounts: form2.accounts?.map((account: any) => ({
+    platform: account.platform,
+    platform_id: account.platform_id,
+    title: account.label
+  })),
+});
 
 // const [monitor, setMonitor]: any = useState();
-  // const [existing, setExisting]: any = useState(false);
-  // const [timeLeft, setTimeLeft]: any = useState(null);
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const navigate = useNavigate();
-  // const [filters, setFilters]: any = useGlobalState('filters');
-  // const { data }: { data: FormElement[] } = require('../../data/filter.json')
-
-
-  // const finalize_form = (form: any) => {
-  //     form.accounts = form.accounts || []
-  //     form.search_terms = form.search_terms || []
-  //     form.search_terms = form.search_terms.map((search_term: any) => search_term.customOption ? search_term.label : search_term)
-
-  //     form.accounts = form.accounts.map((account: any) => ({
-  //         platform: account.platform,
-  //         platform_id: account.platform_id,
-  //         title: account.title
-  //     }))
-
-  //     const data = {
-  //         ...form,
-  //         accounts: form.accounts.map((account: any) => ({
-  //             platform: account.platform,
-  //             platform_id: account.platform_id,
-  //             title: account.title
-  //         })),
-  //     }
-
-  //     delete data['date'];
-  //     // delete data['languages'];
-  //     return data;
-  // }
+// const [existing, setExisting]: any = useState(false);
+// const [timeLeft, setTimeLeft]: any = useState(null);
+// const [searchParams, setSearchParams] = useSearchParams();
+// const navigate = useNavigate();
+// const [filters, setFilters]: any = useGlobalState('filters');
+// const { data }: { data: FormElement[] } = require('../../data/filter.json')
 
   // const estimateTime = (form: any) => {
   //     const timeLeft = (form.search_terms.length || 1) * 8 * form.platforms.length
@@ -107,11 +94,7 @@ export const drawFilterItem = pipe<any, string, FilterElemPartial, FilterElem, J
   //         estimateTime(finalForm)
   //         const createMonitor = Get('create_monitor', finalForm);
 
-  //         createMonitor.then((_data: Response<any>) => {
-  //             let _monitor: any = E.getOrElse(() => [])(_data);
-  //             setSearchParams({ 'monitor_id': _monitor._id })
-  //             setMonitor(_monitor)
-  //         });
+          
   //     }
   // }, [])
 
@@ -125,7 +108,7 @@ export const drawFilterItem = pipe<any, string, FilterElemPartial, FilterElem, J
 
   // useEffect(() => {
   //     if (!monitor) return;
-  //     const collectSample = !existing ? Get('collect_sample', { id: monitor._id }) : new Promise((resolve, reject) => resolve(true))
+      // const collectSample = !existing ? Get('collect_sample', { id: monitor._id }) : new Promise((resolve, reject) => resolve(true))
 
   //     const _timeLeft: number = !existing ? timeLeft : 0
 

@@ -1,43 +1,69 @@
-import { fold } from "fp-ts/lib/Either";
-import { lensPath, map, pipe, set, view } from "ramda";
+import { fold, getOrElse } from "fp-ts/lib/Either";
+import { lensPath, pipe, set } from "ramda";
 import { useEffect, useState } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { FormComponent } from "../../antd/Form";
-import { Get } from "../../shared/Http";
+import { Get, Response } from "../../shared/Http";
 import { useDebounce } from "../../shared/Utils";
 import { TaxonomyResults } from "./Results";
+import { match } from 'ts-pattern';
+import { finalizeForm } from "../../shared/Utils/Taxonomy";
 export const { data }: { data: any[] } = require('../../data/taxonomy/taxonomy.json');
 
 const accountLens = lensPath([1, 'children', 3, 'children', 0, 'list']);
+const accountFormLens = lensPath(["form2", "accounts"]);
 const accountsSelectedLens = lensPath([1, 'children', 3, 'children', 0, 'selected']);
 const keywordsLens = lensPath([1, 'children', 0, 'children', 0, 'selected']);
+const keywordsFormLens = lensPath(["form2", "search_terms"]);
+
+// const finalizeForm = ({form1, form2}: {form1: any, form2: any}) => {
+//       form.accounts = form.accounts || []
+//       form.search_terms = form.search_terms || []
+//       form.search_terms = form.search_terms.map((search_term: any) => search_term.customOption ? search_term.label : search_term)
+
+//       form.accounts = form.accounts.map((account: any) => ({
+//           platform: account.platform,
+//           platform_id: account.platform_id,
+//           title: account.title
+//       }))
+
+//       const data = {
+//           ...form1,
+//           accounts: form.accounts.map((account: any) => ({
+//               platform: account.platform,
+//               platform_id: account.platform_id,
+//               title: account.title
+//           })),
+//       }
+
+//       delete data['date'];
+//       // delete data['languages'];
+//       return data;
+//   }
 
 export function Taxonomy() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(data);
-
-  const [form, setForm] = useState({});
-
+  const [form, setForm] = useState<any>({});
   const [platforms, setPlatforms] = useState([]);
 
   const [accountSubstr, setAccountSubstr] = useState("");
   const [accountSuggestions, setAccountSuggestions] = useState<string[]>();
   const substring = useDebounce(accountSubstr, 500);
 
-  const onValuesChange = (changed: any, values: any) => {
+  const onValuesChange = (changed: any, values: any, formId: string) => {
     const { accounts, platforms, search_terms_upload, accounts_upload } = changed;
 
     if (search_terms_upload) {
-      pipe(
-        set(keywordsLens, search_terms_upload),
-        setFormData
-      )(formData)
+      pipe(set(keywordsLens, search_terms_upload), setFormData)(formData);
+      pipe(set(keywordsFormLens, search_terms_upload), setForm)(form);
+      return;
     }
 
     if (accounts_upload) {
-      pipe(
-        set(accountsSelectedLens, accounts_upload),
-        setFormData
-      )(formData)
+      pipe(set(accountsSelectedLens, accounts_upload), setFormData)(formData);
+      pipe(set(accountFormLens, accounts_upload), setForm)(form);
+      return;
     }
 
     if (accounts && typeof accounts === 'string') {
@@ -47,14 +73,11 @@ export function Taxonomy() {
 
     if (platforms) setPlatforms(platforms);
 
-    setForm({ ...values });
+    setForm({ ...form, [formId]: { ...form[formId], ...changed } });
   }
 
   useEffect(() => {
-    if (accountSuggestions) pipe(
-      set(accountLens, accountSuggestions),
-      setFormData
-    )(formData);
+    if (accountSuggestions) pipe(set(accountLens, accountSuggestions), setFormData)(formData);
   }, [accountSuggestions])
 
   // if platforms or debounced substring from account changes, we suggest new options
@@ -64,12 +87,29 @@ export function Taxonomy() {
     );
   }, [platforms, substring]);
 
+  const onSubmit = (formData: any, values: any) =>
+    match(formData.id)
+      .with("form1", () => navigate(formData.redirect))
+      .with("form2", () => {
+        const createMonitor = Get('create_monitor', finalizeForm(form));
+        createMonitor.then((_data: Response<any>) => {
+          const { _id }: any = getOrElse(() => [])(_data);
+          Get('collect_sample', { id: _id }).then(() => {
+            navigate(`${formData.redirect}?monitor_id=${_id}`);
+          });
+        });
+      })
+      .otherwise(() => "Invalid form data");
 
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/taxonomy/init" />}></Route>
       {formData.map((item, i) => <Route key={`${item.id}_${i}`} path={item.path} element={
-        <FormComponent onValuesChange={onValuesChange} formData={item} formValues={form} />
+        <FormComponent
+          onValuesChange={(changed: any, values: any) => onValuesChange(changed, values, item.id)}
+          formData={item}
+          formValues={form}
+          onSubmit={(values: any) => onSubmit(item, values)} />
       } />)}
       <Route path="/results" element={<TaxonomyResults />}></Route>
     </Routes>
