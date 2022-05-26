@@ -38,14 +38,6 @@ export const finalizeForm = ({ form1, form2 }: any) => ({
   })),
 });
 
-// const [monitor, setMonitor]: any = useState();
-// const [existing, setExisting]: any = useState(false);
-// const [timeLeft, setTimeLeft]: any = useState(null);
-// const [searchParams, setSearchParams] = useSearchParams();
-// const navigate = useNavigate();
-// const [filters, setFilters]: any = useGlobalState('filters');
-// const { data }: { data: FormElement[] } = require('../../data/filter.json')
-
   // const estimateTime = (form: any) => {
   //     const timeLeft = (form.search_terms.length || 1) * 8 * form.platforms.length
   //     console.log('estimateTime', timeLeft)
@@ -101,10 +93,6 @@ export const finalizeForm = ({ form1, form2 }: any) => ({
   // const timeOut = (time: number) => new Promise((resolve, reject) => {
   //     setTimeout(() => resolve(true), time)
   // })
-
-  // useEffect(() => {
-  //     console.log(timeLeft)
-  // }, [timeLeft])
 
   // useEffect(() => {
   //     if (!monitor) return;

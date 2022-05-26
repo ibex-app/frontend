@@ -16,31 +16,6 @@ const accountsSelectedLens = lensPath([1, 'children', 3, 'children', 0, 'selecte
 const keywordsLens = lensPath([1, 'children', 0, 'children', 0, 'selected']);
 const keywordsFormLens = lensPath(["form2", "search_terms"]);
 
-// const finalizeForm = ({form1, form2}: {form1: any, form2: any}) => {
-//       form.accounts = form.accounts || []
-//       form.search_terms = form.search_terms || []
-//       form.search_terms = form.search_terms.map((search_term: any) => search_term.customOption ? search_term.label : search_term)
-
-//       form.accounts = form.accounts.map((account: any) => ({
-//           platform: account.platform,
-//           platform_id: account.platform_id,
-//           title: account.title
-//       }))
-
-//       const data = {
-//           ...form1,
-//           accounts: form.accounts.map((account: any) => ({
-//               platform: account.platform,
-//               platform_id: account.platform_id,
-//               title: account.title
-//           })),
-//       }
-
-//       delete data['date'];
-//       // delete data['languages'];
-//       return data;
-//   }
-
 export function Taxonomy() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(data);
