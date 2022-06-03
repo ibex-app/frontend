@@ -22,7 +22,9 @@ export interface HitsCountItemWithKey extends HitsCountItem {
   youtube: string
 };
 
-export type HitsCountResponse = Array<HitsCountItem>;
+export type HitsCountResponse = {
+  search_terms: Array<HitsCountItem>
+};
 
 export type Monitor = {
   collect_actions: string[];

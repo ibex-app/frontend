@@ -1,5 +1,6 @@
 import { mapWithIndex } from "fp-ts/lib/Array";
 import { fold } from "fp-ts/lib/Either";
+import { pipe, prop } from "ramda";
 import { formatNum } from "../../shared/Utils";
 import { HitsCountItem, HitsCountItemWithKey, HitsCountTableItem } from "../../types/taxonomy";
 
@@ -14,5 +15,8 @@ export const generateHitsCountTableItem =
 
 export const generateHitsCountTableData = fold(
   () => [],
-  mapWithIndex<HitsCountItem, HitsCountTableItem>(generateHitsCountTableItem)
+  pipe(
+    prop<'search_terms', Array<HitsCountItem>>('search_terms'),
+    mapWithIndex<HitsCountItem, HitsCountTableItem>(generateHitsCountTableItem)
+  )
 );

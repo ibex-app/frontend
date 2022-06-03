@@ -27,7 +27,10 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const { userSelection } = useContext(TaxonomyContext);
 
   useEffect(() => {
-    Get<HitsCountResponse>('get_hits_count', { id: monitor_id }).then(pipe(generateHitsCountTableData, setData));
+    Get<HitsCountResponse>('get_hits_count', { id: monitor_id }).then(pipe(
+      generateHitsCountTableData,
+      setData
+    ));
   }, [monitor_id]);
 
   useEffect(() => {
