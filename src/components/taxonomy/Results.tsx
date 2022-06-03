@@ -7,8 +7,8 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
 import { Get } from '../../shared/Http';
-import { map, pipe } from "ramda";
-import { Col, Row, Space } from "antd";
+import { concat, map, pipe } from "ramda";
+import { Button, Col, Row, Space } from "antd";
 import { HitsCountTableItem, Monitor, MonitorRespose } from "../../types/taxonomy";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Posts } from "../../antd/Posts";
@@ -30,6 +30,14 @@ export const TaxonomyResults = () => {
     const searchTerms = hitsCount?.all?.map(({ search_term }) => search_term);
     return searchTerms ? getAllKeywordsWithoutOperator(searchTerms) : [];
   }, [hitsCount?.all]);
+
+  const updateHitsCount = () => {
+    if (hitsCount?.all && hitsCount.new) {
+      console.log(concat(hitsCount.all, hitsCount.new))
+      // TODO
+    }
+
+  }
 
   useEffect(() => {
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
@@ -57,6 +65,9 @@ export const TaxonomyResults = () => {
             <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
             <Recommendations monitor_id={monitor_id} />
+            {hitsCount?.new && <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+              <Button onClick={() => updateHitsCount()}>Update Monitor</Button>
+            </div>}
           </Space>
         </Col>
         <Col span={16} style={{ color: "#F4F4F5" }}>
