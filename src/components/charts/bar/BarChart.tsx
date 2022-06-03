@@ -1,12 +1,6 @@
-import filterData from '../../../data/filter.json';
-import { Typeahead } from 'react-bootstrap-typeahead';
-
-import { useEffect, useMemo, useState } from 'react';
-import { useGlobalState } from '../../../app/store';
-
+import { useEffect, useState } from 'react';
 import { Get, Response, transform_filters_to_request } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
-import React from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -18,8 +12,11 @@ import {
   Legend,
   Filler
 } from 'chart.js';
-import { Line, Bar} from 'react-chartjs-2';
-import faker from 'faker';
+import { Bar } from 'react-chartjs-2';
+
+type Input = {
+  filter: Filter
+}
 
 ChartJS.register(Filler);
 
@@ -75,11 +72,10 @@ export const options = {
 };
 
 
-export function BarChart() {
-  const [filters, _]: any = useGlobalState('filters');
+export function BarChart({ filter }: Input) {
   useEffect(() => {
-    if (Object.keys(filters).length) loadData('platform');
-  }, [filters]);
+    if (Object.keys(filter).length) loadData('platform');
+  }, [filter]);
 
   const [fetching, setFetching] = useState(false);
 
@@ -104,10 +100,9 @@ export function BarChart() {
   }
 
   const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
-    // console.log(filters)
     var dateFrom: Date = new Date(filters.time_interval_from)
     var dateTo: Date = new Date(filters.time_interval_to)
-    dateTo.setDate(dateTo.getDate()+7);
+    dateTo.setDate(dateTo.getDate() + 7);
 
     var interval: number = (dateTo.getTime() - dateFrom.getTime())
     var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
@@ -118,15 +113,13 @@ export function BarChart() {
     var daysThisYear = (dateFrom.getTime() - firstJan.getTime()) / (24 * 60 * 60 * 1000)
     var startWeek = Math.ceil(daysThisYear / 7)
 
-    responce_data.forEach((i:any) => {
-      if(!i[labelType].title){
+    responce_data.forEach((i: any) => {
+      if (!i[labelType].title) {
         i[labelType].title = i[labelType].label
       }
     })
 
     let post_label_values: [] = responce_data.map((i: any) => i[labelType].title).filter((v: any, i: any, a: any) => a.indexOf(v) === i)
-
-    console.log('post_label_values', post_label_values)
 
     let datasets = post_label_values.map((label: any, index: number) => ({
       label: label,
@@ -135,8 +128,8 @@ export function BarChart() {
       fill: true,
       pointBackgroundColor: 'rgba(0,0,0,.3)',
       borderColor: 'rgba(0,0,0,0)',
-      lineTension: .35,        
-      radius: 4  
+      lineTension: .35,
+      radius: 4
     }))
     labels = []
 
@@ -148,9 +141,9 @@ export function BarChart() {
 
       datasets.forEach((dataset: any) => {
         let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id.week == week)
-        if(!match.length){
+        if (!match.length) {
           dataset.data.push(0)
-        } else if (labelType == 'platform'){
+        } else if (labelType == 'platform') {
           let count = match.reduce((a: any, b: any) => a += b.count, 0)
           dataset.data.push(count)
         } else {
@@ -168,7 +161,7 @@ export function BarChart() {
   const loadData = (labelType: string) => {
     setFetching(true)
     const fetchData = Get('posts_aggregated', {
-      post_request_params: transform_filters_to_request(filters),
+      post_request_params: transform_filters_to_request(filter),
       axisX: labelType,
       days: 7
     });
@@ -180,10 +173,9 @@ export function BarChart() {
         return
       }
 
-      let dataset_and_labels: any = generate_dataset(maybeData, labelType, filters)
+      let dataset_and_labels: any = generate_dataset(maybeData, labelType, filter)
       setData(dataset_and_labels);
-      setFetching(false)
-      console.log(dataset_and_labels)
+      setFetching(false);
     });
 
   }
@@ -210,8 +202,3 @@ export function BarChart() {
     </div>
   );
 }
-
-// export default BarChart
-
-
-// 52 + 35 + 11 + 9  = 107

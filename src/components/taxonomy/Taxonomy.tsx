@@ -1,5 +1,5 @@
 import { fold, getOrElse } from "fp-ts/lib/Either";
-import { lensPath, pipe, set } from "ramda";
+import { lensPath, map, pipe, set } from "ramda";
 import { useEffect, useState } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { FormComponent } from "../../antd/Form";
@@ -53,12 +53,12 @@ export function Taxonomy() {
 
   useEffect(() => {
     if (accountSuggestions) pipe(set(accountLens, accountSuggestions), setFormData)(formData);
-  }, [accountSuggestions])
+  }, [accountSuggestions, formData]);
 
   // if platforms or debounced substring from account changes, we suggest new options
   useEffect(() => {
-    if (substring) Get<string[]>('search_account', { platforms, substring }).then(
-      fold(() => { }, setAccountSuggestions)
+    if (substring) Get<Array<{ title: string }>>('search_account', { platforms, substring }).then(
+      fold(() => { }, pipe(map(({ title }) => title), setAccountSuggestions))
     );
   }, [platforms, substring]);
 

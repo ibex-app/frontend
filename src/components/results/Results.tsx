@@ -16,6 +16,7 @@ export function Results() {
   const { search } = useLocation();
   const [filter, setFilter] = useState({});
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
+  const filters = { ...filter, monitor_id };
 
   return (
     <Row >
@@ -26,8 +27,8 @@ export function Results() {
         <Space direction="vertical">
           <Filter onChange={setFilter} />
           <Routes>
-            <Route path="/" element={<Posts filter={{ ...filter, monitor_id }} allowRedirect />} />
-            <Route path="bar" element={<BarChart />} />
+            <Route path="/" element={<Posts filter={filters} allowRedirect />} />
+            <Route path="bar" element={<BarChart filter={filters} />} />
             <Route path="graph" element={<GraphChart />} />
             <Route path="line" element={<LineChart />} />
             <Route path="map" element={<MapChart />} />
