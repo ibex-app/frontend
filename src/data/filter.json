@@ -35,8 +35,13 @@
         },
         {
           "id": 3,
-          "label": "geoTV",
-          "_id": "geoTV"
+          "label": "telegram",
+          "_id": "telegram"
+        },
+        {
+          "id": 4,
+          "label": "vkontakte",
+          "_id": "vkontakte"
         }
       ]
     },
