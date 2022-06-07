@@ -481,3 +481,8 @@ table {
     font-weight: bold;
     color: #717171;
 }
+
+.leftbox-inner button.ant-btn.ant-btn-primary{
+    padding: 6px 8px;
+    font-size: .8em;
+}
