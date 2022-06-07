@@ -2,7 +2,7 @@ import { addIndex, map, reduce } from "ramda";
 import { useEffect, useState } from "react";
 import { FilterElemPartial } from "../types/taxonomy";
 import { match } from 'ts-pattern';
-import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faTwitter, faYoutube, faTelegram } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Map } from "typescript";
 
@@ -100,6 +100,8 @@ export const platformIcon = (platform: string) =>
     .with("facebook", () => <FontAwesomeIcon icon={faFacebook} />)
     .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
     .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
+    .with("telegram", () => <FontAwesomeIcon icon={faTelegram} />)
+    .with("vkontakte", () => <img className='vk-logo' src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/VK.com-logo.svg/192px-VK.com-logo.svg.png' />)
     .otherwise(() => undefined)
 
 export const textContainsStringFromSet = (text: string, array: Array<string>) =>
