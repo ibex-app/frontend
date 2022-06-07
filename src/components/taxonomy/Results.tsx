@@ -33,8 +33,12 @@ export const TaxonomyResults = () => {
 
   const updateHitsCount = () => {
     if (hitsCount?.all && hitsCount.new) {
-      console.log(concat(hitsCount.all, hitsCount.new))
-      // TODO
+      const search_terms = pipe(
+        concat(hitsCount.new),
+        map(({ search_term }: any) => search_term)
+      )(hitsCount.all);
+
+      Get('update_monitor', { id: monitor_id, search_terms });
     }
 
   }
