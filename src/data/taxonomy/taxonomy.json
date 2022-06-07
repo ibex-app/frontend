@@ -63,17 +63,17 @@
         {
           "id": "date",
           "title": "Date Range",
-          "rules": [
-            {
-              "required": true
-            }
-          ],
           "type": "date_interval",
           "tip": "On-going monitor would add newly created posts to the report in real-time",
           "children": [
             {
               "id": "date_from",
-              "type": "date"
+              "type": "date",
+              "rules": [
+                {
+                  "required": true
+                }
+              ]
             },
             {
               "id": "date_end",

@@ -30,7 +30,7 @@ export const finalizeForm = ({ form1, form2 }: any) => ({
   ...form2,
   date_from: form2.date_from.toISOString(),
   date_end: form2.date_end?.toISOString(),
-  search_terms: form2.search_terms.map((search_term: any) => search_term.label),
+  search_terms: form2.search_terms?.map((search_term: any) => search_term.label),
   accounts: form2.accounts?.map((account: any) => ({
     platform: account.platform,
     platform_id: account.platform_id,

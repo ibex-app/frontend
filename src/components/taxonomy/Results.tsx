@@ -21,7 +21,7 @@ export const TaxonomyResults = () => {
   const { search } = useLocation();
   const [monitor, setMonitor] = useState<Monitor>();
   const [hitsCount, setHitsCount] = useState<HitsCountOutput>();
-  const [keywordsFilter, setKeywordsFilter] = useState<string[]>();
+  const [keywordsFilter, setKeywordsFilter] = useState<string[]>([]);
   const [userSelection, setUserSelection] = useState<string>();
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
