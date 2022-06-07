@@ -73,7 +73,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     <Form onFinish={(obj) => addNewHitsCount(obj[0])}>
       <Space size="small">
         {getElem(hitsCountFormItem)}
-        {getElem({ id: 1, type: "button", label: "Add" })}
+        {getElem({ id: 1, type: "button", label: "Add"})}
       </Space>
     </Form>
     <Table rowSelection={hitCountSelection} columns={hitCountCols} dataSource={hitsCountTableData} />
