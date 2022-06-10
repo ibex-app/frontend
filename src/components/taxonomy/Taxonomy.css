@@ -486,3 +486,7 @@ table {
     padding: 6px 8px;
     font-size: .8em;
 }
+
+.fixed-col{
+    height: 100vh;position: sticky;top: 0px;
+}

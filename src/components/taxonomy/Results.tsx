@@ -64,7 +64,7 @@ export const TaxonomyResults = () => {
       setUserSelection
     }}>
       <Row>
-        <Col span={8}>
+        <Col span={8} className="fixed-col">
           <Space direction="vertical" style={{ display: "flex" }}>
             <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />

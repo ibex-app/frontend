@@ -38,7 +38,9 @@ export const hitCountCols = [
     title: '',
     key: 'action',
     render: (_: any, record: any) => (
+      // <Space size="middle" onClick=''>
         <FontAwesomeIcon icon={faTrashCan} />
+      // </Space>
     ),
   }
 ];
