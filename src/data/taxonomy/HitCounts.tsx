@@ -1,8 +1,9 @@
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { FormElement } from "../../types/form";
+import { Form, Input, Space, Table } from "antd";
 
 export const hitsCountFormItem: FormElement = {
   id: 0,
@@ -32,5 +33,12 @@ export const hitCountCols = [
     title: <FontAwesomeIcon icon={faTwitter} />,
     dataIndex: "twitter",
     key: "twitter",
+  },
+  {
+    title: '',
+    key: 'action',
+    render: (_: any, record: any) => (
+        <FontAwesomeIcon icon={faTrashCan} />
+    ),
   }
 ];
