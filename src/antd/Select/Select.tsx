@@ -75,8 +75,7 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
     allowNew={allowNew ? newChecker : false}
     onInputChange={(input: any, e: any) => onChange!(input)}
     labelKey={"label"}
-    renderMenuItemChildren={(option: Option, props: any, index: number) =>{
-      console.log(option)
+    renderMenuItemChildren={(option: Option, props: any, index: number) => {
       return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span></> : option.label || option
     }}
     renderToken={(option: Option, props: any, index: number) =>

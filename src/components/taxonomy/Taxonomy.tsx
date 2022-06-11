@@ -23,7 +23,7 @@ export function Taxonomy() {
   const [platforms, setPlatforms] = useState([]);
 
   const [accountSubstr, setAccountSubstr] = useState("");
-  const [accountSuggestions, setAccountSuggestions] = useState<string[]>();
+  const [accountSuggestions, setAccountSuggestions] = useState<any[]>();
   const substring = useDebounce(accountSubstr, 500);
 
   const onValuesChange = (changed: any, values: any, formId: string) => {
@@ -53,12 +53,12 @@ export function Taxonomy() {
 
   useEffect(() => {
     if (accountSuggestions) pipe(set(accountLens, accountSuggestions), setFormData)(formData);
-  }, [accountSuggestions, formData]);
+  }, [accountSuggestions]);
 
   // if platforms or debounced substring from account changes, we suggest new options
   useEffect(() => {
     if (substring) Get<Array<{ title: string }>>('search_account', { platforms, substring }).then(
-      fold(() => { }, pipe(map(({ title }) => title), setAccountSuggestions))
+      fold(() => { }, setAccountSuggestions)
     );
   }, [platforms, substring]);
 
