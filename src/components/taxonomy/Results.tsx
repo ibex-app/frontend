@@ -32,16 +32,17 @@ export const TaxonomyResults = () => {
   }, [hitsCount?.all]);
 
   const updateHitsCount = () => {
-    if (hitsCount?.all && hitsCount.new) {
-      const search_terms = pipe(
-        concat(hitsCount.new),
-        map(({ search_term }: any) => search_term)
-      )(hitsCount.all);
+    if (!hitsCount?.all || (hitsCount.new && hitsCount.deleted)) return;
+    const search_terms = hitsCount.new 
+      ? pipe(
+          concat(hitsCount.new),
+          map(({ search_term }: any) => search_term)
+        )(hitsCount.all) 
+      : hitsCount.all.map(({ search_term }: any) => search_term)
 
-      Get('update_monitor', { id: monitor_id, search_terms }).then(() => {
-        window.location.reload();
-      });
-    }
+    Get('update_monitor', { id: monitor_id, search_terms }).then(() => {
+      window.location.reload();
+    });
   }
 
   useEffect(() => {

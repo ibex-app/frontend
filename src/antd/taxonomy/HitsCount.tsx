@@ -22,7 +22,7 @@ export type HitsCountOutput = {
   selected: HitsCountTableItem[],
   all?: HitsCountTableItem[],
   new?: HitsCountItemWithKey[],
-  deleted?: boolean
+  deleted?: boolean;
 }
 
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
@@ -69,9 +69,11 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     if(!hitsCountTableData) return;
     const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_:any) => SearchTerm_.search_term !== SearchTerm.search_term)
     setHitsCountTableData(newhitsCountTableData)
+    
     toParent && toParent({
       selected: hitCountsSelected,
-      deleted: true
+      deleted: true,
+      all: newhitsCountTableData
     })
   }
 
