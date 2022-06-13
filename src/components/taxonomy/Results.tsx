@@ -38,9 +38,10 @@ export const TaxonomyResults = () => {
         map(({ search_term }: any) => search_term)
       )(hitsCount.all);
 
-      Get('update_monitor', { id: monitor_id, search_terms });
+      Get('update_monitor', { id: monitor_id, search_terms }).then(() => {
+        window.location.reload();
+      });
     }
-
   }
 
   useEffect(() => {
@@ -69,7 +70,7 @@ export const TaxonomyResults = () => {
             <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
             <Recommendations monitor_id={monitor_id} />
-            {hitsCount?.new && <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            {(hitsCount?.new || hitsCount?.deleted)&& <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
               <Button onClick={() => updateHitsCount()}>Update Monitor</Button>
             </div>}
           </Space>

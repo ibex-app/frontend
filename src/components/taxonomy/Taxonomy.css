@@ -490,3 +490,20 @@ table {
 .fixed-col{
     height: 100vh;position: sticky;top: 0px;
 }
+
+.tax-delete{
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+}
+.tax-delete:hover svg{
+    color:#4670bebb;
+
+}
