@@ -28,7 +28,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
     const try_ = () => pipe(
       then((fold(
         (err: Error) => setPosts(left(err)),
-        (res: PostType[]) => match(isEmpty(res))
+        (res: PostType[]) => match(isEmpty(res) && res.length > 10)
           .with(true, () => {
             const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
             return;

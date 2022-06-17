@@ -80,7 +80,7 @@ export const TaxonomyResults = () => {
           {hitsCount?.selected.length && <Space className="flex search-header">
             Search results for {map(drawFilterItem, hitsCount.selected)}
           </Space>}
-          <Posts key="postsTaxonomy" filter={{ monitor_id, search_terms: keywordsFilter }} />
+          <Posts key="postsTaxonomy" filter={{ monitor_id, search_terms: keywordsFilter }} allowRedirect={false}/>
         </Col>
       </Row>
     </TaxonomyContext.Provider>

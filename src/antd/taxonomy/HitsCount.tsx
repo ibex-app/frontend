@@ -12,6 +12,9 @@ import { hitsCountFormItem } from "../../data/taxonomy/HitCounts";
 import { Get } from "../../shared/Http";
 import { HitsCountItemWithKey, HitsCountResponse, HitsCountTableItem } from "../../types/taxonomy";
 import { getElem } from "../utils/ElementGetter";
+import { fold, left, right } from "fp-ts/lib/Either";
+import { then } from "../../shared/Utils";
+import { match } from "ts-pattern";
 
 type Input = {
   monitor_id: string,
@@ -31,6 +34,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [newHitsCount, setNewHitsCount] = useState<HitsCountItemWithKey[] | undefined>();
   const [hitCountsSelected, setHitCountSelection] = useState<HitsCountTableItem[]>([]);
   const { userSelection } = useContext(TaxonomyContext);
+  
   const hitCountCols = [
     {
       title: "Keyword",
@@ -77,11 +81,32 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     })
   }
 
+  const getFullHitsCount = () => {
+    console.log(3333333333, monitor_id)
+    const try_ = () => pipe(
+      then((fold(
+        (err: Error) => console.log(left(err)),
+        (res: HitsCountResponse[]) => match(false)
+          .with(true, () => {
+            // const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
+            return;
+          })
+          .otherwise(() => console.log(right(res)))
+      )))
+    )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
+
+    // try_();
+    // Get<HitsCountResponse>('get_hits_count', { id: monitor_id })
+    //   .then(res => {
+    //     let k = right(res)
+    //     k._tag
+    //     console.log(left(res))
+    //     console.log(right(res))
+    //   })
+  }
+
   useEffect(() => {
-    Get<HitsCountResponse>('get_hits_count', { id: monitor_id }).then(pipe(
-      generateHitsCountTableData,
-      setData
-    ));
+    getFullHitsCount()
   }, [monitor_id]);
 
   useEffect(() => {
