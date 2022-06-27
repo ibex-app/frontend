@@ -8,9 +8,9 @@ export const generateHitsCountTableItem =
   (key: number | string, { search_term, facebook, youtube, twitter }: HitsCountItem): HitsCountItemWithKey => ({
     key: typeof key === 'number' ? key.toString() : key,
     search_term,
-    facebook: facebook ? formatNum(facebook) : '0',
-    youtube: youtube ? formatNum(youtube) : '0',
-    twitter: twitter ? formatNum(twitter) : '0'
+    facebook: facebook ? formatNum(facebook) : '',
+    youtube: youtube ? formatNum(youtube) : '',
+    twitter: twitter ? formatNum(twitter) : ''
   })
 
 export const generateHitsCountTableData = fold(

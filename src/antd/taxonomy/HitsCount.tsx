@@ -10,11 +10,12 @@ import { faMagnifyingGlass, faTrashCan } from "@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { hitsCountFormItem } from "../../data/taxonomy/HitCounts";
 import { Get } from "../../shared/Http";
-import { HitsCountItemWithKey, HitsCountResponse, HitsCountTableItem } from "../../types/taxonomy";
+import { HitsCountItemWithKey, HitsCountResponse, HitsCountTableItem, HitsCountItem } from "../../types/taxonomy";
 import { getElem } from "../utils/ElementGetter";
 import { fold, left, right } from "fp-ts/lib/Either";
 import { then } from "../../shared/Utils";
 import { match } from "ts-pattern";
+import { boolean } from "fp-ts";
 
 type Input = {
   monitor_id: string,
@@ -33,6 +34,8 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>();
   const [newHitsCount, setNewHitsCount] = useState<HitsCountItemWithKey[] | undefined>();
   const [hitCountsSelected, setHitCountSelection] = useState<HitsCountTableItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
   const { userSelection } = useContext(TaxonomyContext);
   
   const hitCountCols = [
@@ -81,33 +84,63 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     })
   }
 
-  const getFullHitsCount = () => {
-    console.log(3333333333, monitor_id)
+  var isFullSingle = (hitsCountItem:any) => Object.keys(hitsCountItem)
+        .reduce((isfull, key) => hitsCountItem[key] === null ? false : isfull, true)
+
+
+  var isFull = (hitsCountResponse:HitsCountResponse) => Boolean(hitsCountResponse.search_terms.length && hitsCountResponse.search_terms.length > 0 && hitsCountResponse.search_terms
+    .map(isFullSingle)
+    .every((isFull_:boolean) => isFull_))
+ 
+
+
+  // const getFullHitsCount = () => {
+  //   console.log(3333333333, monitor_id)
+  //   const try_ = () => pipe(
+  //     then((fold(
+  //       (err: Error) => console.log(left(err)),
+  //       (res: HitsCountResponse) => match(isFull(res))
+  //         .with(true, () => {
+  //           console.log('repeate---', res.search_terms)
+  //           const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
+  //           return;
+  //         })
+  //         .otherwise(() => console.log('otherwise', right(res)))
+  //     )))
+  //   )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
+
+  //   try_();
+  //   return () => timeout && clearTimeout(timeout) && setTimeout_(undefined);
+  // }
+  
+  useEffect(() => {
+    if(loading) return;
+    setLoading(true);
+
+    timeout && clearTimeout(timeout) && setTimeout_(undefined);
     const try_ = () => pipe(
       then((fold(
-        (err: Error) => console.log(left(err)),
-        (res: HitsCountResponse[]) => match(false)
-          .with(true, () => {
-            // const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
+        (err: Error) => console.log('errr', left(err)),
+        (res: HitsCountResponse) => match(isFull(res))
+          .with(false, () => {
+            setLoading(false);
+            const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
+            setData(generateHitsCountTableData(right(res)))
             return;
           })
-          .otherwise(() => console.log(right(res)))
+          .otherwise(() => {
+            setData(generateHitsCountTableData(right(res)))
+          })
       )))
     )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
 
-    // try_();
-    // Get<HitsCountResponse>('get_hits_count', { id: monitor_id })
-    //   .then(res => {
-    //     let k = right(res)
-    //     k._tag
-    //     console.log(left(res))
-    //     console.log(right(res))
-    //   })
-  }
+    try_();
+    return () => timeout && clearTimeout(timeout) && setTimeout_(undefined);
+  }, [monitor_id, timeout]);
 
-  useEffect(() => {
-    getFullHitsCount()
-  }, [monitor_id]);
+  // useEffect(() => {
+  //   getFullHitsCount()
+  // }, [monitor_id]);
 
   useEffect(() => {
     setHitsCountTableData(data);
