@@ -28,8 +28,9 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
     const try_ = () => pipe(
       then((fold(
         (err: Error) => setPosts(left(err)),
-        (res: PostType[]) => match(isEmpty(res))
+        (res: PostType[]) => match(isEmpty(res) || res.length < 10)
           .with(true, () => {
+            if(!isEmpty(res)) setPosts(right(res))  
             const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
             return;
           })
@@ -54,7 +55,9 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
   return fold(
     () => <span>No posts to show</span>,
     (posts: PostType[]) =>
-      <List dataSource={posts} style={{ paddingRight: "20px" }}
+      <List 
+        dataSource={posts} 
+        style={{ paddingRight: "20px" }}
         loadMore={loadMore(onLoadMore)}
         renderItem={(item) => allowRedirect
           ? <Link to={`details/${item._id.$oid}`}><Post post={item} /></Link>

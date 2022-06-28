@@ -507,3 +507,17 @@ table {
     color:#4670bebb;
 
 }
+
+.leftbox-inner .ant-table-tbody > tr > td:nth-child(2) {
+    max-width: 14vw;
+}
+
+.leftbox-inner .ant-table-tbody > tr > td{
+    max-width: 2vw;
+    white-space: nowrap;
+}
+.leftbox-inner .ant-table-tbody > tr > td:nth-child(2) > div{
+    width: 100%;
+display: flex;
+flex-wrap: wrap;
+}
