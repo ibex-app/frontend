@@ -64,7 +64,7 @@ export const formatNum = (num: number): string => {
   return Math.floor(num / 1000).toLocaleString() + 'K'
 }
 
-export const boolOperators = ['and', 'or', 'not']; // 'and not', 'or not'
+export const boolOperators = ['AND', 'OR', 'NOT']; // 'and not', 'or not'
 
 export const filterHasOperator = (s: string) => reduce((acc: FilterElemPartial, op: string) => {
   const str = s.toLowerCase();

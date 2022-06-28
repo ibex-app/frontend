@@ -88,9 +88,10 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
         .reduce((isfull, key) => hitsCountItem[key] === null ? false : isfull, true)
 
 
-  var isFull = (hitsCountResponse:HitsCountResponse) => Boolean(hitsCountResponse.search_terms.length && hitsCountResponse.search_terms.length > 0 && hitsCountResponse.search_terms
-    .map(isFullSingle)
-    .every((isFull_:boolean) => isFull_))
+  var isFull = (hitsCountResponse:HitsCountResponse) => Boolean(hitsCountResponse.search_terms 
+      && hitsCountResponse.search_terms.length 
+      && hitsCountResponse.search_terms.length > 0 
+      && hitsCountResponse.search_terms.map(isFullSingle).every((isFull_:boolean) => isFull_))
  
 
 
