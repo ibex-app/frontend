@@ -15,7 +15,6 @@ import { getElem } from "../utils/ElementGetter";
 import { fold, left, right } from "fp-ts/lib/Either";
 import { then } from "../../shared/Utils";
 import { match } from "ts-pattern";
-import { boolean } from "fp-ts";
 
 type Input = {
   monitor_id: string,
@@ -37,7 +36,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
   const { userSelection } = useContext(TaxonomyContext);
-  
+
   const hitCountCols = [
     {
       title: "Keyword",
@@ -72,11 +71,12 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     }
   ];
 
-  const deleteSearchTerm = (SearchTerm:any) => {
-    if(!hitsCountTableData) return;
-    const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_:any) => SearchTerm_.search_term !== SearchTerm.search_term)
-    setHitsCountTableData(newhitsCountTableData)
-    
+  const deleteSearchTerm = (SearchTerm: any) => {
+    if (!hitsCountTableData) return;
+    const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term)
+    setHitsCountTableData(newhitsCountTableData);
+    setNewHitsCount(newHitsCount?.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term))
+
     toParent && toParent({
       selected: hitCountsSelected,
       deleted: true,
@@ -84,41 +84,25 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     })
   }
 
-  var isFullSingle = (hitsCountItem:any) => Object.keys(hitsCountItem)
-        .reduce((isfull, key) => hitsCountItem[key] === null ? false : isfull, true)
+  var isFullSingle = (hitsCountItem: any) => Object.keys(hitsCountItem)
+    .reduce((isfull, key) => hitsCountItem[key] === null ? false : isfull, true)
 
 
-  var isFull = (hitsCountResponse:HitsCountResponse) => Boolean(hitsCountResponse.search_terms 
-      && hitsCountResponse.search_terms.length 
-      && hitsCountResponse.search_terms.length > 0 
-      && hitsCountResponse.search_terms.map(isFullSingle).every((isFull_:boolean) => isFull_))
- 
+  var isFull = (hitsCountResponse: HitsCountResponse) => Boolean(hitsCountResponse.search_terms
+    && hitsCountResponse.search_terms.length
+    && hitsCountResponse.search_terms.length > 0
+    && hitsCountResponse.search_terms.map(isFullSingle).every((isFull_: boolean) => isFull_))
 
+  const clearTimeout_ = () => {
+    timeout && clearTimeout(timeout);
+    setTimeout_(undefined);
+  }
 
-  // const getFullHitsCount = () => {
-  //   console.log(3333333333, monitor_id)
-  //   const try_ = () => pipe(
-  //     then((fold(
-  //       (err: Error) => console.log(left(err)),
-  //       (res: HitsCountResponse) => match(isFull(res))
-  //         .with(true, () => {
-  //           console.log('repeate---', res.search_terms)
-  //           const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
-  //           return;
-  //         })
-  //         .otherwise(() => console.log('otherwise', right(res)))
-  //     )))
-  //   )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
-
-  //   try_();
-  //   return () => timeout && clearTimeout(timeout) && setTimeout_(undefined);
-  // }
-  
   useEffect(() => {
-    if(loading) return;
+    if (loading) return;
     setLoading(true);
 
-    timeout && clearTimeout(timeout) && setTimeout_(undefined);
+    clearTimeout_();
     const try_ = () => pipe(
       then((fold(
         (err: Error) => console.log('errr', left(err)),
@@ -130,18 +114,15 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
             return;
           })
           .otherwise(() => {
+            clearTimeout_();
             setData(generateHitsCountTableData(right(res)))
           })
       )))
     )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
 
     try_();
-    return () => timeout && clearTimeout(timeout) && setTimeout_(undefined);
+    return () => clearTimeout_();
   }, [monitor_id, timeout]);
-
-  // useEffect(() => {
-  //   getFullHitsCount()
-  // }, [monitor_id]);
 
   useEffect(() => {
     setHitsCountTableData(data);
@@ -183,7 +164,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     <Form onFinish={(obj) => addNewHitsCount(obj[0])}>
       <Space size="small">
         {getElem(hitsCountFormItem)}
-        {getElem({ id: 1, type: "button", label: "Add"})}
+        {getElem({ id: 1, type: "button", label: "Add" })}
       </Space>
     </Form>
     <Table rowSelection={hitCountSelection} columns={hitCountCols} dataSource={hitsCountTableData} />
