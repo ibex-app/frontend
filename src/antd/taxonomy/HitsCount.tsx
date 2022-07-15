@@ -13,8 +13,9 @@ import { Get } from "../../shared/Http";
 import { HitsCountItemWithKey, HitsCountResponse, HitsCountTableItem, HitsCountItem } from "../../types/taxonomy";
 import { getElem } from "../utils/ElementGetter";
 import { fold, left, right } from "fp-ts/lib/Either";
-import { then } from "../../shared/Utils";
+import { platformIcon, then } from "../../shared/Utils";
 import { match } from "ts-pattern";
+import { ColumnsType } from "antd/lib/table";
 
 type Input = {
   monitor_id: string,
@@ -28,6 +29,45 @@ export type HitsCountOutput = {
   deleted?: boolean;
 }
 
+const createColumns = (platforms: string[], deleteSearchTerm: any) => {
+  let cols: ColumnsType<HitsCountTableItem> = [{
+    title: "Keyword",
+    dataIndex: "search_term",
+    key: "search_term",
+    render: (text: string) => text && drawFilterItem({ search_term: text })
+  }];
+
+  platforms.forEach(platform => {
+    cols.push({
+      title: platformIcon(platform),
+      dataIndex: platform,
+      key: platform,
+    });
+  });
+
+  cols.push({
+    title: '',
+    key: 'action',
+    render: (_: any, record: any) => (
+      // <Space size="middle" onClick=''>
+      <span className="tax-delete" onClick={() => deleteSearchTerm(record)}>
+        <FontAwesomeIcon icon={faTrashCan} />
+      </span>
+    ),
+  });
+
+  return cols;
+};
+
+const generatePlatforms = ({ search_terms }: HitsCountResponse) =>
+  search_terms.reduce((acc, curr) => {
+    Object.keys(curr).forEach(key => {
+      if (key !== 'search_term' && !acc.includes(key)) acc.push(key);
+    });
+
+    return acc;
+  }, [] as string[]);
+
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [data, setData] = useState<HitsCountTableItem[]>();
   const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>();
@@ -35,41 +75,9 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [hitCountsSelected, setHitCountSelection] = useState<HitsCountTableItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
-  const { userSelection } = useContext(TaxonomyContext);
+  const [platforms, setPlatforms] = useState<string[]>();
 
-  const hitCountCols = [
-    {
-      title: "Keyword",
-      dataIndex: "search_term",
-      key: "search_term",
-      render: (text: string) => text && drawFilterItem({ search_term: text })
-    },
-    {
-      title: <FontAwesomeIcon icon={faFacebook} />,
-      dataIndex: "facebook",
-      key: "facebook",
-    },
-    {
-      title: <FontAwesomeIcon icon={faYoutube} />,
-      dataIndex: "youtube",
-      key: "youtube",
-    },
-    {
-      title: <FontAwesomeIcon icon={faTwitter} />,
-      dataIndex: "twitter",
-      key: "twitter",
-    },
-    {
-      title: '',
-      key: 'action',
-      render: (_: any, record: any) => (
-        // <Space size="middle" onClick=''>
-        <span className="tax-delete" onClick={() => deleteSearchTerm(record)}>
-          <FontAwesomeIcon icon={faTrashCan} />
-        </span>
-      ),
-    }
-  ];
+  const { userSelection } = useContext(TaxonomyContext);
 
   const deleteSearchTerm = (SearchTerm: any) => {
     if (!hitsCountTableData) return;
@@ -115,6 +123,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
           })
           .otherwise(() => {
             clearTimeout_();
+            setPlatforms(generatePlatforms(res));
             setData(generateHitsCountTableData(right(res)))
           })
       )))
@@ -167,6 +176,9 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
         {getElem({ id: 1, type: "button", label: "Add" })}
       </Space>
     </Form>
-    <Table rowSelection={hitCountSelection} columns={hitCountCols} dataSource={hitsCountTableData} />
+    <Table
+      rowSelection={hitCountSelection}
+      dataSource={hitsCountTableData}
+      columns={platforms && createColumns(platforms, deleteSearchTerm)} />
   </div>
 }
