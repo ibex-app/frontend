@@ -30,8 +30,8 @@ export function Results() {
             <Route path="/" element={<Posts filter={filters} allowRedirect />} />
             <Route path="bar" element={<BarChart filter={filters} />} />
             <Route path="graph" element={<GraphChart />} />
-            <Route path="line" element={<LineChart />} />
-            <Route path="map" element={<MapChart />} />
+            <Route path="line" element={<LineChart  filter={filters} />} />
+            <Route path="map" element={<MapChart  filter={filters} />} />
             <Route path="bubble" element={<BubbleChart />} />
           </Routes>
         </Space>

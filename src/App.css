@@ -1850,6 +1850,7 @@ button {
   margin: 15px 0 15px 15px;
   padding-right: 15px;
   overflow: hidden;
+  min-height: 80vh;
 }
 
 .filter {
@@ -2021,7 +2022,7 @@ textarea.ant-input,
 div.rbt,
 div.ant-picker {
   border-radius: 7px;
-  padding: 4px 10px;
+  padding: 2.5px 10px;
   border: 2px solid #d5d5d5;
   font-size: 1.2em;
   outline: none;
@@ -2167,7 +2168,7 @@ button.ant-btn span {
 }
 
 .top-filters {
-  padding-top: 10px;
+  margin-top: 10px;
 }
 
 .top-filters .ant-picker {
@@ -2181,6 +2182,7 @@ button.ant-btn span {
 
 .top-filters .ant-col.ant-form-item-label label {
   color: gray;
+  font-size: 9pt; 
 }
 
 .ant-form-item-explain-error {
@@ -2253,7 +2255,7 @@ button.ant-btn span {
 }
 
 .ant-col.ant-form-item-label {
-  margin: 9px 0 6px 0;
+  /* margin: 9px 0 6px 0; */
 }
 
 .tax-title-line a {

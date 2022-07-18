@@ -13,10 +13,7 @@ import {
   Filler
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-
-type Input = {
-  filter: Filter
-}
+import { ChartInputFilter } from '../chartInputFilter'
 
 ChartJS.register(Filler);
 
@@ -72,7 +69,7 @@ export const options = {
 };
 
 
-export function BarChart({ filter }: Input) {
+export function BarChart({ filter }: ChartInputFilter) {
   useEffect(() => {
     if (Object.keys(filter).length) loadData('platform');
   }, [filter]);

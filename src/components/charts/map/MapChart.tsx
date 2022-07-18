@@ -20,8 +20,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { useGlobalState } from '../../../app/store';
+import { ChartInputFilter } from '../chartInputFilter'
 
 ChartJS.register(
     CategoryScale,
@@ -52,14 +51,12 @@ export const options = {
 };
 
 
-export function MapChart() {
+export function MapChart({ filter }: ChartInputFilter) {
+  useEffect(() => {
+    if (Object.keys(filter).length) loadData('platform');
+  }, [filter]);
   const [data, setData]: any = useState([]);
   const [fetching, setFetching]: any = useState(true);
-  const [filters, _]: any = useGlobalState('filters');
-  
-  useEffect(() => {
-      if (Object.keys(filters).length) loadData('persons');
-  }, [filters]);
   
   // useEffect(() => fetchAndSet('topics'), []);
 
@@ -85,7 +82,7 @@ export function MapChart() {
       setFetching(true)
       labelType = 'locations'
       const fetchData = Get('posts_aggregated', {
-          post_request_params: transform_filters_to_request(filters),
+          post_request_params: transform_filters_to_request(filter),
           axisX: labelType
       });
      

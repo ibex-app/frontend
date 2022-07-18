@@ -1,12 +1,8 @@
-import filterData from '../../../data/filter.json';
-import { Typeahead } from 'react-bootstrap-typeahead';
-
 import { useEffect, useMemo, useState } from 'react';
-import { useGlobalState } from '../../../app/store';
 
 import { Get, Response, transform_filters_to_request } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
-import React from 'react';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,7 +15,7 @@ import {
   Filler
 } from 'chart.js';
 import { Line, Chart} from 'react-chartjs-2';
-import faker from 'faker';
+import { ChartInputFilter } from '../chartInputFilter'
 
 ChartJS.register(Filler);
 
@@ -74,12 +70,10 @@ export const options = {
   }
 };
 
-
-export function LineChart() {
-  const [filters, _]: any = useGlobalState('filters');
+export function LineChart({ filter }: ChartInputFilter) {
   useEffect(() => {
-    if (Object.keys(filters).length) loadData('platform');
-  }, [filters]);
+    if (Object.keys(filter).length) loadData('platform');
+  }, [filter]);
 
   const [fetching, setFetching] = useState(false);
 
@@ -194,7 +188,7 @@ export function LineChart() {
   const loadData = (labelType: string) => {
     setFetching(true)
     const fetchData = Get('posts_aggregated', {
-      post_request_params: transform_filters_to_request(filters),
+      post_request_params: transform_filters_to_request(filter),
       axisX: labelType,
       days: 7
     });
@@ -206,7 +200,7 @@ export function LineChart() {
         return
       }
 
-      let dataset_and_labels: any = generate_dataset(maybeData, labelType, filters)
+      let dataset_and_labels: any = generate_dataset(maybeData, labelType, filter)
       setData(dataset_and_labels);
       setFetching(false)
       console.log(dataset_and_labels)
