@@ -41,7 +41,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
     const try_ = () => pipe(
       then((fold(
         (err: Error) => setPosts(left(err)),
-        (res: PostResponse) => match(res.is_loading)
+        (res: PostResponse) => match(res.is_loading && res.posts.length < 10)
           .with(true, () => {
             setIsFetching(false);
             if (!isEmpty(res)) setPosts(right(res));
