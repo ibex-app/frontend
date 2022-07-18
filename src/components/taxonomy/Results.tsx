@@ -16,6 +16,7 @@ import { HitsCount, HitsCountOutput } from "../../antd/taxonomy/HitsCount";
 import { Recommendations } from "../../antd/taxonomy/Recomendations";
 import { TaxonomyContext } from "./TaxonomyContext";
 import { getAllKeywordsWithoutOperator } from "../../shared/Utils";
+import { Filter } from "../filter/Filter";
 
 export const TaxonomyResults = () => {
   const { search } = useLocation();
@@ -23,6 +24,7 @@ export const TaxonomyResults = () => {
   const [hitsCount, setHitsCount] = useState<HitsCountOutput>();
   const [keywordsFilter, setKeywordsFilter] = useState<string[]>([]);
   const [userSelection, setUserSelection] = useState<string>();
+  const [filter, setFilter] = useState({});
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
@@ -33,11 +35,11 @@ export const TaxonomyResults = () => {
 
   const updateHitsCount = () => {
     if (!hitsCount?.all || (hitsCount.new && hitsCount.deleted)) return;
-    const search_terms = hitsCount.new 
+    const search_terms = hitsCount.new
       ? pipe(
-          concat(hitsCount.new),
-          map(({ search_term }: any) => search_term)
-        )(hitsCount.all) 
+        concat(hitsCount.new),
+        map(({ search_term }: any) => search_term)
+      )(hitsCount.all)
       : hitsCount.all.map(({ search_term }: any) => search_term)
 
     Get('update_monitor', { id: monitor_id, search_terms }).then(() => {
@@ -71,16 +73,23 @@ export const TaxonomyResults = () => {
             <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
             <Recommendations monitor_id={monitor_id} />
-            {(hitsCount?.new || hitsCount?.deleted)&& <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            {(hitsCount?.new || hitsCount?.deleted) && <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
               <Button onClick={() => updateHitsCount()}>Update Monitor</Button>
             </div>}
           </Space>
         </Col>
-        <Col span={16} style={{ color: "#F4F4F5" }}>
-          {hitsCount?.selected.length && <Space className="flex search-header">
-            Search results for {map(drawFilterItem, hitsCount.selected)}
-          </Space>}
-          <Posts key="postsTaxonomy" filter={{ monitor_id, search_terms: keywordsFilter }} allowRedirect={false}/>
+        <Col span={16} style={{ color: "#F4F4F5" }} className="flex align-center align-middle">
+          <Space direction="vertical">
+            <Filter onChange={setFilter} />
+            {!!hitsCount?.selected.length && <Space className="flex search-header">
+              Search results for {map(drawFilterItem, hitsCount.selected)}
+            </Space>}
+            <Posts
+              key="postsTaxonomy"
+              filter={{ ...filter, monitor_id, search_terms: keywordsFilter }}
+              allowRedirect={false}
+            />
+          </Space>
         </Col>
       </Row>
     </TaxonomyContext.Provider>

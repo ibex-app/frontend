@@ -13,16 +13,16 @@ export const createFilterElem = ({ hasOp, s, op }: FilterElemPartial): FilterEle
 }
 
 // input HitsCountTableData
-export const drawFilterItem = pipe<any, string, FilterElemPartial, FilterElem, JSX.Element>(
+export const drawFilterItem: any = pipe<any, string, FilterElemPartial, FilterElem, JSX.Element>(
   prop('search_term'),
   filterHasOperator,
   createFilterElem,
   ({ hasOp, left, right, op }) =>
-    hasOp ? <Space>
+    hasOp ? <>
       <span className="keyword">{left}</span>
       <span className="op">{op}</span>
       {drawFilterItem({ search_term: right })}
-    </Space> : <span className="keyword">{left}</span>
+    </> : <span className="keyword">{left}</span>
 );
 
 export const finalizeForm = ({ form1, form2 }: any) => ({

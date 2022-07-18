@@ -7,12 +7,13 @@ import { HitsCountItem, HitsCountItemWithKey, HitsCountTableItem } from "../../t
 
 
 export const generateHitsCountTableItem =
-  (key: number | string, { search_term, facebook, youtube, twitter }: HitsCountItem): HitsCountItemWithKey => ({
-    key: typeof key === 'number' ? key.toString() : key,
+  (key: number | string, { search_term, facebook, youtube, twitter, vkontakte }: HitsCountItem): HitsCountItemWithKey => ({
+    key: typeof key === 'number' ? key.toString() : `hitsCount-${key}`,
     search_term,
     facebook: facebook || facebook === 0 ? formatNum(facebook) : '-',
     youtube: youtube || youtube === 0 ? formatNum(youtube) : '-',
-    twitter: twitter || twitter === 0 ? formatNum(twitter) : '-'
+    twitter: twitter || twitter === 0 ? formatNum(twitter) : '-',
+    vkontakte: vkontakte || vkontakte === 0 ? formatNum(vkontakte) : '-',
   })
 
 export const generateHitsCountTableData = fold(

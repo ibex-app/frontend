@@ -7,19 +7,20 @@ export type HitsCountTableItem = {
 }
 
 export type HitsCountItem = {
-  search_term: string,
-  facebook?: number,
-  twitter?: number,
-  youtube?: number,
-  vkontakte?: number,
-  telegram?: number
+  "search_term": string,
+  "facebook"?: number,
+  "twitter"?: number,
+  "youtube"?: number,
+  "vkontakte"?: number,
+  "telegram"?: number
 };
 
 export interface HitsCountItemWithKey extends HitsCountItem {
   key: string,
   facebook: string,
   twitter: string,
-  youtube: string
+  youtube: string,
+  vkontakte: string
 };
 
 export type HitsCountResponse = {

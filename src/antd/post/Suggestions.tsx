@@ -18,12 +18,11 @@ type Output = {
 }
 
 export const Suggestions = ({ text, selection, highlight, index }: Input) => {
-  const [selectedItem, setSelectedItem] = useState<Output>({ element: <></>, text: "" });
   const { setUserSelection } = useContext(TaxonomyContext);
 
   const Content = ({ text }: { text: string }) => <>
-    <Space direction="vertical">
-      {selection?.map((item) => boolOperators.map(op => {
+    <Space direction="vertical" style={{ cursor: 'pointer' }}>
+      {!!selection?.length ? selection?.map((item) => boolOperators.map(op => {
         const elem = <>{drawFilterItem(item)} <span className="op">{op.toUpperCase()}</span> {text}</>;
         return <span
           key={op}
@@ -31,7 +30,7 @@ export const Suggestions = ({ text, selection, highlight, index }: Input) => {
           {elem}
         </span>
       }
-      ))}
+      )) : <span onClick={() => setUserSelection(text)}>{text}</span>}
     </Space>
     {/* <Modal visible={!!selectedItem.text}>
       <h1>Updating your search results with</h1>
@@ -49,6 +48,7 @@ export const Suggestions = ({ text, selection, highlight, index }: Input) => {
       <span
         key={`${text}-${index}`}
         className={highlight ? "highlight" : ""}
+        style={{ cursor: 'pointer' }}
       >
         {text + " "}
       </span>

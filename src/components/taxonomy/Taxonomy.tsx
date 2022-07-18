@@ -41,8 +41,8 @@ export function Taxonomy() {
       return;
     }
 
-    if (accounts && typeof accounts === 'string') {
-      setAccountSubstr(accounts);
+    if (accounts && typeof accounts[0] === 'string') {
+      setAccountSubstr(accounts[0]);
       return;
     }
 

@@ -1,5 +1,10 @@
 export type TypeOrNull<T> = T | null;
 
+export type PostResponse = {
+  is_loading: boolean;
+  posts: PostType[];
+}
+
 export type PostType = {
   "_id": {
     "$oid": string
