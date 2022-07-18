@@ -25,6 +25,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
   const [posts, setPosts] = useState<Response<PostResponse>>(left(Error('Not fetched')));
   const [pagination, setPagination] = useState(defaultPagination);
   const [filters, setFilters] = useState<Filter>(filter);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
   const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
 
   const clearTimeout_ = () => {
@@ -35,16 +36,20 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
   useEffect(() => {
     setPosts(left(new Error('Not fetched')));
     clearTimeout_();
+    if(isFetching) return;
+    setIsFetching(true);
     const try_ = () => pipe(
       then((fold(
         (err: Error) => setPosts(left(err)),
         (res: PostResponse) => match(res.is_loading)
           .with(true, () => {
+            setIsFetching(false);
             if (!isEmpty(res)) setPosts(right(res));
             const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
             return;
           })
           .otherwise(() => {
+            setIsFetching(false);
             setTimeout_(undefined);
             setPosts(right(res));
           })
