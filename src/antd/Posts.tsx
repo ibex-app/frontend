@@ -26,6 +26,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
   const [pagination, setPagination] = useState(defaultPagination);
   const [filters, setFilters] = useState<Filter>(filter);
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [uppend, setUppend] = useState<boolean>(false);
   const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
 
   const clearTimeout_ = () => {
@@ -51,6 +52,10 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
           .otherwise(() => {
             setIsFetching(false);
             setTimeout_(undefined);
+            
+            // const finalRes: Response<PostResponse> = right(res)
+            // finalRes.posts = finalRes.posts.concat(posts.posts);
+            // setPosts(finalRes);
             setPosts(right(res));
           })
       )))
@@ -61,9 +66,13 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
     return () => clearTimeout_();
   }, [timeout, filters, pagination]);
 
-  const onLoadMore = () => setPagination({ start_index: pagination.count, count: 2 * pagination.count });
+  const onLoadMore = () => {
+    setUppend(true);
+    setPagination({ start_index: pagination.start_index + pagination.count, count: pagination.count })
+  };
 
   useEffect(() => {
+    setUppend(false);
     if (JSON.stringify(filters) !== JSON.stringify(filter)) setFilters(filter);
   }, [filter]);
 
