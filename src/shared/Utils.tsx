@@ -50,9 +50,9 @@ export const tagItemsToArray = (tagItems: { label: string }[]): string[] =>
   tagItems.map(({ label }) => label)
 
 export const formatDate = (date: string) => {
-  console.log(date, date.indexOf('T00:00:00.000Z') == -1, ('T00:00:00+00:00'))
+  // console.log(date, date.indexOf('T00:00:00.000Z') == -1, ('T00:00:00+00:00'))
 
-  date += date.indexOf('T00:00:00.000Z') == -1 && date.indexOf('T00:00:00') == -1 ? 'T00:00:00+00:00' : ''
+  // date += date.indexOf('T00:00:00.000Z') == -1 && date.indexOf('T00:00:00') == -1 ? 'T00:00:00+00:00' : ''
 
   return date
 }
