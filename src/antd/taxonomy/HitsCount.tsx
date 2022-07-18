@@ -1,5 +1,5 @@
 import { Form, Input, Space, Table } from "antd";
-import { concat, pipe, prop } from "ramda";
+import { concat, keys, pipe, prop } from "ramda";
 import { useContext, useEffect, useState } from "react";
 import { generateHitsCountTableData, generateHitsCountTableItem } from "../../components/taxonomy/Data";
 import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
@@ -61,8 +61,8 @@ const createColumns = (platforms: string[], deleteSearchTerm: any) => {
 
 const generatePlatforms = ({ search_terms }: HitsCountResponse) =>
   search_terms.reduce((acc, curr) => {
-    Object.keys(curr).forEach(key => {
-      if (key !== 'search_term' && !acc.includes(key)) acc.push(key);
+    keys(curr).forEach(key => {
+      if (key !== 'search_term' && !acc.includes(key) && curr[key] && curr[key]! > 0) acc.push(key);
     });
 
     return acc;
@@ -83,7 +83,8 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     if (!hitsCountTableData) return;
     const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term)
     setHitsCountTableData(newhitsCountTableData);
-    setNewHitsCount(newHitsCount?.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term))
+    setNewHitsCount(newHitsCount?.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
+    setHitCountSelection(hitCountsSelected.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
 
     toParent && toParent({
       selected: hitCountsSelected,

@@ -64,11 +64,11 @@ export const formatNum = (num: number): string => {
   return Math.floor(num / 1000).toLocaleString() + 'K'
 }
 
-export const boolOperators = ['AND', 'OR', 'NOT']; // 'and not', 'or not'
+export const boolOperators = ['and', 'or', 'not']; // 'and not', 'or not'
 
 export const filterHasOperator = (s: string) => reduce((acc: FilterElemPartial, op: string) => {
   const str = s.toLowerCase();
-  const hasOp = str.includes(` ${op} `);
+  const hasOp = str.includes(` ${op} `) || str.endsWith(` ${op}`);
   return hasOp ? { hasOp, op, s } : acc;
 }, { hasOp: false, s } as FilterElemPartial, boolOperators);
 

@@ -33,7 +33,7 @@ export const Text = ({ text }: Input) => {
   }
 
   const isTaxonomy = useMemo(() => {
-    return location.pathname.includes("taxonomy") && taxonomyContext.highlightWords.length > 0;
+    return location.pathname.includes("taxonomy");
   }, [location])
 
   return <div className="post-content">
