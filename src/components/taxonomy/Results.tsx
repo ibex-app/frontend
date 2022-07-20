@@ -17,6 +17,7 @@ import { Recommendations } from "../../antd/taxonomy/Recomendations";
 import { TaxonomyContext } from "./TaxonomyContext";
 import { getAllKeywordsWithoutOperator } from "../../shared/Utils";
 import { Filter } from "../filter/Filter";
+import FilterData from '../../data/taxonomy/filter.json';
 
 export const TaxonomyResults = () => {
   const { search } = useLocation();
@@ -80,7 +81,7 @@ export const TaxonomyResults = () => {
         </Col>
         <Col span={16} style={{ color: "#F4F4F5" }} className="flex align-center align-middle">
           <Space direction="vertical">
-            <Filter onChange={setFilter} />
+            <Filter data={FilterData.data} onChange={setFilter} />
             {!!hitsCount?.selected.length && <Space className="flex search-header">
               Search results for {map(drawFilterItem, hitsCount.selected)}
             </Space>}

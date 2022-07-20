@@ -7,12 +7,11 @@ import { pipe } from 'ramda';
 import { transform_filters_to_request } from '../../shared/Http';
 
 type Input = {
+  data: any;
   onChange: (filter: Filter) => void;
 }
 
-export function Filter({ onChange }: Input) {
-  const { data }: { data: FormElement[] } = require('../../data/filter.json')
-
+export function Filter({ data, onChange }: Input) {
   const setFilters = pipe(
     transform_filters_to_request,
     onChange
@@ -20,12 +19,7 @@ export function Filter({ onChange }: Input) {
 
   return (
     <Form className="top-filters" layout="vertical" onValuesChange={(changed, values) => setFilters(values)}>
-      <Space wrap>
-        {data.map(getElem)}
-        <div className="form__item btn-small">
-          <FontAwesomeIcon icon={faFileArrowDown} />
-        </div>
-      </Space>
+      {data.map(getElem)}
     </Form>
   );
 }

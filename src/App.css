@@ -2010,7 +2010,7 @@ main.main .main-dashboard {
 }
 
 .rbt-input-wrapper {
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   display: flex;
   gap: 3px;
 }
@@ -2169,6 +2169,9 @@ button.ant-btn span {
 
 .top-filters {
   margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .top-filters .ant-picker {
@@ -2182,7 +2185,7 @@ button.ant-btn span {
 
 .top-filters .ant-col.ant-form-item-label label {
   color: gray;
-  font-size: 9pt; 
+  font-size: 9pt;
 }
 
 .ant-form-item-explain-error {

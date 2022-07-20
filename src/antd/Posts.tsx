@@ -36,7 +36,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
   useEffect(() => {
     setPosts(left(new Error('Not fetched')));
     clearTimeout_();
-    if(isFetching) return;
+    if (isFetching) return;
     setIsFetching(true);
     const try_ = () => pipe(
       then((fold(
@@ -79,7 +79,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
           style={{ paddingRight: "20px" }}
           loadMore={!timeout && loadMore(onLoadMore)}
           renderItem={(item) => allowRedirect
-            ? <Link to={`details/${item._id.$oid}`}><Post post={item} /></Link>
+            ? <Link to={`/details/${item._id.$oid}`}><Post post={item} /></Link>
             : <Post post={item} />
           }
         />

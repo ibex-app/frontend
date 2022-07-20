@@ -11,6 +11,7 @@ import { useMemo, useState } from "react";
 import { Posts } from "../../antd/Posts";
 import { Sidebar } from '../sidebar/Sidebar';
 import { Col, Row } from "antd";
+import FilterData from '../../data/filter.json';
 
 export function Results() {
   const { search } = useLocation();
@@ -25,13 +26,13 @@ export function Results() {
       </Col>
       <Col span={21}>
         <Space direction="vertical">
-          <Filter onChange={setFilter} />
+          <Filter data={FilterData.data} onChange={setFilter} />
           <Routes>
             <Route path="/" element={<Posts filter={filters} allowRedirect />} />
             <Route path="bar" element={<BarChart filter={filters} />} />
             <Route path="graph" element={<GraphChart />} />
-            <Route path="line" element={<LineChart  filter={filters} />} />
-            <Route path="map" element={<MapChart  filter={filters} />} />
+            <Route path="line" element={<LineChart filter={filters} />} />
+            <Route path="map" element={<MapChart filter={filters} />} />
             <Route path="bubble" element={<BubbleChart />} />
           </Routes>
         </Space>

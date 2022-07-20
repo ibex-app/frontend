@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": "platform",
+      "type": "tag",
+      "title": "Platform",
+      "value": [],
+      "list": [
+        {
+          "id": 0,
+          "label": "facebook",
+          "_id": "facebook"
+        },
+        {
+          "id": 1,
+          "label": "twitter",
+          "_id": "twitter"
+        },
+        {
+          "id": 2,
+          "label": "youtube",
+          "_id": "youtube"
+        },
+        {
+          "id": 3,
+          "label": "telegram",
+          "_id": "telegram"
+        },
+        {
+          "id": 4,
+          "label": "vkontakte",
+          "_id": "vkontakte"
+        }
+      ]
+    }
+  ]
+}
