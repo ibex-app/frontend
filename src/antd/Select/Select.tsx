@@ -3,7 +3,7 @@ import { FormElement, Option } from "../../types/form"
 import { last, map, pipe } from "ramda";
 
 import './Select.css';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { filterHasOperator, filterOperatorUpper, platformIcon } from "../../shared/Utils";
 
 type Value = Option[];
@@ -38,11 +38,18 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
   const { id, list, allowNew, placeholder, checkBoolUpper, selected } = el;
 
   const [value, setValue] = useState<Option[]>([]);
+  const [userValue, setUserValue] = useState<string>('');
+  const ref = useRef<any>();
 
   const newChecker = (results: Array<Object | string>, props: any) => {
     const selected = map<{ label: string }, string>(({ label }) => label)(props.selected);
     // TODO filter accounts by platform+title
     return selected.indexOf(props.text) < 0;
+  }
+
+  const onChange_ = (value: any) => {
+    setUserValue(value);
+    onChange!([value]);
   }
 
   const onValChange = (val: Value) => {
@@ -51,6 +58,8 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
       val[val.length - 1].label = pipe(filterHasOperator, filterOperatorUpper)(lastKeyword);
     }
 
+    ref.current.state.text = "";
+    setUserValue('');
     setValue(val);
     onChange!(val);
   }
@@ -68,13 +77,15 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
 
   return <TypeaheadOverride
     id={id}
+    ref={ref}
     multiple
     options={list || []}
     selected={value}
     placeholder={placeholder}
     allowNew={allowNew ? newChecker : false}
-    onInputChange={(input: any, e: any) => onChange!([input])}
+    onInputChange={(input: any, e: any) => onChange_(input)}
     labelKey={"label"}
+    onBlur={() => userValue && onValChange([...value, { label: userValue }])}
     renderMenuItemChildren={(option: Option, props: any, index: number) => {
       return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span></> : option.label || option
     }}

@@ -17,7 +17,7 @@ export const getElem = (element: FormElement): any => {
     type, id, rules, placeholder, disabled, title, label, tip, value, children, checked
   } = element;
 
-  return <div>
+  return <>
     <Form.Item name={`${id}`} label={title ? `${title}` : undefined} rules={rules || []} style={{ marginBottom: "5px" }}>
       {match(type)
         .with("date_interval", () => children && <DateInterval children={children} />)
@@ -46,5 +46,5 @@ export const getElem = (element: FormElement): any => {
         })}
     </Form.Item>
     {tip && <div className="tax-tip"><FontAwesomeIcon icon={faLightbulb} />{tip}</div>}
-  </div>
+  </>
 }
