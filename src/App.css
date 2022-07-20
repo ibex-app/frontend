@@ -1542,11 +1542,14 @@ footer {
 }
 
 .sidebar {
-  width: 100%;
-  height: 100%;
+  width: 12%;
+  height: 100vh;
   background-color: #FCFCFC;
   padding: 0 15px;
-  position: relative;
+  position: fixed;
+  overflow: hidden;
+  left: 0;
+  top: 0;
 }
 
 .sidebar .main-nav ul li {
@@ -2168,10 +2171,17 @@ button.ant-btn span {
 }
 
 .top-filters {
-  margin-top: 10px;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 88%;
+  z-index: 1;
+  background: #fcfcfc;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .top-filters .ant-picker {
@@ -2274,4 +2284,15 @@ button.ant-btn span {
 
 .vk-logo {
   width: 1.1em;
+}
+
+.results {
+  margin: 15px 0 15px 15px;
+  padding-right: 15px;
+  overflow: hidden;
+  min-height: 80vh;
+  position: fixed;
+  height: 75vh;
+  width: 85vw;
+  top: 17vh;
 }
