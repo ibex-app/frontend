@@ -2296,3 +2296,13 @@ button.ant-btn span {
   width: 85vw;
   top: 17vh;
 }
+
+
+.results-cont {
+  padding-top: 150px;
+}
+
+
+.ant-empty-image {
+  display: none;
+}

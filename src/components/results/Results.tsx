@@ -24,7 +24,7 @@ export function Results() {
       <Col span={3} style={{ height: "100vh", position: "sticky", top: "0" }}>
         <Sidebar />
       </Col>
-      <Col span={21}>
+      <Col span={21} className="results-cont">
         <Space direction="vertical">
           <Filter data={FilterData.data} onChange={setFilter} />
           <Routes>
