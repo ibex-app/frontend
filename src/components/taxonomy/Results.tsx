@@ -68,7 +68,7 @@ export const TaxonomyResults = () => {
       userSelection,
       setUserSelection
     }}>
-      <Row>
+      <Row className="tax-cont">
         <Col span={8} className="fixed-col">
           <Space direction="vertical" style={{ display: "flex" }}>
             <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
@@ -80,7 +80,7 @@ export const TaxonomyResults = () => {
           </Space>
         </Col>
         <Col span={16} style={{ color: "#F4F4F5" }} className="flex align-center align-middle">
-          <Space direction="vertical">
+          <Space direction="vertical" className="full-height-width">
             <Filter data={FilterData.data} onChange={setFilter} />
             {!!hitsCount?.selected.length && <Space className="flex search-header">
               Search results for {map(drawFilterItem, hitsCount.selected)}
