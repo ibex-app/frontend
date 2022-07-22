@@ -17,9 +17,10 @@ type Input = {
 
 const defaultPagination = { start_index: 0, count: 10 };
 
-const Loader = () => <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-  Ibex is collecting data, please stand-by <Spin />
-</div>
+const Loader = ({ isLoading }: { isLoading?: boolean }) =>
+  <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+    {isLoading ? 'Ibex is collecting data, please stand-by' : 'Loading'} <Spin />
+  </div>
 
 export const Posts = ({ filter, allowRedirect }: Input) => {
   const [posts, setPosts] = useState<Response<PostResponse>>(E.left(Error('Not fetched')));
@@ -95,7 +96,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
             : <Post post={item} />
           }
         />
-        {timeout && <Loader />}
+        {timeout && <Loader isLoading={data.is_loading} />}
       </>
   )(posts);
 }  
