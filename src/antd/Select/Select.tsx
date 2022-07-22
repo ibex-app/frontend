@@ -41,16 +41,19 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
   const [userValue, setUserValue] = useState<string>('');
   const ref = useRef<any>();
 
-  const newChecker = (results: Array<Object | string>, props: any) => {
+  const newChecker = (newVal: string, props: any) => {
     const selected = map<{ label: string }, string>(({ label }) => label)(props.selected);
     // TODO filter accounts by platform+title
-    return selected.indexOf(props.text) < 0;
+    return selected.indexOf(props.text || newVal) < 0;
   }
 
   const onChange_ = (value: any) => {
     setUserValue(value);
     onChange!([value]);
   }
+
+  const onBlur = () =>
+    allowNew && newChecker(userValue, { selected: value }) && onValChange([...value, { label: userValue }])
 
   const onValChange = (val: Value) => {
     if (checkBoolUpper && val.length) {
@@ -85,7 +88,7 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
     allowNew={allowNew ? newChecker : false}
     onInputChange={(input: any, e: any) => onChange_(input)}
     labelKey={"label"}
-    onBlur={() => userValue && onValChange([...value, { label: userValue }])}
+    onBlur={onBlur}
     renderMenuItemChildren={(option: Option, props: any, index: number) => {
       return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span></> : option.label || option
     }}
