@@ -1,28 +1,11 @@
-import { Space } from "antd";
-import { pipe, prop, trim } from "ramda";
-import { FilterElem, FilterElemPartial } from "../../types/taxonomy";
-import { filterHasOperator } from "../Utils";
-
-export const createFilterElem = ({ hasOp, s, op }: FilterElemPartial): FilterElem => {
-  if (!hasOp || op === undefined) return { hasOp: false, left: s };
-  const opStartIndex = s.toLowerCase().indexOf(` ${op} `);
-  const left = s.substring(0, opStartIndex);
-  const right = s.substring(opStartIndex + op.length + 2);
-
-  return { hasOp, left: trim(left), right: trim(right), op: op.toUpperCase() };
-}
+import { map, pipe, prop } from "ramda";
+import { getWordList, WordList } from "../Utils";
 
 // input HitsCountTableData
-export const drawFilterItem: any = pipe<any, string, FilterElemPartial, FilterElem, JSX.Element>(
+export const drawFilterItem: any = pipe<any, string, WordList, JSX.Element[]>(
   prop('search_term'),
-  filterHasOperator,
-  createFilterElem,
-  ({ hasOp, left, right, op }) =>
-    hasOp ? <>
-      <span className="keyword">{left}</span>
-      <span className="op">{op}</span>
-      {drawFilterItem({ search_term: right })}
-    </> : <span className="keyword">{left}</span>
+  getWordList,
+  map(({ type, keyword }) => <span className={type}>{keyword}</span>)
 );
 
 export const finalizeForm = ({ form1, form2 }: any) => ({

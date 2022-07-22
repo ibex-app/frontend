@@ -1,4 +1,4 @@
-import { addIndex, curry, map, reduce } from "ramda";
+import { addIndex, curry, map, pipe, reduce, split } from "ramda";
 import { useEffect, useState } from "react";
 import { FilterElemPartial } from "../types/taxonomy";
 import { match } from 'ts-pattern';
@@ -65,6 +65,23 @@ export const formatNum = (num: number): string => {
 }
 
 export const boolOperators = ['and', 'or', 'not']; // 'and not', 'or not'
+
+export type WordList = {
+  type: string;
+  keyword: string;
+}[];
+
+export const getWordList = pipe<string[], string[], WordList>(
+  split(' '),
+  map((word) => {
+    const isOp = boolOperators.includes(word.toLowerCase());
+
+    return {
+      type: isOp ? 'op' : 'keyword',
+      keyword: isOp ? word.toUpperCase() : word
+    }
+  })
+)
 
 export const filterHasOperator = (s: string) => reduce((acc: FilterElemPartial, op: string) => {
   const str = s.toLowerCase();
