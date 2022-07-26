@@ -10,7 +10,7 @@ import { faMagnifyingGlass, faTrashCan } from "@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { hitsCountFormItem } from "../../data/taxonomy/HitCounts";
 import { Get } from "../../shared/Http";
-import { HitsCountItemWithKey, HitsCountResponse, HitsCountTableItem, HitsCountItem } from "../../types/taxonomy";
+import { HitsCountResponse, HitsCountTableItem, HitsCountItem } from "../../types/taxonomy";
 import { getElem } from "../utils/ElementGetter";
 import { fold, left, right } from "fp-ts/lib/Either";
 import { platformIcon, then } from "../../shared/Utils";
@@ -23,10 +23,8 @@ type Input = {
 }
 
 export type HitsCountOutput = {
-  selected: HitsCountTableItem[],
+  selected?: HitsCountTableItem[],
   all?: HitsCountTableItem[],
-  new?: HitsCountItemWithKey[],
-  deleted?: boolean;
 }
 
 const createColumns = (platforms: string[], deleteSearchTerm: any) => {
@@ -70,8 +68,7 @@ const generatePlatforms = ({ search_terms }: HitsCountResponse) =>
 
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [data, setData] = useState<HitsCountTableItem[]>();
-  const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>();
-  const [newHitsCount, setNewHitsCount] = useState<HitsCountItemWithKey[] | undefined>();
+  const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>([]);
   const [hitCountsSelected, setHitCountSelection] = useState<HitsCountTableItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
@@ -83,14 +80,9 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     if (!hitsCountTableData) return;
     const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term)
     setHitsCountTableData(newhitsCountTableData);
-    setNewHitsCount(newHitsCount?.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
     setHitCountSelection(hitCountsSelected.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
 
-    toParent && toParent({
-      selected: hitCountsSelected,
-      deleted: true,
-      all: newhitsCountTableData
-    })
+    toParent && toParent({ all: newhitsCountTableData })
   }
 
   var isFullSingle = (hitsCountItem: any) => Object.keys(hitsCountItem)
@@ -134,26 +126,13 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     return () => clearTimeout_();
   }, [monitor_id, timeout]);
 
-  useEffect(() => {
-    setHitsCountTableData(data);
-    toParent && toParent({
-      selected: hitCountsSelected,
-      new: newHitsCount,
-      all: data
-    })
-  }, [data]);
+  useEffect(() => data && setHitsCountTableData(data), [data]);
 
   useEffect(() => {
     if (toParent) toParent({
-      selected: hitCountsSelected,
-      new: newHitsCount,
-      all: data
+      selected: hitCountsSelected
     });
-  }, [hitCountsSelected, newHitsCount]);
-
-  useEffect(() => {
-    if (newHitsCount) setHitsCountTableData(data ? concat(newHitsCount, data) : newHitsCount);
-  }, [newHitsCount]);
+  }, [hitCountsSelected]);
 
   const hitCountSelection = {
     hitCountsSelected,
@@ -162,8 +141,8 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
 
   const addNewHitsCount = pipe(
     (keyword: string) => generateHitsCountTableItem(keyword, { search_term: keyword }),
-    (item: HitsCountItemWithKey) => newHitsCount ? concat([item], newHitsCount) : [item],
-    setNewHitsCount
+    (tableItem) => concat([tableItem], hitsCountTableData),
+    setHitsCountTableData
   )
 
   useEffect(() => {
@@ -171,7 +150,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   }, [userSelection])
 
   return <div className="leftbox-inner">
-    <Form onFinish={(obj) => addNewHitsCount(obj[0])}>
+    <Form onFinish={(obj) => obj[0] && addNewHitsCount(obj[0])}>
       <Space size="small">
         {getElem(hitsCountFormItem)}
         {getElem({ id: 1, type: "button", label: "Add" })}
