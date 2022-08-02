@@ -26,10 +26,10 @@ export const FileUpload: React.FC<CustomFormItemProps> = ({ value, onChange }: C
   return (
     <div className="file-upload-wrapper">
       <div className="file-upload-title">
-        Follow instructions in the template and upload the file
+        Please modify template file to upload data using file
       </div>
       <div className="file-upload-template">
-        <FontAwesomeIcon icon={faFileLines}></FontAwesomeIcon> Template.csv
+        <FontAwesomeIcon icon={faFileLines}></FontAwesomeIcon> <a target="_blank" href="https://static.ibex-app.com/search_terms.csv">Template.csv</a>
       </div>
       <FileUploader handleChange={handleChange} name="file" types={fileTypes} label="Drag & drop your file here" />
     </div>
