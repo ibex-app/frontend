@@ -463,12 +463,12 @@ table {
 }
 
 
-.tax-scroll{
-    height: calc(100vh - 61px);
+.tax-scroll {
+    height: calc(92vh - 61px);
     overflow: scroll;
 }
 
-.tax-line-cont{
+.tax-line-cont {
     position: relative;
 }
 
@@ -483,18 +483,18 @@ table {
     color: #717171;
 }
 
-.leftbox-inner button.ant-btn.ant-btn-primary{
+.leftbox-inner button.ant-btn.ant-btn-primary {
     padding: 6px 8px;
     font-size: .8em;
 }
 
-.fixed-col{
+.fixed-col {
     height: 100%;
     position: sticky;
     top: 0px;
 }
 
-.tax-delete{
+.tax-delete {
     cursor: pointer;
     width: 100%;
     height: 100%;
@@ -506,31 +506,33 @@ table {
     justify-content: center;
     transition: .2s;
 }
-.tax-delete:hover svg{
-    color:#4670bebb;
+
+.tax-delete:hover svg {
+    color: #4670bebb;
 
 }
 
-.leftbox-inner .ant-table-tbody > tr > td:nth-child(2) {
+.leftbox-inner .ant-table-tbody>tr>td:nth-child(2) {
     max-width: 14vw;
 }
 
-.leftbox-inner .ant-table-tbody > tr > td{
+.leftbox-inner .ant-table-tbody>tr>td {
     max-width: 2vw;
     white-space: nowrap;
 }
-.leftbox-inner .ant-table-tbody > tr > td:nth-child(2) > div{
+
+.leftbox-inner .ant-table-tbody>tr>td:nth-child(2)>div {
     width: 100%;
-display: flex;
-flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.tax-cont .top-filters{
+.tax-cont .top-filters {
     width: 67%;
     border-bottom: 2px solid gainsboro;
 }
 
-.tax-cont .full-height-width{
+.tax-cont .full-height-width {
     width: 100%;
     height: 100%;
     padding-top: 92px;
@@ -541,6 +543,6 @@ flex-wrap: wrap;
     margin: 9px 0 6px 0;
 }
 
-.tax-cont .ant-collapse{
+.tax-cont .ant-collapse {
     border-radius: 10px;
 }
