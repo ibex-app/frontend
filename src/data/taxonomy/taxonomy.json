@@ -27,6 +27,26 @@
               "required": true
             }
           ]
+        },
+        {
+          "id": "type",
+          "title": "Are you using the keywords or accounts for data collection?",
+          "type": "radio",
+          "rules": [
+            {
+              "required": true
+            }
+          ],
+          "children": [
+            {
+              "title": "Keywords",
+              "value": "search_terms"
+            },
+            {
+              "title": "Accounts",
+              "value": "accounts"
+            }
+          ]
         }
       ]
     },
@@ -40,6 +60,10 @@
           "id": "search_terms",
           "type": "uploader",
           "label": "Keywords",
+          "hideLens": [
+            "form1",
+            "type"
+          ],
           "isOpen": true,
           "checkboxTitle": "Do you have specific keywords you would like to collect posts with?",
           "children": [
@@ -55,6 +79,33 @@
             {
               "id": "search_terms_upload",
               "title": "Upload Keywords",
+              "type": "file_upload",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "accounts",
+          "type": "uploader",
+          "label": "Accounts",
+          "hideLens": [
+            "form1",
+            "type"
+          ],
+          "checkboxTitle": "Do you have specific accounts you would like to collect posts with?",
+          "tip": "Posts will be collected based on the accounts/pages/groups/channels specified.",
+          "children": [
+            {
+              "id": "accounts",
+              "title": "Input Accounts",
+              "type": "tag",
+              "list": [],
+              "tip": "Start typing the account name, and select ones you want to search.",
+              "requestData": "accounts"
+            },
+            {
+              "id": "accounts_upload",
+              "title": "Upload Accounts",
               "type": "file_upload",
               "value": ""
             }
@@ -123,44 +174,6 @@
             }
           ],
           "tip": "Your data will be collected from the platform(s) you've selected."
-        },
-        {
-          "id": "accounts",
-          "type": "uploader",
-          "label": "Accounts",
-          "checkboxTitle": "Do you have specific accounts you would like to collect posts with?",
-          "tip": "Posts will be collected based on the accounts/pages/groups/channels specified.",
-          "children": [
-            {
-              "id": "accounts",
-              "title": "Input Accounts",
-              "type": "tag",
-              "list": [],
-              "tip": "Start typing the account name, and select ones you want to search.",
-              "requestData": "accounts"
-            },
-            {
-              "id": "accounts_upload",
-              "title": "Upload Accounts",
-              "type": "file_upload",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "languages",
-          "title": "What are the languages used in your data sources?",
-          "type": "tag",
-          "value": [],
-          "allowNew": false,
-          "list": [
-            "Armenian",
-            "Georgian",
-            "Azerbaijani",
-            "Russian",
-            "English"
-          ],
-          "tip": "Identifing the languages used in your datasources yields better quelity results."
         }
       ]
     }

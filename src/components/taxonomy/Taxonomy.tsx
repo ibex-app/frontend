@@ -61,6 +61,8 @@ export function Taxonomy() {
     setFormData
   )(formData), [accountSuggestions]);
 
+  useEffect(() => { if (!form.form1) navWithQuery('/taxonomy/init') }, []);
+
   // if platforms or debounced substring from account changes, we suggest new options
   useEffect(() => {
     if (substring) Get<Array<{ title: string }>>('search_account', { platforms, substring }).then(

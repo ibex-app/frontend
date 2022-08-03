@@ -2306,3 +2306,7 @@ button.ant-btn span {
 .ant-empty-image {
   display: none;
 }
+
+.ant-radio-group {
+  font-size: 14px;
+}
