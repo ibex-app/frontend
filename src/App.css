@@ -2306,3 +2306,7 @@ button.ant-btn span {
 .ant-empty-image {
   display: none;
 }
+
+.top-filters .ant-row.ant-form-item {
+  width: 19%;
+}
