@@ -14,7 +14,7 @@ type CustomFormItemProps = {
 };
 
 export const FileUpload: React.FC<CustomFormItemProps> = ({ value, onChange }: CustomFormItemProps) => {
-
+  debugger
   const handleChange = (file: any) => {
     Papa.parse(file, {
       header: true,
