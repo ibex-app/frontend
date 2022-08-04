@@ -2310,3 +2310,6 @@ button.ant-btn span {
 .top-filters .ant-row.ant-form-item {
   width: 19%;
 }
+.ant-radio-group {
+  font-size: 14px;
+}

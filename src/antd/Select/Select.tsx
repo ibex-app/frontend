@@ -34,10 +34,10 @@ const CustomToken = ({ option, index, onRemove }: CustomTokenInput) => {
   </div>
 }
 
-export const Tag = ({ el, onChange }: CustomFormItemProps) => {
+export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
   const { id, list, allowNew, placeholder, checkBoolUpper, selected } = el;
 
-  const [value, setValue] = useState<Option[]>([]);
+  const [val, setValue] = useState<Option[]>(value || []);
   const [userValue, setUserValue] = useState<string>('');
   const ref = useRef<any>();
 
@@ -53,7 +53,7 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
   }
 
   const onBlur = () =>
-    allowNew && newChecker(userValue, { selected: value }) && onValChange([...value, { label: userValue }])
+    userValue && allowNew && newChecker(userValue, { selected: value }) && onValChange([...value, { label: userValue }])
 
   const onValChange = (val: Value) => {
     if (checkBoolUpper && val.length) {
@@ -68,7 +68,7 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
   }
 
   const onRemove = (index: number) => {
-    const newVal = value.filter((val, i) => index !== i);
+    const newVal = value.filter((_: any, i: number) => index !== i);
     setValue(newVal);
     onChange!(newVal);
   }
@@ -83,7 +83,7 @@ export const Tag = ({ el, onChange }: CustomFormItemProps) => {
     ref={ref}
     multiple
     options={list || []}
-    selected={value}
+    selected={val}
     placeholder={placeholder}
     allowNew={allowNew ? newChecker : false}
     onInputChange={(input: any, e: any) => onChange_(input)}

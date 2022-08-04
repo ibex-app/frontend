@@ -1,4 +1,4 @@
-import { Button, Checkbox, DatePicker, Form, Input } from "antd";
+import { Button, Checkbox, DatePicker, Form, Input, Radio } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { match } from "ts-pattern";
 import FileUpload from "../FileUpload";
@@ -40,6 +40,9 @@ export const getElem = (element: FormElement): any => {
         .with("file_upload", () => <FileUpload />)
         .with("uploader", () => <Uploader element={element} />)
         .with("button", () => <Button type="primary" htmlType="submit">{label}</Button>) // TODO make dynamic
+        .with("radio", () => <Radio.Group>
+          {children!.map(({ value, title }) => <Radio.Button key={`Radio-${title}`} value={value}>{title}</Radio.Button>)}
+        </Radio.Group>)
         .otherwise(() => {
           console.error(`Invalid component name ${type}`);
           return <></>

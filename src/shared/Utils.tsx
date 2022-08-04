@@ -4,12 +4,19 @@ import { FilterElemPartial } from "../types/taxonomy";
 import { match } from 'ts-pattern';
 import { faFacebook, faTwitter, faYoutube, faTelegram } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const dateFormat = "DD.MM.YYYY";
 
 export const then = curry((f, p) => p.then(f));
 
 export const ofPromise = (item: any) => new Promise<any>((res) => res(item));
+
+export const useNavWithQuery = () => {
+  const { search } = useLocation();
+  const navigate = useNavigate();
+  return (path: string) => navigate(`${path}${search}`);
+}
 
 export const getParamsAsObject = () => {
   const params = window.location.search.substring(1).split('&');

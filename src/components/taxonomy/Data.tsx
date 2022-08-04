@@ -2,12 +2,12 @@ import { mapWithIndex } from "fp-ts/lib/Array";
 import { fold } from "fp-ts/lib/Either";
 import { pipe, prop } from "ramda";
 import { formatNum } from "../../shared/Utils";
-import { HitsCountItem, HitsCountItemWithKey, HitsCountTableItem } from "../../types/taxonomy";
+import { HitsCountItem, HitsCountTableItem } from "../../types/taxonomy";
 
 
 
 export const generateHitsCountTableItem =
-  (key: number | string, { search_term, facebook, youtube, twitter, vkontakte }: HitsCountItem): HitsCountItemWithKey => ({
+  (key: number | string, { search_term, facebook, youtube, twitter, vkontakte }: HitsCountItem): HitsCountTableItem => ({
     key: typeof key === 'number' ? key.toString() : `hitsCount-${key}`,
     search_term,
     facebook: facebook || facebook === 0 ? formatNum(facebook) : '-',
