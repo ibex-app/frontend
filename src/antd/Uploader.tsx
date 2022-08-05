@@ -10,12 +10,13 @@ export function Uploader({ element }: { element: FormElement }) {
         <div>
             <div className="tax-large-title">{label}</div>
             <div></div>
-            <label className="container flex align-middle">
-                <span className="tax-label">{checkboxTitle}</span>
-                <input type="checkbox" onChange={(event) => setShow(event.target.checked)}></input>
-                <span className={`checkmark ${show ? 'checked' : ''}`}></span>
-            </label>
-            <div className={`tax-toggle-cont ${show ? 'tax-toggle-cont-show' : ''}`} >
+            {/* <label className="container flex align-middle"> */}
+                {/* <span className="tax-label">{checkboxTitle}</span> */}
+                {/* <input type="checkbox" onChange={(event) => setShow(event.target.checked)}></input> */}
+                {/* <span className={`checkmark ${show ? 'checked' : ''}`}></span> */}
+            {/* </label> */}
+            {/* <div className={`tax-toggle-cont ${show ? 'tax-toggle-cont-show' : ''}`} > */}
+            <div className='tax-toggle-cont tax-toggle-cont-show' >
                 {
                     children && <div key={children[0].id}>
                                     {getElem(children[0])}

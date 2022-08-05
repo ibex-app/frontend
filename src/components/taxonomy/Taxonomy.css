@@ -312,8 +312,8 @@ input[type="checkbox"] {
 }
 
 .tax-toggle-cont {
-    padding-left: 15px;
-    border-left: 1.5px solid #c7c3c3;
+    /* padding-left: 15px; */
+    /* border-left: 1.5px solid #c7c3c3; */
     transition: .2s;
     max-height: 0;
     overflow: hidden;
