@@ -2191,6 +2191,7 @@ button.ant-btn span {
 .top-filters .ant-col.ant-form-item-label {
   padding: 2px 5px 2px;
   font-size: 0.9em;
+  margin: 0;
 }
 
 .top-filters .ant-col.ant-form-item-label label {
