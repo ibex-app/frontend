@@ -60,10 +60,13 @@
           "id": "search_terms",
           "type": "uploader",
           "label": "Keywords",
-          "hideLens": [
-            "form1",
-            "type"
-          ],
+          "hide": {
+            "lens": [
+              "form1",
+              "type"
+            ],
+            "value": "search_terms"
+          },
           "isOpen": true,
           "checkboxTitle": "Do you have specific keywords you would like to collect posts with?",
           "children": [
@@ -88,10 +91,13 @@
           "id": "accounts",
           "type": "uploader",
           "label": "Accounts",
-          "hideLens": [
-            "form1",
-            "type"
-          ],
+          "hide": {
+            "lens": [
+              "form1",
+              "type"
+            ],
+            "value": "accounts"
+          },
           "checkboxTitle": "Do you have specific accounts you would like to collect posts with?",
           "tip": "Posts will be collected based on the accounts/pages/groups/channels specified.",
           "children": [
@@ -141,6 +147,13 @@
               "required": true
             }
           ],
+          "hide": {
+            "lens": [
+              "form1",
+              "type"
+            ],
+            "value": "search_terms"
+          },
           "children": [
             {
               "id": "twitter",

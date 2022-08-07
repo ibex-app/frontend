@@ -14,12 +14,13 @@ export const FormComponent = ({ formData, className, formValues, onValuesChange,
       <Row justify="center" className="tax-scroll">
         <Space className="tax-mid mt-20" direction="vertical" size="middle">
           {children.map((el: any) => {
-            if (el.hideLens) {
-              const lensValue = view(lensPath(el.hideLens), formValues);
-              if (lensValue !== el.id) return;
+            const { id, hide } = el;
+            if (hide) {
+              const lensValue = view(lensPath(hide.lens), formValues);
+              if (lensValue !== hide.value) return;
             }
 
-            return <Space key={el.id} size="middle" direction="vertical" style={{ display: 'flex' }}>
+            return <Space key={id} size="middle" direction="vertical" style={{ display: 'flex' }}>
               {getElem(el)}
               {/* <div className="tax-line"></div> */}
             </Space>

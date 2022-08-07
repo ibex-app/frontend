@@ -40,40 +40,42 @@ export function Sidebar() {
       <div className="logo">
         <h1></h1>
       </div>
-      <nav className="main-nav">
-        <ul>
-          {/* <li><a className="inactive" href="/taxonomy">Taxonomy</a></li>
+      <div style={{ height: "91vh", overflow: "auto" }}>
+        <nav className="main-nav">
+          <ul>
+            {/* <li><a className="inactive" href="/taxonomy">Taxonomy</a></li>
           <li><a className="inactive" href="/sources">Data Sources</a></li> */}
-          <li><Link to="results">Monitors<i className="icn icn-arrow arrw-dwn"></i></Link>
-            <ul>
+            <li><Link to="results">Monitors<i className="icn icn-arrow arrw-dwn"></i></Link>
+              <ul>
 
-              {fetching ? (
-                <li> <a className="inactive" href="/">Loading...</a></li>
-              ) : (data.map((monitor: any) => (<li key={monitor._id}> <a onClick={() => routeChange(monitor._id)}> {monitor.title}</a> </li>)))}
-              <li>
-                <Link to="/taxonomy/init">
-                  + Create
-                </Link>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+                {fetching ? (
+                  <li> <a className="inactive" href="/">Loading...</a></li>
+                ) : (data.map((monitor: any) => (<li key={monitor._id}> <a onClick={() => routeChange(monitor._id)}> {monitor.title}</a> </li>)))}
+                <li>
+                  <Link to="/taxonomy/init">
+                    + Create
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
 
-      <nav className="main-nav">
-        <ul>
-          <li className="inactive"> . </li>
-          <li><Link to="/results/bar" >Bar</Link></li>
-          <li><Link to="/results/line" >Line</Link></li>
-          <li><Link to="/results/map" >Map</Link></li>
-          <li><Link className="inactive" to="/results/graph" >Graph</Link></li>
-          <li><Link className="inactive" to="/results/bubble" >Bubble</Link></li>
-        </ul>
-      </nav>
+        <nav className="main-nav">
+          <ul>
+            <li className="inactive"> . </li>
+            <li><Link to="/results/bar" >Bar</Link></li>
+            <li><Link to="/results/line" >Line</Link></li>
+            <li><Link to="/results/map" >Map</Link></li>
+            <li><Link className="inactive" to="/results/graph" >Graph</Link></li>
+            <li><Link className="inactive" to="/results/bubble" >Bubble</Link></li>
+          </ul>
+        </nav>
+      </div>
       <nav className="main-nav bottom">
         <ul>
           <li> {
-            Object.keys(user).length ? <a onClick={logout} >Log out</a> : <Link to="/login" >Log in</Link>
+            !!Object.keys(user).length ? <a onClick={logout} >Log out</a> : <Link to="/login" >Log in</Link>
           }
           </li>
         </ul>
