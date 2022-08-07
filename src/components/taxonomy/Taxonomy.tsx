@@ -31,10 +31,6 @@ export function Taxonomy() {
   const substring = useDebounce(accountSubstr, 500);
   const monitor_id = useMemo(() => new URLSearchParams(location.search).get('monitor_id') || "", [location.search]);
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData])
-
   const onValuesChange = (changed: any, values: any, formId: string) => {
     const { accounts, platforms, search_terms_upload, accounts_upload } = changed;
 
@@ -65,7 +61,7 @@ export function Taxonomy() {
     setFormData
   )(formData), [accountSuggestions]);
 
-  useEffect(() => { if (!form.form1) navWithQuery('/taxonomy/init') }, []);
+  useEffect(() => { if (!form.form1 && !monitor_id) navWithQuery('/taxonomy/init') }, []);
 
   // if platforms or debounced substring from account changes, we suggest new options
   useEffect(() => {
