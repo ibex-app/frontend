@@ -11,9 +11,9 @@ import { finalizeForm } from "../../shared/Utils/Taxonomy";
 import { Steps } from "antd";
 export const { data }: { data: any[] } = require('../../data/taxonomy/taxonomy.json');
 
-const accountLens = lensPath([1, 'children', 3, 'children', 0, 'list']);
+const accountLens = lensPath([1, 'children', 1, 'children', 0, 'list']);
 const accountFormLens = lensPath(["form2", "accounts"]);
-const accountsSelectedLens = lensPath([1, 'children', 3, 'children', 0, 'selected']);
+const accountsSelectedLens = lensPath([1, 'children', 1, 'children', 0, 'selected']);
 const keywordsLens = lensPath([1, 'children', 0, 'children', 0, 'selected']);
 const keywordsFormLens = lensPath(["form2", "search_terms"]);
 
@@ -30,6 +30,10 @@ export function Taxonomy() {
   const [accountSuggestions, setAccountSuggestions] = useState<any[]>();
   const substring = useDebounce(accountSubstr, 500);
   const monitor_id = useMemo(() => new URLSearchParams(location.search).get('monitor_id') || "", [location.search]);
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData])
 
   const onValuesChange = (changed: any, values: any, formId: string) => {
     const { accounts, platforms, search_terms_upload, accounts_upload } = changed;
