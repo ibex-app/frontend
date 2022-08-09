@@ -1,4 +1,4 @@
-import { Form, Input, Space, Table } from "antd";
+import { Form, Input, Space, Spin, Table } from "antd";
 import { concat, keys, pipe, prop } from "ramda";
 import { useContext, useEffect, useState } from "react";
 import { generateHitsCountTableData, generateHitsCountTableItem } from "../../components/taxonomy/Data";
@@ -40,6 +40,7 @@ const createColumns = (platforms: string[], deleteSearchTerm: any) => {
       title: platformIcon(platform),
       dataIndex: platform,
       key: platform,
+      render: (text: number) => text ? text.toString() : <Spin />
     });
   });
 
@@ -60,7 +61,7 @@ const createColumns = (platforms: string[], deleteSearchTerm: any) => {
 const generatePlatforms = ({ search_terms }: HitsCountResponse) =>
   search_terms.reduce((acc, curr) => {
     keys(curr).forEach(key => {
-      if (key !== 'search_term' && !acc.includes(key) && curr[key] && curr[key]! > 0) acc.push(key);
+      if (key !== 'search_term' && !acc.includes(key)) acc.push(key);
     });
 
     return acc;

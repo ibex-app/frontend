@@ -91,7 +91,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
         {!!data?.posts?.length && <List
           dataSource={data.posts}
           style={{ paddingRight: "20px" }}
-          loadMore={loadMore(onLoadMore)}
+          loadMore={loadMore(onLoadMore, data.posts.length, pagination.count, data.is_loading)}
           renderItem={(item) => allowRedirect
             ? <Link to={`/details/${item._id.$oid}`}><Post post={item} /></Link>
             : <Post post={item} />
