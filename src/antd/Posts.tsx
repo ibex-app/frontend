@@ -87,7 +87,8 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
     () => <Loader />,
     (data: PostResponse) =>
       <>
-        <List
+        {!data?.posts?.length && data.is_loading && <Loader isLoading={data.is_loading} />}
+        {!!data?.posts?.length && <List
           dataSource={data.posts}
           style={{ paddingRight: "20px" }}
           loadMore={loadMore(onLoadMore)}
@@ -95,8 +96,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
             ? <Link to={`/details/${item._id.$oid}`}><Post post={item} /></Link>
             : <Post post={item} />
           }
-        />
-        {timeout && <Loader isLoading={data.is_loading} />}
+        />}
       </>
   )(posts);
 }  
