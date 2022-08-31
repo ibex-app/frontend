@@ -1,6 +1,6 @@
 import { Collapse, Table } from "antd"
 import { getOrElse } from "fp-ts/lib/Either";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Get } from "../../shared/Http";
 
 const { Panel } = Collapse;
@@ -10,13 +10,22 @@ type Input = {
 }
 
 export const Recommendations = ({ monitor_id }: Input) => {
+  const [recommendations, setRecommendations] = useState<any>();
+
   useEffect(() => {
-    Get('recomendations', { monitor_id }).then(data => console.log(data));
+    Get('recommendations', { id: monitor_id }).then(data => setRecommendations(data));
   }, []);
+
+  useEffect(() => {
+    if (recommendations) {
+      console.log(recommendations)
+    }
+  }, [recommendations]);
 
   return <Collapse style={{ margin: "0 5%" }}>
     <Panel header="Recommended keywords" key={1}>
       <Table />
+      {/* { recommendations } */}
     </Panel>
   </Collapse>
 }
