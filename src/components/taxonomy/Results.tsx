@@ -36,11 +36,8 @@ export const TaxonomyResults = () => {
   }, [hitsCount?.all]);
 
   const setHitsCount = (newHitsCount: HitsCountOutput) => {
-    console.log('set to parent', hitsCount, newHitsCount)
-    console.log('set to parent --- ', { ...hitsCount, ...newHitsCount })
     if(hitsCount?.all && newHitsCount?.all && hitsCount?.all.length > 0 
         && hitsCount?.all.length !== newHitsCount?.all.length){
-          console.log('set to parent is modified true')
         setIsmodified(true)
     }
     setHitsCount_({ ...hitsCount, ...newHitsCount });
@@ -66,7 +63,6 @@ export const TaxonomyResults = () => {
         map(({ search_term }: HitsCountTableItem) => search_term),
         setKeywordsFilter
       )(hitsCount.selected) : setKeywordsFilter([]);
-    console.log('set to parent ++++ ', hitsCount)
   }, [hitsCount]);
 
   return (
@@ -81,7 +77,7 @@ export const TaxonomyResults = () => {
           <Space direction="vertical" style={{ display: "flex" }}>
             <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
-            <Recommendations monitor_id={monitor_id} />
+            <Recommendations monitor_id={monitor_id} toParent={setHitsCount}/>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
               <Button disabled={!ismodified} onClick={() => updateHitsCount()}>Update Monitor</Button>
             </div>

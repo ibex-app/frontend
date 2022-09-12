@@ -67,7 +67,6 @@ export const formatDate = (date: string) => {
 export const mapIndexed = addIndex(map);
 
 export const formatNum = (num: number): string => {
-  console.log(1111, num)
   if (num == -1) return 'N/A'
   if (num < 10000) return num.toLocaleString()
   return Math.floor(num / 1000).toLocaleString() + 'K'

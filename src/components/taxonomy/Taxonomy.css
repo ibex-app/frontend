@@ -559,3 +559,37 @@ table {
     border-top: 2px solid gainsboro;
     align-items: center;
 }
+
+
+/* recommended */
+.recommend-row{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 3px 13px;
+    align-items: center;
+}
+
+.recommend-prog{
+    width: 16px;
+    border-radius: 4px;
+    border: 2px solid #d5d5d5;
+    height: 31px;
+    position: relative;
+}
+
+.recommend-prog > span{
+    background: rgb(192, 242, 192);
+    width:100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.recommend-row button{
+    max-width: 70px;
+    padding: 7px;
+    font-size: .9em;
+}
+.recommend-word{
+    width: 79%;
+}
