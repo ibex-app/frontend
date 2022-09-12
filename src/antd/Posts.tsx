@@ -27,6 +27,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
   const [pagination, setPagination] = useState(defaultPagination);
 
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [filterRef, setFilterRef] = useState<any>({});
   const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
 
   const clearTimeout_ = () => {
@@ -34,9 +35,14 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
     setTimeout_(undefined);
   }
 
-  const getPosts = () => Get<PostResponse>('posts', { ...filter, ...pagination });
+  const getPosts = () => {
+    // console.log(2222, 'getPosts called')
+    return Get<PostResponse>('posts', { ...filter, ...pagination })
+  };
 
   useEffect(() => {
+    console.log(222, timeout);
+    // debugger
     setPosts(E.left(new Error('Not fetched')));
     clearTimeout_();
     if (isFetching) return;
@@ -79,8 +85,20 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
     setPagination({ start_index: pagination.start_index + pagination.count, count: pagination.count })
   };
 
+
   useEffect(() => {
+
+    // console.log(222, JSON.stringify(filter), JSON.stringify(filterRef))
+    if(JSON.stringify(filter) === JSON.stringify(filterRef)) return
+    setFilterRef(filter)
+    clearTimeout_()
     getPosts().then(setPosts)
+
+
+    // const timeoutId = setTimeout(() => {
+    //   // debugger
+    // }, 1000);
+    // return () => clearTimeout(timeoutId)    
   }, [filter]);
 
   return E.fold(

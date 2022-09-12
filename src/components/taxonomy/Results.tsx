@@ -53,11 +53,17 @@ export const TaxonomyResults = () => {
   }
 
   useEffect(() => {
+    console.log('222 monitor_id set', monitor_id)
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
       .then(E.fold(console.error, ({ monitor }) => setMonitor(monitor)));
   }, [monitor_id]);
 
   useEffect(() => {
+    console.log('222 keywordsFilter set', keywordsFilter)
+  }, [keywordsFilter]);
+
+  useEffect(() => {
+    console.log('222 hitsCount set', hitsCount)
     hitsCount?.selected?.length ?
       pipe(
         map(({ search_term }: HitsCountTableItem) => search_term),
