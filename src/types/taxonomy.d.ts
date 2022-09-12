@@ -4,7 +4,8 @@ export type HitsCountTableItem = {
   facebook: string,
   youtube: string,
   twitter: string,
-  vkontakte: string
+  vkontakte: string,
+  telegram: string,
 }
 
 export type HitsCountItem = {

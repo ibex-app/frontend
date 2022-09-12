@@ -25,6 +25,7 @@ export const TaxonomyResults = () => {
   const [hitsCount, setHitsCount_] = useState<HitsCountOutput>();
   const [keywordsFilter, setKeywordsFilter] = useState<string[]>([]);
   const [userSelection, setUserSelection] = useState<string>();
+  const [ismodified, setIsmodified] = useState<boolean>(false);
   const [filter, setFilter] = useState({});
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
@@ -34,7 +35,16 @@ export const TaxonomyResults = () => {
     return searchTerms ? getAllKeywordsWithoutOperator(searchTerms) : [];
   }, [hitsCount?.all]);
 
-  const setHitsCount = (newHitsCount: HitsCountOutput) => setHitsCount_({ ...hitsCount, ...newHitsCount });
+  const setHitsCount = (newHitsCount: HitsCountOutput) => {
+    console.log('set to parent', hitsCount, newHitsCount)
+    console.log('set to parent --- ', { ...hitsCount, ...newHitsCount })
+    if(hitsCount?.all && newHitsCount?.all && hitsCount?.all.length > 0 
+        && hitsCount?.all.length !== newHitsCount?.all.length){
+          console.log('set to parent is modified true')
+        setIsmodified(true)
+    }
+    setHitsCount_({ ...hitsCount, ...newHitsCount });
+  }
 
   const updateHitsCount = () => {
     if (!hitsCount?.all) return;
@@ -56,6 +66,7 @@ export const TaxonomyResults = () => {
         map(({ search_term }: HitsCountTableItem) => search_term),
         setKeywordsFilter
       )(hitsCount.selected) : setKeywordsFilter([]);
+    console.log('set to parent ++++ ', hitsCount)
   }, [hitsCount]);
 
   return (
@@ -72,7 +83,7 @@ export const TaxonomyResults = () => {
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
             <Recommendations monitor_id={monitor_id} />
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-              <Button disabled={!hitsCount?.all} onClick={() => updateHitsCount()}>Update Monitor</Button>
+              <Button disabled={!ismodified} onClick={() => updateHitsCount()}>Update Monitor</Button>
             </div>
           </Space>
         </Col>

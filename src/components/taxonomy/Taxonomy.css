@@ -373,7 +373,7 @@ input[type="checkbox"] {
     font-size: 20px;
     color: #b1b1b1;
     border-bottom: 2px solid gainsboro;
-    margin-top: 20px;
+    margin-top: 5px;
     font-weight: 500;
     justify-content: space-between;
 }
@@ -535,7 +535,8 @@ table {
 .tax-cont .full-height-width {
     width: 100%;
     height: 100%;
-    padding-top: 92px;
+    padding-top: 120px;
+    margin-bottom: 40px;
 }
 
 
@@ -545,4 +546,16 @@ table {
 
 .tax-cont .ant-collapse {
     border-radius: 10px;
+}
+
+
+.ant-steps{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 64px;
+    background: #fcfcfc;
+    border-top: 2px solid gainsboro;
+    align-items: center;
 }
