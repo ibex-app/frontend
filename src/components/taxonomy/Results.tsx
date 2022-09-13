@@ -25,6 +25,7 @@ export const TaxonomyResults = () => {
   const [hitsCount, setHitsCount_] = useState<HitsCountOutput>();
   const [keywordsFilter, setKeywordsFilter] = useState<string[]>([]);
   const [userSelection, setUserSelection] = useState<string>();
+  const [ismodified, setIsmodified] = useState<boolean>(false);
   const [filter, setFilter] = useState({});
 
   const navWithQuery = useNavWithQuery();
@@ -36,7 +37,13 @@ export const TaxonomyResults = () => {
     return searchTerms ? getAllKeywordsWithoutOperator(searchTerms) : [];
   }, [hitsCount?.all]);
 
-  const setHitsCount = (newHitsCount: HitsCountOutput) => setHitsCount_({ ...hitsCount, ...newHitsCount });
+  const setHitsCount = (newHitsCount: HitsCountOutput) => {
+    if(hitsCount?.all && newHitsCount?.all && hitsCount?.all.length > 0 
+        && hitsCount?.all.length !== newHitsCount?.all.length){
+        setIsmodified(true)
+    }
+    setHitsCount_({ ...hitsCount, ...newHitsCount });
+  }
 
   const updateHitsCount = () => {
     if (!hitsCount?.all) return;
@@ -48,11 +55,17 @@ export const TaxonomyResults = () => {
   }
 
   useEffect(() => {
+    console.log('222 monitor_id set', monitor_id)
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
       .then(E.fold(console.error, ({ monitor }) => setMonitor(monitor)));
   }, [monitor_id]);
 
   useEffect(() => {
+    console.log('222 keywordsFilter set', keywordsFilter)
+  }, [keywordsFilter]);
+
+  useEffect(() => {
+    console.log('222 hitsCount set', hitsCount)
     hitsCount?.selected?.length ?
       pipe(
         map(({ search_term }: HitsCountTableItem) => search_term),
@@ -72,9 +85,9 @@ export const TaxonomyResults = () => {
           <Space direction="vertical" style={{ display: "flex" }}>
             <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
-            <Recommendations monitor_id={monitor_id} />
+            <Recommendations monitor_id={monitor_id} toParent={setHitsCount}/>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-              <Button disabled={!hitsCount?.all} onClick={() => updateHitsCount()}>Update Monitor</Button>
+              <Button disabled={!ismodified} onClick={() => updateHitsCount()}>Update Monitor</Button>
             </div>
 
             <div className="flex align-center align-middle">

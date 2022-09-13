@@ -25,6 +25,7 @@ type Input = {
 export type HitsCountOutput = {
   selected?: HitsCountTableItem[],
   all?: HitsCountTableItem[],
+  // isModified?: boolean,
 }
 
 const createColumns = (platforms: string[], deleteSearchTerm: any) => {
@@ -82,8 +83,8 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term)
     setHitsCountTableData(newhitsCountTableData);
     setHitCountSelection(hitCountsSelected.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
-
-    toParent && toParent({ all: newhitsCountTableData })
+    
+    // toParent && toParent({ isModified: true } )
   }
 
   var isFullSingle = (hitsCountItem: any) => Object.keys(hitsCountItem)
@@ -129,6 +130,8 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
 
   useEffect(() => data && setHitsCountTableData(data), [data]);
 
+  useEffect(() => toParent && toParent({ all: hitsCountTableData} ), [hitsCountTableData]);
+
   useEffect(() => {
     if (toParent) toParent({
       selected: hitCountsSelected
@@ -143,7 +146,8 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const addNewHitsCount = pipe(
     (keyword: string) => generateHitsCountTableItem(keyword, { search_term: keyword }),
     (tableItem) => concat([tableItem], hitsCountTableData),
-    setHitsCountTableData
+    setHitsCountTableData,
+    // () => toParent && toParent({ isModified: true } )
   )
 
   useEffect(() => {
