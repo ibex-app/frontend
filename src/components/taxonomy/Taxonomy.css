@@ -548,7 +548,13 @@ table {
     border-radius: 10px;
 }
 
-<<<<<<< HEAD
+
+/* Data collection progress */
+.data-collection-content .taxonomy-header-spacer {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
 .data-collection-content .ant-layout-content {
     padding: 4rem;    
 }
@@ -563,7 +569,7 @@ table {
 
 .data-collection-content h2 {
     color: #000;
-=======
+}
 
 .ant-steps{
     position: fixed;
@@ -575,7 +581,6 @@ table {
     border-top: 2px solid gainsboro;
     align-items: center;
 }
-
 
 /* recommended */
 .recommend-row{
@@ -608,5 +613,4 @@ table {
 }
 .recommend-word{
     width: 79%;
->>>>>>> 07b769ba07c331e407ae05bea0cdf30323f18d4d
 }

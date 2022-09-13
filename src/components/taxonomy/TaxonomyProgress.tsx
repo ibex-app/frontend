@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
-import { Col, Row, Layout } from 'antd';
+import { Col, Row, Layout, Space } from 'antd';
 import * as E from "fp-ts/lib/Either";
 
 import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
@@ -13,12 +13,14 @@ import { Get, Response } from '../../shared/Http';
 import { TaxonomyResponse } from '../../types/common';
 import { Monitor, MonitorRespose } from '../../types/taxonomy';
 import { useLocation } from 'react-router-dom';
+import ProgressBar from '../../antd/PogressBar/ProgressBar';
 
 const TaxonomyProgress: React.FC = () => {
 
   const { Content } = Layout;
   const [taxonomyData, setTaxonomyData] = useState<Response<TaxonomyResponse>>(E.left(Error('Not fetched')));
-  const [monitor, setMonitor] = useState<Monitor>();
+  const [monitorData, setMonitorData] = useState<MonitorRespose>();
+  const [monitorProgress, setMonitorProgress] = useState();
   const { search } = useLocation();
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);          
@@ -29,10 +31,16 @@ const TaxonomyProgress: React.FC = () => {
 
   useEffect(() => {
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
-      .then(E.fold(console.error, ({ monitor }) => setMonitor(monitor)));
+      .then(E.fold(console.error, (monitorData: any) => setMonitorData(monitorData)));
   }, [monitor_id]);
 
-  console.log(monitor);
+  useEffect(() => {
+    Get('monitor_progress', { id: '238b841f-1d7c-4e71-9525-0aaa1102877b' })
+      .then(E.fold(console.error, (data: any) => console.log(data)));
+  }, [monitor_id]);
+
+  console.log(monitorData);
+  // console.log(monitorProgress);
 
   // useEffect(() => {
   //   Get<Response<TaxonomyResponse>>('get_monitor', E.left('not fetched')).then(
@@ -61,14 +69,21 @@ const TaxonomyProgress: React.FC = () => {
   //         setData(generateHitsCountTableData(right(res)))
   //       })
   //   )))
-  // )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
+  // )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));ვ
+  // let monitorDate = new Date(monitor?.date_from);
 
   return (
     <>
       <div className='data-collection-content'>
           <Content>
-            <h1>Data Collection Step - 4</h1>
-            <h2>Posts Colecting for monitor: "..."</h2>
+            <Space size={'middle'} className="taxonomy-header-spacer">
+              <h1>Data Collection Step - 4</h1>
+              
+              <h2>Colecting Posts for { monitorData?.monitor?.title }</h2>
+            
+              <h2>Description: { monitorData?.monitor?.descr }</h2>
+            </Space>
+
             <Row>
               <Col>
                 <br />
@@ -78,39 +93,31 @@ const TaxonomyProgress: React.FC = () => {
 
             <Row>
               <Col>
-                Date - ...
+                Date - { monitorData?.monitor?.date_from && monitorData?.monitor?.date_from.toString().slice(0, 10) }
               </Col>
             </Row>
 
             <Row>
-              <Col span={4}>
-                Youtube stats
-              </Col>
-
-              <Col span={20}>
-                Render Youtube Bar ...
+              <Col>
+                <h1>Platforms</h1>
               </Col>
             </Row>
 
-            <Row>
-              <Col span={4}>
-                Youtube stats
-              </Col>
 
-              <Col span={20}>
-                Render Youtube Bar ...
-              </Col>
-            </Row>
+            {
+              monitorData?.platforms.map(item => (
+                <Row>
+                  <Col span={4}>
+                    { item } stats
+                  </Col>
 
-            <Row>
-              <Col span={4}>
-                Youtube stats
-              </Col>
-
-              <Col span={20}>
-                Render Youtube Bar ...
-              </Col>
-            </Row>
+                  <Col span={20}>
+                    { item } details being loading...
+                    <ProgressBar percentage={50} showInfo={true} />
+                  </Col>
+                </Row>
+              ))
+            }
         </Content>
       </div>
     </>
