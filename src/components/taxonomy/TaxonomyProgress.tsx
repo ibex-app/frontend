@@ -35,7 +35,7 @@ const TaxonomyProgress: React.FC = () => {
   }, [monitor_id]);
 
   useEffect(() => {
-    Get('monitor_progress', { id: '238b841f-1d7c-4e71-9525-0aaa1102877b' })
+    Get('monitor_progress', { id: monitor_id })
       .then(E.fold(console.error, (data: any) => console.log(data)));
   }, [monitor_id]);
 
