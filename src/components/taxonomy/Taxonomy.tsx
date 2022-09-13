@@ -9,6 +9,7 @@ import { TaxonomyResults } from "./Results";
 import { match } from 'ts-pattern';
 import { finalizeForm } from "../../shared/Utils/Taxonomy";
 import { Steps } from "antd";
+import TaxonomyDataCollection from "./TaxonomyProgress";
 export const { data }: { data: any[] } = require('../../data/taxonomy/taxonomy.json');
 
 const accountLens = lensPath([1, 'children', 1, 'children', 0, 'list']);
@@ -95,7 +96,8 @@ export function Taxonomy() {
   const currentStep = useMemo(() => match(location.pathname)
     .with('/taxonomy/init', () => 0)
     .with('/taxonomy/params', () => 1)
-    .otherwise(() => 2), [location]);
+    .with('/taxonomy/results', () => 2)
+    .otherwise(() => 3), [location]);
 
   const onStepsChange = (step: number) => {
     match(step)
@@ -105,7 +107,8 @@ export function Taxonomy() {
         if (!isFirstFormValid) return;
         navWithQuery('/taxonomy/params');
       })
-      .otherwise(() => monitor_id && updateMonitor());
+      .with(2, () => monitor_id && updateMonitor())
+      .otherwise(() => navWithQuery('/taxonomy/data-collection'));
   }
 
   return (
@@ -120,8 +123,10 @@ export function Taxonomy() {
             onSubmit={(values: any) => onSubmit(item, values)} />
         } />)}
         <Route path="/results" element={<TaxonomyResults />}></Route>
+        <Route path="/data-collection" element={ <TaxonomyDataCollection /> }></Route>
       </Routes>
       <Steps current={currentStep} style={{ padding: '0 50px' }} onChange={onStepsChange}>
+        <Step />
         <Step />
         <Step />
         <Step />

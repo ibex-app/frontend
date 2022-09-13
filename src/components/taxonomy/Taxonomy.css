@@ -546,3 +546,19 @@ table {
 .tax-cont .ant-collapse {
     border-radius: 10px;
 }
+
+.data-collection-content .ant-layout-content {
+    padding: 4rem;    
+}
+
+.data-collection-content .ant-row {
+    margin-top: 1.5rem;
+}
+
+.data-collection-content h1 {
+    color: #000;
+}
+
+.data-collection-content h2 {
+    color: #000;
+}

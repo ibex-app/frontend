@@ -1,5 +1,5 @@
 import * as E from "fp-ts/lib/Either";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,7 +15,7 @@ import { Posts } from "../../antd/Posts";
 import { HitsCount, HitsCountOutput } from "../../antd/taxonomy/HitsCount";
 import { Recommendations } from "../../antd/taxonomy/Recomendations";
 import { TaxonomyContext } from "./TaxonomyContext";
-import { getAllKeywordsWithoutOperator } from "../../shared/Utils";
+import { getAllKeywordsWithoutOperator, useNavWithQuery } from "../../shared/Utils";
 import { Filter } from "../filter/Filter";
 import FilterData from '../../data/taxonomy/filter.json';
 
@@ -26,6 +26,8 @@ export const TaxonomyResults = () => {
   const [keywordsFilter, setKeywordsFilter] = useState<string[]>([]);
   const [userSelection, setUserSelection] = useState<string>();
   const [filter, setFilter] = useState({});
+
+  const navWithQuery = useNavWithQuery();
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
@@ -73,6 +75,17 @@ export const TaxonomyResults = () => {
             <Recommendations monitor_id={monitor_id} />
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
               <Button disabled={!hitsCount?.all} onClick={() => updateHitsCount()}>Update Monitor</Button>
+            </div>
+
+            <div className="flex align-center align-middle">
+            {
+                <Button onClick={() => (
+                  navWithQuery('/taxonomy/data-collection')
+                )}>
+                    Run data collection
+                </Button>
+            }
+              {/* <Link to="data-collection">Run data collection</Link> */}
             </div>
           </Space>
         </Col>
