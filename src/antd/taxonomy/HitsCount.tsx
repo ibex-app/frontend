@@ -113,6 +113,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
           .with(false, () => {
             setLoading(false);
             const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
+            setPlatforms(generatePlatforms(res));
             setData(generateHitsCountTableData(right(res)))
             return;
           })
