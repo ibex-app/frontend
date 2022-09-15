@@ -10,18 +10,22 @@ import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
 import { Get, Response } from '../../shared/Http';
-import { TaxonomyResponse } from '../../types/common';
-import { Monitor, MonitorRespose } from '../../types/taxonomy';
+import { TaxonomyResponse, MonitorProgressResponse, MonitorRespose, Progress, HitsCountResponse } from '../../types/taxonomy';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../../antd/PogressBar/ProgressBar';
+import { pipe } from 'fp-ts/lib/function';
+import { then } from '../../shared/Utils';
+import { fold } from 'fp-ts/lib/Tree';
 
 const TaxonomyProgress: React.FC = () => {
 
   const { Content } = Layout;
   const [taxonomyData, setTaxonomyData] = useState<Response<TaxonomyResponse>>(E.left(Error('Not fetched')));
   const [monitorData, setMonitorData] = useState<MonitorRespose>();
-  const [monitorProgress, setMonitorProgress] = useState();
+  const [monitorProgress, setMonitorProgress] = useState<Progress[]>([] as Progress[]);
   const { search } = useLocation();
+  const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);          
 
@@ -29,48 +33,60 @@ const TaxonomyProgress: React.FC = () => {
   // 2. monitor_progress, returns the information about the progress of data collection
   // 'get_monitor', 
 
+  
+  // const monitorArrayData: Progress[] = useMemo(() => {
+  //   const monitorArray: any = [];
+  //   return monitorArray.splice(0, 0, monitorProgress);
+  // }, [monitorProgress]);
+
   useEffect(() => {
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
       .then(E.fold(console.error, (monitorData: any) => setMonitorData(monitorData)));
   }, [monitor_id]);
 
   useEffect(() => {
-    Get('monitor_progress', { id: monitor_id })
-      .then(E.fold(console.error, (data: any) => console.log(data)));
+    Get<Progress[]>('monitor_progress', { id: monitor_id })
+      .then(E.fold(console.error, (data: Progress[] ) => {
+        setMonitorProgress(data) 
+        // monitorArrayData.push(data)
+      }));
   }, [monitor_id]);
 
-  console.log(monitorData);
-  // console.log(monitorProgress);
 
-  // useEffect(() => {
-  //   Get<Response<TaxonomyResponse>>('get_monitor', E.left('not fetched')).then(
-  //     (data) => console.log('data ', data)
-  //   )
-  // }, [])
+  console.log(monitorProgress);
+  // console.log(monitorArrayData);
    
   // todo
-  // const try_ = () => pipe(
-  //   then((fold(
-  //     (err: Error) => console.log('errr', left(err)),
-  //     (res: HitsCountResponse) => match(isFull(res)) 
   
   // isFull შეიცვალოს -> for platform in responce.items()
   //  responce[platform].finalized_tasks_count == responce[platform].tasks_count
+  // const clearTimeout_ = () => {
+  //   timeout && clearTimeout(timeout);
+  //   setTimeout_(undefined);
+  // }
 
-  //       .with(false, () => {
-  //         setLoading(false);
-  //         const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000); 
-  //         setData(generateHitsCountTableData(right(res)))
-  //         return;
-  //       })
-  //       .otherwise(() => {
-  //         clearTimeout_();
-  //         setPlatforms(generatePlatforms(res));
-  //         setData(generateHitsCountTableData(right(res)))
-  //       })
-  //   )))
-  // )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));ვ
-  // let monitorDate = new Date(monitor?.date_from);
+  // useEffect(() => {
+  //   if (loading) return;
+  //   setLoading(true);
+
+  //   clearTimeout_();
+  //   const try_ = () => pipe(
+  //     then((fold(
+  //       (err: Error) => console.log('errr', left(err)),
+  //       (res: HitsCountResponse) => match(isFull(res))
+  //         .with(false, () => {
+  //           setLoading(false);
+  //           const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
+  //           setData(generateHitsCountTableData(right(res)))
+  //           return;
+  //         })
+  //         .otherwise(() => {
+  //           clearTimeout_();
+  //           setPlatforms(generatePlatforms(res));
+  //           setData(generateHitsCountTableData(right(res)))
+  //         })
+  //     )))
+  //   )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
 
   return (
     <>
@@ -105,18 +121,25 @@ const TaxonomyProgress: React.FC = () => {
 
 
             {
-              monitorData?.platforms.map(item => (
-                <Row>
-                  <Col span={4}>
-                    { item } stats
-                  </Col>
+              monitorProgress ? monitorProgress.map((item, i) => {
+                let progressValue: number = 0;
+                if (item.tasks_count) progressValue = item.tasks_count / item.finalized_collect_tasks_count * 100;
+                
+                console.log(`NUmber -> for index ${i}`, progressValue);
+                return (
+                  <Row key={item.platform}>
+                    <Col span={4}>
+                      { item?.platform } stats 
+                    </Col>
 
-                  <Col span={20}>
-                    { item } details being loading...
-                    <ProgressBar percentage={50} showInfo={true} />
-                  </Col>
-                </Row>
-              ))
+                    <Col span={20}>
+                      { typeof(progressValue) === "number" && progressValue < 100 ? "details being loading..." : "details fetched" } 
+                      
+                      <ProgressBar percentage={progressValue} showInfo={true} />
+                    </Col>
+                  </Row>
+                )
+              }) : <h1>No Data Available</h1>
             }
         </Content>
       </div>

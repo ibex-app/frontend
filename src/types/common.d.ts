@@ -48,7 +48,3 @@ export type PostType = {
   "transcripts": null,
   "account": []
 }
-
-export type TaxonomyResponse = {
-  
-}
