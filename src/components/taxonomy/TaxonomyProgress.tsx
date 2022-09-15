@@ -13,16 +13,17 @@ import { Get, Response } from '../../shared/Http';
 import { TaxonomyResponse, MonitorProgressResponse, MonitorRespose, Progress, HitsCountResponse } from '../../types/taxonomy';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../../antd/PogressBar/ProgressBar';
-import { pipe } from 'fp-ts/lib/function';
+import { pipe } from 'ramda';
 import { then } from '../../shared/Utils';
-import { fold } from 'fp-ts/lib/Tree';
+import { left, fold } from 'fp-ts/lib/Either';
+import { match } from 'ts-pattern';
 
 const TaxonomyProgress: React.FC = () => {
 
   const { Content } = Layout;
   const [taxonomyData, setTaxonomyData] = useState<Response<TaxonomyResponse>>(E.left(Error('Not fetched')));
   const [monitorData, setMonitorData] = useState<MonitorRespose>();
-  const [monitorProgress, setMonitorProgress] = useState<Progress[]>([] as Progress[]);
+  const [monitorProgress, setMonitorProgress] = useState<MonitorProgressResponse[]>([] as MonitorProgressResponse[]);
   const { search } = useLocation();
   const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -44,13 +45,13 @@ const TaxonomyProgress: React.FC = () => {
       .then(E.fold(console.error, (monitorData: any) => setMonitorData(monitorData)));
   }, [monitor_id]);
 
-  useEffect(() => {
-    Get<Progress[]>('monitor_progress', { id: monitor_id })
-      .then(E.fold(console.error, (data: Progress[] ) => {
-        setMonitorProgress(data) 
-        // monitorArrayData.push(data)
-      }));
-  }, [monitor_id]);
+  // useEffect(() => {
+  //   Get<Progress[]>('monitor_progress', { id: monitor_id })
+  //     .then(E.fold(console.error, (data: Progress[] ) => {
+  //       setMonitorProgress(data) 
+  //       // monitorArrayData.push(data)
+  //     }));
+  // }, [monitor_id]);
 
 
   console.log(monitorProgress);
@@ -60,33 +61,52 @@ const TaxonomyProgress: React.FC = () => {
   
   // isFull შეიცვალოს -> for platform in responce.items()
   //  responce[platform].finalized_tasks_count == responce[platform].tasks_count
-  // const clearTimeout_ = () => {
-  //   timeout && clearTimeout(timeout);
-  //   setTimeout_(undefined);
-  // }
+  
+  const clearTimeout_ = () => {
+    timeout && clearTimeout(timeout);
+    setTimeout_(undefined);
+  }
 
-  // useEffect(() => {
-  //   if (loading) return;
-  //   setLoading(true);
+  const isFinalized = (res: MonitorProgressResponse) => {
+    return Boolean(res.progressItem.finalized_collect_tasks_count === res.progressItem.tasks_count)
+  }
 
-  //   clearTimeout_();
-  //   const try_ = () => pipe(
-  //     then((fold(
-  //       (err: Error) => console.log('errr', left(err)),
-  //       (res: HitsCountResponse) => match(isFull(res))
-  //         .with(false, () => {
-  //           setLoading(false);
-  //           const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
-  //           setData(generateHitsCountTableData(right(res)))
-  //           return;
-  //         })
-  //         .otherwise(() => {
-  //           clearTimeout_();
-  //           setPlatforms(generatePlatforms(res));
-  //           setData(generateHitsCountTableData(right(res)))
-  //         })
-  //     )))
-  //   )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
+  const generateMonitorProgress = (res: MonitorProgressResponse) =>  {
+    console.log(res);
+    return Object.create(res.progressItem);
+  }
+
+  useEffect(() => {
+    if (loading) return;
+    setLoading(true);
+
+    clearTimeout_();
+    const try_ = () => pipe(
+      then((fold(
+        (err: Error) => console.log('errr', left(err)),
+        (res: MonitorProgressResponse) => match(isFinalized(res))
+          .with(false, () => {
+            console.log("Is Finalized ", isFinalized(res));
+            setLoading(false);
+            const timeout_: any = setTimeout(() => setTimeout_(timeout_), 1000);
+            // setData(generateHitsCountTableData(right(res)))
+            return;
+          })
+          .otherwise(() => {
+            clearTimeout_();
+            setMonitorProgress(generateMonitorProgress(res));
+            console.log("Is Finalized ", isFinalized(res));
+            // setPlatforms(generatePlatforms(res));
+            // setData(generateHitsCountTableData(right(res)))
+          })
+      )))
+    )(Get<MonitorProgressResponse>('monitor_progress', { id: monitor_id }));
+
+    try_();
+    return () => clearTimeout_();
+  }, [monitor_id, timeout]);
+
+  // console.log(monitorProgress)
 
   return (
     <>
@@ -121,15 +141,15 @@ const TaxonomyProgress: React.FC = () => {
 
 
             {
-              monitorProgress ? monitorProgress.map((item, i) => {
+              monitorProgress ? monitorProgress.map((item: any, i) => {
                 let progressValue: number = 0;
-                if (item.tasks_count) progressValue = item.tasks_count / item.finalized_collect_tasks_count * 100;
+                if (item.progressItem.platform) progressValue = item?.progressItem?.tasks_count / item.progressItem?.finalized_collect_tasks_count * 100;
                 
                 console.log(`NUmber -> for index ${i}`, progressValue);
                 return (
-                  <Row key={item.platform}>
+                  <Row key={item.progressItem.platform}>
                     <Col span={4}>
-                      { item?.platform } stats 
+                      { item?.progressItem.platform } stats 
                     </Col>
 
                     <Col span={20}>
