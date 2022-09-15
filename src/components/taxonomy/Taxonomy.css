@@ -548,6 +548,22 @@ table {
     border-radius: 10px;
 }
 
+<<<<<<< HEAD
+.data-collection-content .ant-layout-content {
+    padding: 4rem;    
+}
+
+.data-collection-content .ant-row {
+    margin-top: 1.5rem;
+}
+
+.data-collection-content h1 {
+    color: #000;
+}
+
+.data-collection-content h2 {
+    color: #000;
+=======
 
 .ant-steps{
     position: fixed;
@@ -592,4 +608,5 @@ table {
 }
 .recommend-word{
     width: 79%;
+>>>>>>> 07b769ba07c331e407ae05bea0cdf30323f18d4d
 }
