@@ -33,9 +33,9 @@ export type Monitor = {
 }
 
 export type Progress = {
-  finalized_collect_tasks_count?: number,
+  finalized_collect_tasks_count: number,
   posts_count: number,
-  tasks_count?: number, 
+  tasks_count: number, 
   time_estimate?: number,
   platform?: string
 }
@@ -53,9 +53,8 @@ export type MonitorRespose = {
   platforms: Array[]
 }
 
-export type MonitorProgressResponse = {
-  progressItem: Progress
-}
+export type MonitorProgressResponse = Progress[]
+
 
 export type FilterElem = { hasOp: boolean, left: string, right?: string, op?: string };
 

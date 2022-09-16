@@ -23,7 +23,7 @@ const TaxonomyProgress: React.FC = () => {
   const { Content } = Layout;
   const [taxonomyData, setTaxonomyData] = useState<Response<TaxonomyResponse>>(E.left(Error('Not fetched')));
   const [monitorData, setMonitorData] = useState<MonitorRespose>();
-  const [monitorProgress, setMonitorProgress] = useState<MonitorProgressResponse[]>([] as MonitorProgressResponse[]);
+  const [monitorProgress, setMonitorProgress] = useState<MonitorProgressResponse>();
   const { search } = useLocation();
   const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -33,12 +33,6 @@ const TaxonomyProgress: React.FC = () => {
   // 1. get_monitor, returns the monitor details like name, date range and used keywords
   // 2. monitor_progress, returns the information about the progress of data collection
   // 'get_monitor', 
-
-  
-  // const monitorArrayData: Progress[] = useMemo(() => {
-  //   const monitorArray: any = [];
-  //   return monitorArray.splice(0, 0, monitorProgress);
-  // }, [monitorProgress]);
 
   useEffect(() => {
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
@@ -52,15 +46,6 @@ const TaxonomyProgress: React.FC = () => {
   //       // monitorArrayData.push(data)
   //     }));
   // }, [monitor_id]);
-
-
-  console.log(monitorProgress);
-  // console.log(monitorArrayData);
-   
-  // todo
-  
-  // isFull შეიცვალოს -> for platform in responce.items()
-  //  responce[platform].finalized_tasks_count == responce[platform].tasks_count
   
   const clearTimeout_ = () => {
     timeout && clearTimeout(timeout);
@@ -68,12 +53,7 @@ const TaxonomyProgress: React.FC = () => {
   }
 
   const isFinalized = (res: MonitorProgressResponse) => {
-    return Boolean(res.progressItem.finalized_collect_tasks_count === res.progressItem.tasks_count)
-  }
-
-  const generateMonitorProgress = (res: MonitorProgressResponse) =>  {
-    console.log(res);
-    return Object.create(res.progressItem);
+    return res.reduce((isFinalized: boolean, progress:Progress) => !isFinalized ? isFinalized : progress.tasks_count === progress.finalized_collect_tasks_count, true)
   }
 
   useEffect(() => {
@@ -88,16 +68,14 @@ const TaxonomyProgress: React.FC = () => {
           .with(false, () => {
             console.log("Is Finalized ", isFinalized(res));
             setLoading(false);
-            const timeout_: any = setTimeout(() => setTimeout_(timeout_), 1000);
-            // setData(generateHitsCountTableData(right(res)))
+            setMonitorProgress(res);
+            const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
             return;
           })
           .otherwise(() => {
             clearTimeout_();
-            setMonitorProgress(generateMonitorProgress(res));
+            setMonitorProgress(res);
             console.log("Is Finalized ", isFinalized(res));
-            // setPlatforms(generatePlatforms(res));
-            // setData(generateHitsCountTableData(right(res)))
           })
       )))
     )(Get<MonitorProgressResponse>('monitor_progress', { id: monitor_id }));
@@ -106,7 +84,8 @@ const TaxonomyProgress: React.FC = () => {
     return () => clearTimeout_();
   }, [monitor_id, timeout]);
 
-  // console.log(monitorProgress)
+
+  console.log(monitorProgress)
 
   return (
     <>
@@ -139,23 +118,31 @@ const TaxonomyProgress: React.FC = () => {
               </Col>
             </Row>
 
-
             {
-              monitorProgress ? monitorProgress.map((item: any, i) => {
+              monitorProgress && monitorProgress.length > 0 ? monitorProgress.map((item, i) => {
                 let progressValue: number = 0;
-                if (item.progressItem.platform) progressValue = item?.progressItem?.tasks_count / item.progressItem?.finalized_collect_tasks_count * 100;
+                if (item.platform) progressValue = item.finalized_collect_tasks_count * 100 / item.tasks_count;
                 
-                console.log(`NUmber -> for index ${i}`, progressValue);
+                // console.log(`NUmber -> for index ${i}`, progressValue);
                 return (
-                  <Row key={item.progressItem.platform}>
+                  <Row key={item.platform}>
                     <Col span={4}>
-                      { item?.progressItem.platform } stats 
+                      { item.platform } stats 
                     </Col>
 
                     <Col span={20}>
                       { typeof(progressValue) === "number" && progressValue < 100 ? "details being loading..." : "details fetched" } 
                       
                       <ProgressBar percentage={progressValue} showInfo={true} />
+
+                      {
+                        `Posts count: ${item.posts_count}`
+                      }
+                      
+                      {' - '}
+                      {
+                        `Estimated time to get data: ${item.time_estimate}`
+                      }
                     </Col>
                   </Row>
                 )
