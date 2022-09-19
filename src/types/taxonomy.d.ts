@@ -1,3 +1,5 @@
+import { number } from "fp-ts";
+
 export type HitsCountTableItem = {
   key: string,
   search_term: string,
@@ -23,11 +25,19 @@ export type HitsCountResponse = {
 
 export type Monitor = {
   collect_actions: string[];
-  date_from: Date,
+  date_from: Date | string,
   date_to?: Date,
   descr: string,
   title: string,
   _id: string
+}
+
+export type Progress = {
+  finalized_collect_tasks_count: number,
+  posts_count: number,
+  tasks_count: number, 
+  time_estimate?: number,
+  platform?: string
 }
 
 export type SearchTerm = {
@@ -39,9 +49,17 @@ export type SearchTerm = {
 export type MonitorRespose = {
   monitor: Monitor,
   search_term: SearchTerm[],
-  accounts: Account[]
+  accounts: Account[],
+  platforms: Array[]
 }
+
+export type MonitorProgressResponse = Progress[]
+
 
 export type FilterElem = { hasOp: boolean, left: string, right?: string, op?: string };
 
 export type FilterElemPartial = { hasOp?: boolean, op?: string, s: string };
+
+export type TaxonomyResponse = {
+  
+}
