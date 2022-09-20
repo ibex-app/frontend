@@ -4,6 +4,7 @@ import { Results } from './components/results/Results';
 import { Taxonomy } from './components/taxonomy/Taxonomy';
 import { Sources } from './components/sources/Sources';
 import { Details } from './components/details/Details';
+import { Summary } from './components/summary/Summary';
 import { Login } from './components/login/Login';
 import { PrivateRoutes } from './components/private-routes/PrivateRoutes';
 import { useGlobalState } from './app/store';
@@ -39,6 +40,7 @@ function App() {
           <Route path="/" element={<PrivateRoutes />} >
             <Route path="/" element={<Results />} />
             <Route path="/results/*" element={<Results />} />
+            <Route path="/summary/*" element={<Summary />} />
             <Route path="/taxonomy/*" element={<Taxonomy />} />
             <Route path="/sources" element={<Sources />} />
             <Route path="/details/:postId" element={<Details />} />
