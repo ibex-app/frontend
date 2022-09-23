@@ -136,12 +136,12 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     // console.log('hitsCountTableData effect')
   }, [hitsCountTableData]);
 
-  // useEffect(() => {
-  //   console.log('hitCountsSelected effect')
-  //   // if (toParent) toParent({
-  //   //   selected: hitCountsSelected
-  //   // });
-  // }, [hitCountsSelected]);
+  useEffect(() => {
+    console.log('hitCountsSelected effect')
+    if (toParent) toParent({
+      selected: hitCountsSelected
+    });
+  }, [hitCountsSelected]);
 
   const hitCountSelection = {
     hitCountsSelected,
