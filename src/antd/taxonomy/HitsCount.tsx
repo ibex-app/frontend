@@ -82,7 +82,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     if (!hitsCountTableData) return;
     const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term)
     setHitsCountTableData(newhitsCountTableData);
-    setHitCountSelection(hitCountsSelected.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
+    // setHitCountSelection(hitCountsSelected.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
     
     // toParent && toParent({ isModified: true } )
   }
@@ -131,13 +131,17 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
 
   useEffect(() => data && setHitsCountTableData(data), [data]);
 
-  useEffect(() => toParent && toParent({ all: hitsCountTableData} ), [hitsCountTableData]);
-
   useEffect(() => {
-    if (toParent) toParent({
-      selected: hitCountsSelected
-    });
-  }, [hitCountsSelected]);
+    toParent && toParent({ all: hitsCountTableData} )
+    // console.log('hitsCountTableData effect')
+  }, [hitsCountTableData]);
+
+  // useEffect(() => {
+  //   console.log('hitCountsSelected effect')
+  //   // if (toParent) toParent({
+  //   //   selected: hitCountsSelected
+  //   // });
+  // }, [hitCountsSelected]);
 
   const hitCountSelection = {
     hitCountsSelected,

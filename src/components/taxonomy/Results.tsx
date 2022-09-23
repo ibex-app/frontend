@@ -42,6 +42,7 @@ export const TaxonomyResults = () => {
         && hitsCount?.all.length !== newHitsCount?.all.length){
         setIsmodified(true)
     }
+    // console.log(333, hitsCount, newHitsCount, { ...hitsCount, ...newHitsCount })
     setHitsCount_({ ...hitsCount, ...newHitsCount });
   }
 
@@ -55,17 +56,17 @@ export const TaxonomyResults = () => {
   }
 
   useEffect(() => {
-    console.log('222 monitor_id set', monitor_id)
+    // console.log('222 monitor_id set', monitor_id)
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
       .then(E.fold(console.error, ({ monitor }) => setMonitor(monitor)));
   }, [monitor_id]);
 
   useEffect(() => {
-    console.log('222 keywordsFilter set', keywordsFilter)
+    // console.log('222 keywordsFilter set', keywordsFilter)
   }, [keywordsFilter]);
 
   useEffect(() => {
-    console.log('222 hitsCount set', hitsCount)
+    // console.log('222 hitsCount set', hitsCount)
     hitsCount?.selected?.length ?
       pipe(
         map(({ search_term }: HitsCountTableItem) => search_term),
