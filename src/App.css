@@ -1887,7 +1887,7 @@ main.main .main-dashboard {
   left: 5%;
   height: calc(100% - 50px);
   position: absolute;
-  top: 70px;
+  top: 20px;
   overflow: hidden;
 }
 
@@ -2291,11 +2291,11 @@ button.ant-btn span {
   margin: 15px 0 15px 15px;
   padding-right: 15px;
   overflow: hidden;
-  min-height: 80vh;
-  position: fixed;
-  height: 75vh;
+  min-height: 200px;
+  position: relative;
+  height: 40vh;
   width: 85vw;
-  top: 17vh;
+  top: 2rem;
 }
 
 
