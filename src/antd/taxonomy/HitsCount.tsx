@@ -16,6 +16,7 @@ import { fold, left, right } from "fp-ts/lib/Either";
 import { platformIcon, then } from "../../shared/Utils";
 import { match } from "ts-pattern";
 import { ColumnsType } from "antd/lib/table";
+import { formatNum } from "../../shared/Utils";
 
 type Input = {
   monitor_id: string,
@@ -27,7 +28,11 @@ export type HitsCountOutput = {
   all?: HitsCountTableItem[],
   // isModified?: boolean,
 }
-
+const renderCell = (value: number | undefined) => {
+  if(!value) return <Spin />;
+  
+  return <span className={value < 0 ? 'table-cell-gray' : value > 10000 ? 'table-cell-red' : ''}> {formatNum(value)}</span>
+}
 const createColumns = (platforms: string[], deleteSearchTerm: any) => {
   let cols: ColumnsType<HitsCountTableItem> = [{
     title: "Keyword",
@@ -41,7 +46,7 @@ const createColumns = (platforms: string[], deleteSearchTerm: any) => {
       title: platformIcon(platform),
       dataIndex: platform,
       key: platform,
-      render: (text: number) => text ? text.toString() : <Spin />
+      render: (text: number) => renderCell(text)
     });
   });
 

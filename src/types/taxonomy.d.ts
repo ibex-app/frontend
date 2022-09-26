@@ -3,11 +3,11 @@ import { number } from "fp-ts";
 export type HitsCountTableItem = {
   key: string,
   search_term: string,
-  facebook: string,
-  youtube: string,
-  twitter: string,
-  vkontakte: string,
-  telegram: string,
+  facebook: number | undefined,
+  youtube: number | undefined,
+  twitter: number | undefined,
+  vkontakte: number | undefined,
+  telegram: number | undefined,
 }
 
 export type HitsCountItem = {
