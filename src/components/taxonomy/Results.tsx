@@ -57,6 +57,7 @@ export const TaxonomyResults = () => {
 
   useEffect(() => {
     // console.log('222 monitor_id set', monitor_id)
+    if(!monitor_id) return;
     Get<MonitorRespose>('get_monitor', { id: monitor_id })
       .then(E.fold(console.error, ({ monitor }) => setMonitor(monitor)));
   }, [monitor_id]);
