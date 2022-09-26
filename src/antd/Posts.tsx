@@ -77,7 +77,7 @@ export const Posts = ({ filter, allowRedirect, shuffle }: Input) => {
     }
 
     useEffect(() => {
-        setPosts(E.left(new Error('Not fetched')));
+        // setPosts(E.left(new Error('Not fetched')));
         clearTimeout_();
         if (isFetching) return;
         setIsFetching(true);
