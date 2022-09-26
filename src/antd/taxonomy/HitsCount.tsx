@@ -29,9 +29,9 @@ export type HitsCountOutput = {
   // isModified?: boolean,
 }
 const renderCell = (value: number | undefined) => {
-  if(!value) return <Spin />;
+  if(!value && value!==0) return <Spin />;
   
-  return <span className={value < 0 ? 'table-cell-gray' : value > 10000 ? 'table-cell-red' : ''}> {formatNum(value)}</span>
+  return <span className={value < 1 ? 'table-cell-gray' : value > 10000 ? 'table-cell-red' : ''}> {formatNum(value)}</span>
 }
 const createColumns = (platforms: string[], deleteSearchTerm: any) => {
   let cols: ColumnsType<HitsCountTableItem> = [{
