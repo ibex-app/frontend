@@ -113,6 +113,7 @@ export const TaxonomyResults = () => {
               key="postsTaxonomy"
               filter={{ ...filter, monitor_id, search_terms: keywordsFilter }}
               allowRedirect={false}
+              shuffle={true}
             />
           </Space>
         </Col>

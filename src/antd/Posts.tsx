@@ -1,6 +1,6 @@
 import { List, Spin } from "antd";
 import * as E from "fp-ts/lib/Either";
-import { isEmpty, pipe } from "ramda";
+import { any, isEmpty, pipe } from "ramda";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { match } from "ts-pattern";
@@ -12,7 +12,8 @@ import { Post } from "./post/Post";
 
 type Input = {
   filter: Filter,
-  allowRedirect?: boolean
+  allowRedirect?: boolean,
+  shuffle?: boolean
 }
 
 const defaultPagination = { start_index: 0, count: 10 };
@@ -22,7 +23,7 @@ const Loader = ({ isLoading }: { isLoading?: boolean }) =>
     {isLoading ? 'Ibex is collecting data, please stand-by' : 'Loading'} <Spin />
   </div>
 
-export const Posts = ({ filter, allowRedirect }: Input) => {
+export const Posts = ({ filter, allowRedirect, shuffle }: Input) => {
   const [posts, setPosts] = useState<Response<PostResponse>>(E.left(Error('Not fetched')));
   const [pagination, setPagination] = useState(defaultPagination);
 
@@ -37,7 +38,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
 
   const getPosts = () => {
     // console.log(2222, 'getPosts called')
-    return Get<PostResponse>('posts', { ...filter, ...pagination })
+    return Get<PostResponse>('posts', { ...filter, ...pagination, ...{shuffle: Boolean(shuffle)} })
   };
 
   useEffect(() => {
@@ -61,6 +62,7 @@ export const Posts = ({ filter, allowRedirect }: Input) => {
             setIsFetching(false);
             setTimeout_(undefined);
             setPosts(E.right(res));
+            // p__: any = E.right(res);
           })
       )))
     )(getPosts());

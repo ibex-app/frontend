@@ -35,7 +35,7 @@ const TaxonomyProgress: React.FC = () => {
   // 'get_monitor', 
 
   useEffect(() => {
-    Get<MonitorRespose>('get_monitor', { id: monitor_id })
+    Get<MonitorRespose>('run_data_collection', { id: monitor_id })
       .then(E.fold(console.error, (monitorData: any) => setMonitorData(monitorData)));
   }, [monitor_id]);
 
