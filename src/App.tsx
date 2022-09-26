@@ -24,6 +24,7 @@ function App() {
     setUser({ jwt: token })
 
     if (!storage_token) window.localStorage.setItem('jwt', token);
+    window.location.href = window.location.protocol + '//' + window.location.host;
     // window.localStorage.setItem('refresh', req.response["refresh_token"]);
     // setUser({email: searchParams.get("user"), jwt: token})
   }

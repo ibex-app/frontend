@@ -616,7 +616,7 @@ table {
 }
 
 .table-cell-gray{
-    color: gray;
+    color: #c9c9c9;
 }
 .table-cell-red{
     color: red;
@@ -625,18 +625,18 @@ table {
 
 .table-cell-red::after{
     position: absolute;
-content: "!";
-background: #febd57;
-color: white;
-top: -14px;
-left: 4px;
-border-radius: 100%;
-width: 11px;
-height: 11px;
-display: flex;
-align-items: center;
-font-size: 9px;
-text-align: center;
-justify-content: center;
-font-weight: bold;
+    content: "!";
+    background: #febd57;
+    color: white;
+    top: -14px;
+    left: 4px;
+    border-radius: 100%;
+    width: 11px;
+    height: 11px;
+    display: flex;
+    align-items: center;
+    font-size: 9px;
+    text-align: center;
+    justify-content: center;
+    font-weight: bold;
 }
