@@ -1,5 +1,6 @@
 import { BarChart } from "../charts/bar/BarChart";
 import { ChartInputFilter } from "../charts/chartInputFilter";
+import { DoughnatChart } from "../charts/doughnat/DoughnatChart";
 import { LineChart } from "../charts/line/LineChart";
 
 export function Summary( { filter }: ChartInputFilter) {
@@ -26,6 +27,13 @@ export function Summary( { filter }: ChartInputFilter) {
         <div>
             By Accounts
             <LineChart axisX='platform' axisY={12} filter={filter} />
+            {/* <DoughnutChart  axisX={account} axisY={count}/> */}
+            <button>Download</button>
+        </div>
+
+        <div>
+            By Accounts
+            <DoughnatChart axisX='platform' axisY={12} filter={filter} />
             {/* <DoughnutChart  axisX={account} axisY={count}/> */}
             <button>Download</button>
         </div>
