@@ -164,7 +164,6 @@ export function BarChart({ axisX, axisY, filter }: ChartInputParams) {
       days: 7
     });
 
-
     fetchData.then((_data: Response<any>) => {
       let maybeData: any = E.getOrElse(() => [data_])(_data)
       if (!maybeData.length) {

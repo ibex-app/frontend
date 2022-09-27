@@ -48,8 +48,8 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
   let data_: any = {
     datasets: [
       {
-        label: '',
-        data: labels.map(() => 0)
+        data: labels.map(() => 0),
+        backgroundColor: ["#bf501f", "#f59c34", "#89a7c6"]
       },
     ],
     labels
@@ -103,10 +103,11 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
       //labels.push(intervalDate.toISOString().slice(0, 10))
 
       datasets.forEach((dataset: any) => {
-        let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id.week == week)
+        let match = responce_data.filter((d: any) => d[labelType].title === dataset.label && d._id.week === week)
+        console.log(match);
         if (!match.length) {
           dataset.data.push(0)
-        } else if (labelType == 'platform') {
+        } else if (labelType === 'platform') {
           let count = match.reduce((a: any, b: any) => a += b.count, 0)
           dataset.data.push(count)
         } else {
@@ -114,6 +115,8 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
         }
       })
     }
+
+    console.log(datasets)
 
     return {
       labels: post_label_values,

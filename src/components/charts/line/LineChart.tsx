@@ -138,9 +138,7 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
       lineTension: .35,        
       radius: 4  
     }))
-    
     labels = []
-
     // debugger
     for (let week = startWeek; week <= startWeek + numberOfWeeks; week++) {
       var intervalDate = new Date(dateFrom);
