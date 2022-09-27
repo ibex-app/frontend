@@ -138,7 +138,9 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
       lineTension: .35,        
       radius: 4  
     }))
+    
     labels = []
+
     // debugger
     for (let week = startWeek; week <= startWeek + numberOfWeeks; week++) {
       var intervalDate = new Date(dateFrom);
@@ -204,7 +206,7 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
       let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter)
       setData(dataset_and_labels);
       setFetching(false)
-      console.log(dataset_and_labels)
+      // console.log(dataset_and_labels)
     });
 
   }
