@@ -7,7 +7,7 @@ import { match } from "ts-pattern";
 import { Get, Response } from "../shared/Http";
 import { then } from "../shared/Utils";
 import { PostResponse, PostType } from "../types/common";
-import { loadMore } from "./LoadMore";
+import { LoadMore } from "./LoadMore";
 import { Post } from "./post/Post";
 
 type Input = {
@@ -118,7 +118,12 @@ export const Posts = ({ filter, allowRedirect, shuffle }: Input) => {
                 {!!data?.posts?.length && <List
                     dataSource={data.posts}
                     style={{ paddingRight: "20px" }}
-                    loadMore={loadMore(onLoadMore, data.posts.length, pagination.count, data.is_loading)}
+                    loadMore={<LoadMore
+                        onLoadMore={onLoadMore}
+                        count={data.posts.length}
+                        pageSize={pagination.count}
+                        isLoading={data.is_loading} />
+                    }
                     renderItem={(item) => allowRedirect
                         ? <Link to={`/details/${item._id.$oid}`}><Post post={item} /></Link>
                         : <Post post={item} />

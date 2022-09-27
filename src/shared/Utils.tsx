@@ -18,6 +18,21 @@ export const useNavWithQuery = () => {
   return (path: string) => navigate(`${path}${search}`);
 }
 
+export const useOnScreen = (ref: React.MutableRefObject<any>) => {
+  const [isIntersecting, setIntersecting] = useState(false)
+
+  const observer = new IntersectionObserver(
+    ([entry]) => setIntersecting(entry.isIntersecting)
+  )
+
+  useEffect(() => {
+    observer.observe(ref.current)
+    return () => { observer.disconnect() }
+  }, [])
+
+  return isIntersecting
+}
+
 export const getParamsAsObject = () => {
   const params = window.location.search.substring(1).split('&');
   let paramsObject: { [key: string]: string | Array<string> } = {};
