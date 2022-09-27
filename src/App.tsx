@@ -11,6 +11,9 @@ import { useGlobalState } from './app/store';
 
 import './App.css';
 import { Col, Row } from "antd";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   const [user, setUser] = useGlobalState('user');
@@ -38,19 +41,21 @@ function App() {
           <title>{"ibex"}</title>
         </Helmet>
       </HelmetProvider>
-      <Col span={24}>
-        <Routes>
-          <Route path="/" element={<PrivateRoutes />} >
-            <Route path="/" element={<Results />} />
-            <Route path="/results/*" element={<Results />} />
-            <Route path="/summary/*" element={<Summary />} />
-            <Route path="/taxonomy/*" element={<Taxonomy />} />
-            <Route path="/sources" element={<Sources />} />
-            <Route path="/details/:postId" element={<Details />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Col>
+      <QueryClientProvider client={queryClient}>
+        <Col span={24}>
+          <Routes>
+            <Route path="/" element={<PrivateRoutes />} >
+              <Route path="/" element={<Results />} />
+              <Route path="/results/*" element={<Results />} />
+              <Route path="/summary/*" element={<Summary />} />
+              <Route path="/taxonomy/*" element={<Taxonomy />} />
+              <Route path="/sources" element={<Sources />} />
+              <Route path="/details/:postId" element={<Details />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Col>
+      </QueryClientProvider>
     </Row>
   );
 }

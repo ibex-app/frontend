@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { useEffect, useRef } from "react";
-import { useOnScreen } from "../shared/Utils";
+import { useDebounce, useOnScreen } from "../shared/Utils";
 
 type Input = {
   onLoadMore: () => void,
@@ -13,7 +13,9 @@ export const LoadMore = ({ onLoadMore, count, pageSize, isLoading }: Input) => {
   const ref = useRef<HTMLDivElement>(null);
   const isVisible = useOnScreen(ref);
 
-  useEffect(() => onLoadMore(), [isVisible]);
+  useEffect(() => {
+    isVisible && onLoadMore()
+  }, [isVisible]);
 
   return !!isLoading && count < pageSize
     ? <></>

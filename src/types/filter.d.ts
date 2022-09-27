@@ -10,3 +10,8 @@ type Filter = {
   search_terms?: string[],
   hasVideo?: boolean
 }
+
+type Pagination = {
+  start_index: number,
+  count: number
+}
