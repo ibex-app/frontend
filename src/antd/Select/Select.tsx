@@ -3,7 +3,7 @@ import { FormElement, Option } from "../../types/form"
 import { last, map, pipe } from "ramda";
 
 import './Select.css';
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { filterHasOperator, filterOperatorUpper, platformIcon } from "../../shared/Utils";
 
 type Value = Option[];
@@ -52,10 +52,10 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     onChange!([value]);
   }
 
-  const onBlur = () =>
-    userValue && allowNew && newChecker(userValue, { selected: value }) && onValChange([...value, { label: userValue }])
+  const onBlur = useCallback(() => userValue && allowNew && newChecker(userValue, { selected: val }) && onValChange([...val, { label: userValue }]), [userValue, value]);
 
   const onValChange = (val: Value) => {
+    // console.log(val)
     if (checkBoolUpper && val.length) {
       const lastKeyword = last(val as any[])?.label;
       val[val.length - 1].label = pipe(filterHasOperator, filterOperatorUpper)(lastKeyword);

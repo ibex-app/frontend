@@ -6,18 +6,35 @@ import * as T from 'fp-ts/Task'
 
 export type Response<T> = E.Either<Error, T>;
 
+const Logout = () => {
+    window.localStorage.removeItem('jwt')
+    if (window.location.href.indexOf('/login') === -1) {
+        window.location.href = '/login'
+    }
+    const kkk: any = {}
+    return T.of(kkk);
+}
+
+export const _Get = <T>(path: string, params: Object): Promise<T> => {
+    const token = window.localStorage.getItem('jwt')
+    const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
+    const url = `https://${subdomain}.ibex-app.com/api/${path}`
+    const headers = new Headers(token ? {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer " + token
+    } : { 'Content-Type': 'application/json' })
+
+    return fetch(url, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(params)
+    }).then(res => res.json())
+
+}
+
 export const Get = async <T>(path: string, params: Object): Promise<Response<T>> => {
     const token = window.localStorage.getItem('jwt')
     const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
-
-    const Logout = () => {
-        window.localStorage.removeItem('jwt')
-        if (window.location.href.indexOf('/login') === -1) {
-            window.location.href = '/login'
-        }
-        const kkk: any = {}
-        return T.of(kkk);
-    }
 
     return pipe(
         TE.tryCatch(
