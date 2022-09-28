@@ -25,12 +25,15 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
   };
   
   const [data, setData] = useState(data_);
+  
   var exactCols = [ 
     ['facebook', '#464b9c'],
     ['youtube', '#f10000'],
     ['twitter', '#51a3e3']
   ]
+
   var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
+  
   const options = {
     maintainAspectRatio: false,
     type: 'line',
@@ -46,10 +49,6 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
       legend: {
         position: 'bottom' as const,
       },
-      // title: {
-      //   display: true,
-      //   text: 'Chart.js Line Chart',
-      // },
       padding: {
         top: 50,
         left: 50,
@@ -60,14 +59,15 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
   };
 
   const getCol = (label: string, index: number) => {
-    let col:string = ''
+    let col: string = ''
     exactCols.forEach((exactCol:any) => {
-      if(exactCol[0] == label) col = exactCol[1]
+      if(exactCol[0] === label) col = exactCol[1]
     })
     
     return col || cols[index]
   }
-  const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
+
+  const generate_dataset = (responce_data: any) => {
     return {
       labels: responce_data.map((dataPoint:any) => dataPoint[axisX]),
       datasets: [{
@@ -86,14 +86,13 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
       axisY: axisY
     });
 
-
     fetchData.then((_data: Response<any>) => {
       let maybeData: any = E.getOrElse(() => [data_])(_data)
       if (!maybeData.length) {
         return
       }
 
-      let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter)
+      let dataset_and_labels: any = generate_dataset(maybeData)
       setData(dataset_and_labels);
       setFetching(false);
     });
@@ -108,13 +107,6 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
   return (
     <div className="chart-cont-sm">
       {
-        console.log("Data", data)
-      }
-      {
-        console.log("Actual Data", data?.datasets)
-      }
-
-      {
         fetching ? (
           <div className="button-tr">
             <div>
@@ -123,10 +115,8 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
               </div>
             </div>
           </div>
-          ) : 
-          
-          <div className="chart"><Doughnut options={options} data={data} /></div>
-          
+        ) : 
+        <div className="chart"><Doughnut options={options} data={data} /></div>
       }
     </div>
   )
