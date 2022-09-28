@@ -8,11 +8,18 @@ import * as E from "fp-ts/lib/Either";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 // export const datax = {
-//   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//   labels: ["red", "green", "purple", "yellow", "brown", "blue"],
 //   datasets: [
 //     {
 //       label: '# of Votes',
-//       data: [12, 19, 3, 5, 2, 3],
+//       data: [
+//         [123,32, 55],
+//         [52],
+//         [22],
+//         [122,54, 9],
+//         [52],
+//         [32],
+//       ],
 //       backgroundColor: [
 //         'rgba(255, 99, 132, 0.2)',
 //         'rgba(54, 162, 235, 0.2)',
@@ -46,18 +53,18 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
   let labels = [''];
   
   let data_: any = {
+    labels,
     datasets: [
       {
         data: labels.map(() => 0),
-        backgroundColor: ["#bf501f", "#f59c34", "#89a7c6"]
+        backgroundColor: '#f59c34'
       },
     ],
-    labels
   };
   
   const [data, setData] = useState(data_);
 
-  let cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
+  var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
 
   const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
     let dateFrom: Date = new Date(filters.time_interval_from)
@@ -172,8 +179,7 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
           </div>
           ) : 
           <div className="results">
-              <div className="chart"><Doughnut data={data} /></div>
-              Hehe Buddy
+              <div className="chart"><Doughnut style={{ width: '150px', height: '150px' }} data={data} /></div>
           </div>
       }
     </div>
