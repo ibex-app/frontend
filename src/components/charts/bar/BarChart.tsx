@@ -28,6 +28,7 @@ ChartJS.register(
 );
 
 export const options = {
+  maintainAspectRatio: false,
   type: 'line',
   responsive: true,
   plugins: {
@@ -35,7 +36,7 @@ export const options = {
       propagate: false,
     },
     legend: {
-      position: 'right' as const,
+      position: 'top' as const,
     },
     // title: {
     //   display: true,
@@ -178,11 +179,11 @@ export function BarChart({ axisX, axisY, filter }: ChartInputParams) {
 
   if (fetching) {
     return (
-      <div className="results" >Loading...</div>
+      <div className="chart-cont-l" >Loading...</div>
     )
   }
   return (
-    <div className="results">
+    <div className="chart-cont-l">
       {/* <select onChange={change}>
         {['platform', 'persons', 'locations', 'topics', 'datasources'].map(d => <option key={d}>{d}</option>)}
       </select>

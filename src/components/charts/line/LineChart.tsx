@@ -30,6 +30,7 @@ ChartJS.register(
 );
 
 export const options = {
+  maintainAspectRatio: false,
   type: 'line',
   responsive: true,
   plugins: {
@@ -37,7 +38,7 @@ export const options = {
       propagate: false,
     },
     legend: {
-      position: 'right' as const,
+      position: 'top' as const,
     },
     // title: {
     //   display: true,
@@ -61,7 +62,7 @@ export const options = {
     },
     y: {
       // display: true,
-      stacked: true,
+      // stacked: true,
       title: {
         display: true,
         text: 'Count'
@@ -128,7 +129,7 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
       label: label,
       data: [0],
       // borderColor:  "rgba(0,10,13,0)",
-      backgroundColor: cols[index],
+      // backgroundColor: cols[index],
       // background: 'red',//cols[index],
       fill: true,
       pointBackgroundColor: 'rgba(0,0,0,.3)',
@@ -211,11 +212,11 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
 
   if (fetching) {
     return (
-      <div className="results" >Loading...</div>
+      <div className="chart-cont-l" >Loading...</div>
     )
   }
   return (
-    <div className="results">
+    <div className="chart-cont-l">
       {/* <select onChange={change}>
         {['platform', 'persons', 'locations', 'topics', 'datasources'].map(d => <option key={d}>{d}</option>)}
       </select>

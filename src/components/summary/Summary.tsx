@@ -5,33 +5,33 @@ import { LineChart } from "../charts/line/LineChart";
 
 export function Summary( { filter }: ChartInputFilter) {
     console.log(filter)
-    return <div>
+    return <div className='results'>
         <div>
             Monitor name
             description
             dates
         </div>
-        <div>
+        <div className='dashbord-block post'>
             By Platforms
             <LineChart axisX='platform' axisY={10} filter={filter} />
             {/* <BarChart axisX="platform" filter={filter} /> */}
             {/* <DoughnutChart axisX={platform} axisY={count} /> https://react-chartjs-2.js.org/examples/doughnut-chart/ */}
             <button>Download</button>
         </div>
-        <div>
+        <div className='dashbord-block post'>
             By keywords
             <BarChart axisX='platform' axisY={11} filter={filter} />
             {/* <DoughnutChart  axisX={keyword} axisY={count}/> */}
             <button>Download</button>
         </div>
-        <div>
+        <div className='dashbord-block post'>
             By Accounts
             <LineChart axisX='platform' axisY={12} filter={filter} />
             {/* <DoughnutChart  axisX={account} axisY={count}/> */}
             <button>Download</button>
         </div>
 
-        <div>
+        <div className='dashbord-block post'>
             By Accounts
             <DoughnatChart axisX='platform' axisY={12} filter={filter} />
             {/* <DoughnutChart  axisX={account} axisY={count}/> */}

@@ -1883,10 +1883,11 @@ main.main .main-dashboard {
 }
 
 .chart {
-  width: 80%;
+  width: 100%;
   left: 5%;
-  height: calc(100% - 50px);
-  position: absolute;
+  /* height: calc(100% - 50px); */
+  height: 100%;
+  /* position: absolute; */
   top: 20px;
   overflow: hidden;
 }
@@ -2293,7 +2294,7 @@ button.ant-btn span {
   overflow: hidden;
   min-height: 200px;
   position: relative;
-  height: 40vh;
+  height: 100%;
   width: 85vw;
   top: 2rem;
 }
@@ -2313,4 +2314,9 @@ button.ant-btn span {
 }
 .ant-radio-group {
   font-size: 14px;
+}
+
+.chart-cont-l{
+  width: 70%;
+  height: 25vh;
 }
