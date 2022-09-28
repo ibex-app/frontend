@@ -1,6 +1,7 @@
 
 export type ChartInputFilter = {
     filter: Filter
+    monitorId?: string
 }
 
 export type ChartInputParams = {
