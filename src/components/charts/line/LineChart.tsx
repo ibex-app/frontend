@@ -128,15 +128,15 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
     let datasets = post_label_values.map((label: any, index: number) => ({
       label: label,
       data: [0],
-      // borderColor:  "rgba(0,10,13,0)",
+      borderColor:  cols[index],
       // backgroundColor: cols[index],
       // background: 'red',//cols[index],
-      fill: true,
-      pointBackgroundColor: 'rgba(0,0,0,.3)',
-      borderColor: 'rgba(0,0,0,0)',
+      // fill: true,
+      // pointBackgroundColor: 'rgba(0,0,0,.3)',
+      // borderColor: 'rgba(0,0,0,0)',
       // pointHighlightStroke: cols[index],
       // borderCapStyle: 'butt',
-      lineTension: .35,        
+      lineTension: .35,
       radius: 4  
     }))
     labels = []
