@@ -2319,4 +2319,12 @@ button.ant-btn span {
 .chart-cont-l{
   width: 70%;
   height: 25vh;
+  display: inline-block;
+}
+
+.chart-cont-sm{
+  width: 15%;
+  margin-left: 10%;
+  height: 25vh;
+  display: inline-block;
 }

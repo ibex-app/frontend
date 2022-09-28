@@ -12,28 +12,27 @@ export function Summary( { filter }: ChartInputFilter) {
             dates
         </div>
         <div className='dashbord-block post'>
-            By Platforms
-            <LineChart axisX='platform' axisY={10} filter={filter} />
-            {/* <BarChart axisX="platform" filter={filter} /> */}
-            {/* <DoughnutChart axisX={platform} axisY={count} /> https://react-chartjs-2.js.org/examples/doughnut-chart/ */}
+            <div>By Platforms</div>
+            <LineChart axisX='platform' axisY='count' filter={filter} />
+            <DoughnatChart axisX='platform' axisY='count' filter={filter} />
             <button>Download</button>
         </div>
         <div className='dashbord-block post'>
-            By keywords
-            <BarChart axisX='platform' axisY={11} filter={filter} />
+            <div>By keywords</div>
+            <BarChart axisX='platform' axisY='count' filter={filter} />
             {/* <DoughnutChart  axisX={keyword} axisY={count}/> */}
             <button>Download</button>
         </div>
         <div className='dashbord-block post'>
-            By Accounts
-            <LineChart axisX='platform' axisY={12} filter={filter} />
+            <div>By Accounts</div>
+            <LineChart axisX='platform' axisY='count' filter={filter} />
             {/* <DoughnutChart  axisX={account} axisY={count}/> */}
             <button>Download</button>
         </div>
 
         <div className='dashbord-block post'>
-            By Accounts
-            <DoughnatChart axisX='platform' axisY={12} filter={filter} />
+            <div>By Accounts</div>
+            
             {/* <DoughnutChart  axisX={account} axisY={count}/> */}
             <button>Download</button>
         </div>

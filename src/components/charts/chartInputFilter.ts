@@ -5,6 +5,6 @@ export type ChartInputFilter = {
 
 export type ChartInputParams = {
   axisX: string;
-  axisY: number;
+  axisY: string;
   filter: Filter,
 }
