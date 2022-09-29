@@ -172,7 +172,7 @@ const TaxonomyProgress: React.FC = () => {
               
             }
             {
-                isFinalizedState ? <div><Link to={`/resutls/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </div> : <></>
+                isFinalizedState ? <div><Link to={`/results/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </div> : <></>
             }
               </Content>
         }
