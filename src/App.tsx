@@ -47,7 +47,7 @@ function App() {
             <Route path="/" element={<PrivateRoutes />} >
               <Route path="/" element={<Results />} />
               <Route path="/results/*" element={<Results />} />
-              <Route path="/summary/*" element={<Summary />} />
+              {/* <Route path="/summary/*" element={<Summary />} /> */}
               <Route path="/taxonomy/*" element={<Taxonomy />} />
               <Route path="/sources" element={<Sources />} />
               <Route path="/details/:postId" element={<Details />} />

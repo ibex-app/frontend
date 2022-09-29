@@ -5,7 +5,7 @@ import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-i
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Layout, Space } from 'antd';
 import * as E from "fp-ts/lib/Either";
-
+import { Link } from "react-router-dom";
 import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
@@ -29,6 +29,7 @@ const TaxonomyProgress: React.FC = () => {
   const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<[]>();
+  const [isFinalizedState, setisFinalizedState] = useState<boolean>(false);
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);          
 
@@ -82,6 +83,7 @@ const TaxonomyProgress: React.FC = () => {
             clearTimeout_();
             setMonitorProgress(res);
             console.log("Is Finalized ", isFinalized(res));
+            setisFinalizedState(true);
           })
       )))
     )(Get<MonitorProgressResponse>('monitor_progress', { id: monitor_id }));
@@ -165,6 +167,10 @@ const TaxonomyProgress: React.FC = () => {
                   </Row>
                 )
               }) : <h1>No Data Available</h1>
+              
+            }
+            {
+                isFinalizedState ? <div><Link to={`/resutls/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </div> : <></>
             }
               </Content>
         }

@@ -13,7 +13,7 @@ import {
   Filler
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { ChartInputFilter } from '../chartInputFilter'
+import { ChartInputFilter, ChartInputParams } from '../chartInputFilter'
 
 ChartJS.register(Filler);
 
@@ -28,6 +28,7 @@ ChartJS.register(
 );
 
 export const options = {
+  maintainAspectRatio: false,
   type: 'line',
   responsive: true,
   plugins: {
@@ -35,7 +36,7 @@ export const options = {
       propagate: false,
     },
     legend: {
-      position: 'right' as const,
+      position: 'top' as const,
     },
     // title: {
     //   display: true,
@@ -69,9 +70,9 @@ export const options = {
 };
 
 
-export function BarChart({ filter }: ChartInputFilter) {
+export function BarChart({ axisX, axisY, filter }: ChartInputParams) {
   useEffect(() => {
-    if (Object.keys(filter).length) loadData('platform');
+    if (Object.keys(filter).length) loadData();
   }, [filter]);
 
   const [fetching, setFetching] = useState(false);
@@ -92,9 +93,9 @@ export function BarChart({ filter }: ChartInputFilter) {
 
   const [data, setData] = useState(data_);
 
-  const change = (e: any) => {
-    loadData(e.target.value)
-  }
+  // const change = (e: any) => {
+  //   loadData(e.target.value)
+  // }
 
   const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
     var dateFrom: Date = new Date(filters.time_interval_from)
@@ -155,14 +156,14 @@ export function BarChart({ filter }: ChartInputFilter) {
     }
   }
 
-  const loadData = (labelType: string) => {
+  const loadData = () => {
     setFetching(true)
     const fetchData = Get('posts_aggregated', {
       post_request_params: transform_filters_to_request(filter),
-      axisX: labelType,
+      axisX: axisX,
+      axisY: axisY,
       days: 7
     });
-
 
     fetchData.then((_data: Response<any>) => {
       let maybeData: any = E.getOrElse(() => [data_])(_data)
@@ -170,26 +171,25 @@ export function BarChart({ filter }: ChartInputFilter) {
         return
       }
 
-      let dataset_and_labels: any = generate_dataset(maybeData, labelType, filter)
+      let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter)
       setData(dataset_and_labels);
       setFetching(false);
     });
-
   }
 
   if (fetching) {
     return (
-      <div className="results" >Loading...</div>
+      <div className="chart-cont-l" >Loading...</div>
     )
   }
   return (
-    <div className="results">
-      <select onChange={change}>
+    <div className="chart-cont-l">
+      {/* <select onChange={change}>
         {['platform', 'persons', 'locations', 'topics', 'datasources'].map(d => <option key={d}>{d}</option>)}
       </select>
       <select onChange={change}>
         {['count', 'hate-speech', 'reach-out', 'likes', 'shares', 'sentiment', 'comments'].map(d => <option key={d}>{d}</option>)}
-      </select>
+      </select> */}
       {
         fetching ? (
           <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>

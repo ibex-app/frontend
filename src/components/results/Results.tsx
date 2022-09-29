@@ -12,12 +12,15 @@ import { Posts } from "../../antd/Posts";
 import { Sidebar } from '../sidebar/Sidebar';
 import { Col, Row } from "antd";
 import FilterData from '../../data/filter.json';
+import { Summary } from "../summary/Summary";
 
 export function Results() {
   const { search } = useLocation();
   const [filter, setFilter] = useState({});
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
   const filters = { ...filter, monitor_id };
+
+  console.log("Filtered Data: ", filter);
 
   return (
     <Row >
@@ -29,11 +32,12 @@ export function Results() {
           <Filter data={FilterData.data} onChange={setFilter} />
           <Routes>
             <Route path="/" element={<Posts filter={filters} allowRedirect />} />
-            <Route path="bar" element={<BarChart filter={filters} />} />
+            {/* <Route path="bar" element={<BarChart filter={filters} />} /> */}
             <Route path="graph" element={<GraphChart />} />
-            <Route path="line" element={<LineChart filter={filters} />} />
+            {/* <Route path="line" element={<LineChart filter={filters} />} /> */}
             <Route path="map" element={<MapChart filter={filters} />} />
             <Route path="bubble" element={<BubbleChart />} />
+            <Route path="summary" element={<Summary filter={filters} axisX="platform" axisY="count" />} />
           </Routes>
         </Space>
       </Col>

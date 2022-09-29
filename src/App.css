@@ -1883,11 +1883,12 @@ main.main .main-dashboard {
 }
 
 .chart {
-  width: 80%;
+  width: 100%;
   left: 5%;
-  height: calc(100% - 50px);
-  position: absolute;
-  top: 70px;
+  /* height: calc(100% - 50px); */
+  height: 100%;
+  /* position: absolute; */
+  top: 20px;
   overflow: hidden;
 }
 
@@ -2292,11 +2293,11 @@ button.ant-btn span {
   margin: 15px 0 15px 15px;
   padding-right: 15px;
   overflow: hidden;
-  min-height: 80vh;
-  position: fixed;
-  height: 75vh;
+  min-height: 200px;
+  position: relative;
+  height: 100%;
   width: 85vw;
-  top: 17vh;
+  top: 2rem;
 }
 
 
@@ -2314,4 +2315,17 @@ button.ant-btn span {
 }
 .ant-radio-group {
   font-size: 14px;
+}
+
+.chart-cont-l{
+  width: 70%;
+  height: 25vh;
+  display: inline-block;
+}
+
+.chart-cont-sm{
+  width: 10%;
+  margin-left: 12%;
+  height: 25vh;
+  display: inline-block;
 }
