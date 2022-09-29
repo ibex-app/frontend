@@ -88,7 +88,7 @@ const TaxonomyProgress: React.FC = () => {
 
     try_();
     return () => clearTimeout_();
-  }, [monitor_id, timeout]);
+  }, [monitorData, timeout]);
 
 
   return (
