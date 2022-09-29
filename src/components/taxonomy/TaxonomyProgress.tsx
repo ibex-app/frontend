@@ -65,6 +65,8 @@ const TaxonomyProgress: React.FC = () => {
 
   useEffect(() => {
     if (loading) return;
+    // if (!monitorData) return;
+    console.log(22, monitorData)
     setLoading(true);
 
     clearTimeout_();
