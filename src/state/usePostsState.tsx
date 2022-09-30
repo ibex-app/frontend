@@ -13,13 +13,7 @@ export const usePostsState = (params: InputParams) => {
 
   return useInfiniteQuery(queries.posts(params), ({ pageParam = 0 }) => _Get<PostResponse>('posts', { ...params, start_index: pageParam }), {
     enabled: !!params.monitor_id,
-    refetchInterval: refetchInterval,
     refetchOnWindowFocus: false,
-    // getNextPageParam: () => params.start_index + 1,
-    getNextPageParam: (lastPage, pages) => pages.length - 1,
-    onSuccess: ({ pages }) => {
-      const { is_loading, posts } = pages[pages.length - 1];
-      !(is_loading && posts.length < 10) && setRefetchInterval(0);
-    }
+    getNextPageParam: (lastPage, pages) => pages.length || 1
   })
 }

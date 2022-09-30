@@ -29,8 +29,8 @@ export type HitsCountOutput = {
   // isModified?: boolean,
 }
 const renderCell = (value: number | undefined) => {
-  if(!value && value!==0) return <Spin />;
-  
+  if (!value && value !== 0) return <Spin />;
+
   return <span className={value < 1 ? 'table-cell-gray' : value > 10000 ? 'table-cell-red' : ''}> {formatNum(value)}</span>
 }
 const createColumns = (platforms: string[], deleteSearchTerm: any) => {
@@ -88,7 +88,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term)
     setHitsCountTableData(newhitsCountTableData);
     // setHitCountSelection(hitCountsSelected.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
-    
+
     // toParent && toParent({ isModified: true } )
   }
 
@@ -137,8 +137,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   useEffect(() => data && setHitsCountTableData(data), [data]);
 
   useEffect(() => {
-    toParent && toParent({ all: hitsCountTableData} )
-    // console.log('hitsCountTableData effect')
+    toParent && toParent({ all: hitsCountTableData })
   }, [hitsCountTableData]);
 
   useEffect(() => {

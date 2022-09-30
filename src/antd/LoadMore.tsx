@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import { useEffect, useRef } from "react";
-import { useDebounce, useOnScreen } from "../shared/Utils";
+import { useOnScreen } from "../shared/Utils";
+import { Loader } from './Loader';
 
 type Input = {
   onLoadMore: () => void,
@@ -15,10 +16,10 @@ export const LoadMore = ({ onLoadMore, count, pageSize, isLoading }: Input) => {
 
   useEffect(() => {
     isVisible && onLoadMore()
-  }, [isVisible]);
+  }, [isVisible, onLoadMore]);
 
-  return !!isLoading && count < pageSize
-    ? <></>
+  return count < pageSize
+    ? isLoading ? <Loader isInProgress={isLoading} /> : <></>
     : <div
       ref={ref}
       style={{

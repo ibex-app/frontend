@@ -1,10 +1,7 @@
 import { mapWithIndex } from "fp-ts/lib/Array";
 import { fold } from "fp-ts/lib/Either";
 import { pipe, prop } from "ramda";
-import { formatNum } from "../../shared/Utils";
 import { HitsCountItem, HitsCountTableItem } from "../../types/taxonomy";
-
-
 
 export const generateHitsCountTableItem =
   (key: number | string, { search_term, facebook, youtube, twitter, vkontakte, telegram }: HitsCountItem): HitsCountTableItem => ({
