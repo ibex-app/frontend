@@ -23,7 +23,7 @@ type Input = {
 export type HitsCountOutput = {
   selected?: HitsCountTableItem[],
   all?: HitsCountTableItem[],
-  // isModified?: boolean,
+  platforms?: string[]
 }
 const renderCell = (value: number | undefined | null) => match(value)
   .with(null, () => <Spin />)
@@ -98,15 +98,11 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     return searchTerm;
   }
 
-  useEffect(() => {
-    toParent && toParent({ all: hitsCountTableData })
-  }, [hitsCountTableData]);
+  useEffect(() => toParent && toParent({ all: hitsCountTableData }), [hitsCountTableData]);
 
-  useEffect(() => {
-    if (toParent) toParent({
-      selected: hitCountsSelected
-    });
-  }, [hitCountsSelected]);
+  useEffect(() => toParent && toParent({ selected: hitCountsSelected }), [hitCountsSelected]);
+
+  useEffect(() => toParent && toParent({ platforms }), [platforms]);
 
   const hitCountSelection = {
     hitCountsSelected,

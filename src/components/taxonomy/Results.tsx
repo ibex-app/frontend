@@ -1,5 +1,5 @@
 import * as E from "fp-ts/lib/Either";
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,7 +7,7 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
 import { Get } from '../../shared/Http';
-import { concat, map, pipe } from "ramda";
+import { map, pipe } from "ramda";
 import { Button, Col, Row, Space } from "antd";
 import { HitsCountTableItem, Monitor, MonitorRespose } from "../../types/taxonomy";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
@@ -15,11 +15,14 @@ import { Posts } from "../../antd/Posts";
 import { HitsCount, HitsCountOutput } from "../../antd/taxonomy/HitsCount";
 import { Recommendations } from "../../antd/taxonomy/Recomendations";
 import { TaxonomyContext } from "./TaxonomyContext";
-import { getAllKeywordsWithoutOperator, useNavWithQuery } from "../../shared/Utils";
+import { capitalize, getAllKeywordsWithoutOperator, useNavWithQuery } from "../../shared/Utils";
 import { Filter } from "../filter/Filter";
 import FilterData from '../../data/taxonomy/filter.json';
+import { useQueryClient } from 'react-query';
+import { queries } from '../../shared/Queries';
 
 export const TaxonomyResults = () => {
+  const queryClient = useQueryClient();
   const { search } = useLocation();
   const [monitor, setMonitor] = useState<Monitor>();
   const [hitsCount, setHitsCount_] = useState<HitsCountOutput>();
@@ -38,11 +41,11 @@ export const TaxonomyResults = () => {
   }, [hitsCount?.all]);
 
   const setHitsCount = (newHitsCount: HitsCountOutput) => {
-    if(hitsCount?.all && newHitsCount?.all && hitsCount?.all.length > 0 
-        && hitsCount?.all.length !== newHitsCount?.all.length){
-        setIsmodified(true)
+    if (hitsCount?.all && newHitsCount?.all && hitsCount?.all.length > 0
+      && hitsCount?.all.length !== newHitsCount?.all.length) {
+      setIsmodified(true)
     }
-    // console.log(333, hitsCount, newHitsCount, { ...hitsCount, ...newHitsCount })
+
     setHitsCount_({ ...hitsCount, ...newHitsCount });
   }
 
@@ -51,23 +54,28 @@ export const TaxonomyResults = () => {
     const search_terms = hitsCount.all.map(({ search_term }: any) => search_term);
 
     Get('update_monitor', { id: monitor_id, search_terms }).then(() => {
-      window.location.reload();
+      Promise.all([
+        queryClient.invalidateQueries(queries.posts({ monitor_id })),
+        queryClient.invalidateQueries(queries.hitsCount(monitor_id))
+      ])
     });
   }
 
+  const filters = useMemo(() => {
+    const filter = FilterData.data[0];
+    const list = hitsCount?.platforms?.map((platform, id) => ({
+      id, label: capitalize(platform), _id: platform
+    }))
+
+    return [{ ...filter, selected: list, list }]
+  }, [hitsCount?.platforms])
+
   useEffect(() => {
-    // console.log('222 monitor_id set', monitor_id)
-    if(!monitor_id) return;
-    Get<MonitorRespose>('get_monitor', { id: monitor_id })
+    !monitor_id && Get<MonitorRespose>('get_monitor', { id: monitor_id })
       .then(E.fold(console.error, ({ monitor }) => setMonitor(monitor)));
   }, [monitor_id]);
 
   useEffect(() => {
-    // console.log('222 keywordsFilter set', keywordsFilter)
-  }, [keywordsFilter]);
-
-  useEffect(() => {
-    // console.log('222 hitsCount set', hitsCount)
     hitsCount?.selected?.length ?
       pipe(
         map(({ search_term }: HitsCountTableItem) => search_term),
@@ -87,26 +95,26 @@ export const TaxonomyResults = () => {
           <Space direction="vertical" style={{ display: "flex" }}>
             <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
-            <Recommendations monitor_id={monitor_id} toParent={setHitsCount}/>
+            <Recommendations monitor_id={monitor_id} toParent={setHitsCount} />
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
               <Button disabled={!ismodified} onClick={() => updateHitsCount()}>Update Monitor</Button>
             </div>
 
             <div className="flex align-center align-middle">
-            {
+              {
                 <Button onClick={() => (
                   navWithQuery('/taxonomy/data-collection')
                 )}>
-                    Run data collection
+                  Run data collection
                 </Button>
-            }
+              }
               {/* <Link to="data-collection">Run data collection</Link> */}
             </div>
           </Space>
         </Col>
         <Col span={16} style={{ color: "#F4F4F5" }} className="flex align-center align-middle">
           <Space direction="vertical" className="full-height-width">
-            <Filter data={FilterData.data} onChange={setFilter} />
+            <Filter data={filters} onChange={setFilter} />
             {!!hitsCount?.selected?.length && <Space className="flex search-header">
               Search results for {map(drawFilterItem, hitsCount.selected)}
             </Space>}
