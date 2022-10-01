@@ -1,22 +1,19 @@
 import { Form, Input, Space, Spin, Table } from "antd";
-import { concat, keys, pipe, prop } from "ramda";
-import { useContext, useEffect, useState } from "react";
-import { generateHitsCountTableData, generateHitsCountTableItem } from "../../components/taxonomy/Data";
+import { concat, keys, pipe } from "ramda";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { generateEmptyHitsCount, generateHitsCountTableData, generateHitsCountTableItem } from "../../components/taxonomy/Data";
 import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
-// import { hitCountCols, hitsCountFormItem } from "../../data/taxonomy/HitCounts";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
-import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import { faMagnifyingGlass, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { hitsCountFormItem } from "../../data/taxonomy/HitCounts";
-import { Get } from "../../shared/Http";
-import { HitsCountResponse, HitsCountTableItem, HitsCountItem } from "../../types/taxonomy";
+import { HitsCountResponse, HitsCountTableItem } from "../../types/taxonomy";
 import { getElem } from "../utils/ElementGetter";
-import { fold, left, right } from "fp-ts/lib/Either";
-import { platformIcon, then } from "../../shared/Utils";
+import { platformIcon } from "../../shared/Utils";
 import { match } from "ts-pattern";
 import { ColumnsType } from "antd/lib/table";
 import { formatNum } from "../../shared/Utils";
+import { useHitsCountState } from '../../state/useHitsCountState';
 
 type Input = {
   monitor_id: string,
@@ -28,11 +25,16 @@ export type HitsCountOutput = {
   all?: HitsCountTableItem[],
   // isModified?: boolean,
 }
-const renderCell = (value: number | undefined) => {
-  if (!value && value !== 0) return <Spin />;
+const renderCell = (value: number | undefined | null) => match(value)
+  .with(null, () => <Spin />)
+  .with(undefined, () => <span className="tax-null">-</span>)
+  .with(-1, () => "N/A")
+  .otherwise((val) => val &&
+    <span className={val < 1 ? 'table-cell-gray' : val > 10000 ? 'table-cell-red' : ''}>
+      {formatNum(val)}
+    </span>
+  )
 
-  return <span className={value < 1 ? 'table-cell-gray' : value > 10000 ? 'table-cell-red' : ''}> {formatNum(value)}</span>
-}
 const createColumns = (platforms: string[], deleteSearchTerm: any) => {
   let cols: ColumnsType<HitsCountTableItem> = [{
     title: "Keyword",
@@ -53,9 +55,9 @@ const createColumns = (platforms: string[], deleteSearchTerm: any) => {
   cols.push({
     title: '',
     key: 'action',
-    render: (_: any, record: any) => (
+    render: (_: any, { search_term }: any) => (
       // <Space size="middle" onClick=''>
-      <span className="tax-delete" onClick={() => deleteSearchTerm(record)}>
+      <span className="tax-delete" onClick={() => deleteSearchTerm(search_term)}>
         <FontAwesomeIcon icon={faTrashCan} />
       </span>
     ),
@@ -74,74 +76,33 @@ const generatePlatforms = ({ search_terms }: HitsCountResponse) =>
   }, [] as string[]);
 
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
-  const [data, setData] = useState<HitsCountTableItem[]>();
-  const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>([]);
+  const { data } = useHitsCountState(monitor_id);
+  const dataFormatted = useMemo(() => data ? generateHitsCountTableData(data) : [], [data]);
+  const [newHitsCount, setNewHitsCount] = useState<HitsCountTableItem[]>([]);
+  const [deleted, setDeleted] = useState<string[]>([]);
+
   const [hitCountsSelected, setHitCountSelection] = useState<HitsCountTableItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
-  const [platforms, setPlatforms] = useState<string[]>();
+  const platforms = useMemo(() => data && generatePlatforms(data), [data]);
 
   const { userSelection } = useContext(TaxonomyContext);
 
-  const deleteSearchTerm = (SearchTerm: any) => {
-    if (!hitsCountTableData) return;
-    const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term)
-    setHitsCountTableData(newhitsCountTableData);
-    // setHitCountSelection(hitCountsSelected.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
+  const hitsCountTableData = useMemo(() =>
+    concat(newHitsCount, dataFormatted || [])
+      .filter(({ search_term }) => !deleted.includes(search_term))
+    , [newHitsCount, dataFormatted, deleted]);
 
-    // toParent && toParent({ isModified: true } )
+  const deleteSearchTerm = (searchTerm: string) => setDeleted([...deleted, searchTerm]);
+
+  const removeDeletion = (searchTerm: string) => {
+    setDeleted(deleted.filter(term => term !== searchTerm));
+    return searchTerm;
   }
-
-  var isFullSingle = (hitsCountItem: any) => Object.keys(hitsCountItem)
-    .reduce((isfull, key) => hitsCountItem[key] === null ? false : isfull, true)
-
-
-  var isFull = (hitsCountResponse: HitsCountResponse) => Boolean(hitsCountResponse.search_terms
-    && hitsCountResponse.search_terms.length
-    && hitsCountResponse.search_terms.length > 0
-    && hitsCountResponse.search_terms.map(isFullSingle).every((isFull_: boolean) => isFull_))
-
-  const clearTimeout_ = () => {
-    timeout && clearTimeout(timeout);
-    setTimeout_(undefined);
-  }
-
-  useEffect(() => {
-    if (loading) return;
-    setLoading(true);
-
-    clearTimeout_();
-    const try_ = () => pipe(
-      then((fold(
-        (err: Error) => console.log('errr', left(err)),
-        (res: HitsCountResponse) => match(isFull(res))
-          .with(false, () => {
-            setLoading(false);
-            const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
-            setPlatforms(generatePlatforms(res));
-            setData(generateHitsCountTableData(right(res)))
-            return;
-          })
-          .otherwise(() => {
-            clearTimeout_();
-            setPlatforms(generatePlatforms(res));
-            setData(generateHitsCountTableData(right(res)))
-          })
-      )))
-    )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
-
-    try_();
-    return () => clearTimeout_();
-  }, [monitor_id, timeout]);
-
-  useEffect(() => data && setHitsCountTableData(data), [data]);
 
   useEffect(() => {
     toParent && toParent({ all: hitsCountTableData })
   }, [hitsCountTableData]);
 
   useEffect(() => {
-    console.log('hitCountsSelected effect')
     if (toParent) toParent({
       selected: hitCountsSelected
     });
@@ -153,10 +114,11 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   }
 
   const addNewHitsCount = pipe(
-    (keyword: string) => generateHitsCountTableItem(keyword, { search_term: keyword }),
-    (tableItem) => concat([tableItem], hitsCountTableData),
-    setHitsCountTableData,
-    // () => toParent && toParent({ isModified: true } )
+    removeDeletion,
+    generateEmptyHitsCount,
+    ({ search_term, ...rest }) => generateHitsCountTableItem(search_term, { search_term, ...rest }),
+    (tableItem) => concat([tableItem], newHitsCount),
+    setNewHitsCount
   )
 
   useEffect(() => {
