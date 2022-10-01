@@ -1,6 +1,6 @@
 import { Form, Input, Space, Spin, Table } from "antd";
 import { concat, keys, pipe } from "ramda";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { generateEmptyHitsCount, generateHitsCountTableData, generateHitsCountTableItem } from "../../components/taxonomy/Data";
 import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
@@ -14,6 +14,7 @@ import { match } from "ts-pattern";
 import { ColumnsType } from "antd/lib/table";
 import { formatNum } from "../../shared/Utils";
 import { useHitsCountState } from '../../state/useHitsCountState';
+import { useForm } from 'antd/lib/form/Form';
 
 type Input = {
   monitor_id: string,
@@ -81,6 +82,8 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [newHitsCount, setNewHitsCount] = useState<HitsCountTableItem[]>([]);
   const [deleted, setDeleted] = useState<string[]>([]);
 
+  const [form] = useForm();
+
   const [hitCountsSelected, setHitCountSelection] = useState<HitsCountTableItem[]>([]);
   const platforms = useMemo(() => data && generatePlatforms(data), [data]);
 
@@ -121,8 +124,13 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     userSelection && addNewHitsCount(userSelection)
   }, [userSelection])
 
+  const onHitsCountAdd = useCallback((values: string[]) => {
+    addNewHitsCount(values[0])
+    form.resetFields();
+  }, [form, addNewHitsCount]);
+
   return <div className="leftbox-inner">
-    <Form onFinish={(obj) => obj[0] && addNewHitsCount(obj[0])}>
+    <Form form={form} onFinish={onHitsCountAdd}>
       <Space size="small">
         {getElem(hitsCountFormItem)}
         {getElem({ id: 1, type: "button", label: "Add" })}
