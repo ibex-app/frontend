@@ -37,7 +37,7 @@ const TaxonomyProgress: React.FC = () => {
   // 2. monitor_progress, returns the information about the progress of data collection
   // 'get_monitor', 
   const noErrors = (monitorData: any) => {
-    return Boolean(monitorData?.details?.out_of_limit.length);
+    return !Boolean(monitorData?.details?.out_of_limit.length);
   } 
 
   useEffect(() => {
@@ -65,8 +65,9 @@ const TaxonomyProgress: React.FC = () => {
 
   useEffect(() => {
     if (loading) return;
-    // if (!monitorData) return;
-    console.log(22, monitorData)
+    console.log()
+    if (!monitorData) return;
+    console.log(555, monitorData)
     setLoading(true);
 
     clearTimeout_();
@@ -99,20 +100,9 @@ const TaxonomyProgress: React.FC = () => {
     <>
       <div className='data-collection-content'>
         {
-          errors && errors?.length > 0 
-            ? <Content>
-              <Space size={'middle'} className="taxonomy-header-spacer">
-                <span>The number of posts for some search terms / accounts exceed allowed maximum limit of 10 000 posts.
-
-                Please <a href="#"  style={{display: "inline"}}> modify </a > the monitor and try again</span>
-              { 
-                errors.map((error: any) => <>
-                    <span className="">{platformIcon(error.platform)} {error?.search_terms && error?.search_terms.length ? error?.search_terms[0].term : error?.accounts[0].title} {error.hits_count}</span>
-                </>)
-              }
-              </Space>
-            </Content> 
-            : <Content>
+          
+            
+          <Content>
             <Space size={'middle'} className="taxonomy-header-spacer">
               <h1>Data Collection Step - 4</h1>
               
@@ -139,9 +129,20 @@ const TaxonomyProgress: React.FC = () => {
                 <h1>Platforms</h1>
               </Col>
             </Row>
-
             {
-              monitorProgress && monitorProgress.length > 0 ? monitorProgress.map((item, i) => {
+              errors && errors?.length > 0 
+              ? 
+                <Space size={'middle'} className="taxonomy-header-spacer">
+                  <span>The number of posts for some search terms / accounts exceed allowed maximum limit of 10 000 posts.
+  
+                  Please <Link to={`/taxonomy/results?monitor_id=${monitor_id}`}>modify </Link> the monitor and try again</span>
+                { 
+                  errors.map((error: any) => <>
+                      <span className="">{platformIcon(error.platform)} {error?.search_terms && error?.search_terms.length ? error?.search_terms[0].term : error?.accounts[0].title} {error.hits_count}</span>
+                  </>)
+                }
+                </Space>
+                : monitorProgress && monitorProgress.length > 0 ? monitorProgress.map((item, i) => {
                 let progressValue: number = 0;
                 if (item.platform) progressValue = item.finalized_collect_tasks_count * 100 / item.tasks_count;
                 
@@ -155,7 +156,7 @@ const TaxonomyProgress: React.FC = () => {
                     <Col span={20}>
                       { typeof(progressValue) === "number" && progressValue < 100 ? "details being loading..." : "details fetched" } 
                       
-                      <ProgressBar percentage={progressValue} showInfo={true} />
+                      <ProgressBar percentage={100} showInfo={true} />
 
                       {
                         `Posts count: ${item.posts_count}`
@@ -172,7 +173,7 @@ const TaxonomyProgress: React.FC = () => {
               
             }
             {
-                isFinalizedState ? <div><Link to={`/results/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </div> : <></>
+                true ? <div><Link to={`/results/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </div> : <></>
             }
               </Content>
         }

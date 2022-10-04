@@ -120,7 +120,7 @@ export function Summary({ filter, axisX, axisY }: SummaryInputParams) {
         </div>
 
         <div className='dashbord-block post'>
-            <div>By Accounts</div>
+            <div>All the posts</div>
             
             {/* <DoughnutChart  axisX={account} axisY={count}/> */}
             <button>
