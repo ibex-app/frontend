@@ -10,11 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Tag } from "../Select/Select";
 import { dateFormat } from "../../shared/Utils";
-import moment from "moment";
 
 export const getElem = (element: FormElement): any => {
   const {
-    type, id, rules, placeholder, disabled, title, label, tip, value, children, checked
+    type, id, rules, placeholder, disabled, title, label, tip, children, checked
   } = element;
 
   return <>

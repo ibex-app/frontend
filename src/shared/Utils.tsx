@@ -1,4 +1,4 @@
-import { addIndex, curry, map, pipe, reduce, split } from "ramda";
+import { addIndex, curry, map, pipe, reduce, split, replace, toUpper } from "ramda";
 import { useEffect, useState } from "react";
 import { FilterElemPartial } from "../types/taxonomy";
 import { match } from 'ts-pattern';
@@ -11,6 +11,8 @@ export const dateFormat = "DD.MM.YYYY";
 export const then = curry((f, p) => p.then(f));
 
 export const ofPromise = (item: any) => new Promise<any>((res) => res(item));
+
+export const capitalize = replace(/^./, toUpper);
 
 export const useNavWithQuery = () => {
   const { search } = useLocation();
@@ -26,7 +28,7 @@ export const useOnScreen = (ref: React.MutableRefObject<any>) => {
   )
 
   useEffect(() => {
-    observer.observe(ref.current)
+    if (ref.current) observer.observe(ref.current)
     return () => { observer.disconnect() }
   }, [])
 

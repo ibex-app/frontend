@@ -37,7 +37,7 @@ const CustomToken = ({ option, index, onRemove }: CustomTokenInput) => {
 export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
   const { id, list, allowNew, placeholder, checkBoolUpper, selected } = el;
 
-  const [val, setValue] = useState<Option[]>(value || []);
+  const [val, setValue] = useState<Option[]>(value || selected || []);
   const [userValue, setUserValue] = useState<string>('');
   const ref = useRef<any>();
 
@@ -67,11 +67,11 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     onChange!(val);
   }
 
-  const onRemove = (index: number) => {
-    const newVal = value.filter((_: any, i: number) => index !== i);
+  const onRemove = useCallback((index: number) => {
+    const newVal = val.filter((_: any, i: number) => index !== i);
     setValue(newVal);
     onChange!(newVal);
-  }
+  }, [val]);
 
 
   useEffect(() => {

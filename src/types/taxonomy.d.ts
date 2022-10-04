@@ -1,22 +1,20 @@
-import { number } from "fp-ts";
-
 export type HitsCountTableItem = {
   key: string,
   search_term: string,
-  facebook: number | undefined,
-  youtube: number | undefined,
-  twitter: number | undefined,
-  vkontakte: number | undefined,
-  telegram: number | undefined,
+  facebook: number | undefined | null,
+  youtube: number | undefined | null,
+  twitter: number | undefined | null,
+  vkontakte: number | undefined | null,
+  telegram: number | undefined | null
 }
 
 export type HitsCountItem = {
   "search_term": string,
-  "facebook"?: number,
-  "twitter"?: number,
-  "youtube"?: number,
-  "vkontakte"?: number,
-  "telegram"?: number
+  "facebook"?: number | null,
+  "twitter"?: number | null,
+  "youtube"?: number | null,
+  "vkontakte"?: number | null,
+  "telegram"?: number | null
 };
 
 export type HitsCountResponse = {
@@ -35,7 +33,7 @@ export type Monitor = {
 export type Progress = {
   finalized_collect_tasks_count: number,
   posts_count: number,
-  tasks_count: number, 
+  tasks_count: number,
   time_estimate?: number,
   platform?: string
 }
@@ -61,5 +59,5 @@ export type FilterElem = { hasOp: boolean, left: string, right?: string, op?: st
 export type FilterElemPartial = { hasOp?: boolean, op?: string, s: string };
 
 export type TaxonomyResponse = {
-  
+
 }

@@ -2,7 +2,7 @@ import { Rule } from "antd/lib/form";
 import { string } from "fp-ts";
 
 interface FormCommon {
-  id: number,
+  id: number | string,
   type: string;
   title?: string;
   children?: FormElement[];
@@ -12,6 +12,7 @@ interface FormCommon {
   tip?: string;
   disabled?: boolean;
   placeholder?: string;
+  defaultValue?: any;
 }
 
 interface FormItemGroup {
