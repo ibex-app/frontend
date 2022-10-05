@@ -30,6 +30,7 @@ export const TaxonomyResults = () => {
   const [userSelection, setUserSelection] = useState<string>();
   const [ismodified, setIsmodified] = useState<boolean>(false);
   const [filter, setFilter] = useState({});
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
 
   const navWithQuery = useNavWithQuery();
 
@@ -51,13 +52,14 @@ export const TaxonomyResults = () => {
 
   const updateHitsCount = () => {
     if (!hitsCount?.all) return;
+    setButtonsDisabled(true);
     const search_terms = hitsCount.all.map(({ search_term }: any) => search_term);
 
     Get('update_monitor', { id: monitor_id, search_terms }).then(() => {
       Promise.all([
         queryClient.invalidateQueries(queries.posts({ monitor_id })),
         queryClient.invalidateQueries(queries.hitsCount(monitor_id))
-      ])
+      ]).then(() => setButtonsDisabled(false));
     });
   }
 
@@ -97,14 +99,17 @@ export const TaxonomyResults = () => {
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
             <Recommendations monitor_id={monitor_id} toParent={setHitsCount} />
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-              <Button disabled={!ismodified} onClick={() => updateHitsCount()}>Update Monitor</Button>
+              <Button disabled={!ismodified || !hitsCount?.all?.length || buttonsDisabled} onClick={() => updateHitsCount()}>
+                Update Monitor
+              </Button>
             </div>
 
             <div className="flex align-center align-middle">
               {
-                <Button onClick={() => (
+                <Button disabled={buttonsDisabled} onClick={() => {
+                  setButtonsDisabled(true)
                   navWithQuery('/taxonomy/data-collection')
-                )}>
+                }}>
                   Run data collection
                 </Button>
               }

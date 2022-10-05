@@ -9,7 +9,11 @@ export type HitsCountTableItem = {
 }
 
 export type HitsCountItem = {
-  "search_term": string,
+  item: {
+    tags?: string[],
+    term: string,
+    _id?: string
+  },
   "facebook"?: number | null,
   "twitter"?: number | null,
   "youtube"?: number | null,
@@ -18,7 +22,7 @@ export type HitsCountItem = {
 };
 
 export type HitsCountResponse = {
-  search_terms: Array<HitsCountItem>
+  data: Array<HitsCountItem>
 };
 
 export type Monitor = {

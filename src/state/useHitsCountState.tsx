@@ -8,10 +8,10 @@ const isFullSingle = (hitsCountItem: any) => Object.keys(hitsCountItem)
   .reduce((isfull, key) => hitsCountItem[key] === null ? false : isfull, true)
 
 
-const isFull = (hitsCountResponse: HitsCountResponse) => Boolean(hitsCountResponse.search_terms
-  && hitsCountResponse.search_terms.length
-  && hitsCountResponse.search_terms.length > 0
-  && hitsCountResponse.search_terms.map(isFullSingle).every((isFull_: boolean) => isFull_))
+const isFull = (hitsCountResponse: HitsCountResponse) => Boolean(hitsCountResponse.data
+  && hitsCountResponse.data.length
+  && hitsCountResponse.data.length > 0
+  && hitsCountResponse.data.map(isFullSingle).every((isFull_: boolean) => isFull_))
 
 export const useHitsCountState = (monitor_id: string) => {
   const [interval, setInterval] = useState<number>(0);

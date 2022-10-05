@@ -35,6 +35,7 @@ export const Posts = ({ filter, allowRedirect, shuffle }: Input) => {
 
     return isLoading && isFetching ? <Loader isInProgress={isLoadingFromServ} /> : <>
         {!posts.length && isLoadingFromServ && <Loader isInProgress={isLoadingFromServ} />}
+        {!posts.length && !isLoadingFromServ && <div style={{ textAlign: 'center' }}>No posts found</div>}
         {!!posts.length && <List
             dataSource={posts}
             style={{ paddingRight: "20px" }}

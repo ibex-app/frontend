@@ -67,10 +67,10 @@ const createColumns = (platforms: string[], deleteSearchTerm: any) => {
   return cols;
 };
 
-const generatePlatforms = ({ search_terms }: HitsCountResponse) =>
-  search_terms.reduce((acc, curr) => {
+const generatePlatforms = ({ data }: HitsCountResponse) =>
+  data.reduce((acc, curr) => {
     keys(curr).forEach(key => {
-      if (key !== 'search_term' && !acc.includes(key)) acc.push(key);
+      if (key !== 'item' && !acc.includes(key)) acc.push(key);
     });
 
     return acc;
@@ -115,7 +115,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const addNewHitsCount = pipe(
     removeDeletion,
     generateEmptyHitsCount,
-    ({ search_term, ...rest }) => generateHitsCountTableItem(search_term, { search_term, ...rest }),
+    ({ search_term, ...rest }) => generateHitsCountTableItem(search_term, { item: { term: search_term }, ...rest }),
     (tableItem) => concat([tableItem], newHitsCount),
     setNewHitsCount
   )
