@@ -4,8 +4,7 @@ import { _Get } from '../shared/Http';
 import { useState } from 'react';
 import { HitsCountResponse } from '../types/taxonomy';
 
-const isFullSingle = (hitsCountItem: any) => Object.keys(hitsCountItem)
-  .reduce((isfull, key) => hitsCountItem[key] === null ? false : isfull, true)
+const isFullSingle = (hitsCountItem: any) => hitsCountItem.is_loading
 
 
 const isFull = (hitsCountResponse: HitsCountResponse) => Boolean(hitsCountResponse.data
