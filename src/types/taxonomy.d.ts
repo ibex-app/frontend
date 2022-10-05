@@ -22,7 +22,9 @@ export type HitsCountItem = {
 };
 
 export type HitsCountResponse = {
-  data: Array<HitsCountItem>
+  data: Array<HitsCountItem>,
+  is_loading: boolean,
+  type: string
 };
 
 export type Monitor = {

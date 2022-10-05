@@ -4,21 +4,13 @@ import { _Get } from '../shared/Http';
 import { useState } from 'react';
 import { HitsCountResponse } from '../types/taxonomy';
 
-const isFullSingle = (hitsCountItem: any) => hitsCountItem.is_loading
-
-
-const isFull = (hitsCountResponse: HitsCountResponse) => Boolean(hitsCountResponse.data
-  && hitsCountResponse.data.length
-  && hitsCountResponse.data.length > 0
-  && hitsCountResponse.data.map(isFullSingle).every((isFull_: boolean) => isFull_))
-
 export const useHitsCountState = (monitor_id: string) => {
   const [interval, setInterval] = useState<number>(0);
 
   return useQuery(queries.hitsCount(monitor_id), () => _Get<HitsCountResponse>('get_hits_count', { id: monitor_id }), {
     refetchOnWindowFocus: false,
     refetchInterval: interval,
-    onSuccess: (data) => isFull(data) ? setInterval(0) : setInterval(5000),
+    onSuccess: (data) => !data.is_loading ? setInterval(0) : setInterval(5000),
     enabled: Boolean(monitor_id)
   })
 }
