@@ -63,7 +63,7 @@ const MonitorList: React.FC = () => {
                       ]}
                     >
                       <Meta
-                        avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                        // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
                         title={monitorItem.title}
                         description={monitorDescription}
                       /> 
