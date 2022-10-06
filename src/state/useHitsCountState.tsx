@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { queries } from '../shared/Queries';
 import { _Get } from '../shared/Http';
 import { useState } from 'react';
-import { HitsCountResponse } from '../types/taxonomy';
+import { HitsCountResponse } from '../types/hitscount';
 
 export const useHitsCountState = (monitor_id: string) => {
   const [interval, setInterval] = useState<number>(0);

@@ -1,6 +1,6 @@
 import * as E from "fp-ts/lib/Either";
 import { useLocation } from 'react-router-dom';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSliders } from '@fortawesome/free-solid-svg-icons'
@@ -9,7 +9,7 @@ import './Taxonomy.css';
 import { Get } from '../../shared/Http';
 import { map, pipe } from "ramda";
 import { Button, Col, Row, Space } from "antd";
-import { HitsCountTableItem, Monitor, MonitorRespose } from "../../types/taxonomy";
+import { Monitor, MonitorRespose } from "../../types/taxonomy";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Posts } from "../../antd/Posts";
 import { HitsCount, HitsCountOutput } from "../../antd/taxonomy/HitsCount";
@@ -20,6 +20,7 @@ import { Filter } from "../filter/Filter";
 import FilterData from '../../data/taxonomy/filter.json';
 import { useQueryClient } from 'react-query';
 import { queries } from '../../shared/Queries';
+import { HitsCountTableItem } from '../../types/hitscount';
 
 export const TaxonomyResults = () => {
   const queryClient = useQueryClient();
@@ -28,7 +29,6 @@ export const TaxonomyResults = () => {
   const [hitsCount, setHitsCount_] = useState<HitsCountOutput>();
   const [keywordsFilter, setKeywordsFilter] = useState<string[]>([]);
   const [userSelection, setUserSelection] = useState<string>();
-  const [ismodified, setIsmodified] = useState<boolean>(false);
   const [filter, setFilter] = useState({});
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
 
@@ -36,19 +36,15 @@ export const TaxonomyResults = () => {
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
+  const type = useMemo(() => hitsCount?.type, [hitsCount]);
   const highlightWords = useMemo(() => {
-    const searchTerms = hitsCount?.all?.map(({ search_term }) => search_term);
+    const searchTerms = hitsCount?.all?.map(({ title }) => title);
     return searchTerms ? getAllKeywordsWithoutOperator(searchTerms) : [];
   }, [hitsCount?.all]);
 
-  const setHitsCount = (newHitsCount: HitsCountOutput) => {
-    if (hitsCount?.all && newHitsCount?.all && hitsCount?.all.length > 0
-      && hitsCount?.all.length !== newHitsCount?.all.length) {
-      setIsmodified(true)
-    }
-
+  const setHitsCount = useCallback((newHitsCount: HitsCountOutput) => {
     setHitsCount_({ ...hitsCount, ...newHitsCount });
-  }
+  }, [hitsCount]);
 
   const updateHitsCount = () => {
     if (!hitsCount?.all) return;
@@ -80,8 +76,8 @@ export const TaxonomyResults = () => {
   useEffect(() => {
     hitsCount?.selected?.length ?
       pipe(
-        map(({ search_term }: HitsCountTableItem) => search_term),
-        setKeywordsFilter
+        map(({ title }: HitsCountTableItem) => title),
+        (res) => res && setKeywordsFilter
       )(hitsCount.selected) : setKeywordsFilter([]);
   }, [hitsCount]);
 
@@ -99,7 +95,7 @@ export const TaxonomyResults = () => {
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
             <Recommendations monitor_id={monitor_id} toParent={setHitsCount} />
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-              <Button disabled={!ismodified || !hitsCount?.all?.length || buttonsDisabled} onClick={() => updateHitsCount()}>
+              <Button disabled={hitsCount?.pristine || buttonsDisabled} onClick={() => updateHitsCount()}>
                 Update Monitor
               </Button>
             </div>
@@ -124,6 +120,7 @@ export const TaxonomyResults = () => {
               Search results for {map(drawFilterItem, hitsCount.selected)}
             </Space>}
             <Posts
+              allowSuggestions={type === 'search_terms' ? true : false}
               key="postsTaxonomy"
               filter={{ ...filter, monitor_id, search_terms: keywordsFilter }}
               allowRedirect={false}

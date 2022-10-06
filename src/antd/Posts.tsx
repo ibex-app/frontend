@@ -9,12 +9,13 @@ import { Loader } from "./Loader";
 type Input = {
     filter: Filter,
     allowRedirect?: boolean,
+    allowSuggestions?: boolean,
     shuffle?: boolean
 }
 
 const defaultPagination = { start_index: 0, count: 10 };
 
-export const Posts = ({ filter, allowRedirect, shuffle }: Input) => {
+export const Posts = ({ filter, allowRedirect, shuffle, allowSuggestions }: Input) => {
     const { data, isLoading, isFetching, fetchNextPage, refetch } = usePostsState({ ...filter, ...defaultPagination, shuffle });
     const lastPostsData = useMemo(() => data?.pages[data?.pages.length - 1], [data]);
     const isLoadingFromServ = useMemo(() => data?.pages[data.pages.length - 1].is_loading, [data]);
@@ -46,8 +47,8 @@ export const Posts = ({ filter, allowRedirect, shuffle }: Input) => {
                 isLoading={isLoadingFromServ || false} />
             }
             renderItem={(item) => allowRedirect
-                ? <Link to={`/details/${item._id.$oid}`}><Post post={item} /></Link>
-                : <Post post={item} />
+                ? <Link to={`/details/${item._id.$oid}`}><Post post={item} allowSuggestions={allowSuggestions} /></Link>
+                : <Post post={item} allowSuggestions={allowSuggestions} />
             }
         />}
     </>

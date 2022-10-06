@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { HitsCountTableItem } from "../../types/taxonomy";
+import { HitsCountTableItem } from "../../types/hitscount";
 
 type TaxonomyContext = {
   highlightWords: string[],

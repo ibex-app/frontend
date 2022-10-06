@@ -69,7 +69,7 @@ export const finalizeForm = ({ form1, form2 }: any) => ({
   //         estimateTime(finalForm)
   //         const createMonitor = Get('create_monitor', finalForm);
 
-          
+
   //     }
   // }, [])
 
