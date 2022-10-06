@@ -10,7 +10,7 @@ export const useHitsCountState = (monitor_id: string) => {
   return useQuery(queries.hitsCount(monitor_id), () => _Get<HitsCountResponse>('get_hits_count', { id: monitor_id }), {
     refetchOnWindowFocus: false,
     refetchInterval: interval,
-    onSuccess: (data) => !data.is_loading ? setInterval(0) : setInterval(5000),
+    onSuccess: (data) => !data.is_loading ? setInterval(0) : setInterval(3500),
     enabled: Boolean(monitor_id)
   })
 }
