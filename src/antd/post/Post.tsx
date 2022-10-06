@@ -5,7 +5,12 @@ import "./post.css";
 import { platformIcon } from "../../shared/Utils";
 import { Text } from "./Text";
 
-export const Post = ({ post }: { post: PostType }) => {
+type Input = {
+  allowSuggestions?: boolean,
+  post: PostType,
+}
+
+export const Post = ({ post, allowSuggestions }: Input) => {
   const { title, text, created_at, image_url, url, platform } = post;
 
   return <Row className="post">
@@ -15,7 +20,7 @@ export const Post = ({ post }: { post: PostType }) => {
           <h1><Text text={title} /></h1>
           {created_at.$date && <h3>{new Date(created_at.$date).toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: 'numeric' })}</h3>}
         </div>
-        <Text text={text} />
+        <Text text={text} allowSuggestions={allowSuggestions} />
         <span>{platform && platformIcon(platform)} <a href={url}>{url}</a></span>
       </Space>
     </Col>

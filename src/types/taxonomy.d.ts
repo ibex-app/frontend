@@ -1,32 +1,3 @@
-export type HitsCountTableItem = {
-  key: string,
-  search_term: string,
-  facebook: number | undefined | null,
-  youtube: number | undefined | null,
-  twitter: number | undefined | null,
-  vkontakte: number | undefined | null,
-  telegram: number | undefined | null
-}
-
-export type HitsCountItem = {
-  item: {
-    tags?: string[],
-    term: string,
-    _id?: string
-  },
-  "facebook"?: number | null,
-  "twitter"?: number | null,
-  "youtube"?: number | null,
-  "vkontakte"?: number | null,
-  "telegram"?: number | null
-};
-
-export type HitsCountResponse = {
-  data: Array<HitsCountItem>,
-  is_loading: boolean,
-  type: string
-};
-
 export type Monitor = {
   collect_actions: string[];
   date_from: Date | string,

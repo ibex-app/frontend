@@ -1,16 +1,11 @@
-import { FormElement } from '../../types/form';
 import { useEffect, useMemo, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Layout, Space } from 'antd';
 import * as E from "fp-ts/lib/Either";
 import { Link } from "react-router-dom";
-import { faThumbsUp, faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
 import { Get, Response } from '../../shared/Http';
-import { TaxonomyResponse, MonitorProgressResponse, MonitorRespose, Progress, HitsCountResponse } from '../../types/taxonomy';
+import { TaxonomyResponse, MonitorProgressResponse, MonitorRespose, Progress } from '../../types/taxonomy';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../../antd/PogressBar/ProgressBar';
 import { pipe } from 'ramda';

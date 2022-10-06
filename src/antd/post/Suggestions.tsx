@@ -1,9 +1,9 @@
-import { Modal, Popover, Space } from "antd";
-import { useContext, useState } from "react";
+import { Popover, Space } from "antd";
+import { useContext } from "react";
 import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
 import { boolOperators } from "../../shared/Utils";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
-import { HitsCountTableItem } from "../../types/taxonomy"
+import { HitsCountTableItem } from "../../types/hitscount"
 
 type Input = {
   text: string,
@@ -26,7 +26,7 @@ export const Suggestions = ({ text, selection, highlight, index }: Input) => {
         const elem = <>{drawFilterItem(item)} <span className="op">{op.toUpperCase()}</span> {text}</>;
         return <span
           key={op}
-          onClick={() => setUserSelection(`${item.search_term} ${op} ${text}`)}>
+          onClick={() => setUserSelection(`${item.title} ${op} ${text}`)}>
           {elem}
         </span>
       }

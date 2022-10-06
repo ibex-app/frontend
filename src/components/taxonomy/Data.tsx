@@ -1,29 +1,8 @@
-import { mapWithIndex } from "fp-ts/lib/Array";
 import { pipe, prop } from "ramda";
-import { HitsCountItem, HitsCountTableItem } from "../../types/taxonomy";
+import { match } from 'ts-pattern';
+import { Account, HitsCountResponse, HitsCountSearchTerm } from "../../types/hitscount";
 
-export const generateEmptyHitsCount = (search_term: string): HitsCountTableItem => ({
-  key: search_term,
-  search_term,
-  facebook: undefined,
-  youtube: undefined,
-  twitter: undefined,
-  telegram: undefined,
-  vkontakte: undefined,
-})
-
-export const generateHitsCountTableItem =
-  (key: number | string, { item, facebook, youtube, twitter, vkontakte, telegram }: HitsCountItem): HitsCountTableItem => ({
-    key: typeof key === 'number' ? key.toString() : `hitsCount-${key}`,
-    search_term: item.term,
-    facebook,
-    youtube,
-    twitter,
-    telegram,
-    vkontakte,
-  })
-
-export const generateHitsCountTableData = pipe(
-  prop<'data', Array<HitsCountItem>>('data'),
-  mapWithIndex<HitsCountItem, HitsCountTableItem>(generateHitsCountTableItem)
-);
+export const generateHitsCountTableData = (data: HitsCountResponse) => match(data)
+  .with({ type: 'search_terms' }, pipe(prop<'data', Array<HitsCountSearchTerm>>('data')))
+  .with({ type: 'accounts' }, pipe(prop<'data', Array<Account>>('data')))
+  .otherwise(() => [])
