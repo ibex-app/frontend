@@ -28,7 +28,7 @@ const generatePlatforms = (data: Array<HitsCountSearchTerm>) =>
   data.reduce((acc, curr) => {
     keys(curr).forEach(key => match(key)
       .with('item', 'title', 'id', () => acc)
-      .otherwise(() => acc.push(key))
+      .otherwise(() => !acc.includes(key) && acc.push(key))
     );
 
     return acc;
