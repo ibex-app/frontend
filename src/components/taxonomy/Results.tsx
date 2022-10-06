@@ -21,11 +21,11 @@ import FilterData from '../../data/taxonomy/filter.json';
 import { useQueryClient } from 'react-query';
 import { queries } from '../../shared/Queries';
 import { HitsCountTableItem } from '../../types/hitscount';
+import { useMonitorState } from '../../state/useMonitorState';
 
 export const TaxonomyResults = () => {
   const queryClient = useQueryClient();
   const { search } = useLocation();
-  const [monitor, setMonitor] = useState<Monitor>();
   const [hitsCount, setHitsCount_] = useState<HitsCountOutput>();
   const [keywordsFilter, setKeywordsFilter] = useState<string[]>([]);
   const [userSelection, setUserSelection] = useState<string>();
@@ -35,6 +35,9 @@ export const TaxonomyResults = () => {
   const navWithQuery = useNavWithQuery();
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
+  const { data: monitorRes } = useMonitorState(monitor_id);
+
+  const monitor = useMemo(() => monitorRes?.monitor, [monitorRes]);
 
   const type = useMemo(() => hitsCount?.type, [hitsCount]);
   const highlightWords = useMemo(() => {
@@ -49,7 +52,7 @@ export const TaxonomyResults = () => {
   const updateHitsCount = () => {
     if (!hitsCount?.all) return;
     setButtonsDisabled(true);
-    const search_terms = hitsCount.all.map(({ search_term }: any) => search_term);
+    const search_terms = hitsCount.all.map(({ title }) => title);
 
     Get('update_monitor', { id: monitor_id, search_terms }).then(() => {
       Promise.all([
@@ -67,11 +70,6 @@ export const TaxonomyResults = () => {
 
     return [{ ...filter, selected: list, list }]
   }, [hitsCount?.platforms])
-
-  useEffect(() => {
-    !monitor_id && Get<MonitorRespose>('get_monitor', { id: monitor_id })
-      .then(E.fold(console.error, ({ monitor }) => setMonitor(monitor)));
-  }, [monitor_id]);
 
   useEffect(() => {
     hitsCount?.selected?.length ?
