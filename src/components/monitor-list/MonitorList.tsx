@@ -1,12 +1,12 @@
-import { Avatar, Button, Card, Col, Modal, Row, Skeleton } from 'antd';
-import React, { useEffect, useState } from 'react'
+import { Button, Card, Col, Modal, Row } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react'
 import classes from './MonitorList.module.css'
-import { BarsOutlined, CopyOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { BarsOutlined, CopyOutlined, DeleteOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
-import { Get, Response } from '../../shared/Http';
+import { Delete, Get, Response } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { Monitor } from '../../types/taxonomy';
-import { duplicate } from 'fp-ts/lib/ReadonlyNonEmptyArray';
+import { useNavigate } from 'react-router-dom';
 
 const MonitorList: React.FC = () => {
   const [data, setData]: any = useState([]);
@@ -16,7 +16,8 @@ const MonitorList: React.FC = () => {
   const [duplicateModalVisible, setDuplicateModalVisible] = useState(false);
 
   const [monitorId, setMonitorId] = useState("");
-  // const [duplicateText, setDuplicateText] = useState("");
+
+  const navigate = useNavigate();
   
   const showDeleteModal = (monitorItem: Monitor) => {
     console.log(monitorItem)
@@ -28,6 +29,16 @@ const MonitorList: React.FC = () => {
     setMonitorId("");
     setDeleteModalVisible(false);
   };
+
+  const deleteItemHandler = useCallback(() => {
+    const fetchData = Delete('delete_monitor', { monitor_id: monitorId });
+
+    fetchData.then((_data: Response<any>) => {
+      let maybeData = E.getOrElse(() => [])(_data)
+      if (!maybeData || !maybeData.forEach) return
+      console.log(maybeData);
+    });
+  }, [monitorId]);
   
   const showDuplicateModal = (monitorItem: Monitor) => {
     console.log(monitorItem)
@@ -39,6 +50,18 @@ const MonitorList: React.FC = () => {
     setMonitorId("");
     setDuplicateModalVisible(false);
   };
+  
+  const duplicateItemHandler = useCallback(
+    () => {
+      const fetchData = Get('duplicate_monitor', { monitor_id: monitorId });
+
+      fetchData.then((_data: Response<any>) => {
+        let maybeData = E.getOrElse(() => [])(_data)
+        if (!maybeData || !maybeData.forEach) return
+        console.log(maybeData);
+      });
+    }, [monitorId]
+  );
 
   useEffect(() => {
     const fetchData = Get('get_monitors', { tag: '*' });
@@ -50,18 +73,8 @@ const MonitorList: React.FC = () => {
       setData(maybeData)
       setFetching(false)
     });
-  }, [])
-
-  // სახელი
-  // - აღწერა
-  // - დროის ინტერვალი
-  // - პლატფორმები
-  // - ანგარიშები accounts ან საძიებო სიტყვები search_terms
-  // - summary ან taxomony გვერდზე გადასვლის ღილაკი
-  // - duplicate ღილაკი, რომელიც api - duplicate_monitor-ს გადასცემს monitor_id-ს  და მიიღებს ახალ დამატებულ მონიტორს და დაამატებს სიაში
-  // - delete ღილაკი, რომელიც გამოაჩენს (ant) confirm popup-ს ტექსტით: 'Confirm delete action for monitor {monitor name}', და დასტურის შემთხვევაში api delete_monitor-ს გადასცემს წასაშლელ monitor_id-ს
+  }, [duplicateItemHandler, deleteItemHandler])
  
-
   return (
     <div className={classes.monitorListContainer}>
       <h1>Monitors List</h1>
@@ -72,7 +85,7 @@ const MonitorList: React.FC = () => {
               <Modal
                 title="Modal"
                 visible={deleteModalVisible}
-                onOk={hideDeleteModal}
+                onOk={deleteItemHandler}
                 onCancel={hideDeleteModal}
                 okText="Ok"
                 cancelText="Cancel"
@@ -122,7 +135,7 @@ const MonitorList: React.FC = () => {
                       actions={[
                         <DeleteOutlined key="delete" onClick={() => showDeleteModal(monitorItem)} />,
                         <CopyOutlined key="duplicate" onClick={() => showDuplicateModal(monitorItem)} />,
-                        <BarsOutlined key="summary" />,
+                        <BarsOutlined key="summary" onClick={() => navigate("/results/summary")} />,
                       ]}
                     >
                       <Meta                        
