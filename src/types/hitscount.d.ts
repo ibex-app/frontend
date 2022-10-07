@@ -51,6 +51,11 @@ type HitsCountSearchTermRes = {
   data: Array<HitsCountSearchTerm>
 }
 
+export type Recommendations = {
+  word: string,
+  score: number
+}[]
+
 export type HitsCountItem = SearchTermItem | AccountItem
 
 export type HitsCountTableItem = HitsCountSearchTerm | AccountItem

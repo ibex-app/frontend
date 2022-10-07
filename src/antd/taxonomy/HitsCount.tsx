@@ -1,4 +1,4 @@
-import { Form, Input, Space, Table } from "antd";
+import { Form, Space, Table } from "antd";
 import { concat, keys, pipe, equals } from "ramda";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { generateHitsCountTableData } from "../../components/taxonomy/Data";
@@ -37,6 +37,7 @@ const generatePlatforms = (data: Array<HitsCountSearchTerm>) =>
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const { data } = useHitsCountState(monitor_id);
   const [dataSet, setDataSet] = useState(false);
+  const { userSelection } = useContext(TaxonomyContext);
   const dataFormatted = useMemo(() => data ? generateHitsCountTableData(data) : [], [data]);
   const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>([]);
   const type = useMemo(() => data?.type, [data]);
@@ -54,7 +55,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     setHitsCountTableData(hitsCountTableData.filter(({ title }) => searchTerm !== title));
   }, [hitsCountTableData]);
 
-  const platforms = useMemo(() => data && data.type == 'search_terms' ? generatePlatforms(data.data) : [], [data]);
+  const platforms = useMemo(() => data && data.type === 'search_terms' ? generatePlatforms(data.data) : [], [data]);
 
   const columns = useMemo(() => match(data)
     .with({ type: 'search_terms' }, ({ data }) => platforms ? createSearchTermColumns(platforms, deleteSearchTerm) : [])
@@ -63,8 +64,6 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     , [data, deleteSearchTerm, platforms]);
 
   const [hitCountsSelected, setHitCountSelection] = useState<HitsCountItem[]>([]);
-
-  const { userSelection, setUserSelection } = useContext(TaxonomyContext);
 
   const hitCountSelection = useMemo(() => ({
     hitCountsSelected,

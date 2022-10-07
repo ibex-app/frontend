@@ -22,11 +22,7 @@
           "title": "What is the report about?",
           "value": "",
           "type": "textbox",
-          "rules": [
-            {
-              "required": true
-            }
-          ]
+          "rules": []
         },
         {
           "id": "type",

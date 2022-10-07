@@ -1,4 +1,3 @@
-import * as E from "fp-ts/lib/Either";
 import { useLocation } from 'react-router-dom';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -51,7 +50,6 @@ export const TaxonomyResults = () => {
   const updateHitsCount = () => {
     if (!hitsCount?.all) return;
     setButtonsDisabled(true);
-    console.log(hitsCount.all)
     const search_terms = hitsCount.all.map((search_term: any) => ({
       id: search_term._id,
       term: search_term.title
