@@ -8,7 +8,7 @@
       "children": [
         {
           "id": "title",
-          "title": "What is the name of the report?",
+          "title": "What is the name of your report?",
           "value": "",
           "type": "text",
           "rules": [
@@ -26,7 +26,7 @@
         },
         {
           "id": "type",
-          "title": "Are you using the keywords or accounts for data collection?",
+          "title": "Are you using keywords or accounts for data collection?",
           "type": "radio",
           "rules": [
             {
@@ -117,7 +117,7 @@
           "id": "date",
           "title": "Date Range",
           "type": "date_interval",
-          "tip": "On-going monitor would add newly created posts to the report in real-time",
+          "tip": "Ongoing monitor would add newly created posts to the report in real-time",
           "children": [
             {
               "id": "date_from",

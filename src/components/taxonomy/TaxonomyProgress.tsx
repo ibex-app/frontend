@@ -109,7 +109,7 @@ const TaxonomyProgress: React.FC = () => {
             <Row>
               <Col>
                 <br />
-                Esitmated
+                Estimated
               </Col>
             </Row>
 
@@ -149,7 +149,7 @@ const TaxonomyProgress: React.FC = () => {
                     </Col>
 
                     <Col span={20}>
-                      { typeof(progressValue) === "number" && progressValue < 100 ? "details being loading..." : "details fetched" } 
+                      { typeof(progressValue) === "number" && progressValue < 100 ? "Details are being loaded…" : "Details fetched" } 
                       
                       <ProgressBar percentage={100} showInfo={true} />
 
