@@ -36,17 +36,23 @@ const generatePlatforms = (data: Array<HitsCountSearchTerm>) =>
 
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const { data } = useHitsCountState(monitor_id);
+  const [dataSet, setDataSet] = useState(false);
   const dataFormatted = useMemo(() => data ? generateHitsCountTableData(data) : [], [data]);
   const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>([]);
-  const [newHitsCount, setNewHitsCount] = useState<HitsCountTableItem[]>([]);
   const type = useMemo(() => data?.type, [data]);
 
   const [form] = useForm();
 
+  useEffect(() => {
+    if (!dataSet && dataFormatted) {
+      setHitsCountTableData(dataFormatted as any);
+      setDataSet(true);
+    }
+  }, [dataFormatted, dataSet]);
+
   const deleteSearchTerm = useCallback((searchTerm: string) => {
     setHitsCountTableData(hitsCountTableData.filter(({ title }) => searchTerm !== title));
-    setNewHitsCount(newHitsCount.filter(({ title }) => searchTerm !== title));
-  }, [hitsCountTableData, newHitsCount]);
+  }, [hitsCountTableData]);
 
   const platforms = useMemo(() => data && data.type == 'search_terms' ? generatePlatforms(data.data) : [], [data]);
 
@@ -60,8 +66,6 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
 
   const { userSelection, setUserSelection } = useContext(TaxonomyContext);
 
-  useEffect(() => setHitsCountTableData(concat(newHitsCount, dataFormatted as any || [])), [newHitsCount, dataFormatted]);
-
   const hitCountSelection = useMemo(() => ({
     hitCountsSelected,
     onChange: (_: React.Key[], selectedRows: any[]) => setHitCountSelection(selectedRows)
@@ -69,17 +73,15 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
 
   const addNewHitsCount = useMemo(() => pipe(
     generateEmptyHitsCount,
-    // ({ search_term, ...rest }) => generateHitsCountTableItem(search_term, { item: { term: search_term }, ...rest }),
-    (tableItem) => concat([tableItem], newHitsCount),
-    setNewHitsCount
-  ), [newHitsCount, setNewHitsCount]);
+    (tableItem) => concat([tableItem], hitsCountTableData),
+    setHitsCountTableData
+  ), [hitsCountTableData]);
 
   useEffect(() => {
     userSelection && addNewHitsCount(userSelection)
   }, [userSelection, addNewHitsCount]);
 
   const onHitsCountAdd = useCallback((values: string[]) => {
-    console.log(values)
     addNewHitsCount(values[0])
     form.resetFields();
   }, [form, addNewHitsCount]);

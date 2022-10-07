@@ -9,7 +9,6 @@ import './Taxonomy.css';
 import { Get } from '../../shared/Http';
 import { map, pipe } from "ramda";
 import { Button, Col, Row, Space } from "antd";
-import { Monitor, MonitorRespose } from "../../types/taxonomy";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Posts } from "../../antd/Posts";
 import { HitsCount, HitsCountOutput } from "../../antd/taxonomy/HitsCount";
@@ -53,10 +52,11 @@ export const TaxonomyResults = () => {
     if (!hitsCount?.all) return;
     setButtonsDisabled(true);
     console.log(hitsCount.all)
-    const search_terms = hitsCount.all.map(( search_term : any) => ({
-        id: search_term._id,
-        term: search_term.title}));
-    
+    const search_terms = hitsCount.all.map((search_term: any) => ({
+      id: search_term._id,
+      term: search_term.title
+    }));
+
     Get('update_monitor', { id: monitor_id, search_terms: search_terms }).then(() => {
       Promise.all([
         queryClient.invalidateQueries(queries.posts({ monitor_id })),

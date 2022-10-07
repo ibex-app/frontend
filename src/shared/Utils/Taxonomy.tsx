@@ -3,7 +3,7 @@ import { getWordList, WordList } from "../Utils";
 
 // input HitsCountTableData
 export const drawFilterItem: any = pipe<any, string, WordList, JSX.Element[]>(
-  prop('search_term'),
+  prop('title'),
   getWordList,
   map(({ type, keyword }) => <span className={type}>{keyword}</span>)
 );

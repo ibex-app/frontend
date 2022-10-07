@@ -22,7 +22,7 @@ export const createSearchTermColumns = (platforms: string[], deleteSearchTerm: a
     title: "Keyword",
     dataIndex: "title",
     key: "title",
-    render: (text: string) => text && drawFilterItem({ search_term: text })
+    render: (title: string) => title && drawFilterItem({ title })
   }];
 
   platforms.forEach(platform => {
