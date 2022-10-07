@@ -49,9 +49,12 @@ export const TaxonomyResults = () => {
   const updateHitsCount = () => {
     if (!hitsCount?.all) return;
     setButtonsDisabled(true);
-    const search_terms = hitsCount.all.map(({ search_term }: any) => search_term);
-
-    Get('update_monitor', { id: monitor_id, search_terms }).then(() => {
+    console.log(hitsCount.all)
+    const search_terms = hitsCount.all.map(( search_term : any) => ({
+        id: search_term._id,
+        term: search_term.title}));
+    
+    Get('update_monitor', { id: monitor_id, search_terms: search_terms }).then(() => {
       Promise.all([
         queryClient.invalidateQueries(queries.posts({ monitor_id })),
         queryClient.invalidateQueries(queries.hitsCount(monitor_id))
