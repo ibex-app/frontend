@@ -1,15 +1,44 @@
-import { Avatar, Card, Col, Row, Skeleton } from 'antd';
+import { Avatar, Button, Card, Col, Modal, Row, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react'
 import classes from './MonitorList.module.css'
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { BarsOutlined, CopyOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
 import { Get, Response } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { Monitor } from '../../types/taxonomy';
+import { duplicate } from 'fp-ts/lib/ReadonlyNonEmptyArray';
 
 const MonitorList: React.FC = () => {
   const [data, setData]: any = useState([]);
   const [fetching, setFetching]: any = useState(true);
+  
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [duplicateModalVisible, setDuplicateModalVisible] = useState(false);
+
+  const [monitorId, setMonitorId] = useState("");
+  // const [duplicateText, setDuplicateText] = useState("");
+  
+  const showDeleteModal = (monitorItem: Monitor) => {
+    console.log(monitorItem)
+    setMonitorId(monitorItem?._id);
+    setDeleteModalVisible(true);
+  };
+  
+  const hideDeleteModal = () => {
+    setMonitorId("");
+    setDeleteModalVisible(false);
+  };
+  
+  const showDuplicateModal = (monitorItem: Monitor) => {
+    console.log(monitorItem)
+    setMonitorId(monitorItem?._id);
+    setDuplicateModalVisible(true);
+  };
+  
+  const hideDuplicateModal = () => {
+    setMonitorId("");
+    setDuplicateModalVisible(false);
+  };
 
   useEffect(() => {
     const fetchData = Get('get_monitors', { tag: '*' });
@@ -37,6 +66,40 @@ const MonitorList: React.FC = () => {
     <div className={classes.monitorListContainer}>
       <h1>Monitors List</h1>
 
+      {
+        deleteModalVisible && (
+          <>
+              <Modal
+                title="Modal"
+                visible={deleteModalVisible}
+                onOk={hideDeleteModal}
+                onCancel={hideDeleteModal}
+                okText="Ok"
+                cancelText="Cancel"
+              >
+                <p>Confirm delete action for monitor {monitorId}?</p>
+            </Modal>
+          </>
+        )
+      }
+
+      {
+        duplicateModalVisible && (
+          <>
+              <Modal
+                title="Modal"
+                visible={duplicateModalVisible}
+                onOk={hideDuplicateModal}
+                onCancel={hideDuplicateModal}
+                okText="Ok"
+                cancelText="Cancel"
+              >
+                <p>Confirm duplicate action for monitor {monitorId}?</p>
+            </Modal>
+          </>
+        )
+      }
+
       <> 
         {
           !fetching ? (
@@ -57,13 +120,12 @@ const MonitorList: React.FC = () => {
                     <Card
                       style={{ width: 300, marginTop: 16 }}
                       actions={[
-                        <SettingOutlined key="setting" />,
-                        <EditOutlined key="edit" />,
-                        <EllipsisOutlined key="ellipsis" />,
+                        <DeleteOutlined key="delete" onClick={() => showDeleteModal(monitorItem)} />,
+                        <CopyOutlined key="duplicate" onClick={() => showDuplicateModal(monitorItem)} />,
+                        <BarsOutlined key="summary" />,
                       ]}
                     >
-                      <Meta
-                        // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                      <Meta                        
                         title={monitorItem.title}
                         description={monitorDescription}
                       /> 
