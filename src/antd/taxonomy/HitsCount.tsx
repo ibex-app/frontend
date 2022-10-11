@@ -45,7 +45,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [form] = useForm();
 
   useEffect(() => {
-    if (!dataSet && dataFormatted) {
+    if (!dataSet && dataFormatted.length) {
       setHitsCountTableData(dataFormatted as any);
       setDataSet(true);
     }
@@ -91,7 +91,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     type,
     platforms,
     pristine: equals(hitsCountTableData, dataFormatted as any) || !hitsCountTableData.length
-  }), [hitCountsSelected, hitsCountTableData, type, platforms]);
+  }), [hitCountsSelected, hitsCountTableData, type, platforms, dataFormatted]);
 
   return <div className="leftbox-inner">
     <Form form={form} onFinish={onHitsCountAdd}>
