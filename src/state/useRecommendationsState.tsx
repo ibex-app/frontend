@@ -14,7 +14,7 @@ export const useRecommendationsState = (monitor_id: string) => {
       enabled: !!monitor_id,
       refetchInterval: interval,
       onSuccess: (data) => {
-        !!data.length && setInterval(3500)
+        data.is_loading && setInterval(3500)
       }
     });
 };

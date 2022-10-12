@@ -645,3 +645,8 @@ table {
 .tax-cont .top-filters .ant-row.ant-form-item{
     width: 98%;
 }
+
+.underline-link{
+    text-decoration: underline;
+    color: #1c9cea;
+}

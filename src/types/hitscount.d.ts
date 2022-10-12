@@ -52,9 +52,12 @@ type HitsCountSearchTermRes = {
 }
 
 export type Recommendations = {
-  word: string,
-  score: number
-}[]
+  is_loading: boolean,
+  recommendations: {
+    word: string,
+    score: number
+  }[]
+}
 
 export type HitsCountItem = SearchTermItem | AccountItem
 
