@@ -20,6 +20,7 @@ import { useQueryClient } from 'react-query';
 import { queries } from '../../shared/Queries';
 import { HitsCountTableItem } from '../../types/hitscount';
 import { useMonitorState } from '../../state/useMonitorState';
+import { useUpdateMonitorMutation } from '../../state/useUpdateMonitorMutation';
 
 export const TaxonomyResults = () => {
   const queryClient = useQueryClient();
@@ -33,6 +34,8 @@ export const TaxonomyResults = () => {
   const navWithQuery = useNavWithQuery();
 
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
+  const { mutateAsync: updateMonitor } = useUpdateMonitorMutation(monitor_id);
+
   const { data: monitorRes } = useMonitorState(monitor_id);
 
   const monitor = useMemo(() => monitorRes?.monitor, [monitorRes]);
@@ -47,7 +50,7 @@ export const TaxonomyResults = () => {
     setHitsCount_({ ...hitsCount, ...newHitsCount });
   }, [hitsCount]);
 
-  const updateHitsCount = () => {
+  const updateHitsCount = useCallback(() => {
     if (!hitsCount?.all) return;
     setButtonsDisabled(true);
     const search_terms = hitsCount.all.map((search_term: any) => ({
@@ -55,13 +58,8 @@ export const TaxonomyResults = () => {
       term: search_term.title
     }));
 
-    Get('update_monitor', { id: monitor_id, search_terms: search_terms }).then(() => {
-      Promise.all([
-        queryClient.invalidateQueries(queries.posts({ monitor_id })),
-        queryClient.invalidateQueries(queries.hitsCount(monitor_id))
-      ]).then(() => setButtonsDisabled(false));
-    });
-  }
+    updateMonitor({ id: monitor_id, search_terms }).then(() => setButtonsDisabled(false));;
+  }, [hitsCount?.all, monitor_id, updateMonitor]);
 
   const filters = useMemo(() => {
     const filter = FilterData.data[0];

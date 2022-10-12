@@ -10,6 +10,7 @@ import { match } from 'ts-pattern';
 import { finalizeForm } from "../../shared/Utils/Taxonomy";
 import { Steps } from "antd";
 import TaxonomyDataCollection from "./TaxonomyProgress";
+import { useUpdateMonitorMutation } from '../../state/useUpdateMonitorMutation';
 export const { data }: { data: any[] } = require('../../data/taxonomy/taxonomy.json');
 
 const accountLens = lensPath([1, 'children', 1, 'children', 0, 'list']);
@@ -31,6 +32,7 @@ export function Taxonomy() {
   const [accountSuggestions, setAccountSuggestions] = useState<any[]>();
   const substring = useDebounce(accountSubstr, 500);
   const monitor_id = useMemo(() => new URLSearchParams(location.search).get('monitor_id') || "", [location.search]);
+  const { mutateAsync: _updateMonitor } = useUpdateMonitorMutation(monitor_id);
 
   const onValuesChange = (changed: any, values: any, formId: string) => {
     const { accounts, platforms, search_terms_upload, accounts_upload } = changed;
@@ -71,8 +73,7 @@ export function Taxonomy() {
     );
   }, [platforms, substring]);
 
-  const updateMonitor = () => Get<Response<any>>('update_monitor', { monitor_id, ...finalizeForm(form) })
-    .then(fold(() => { }, () => navWithQuery('/taxonomy/results')));
+  const updateMonitor = () => _updateMonitor(finalizeForm(form)).then(() => navWithQuery('/taxonomy/results'));
 
   const onSubmit = (formData: any, values: any) =>
     match(formData.id)
@@ -123,7 +124,7 @@ export function Taxonomy() {
             onSubmit={(values: any) => onSubmit(item, values)} />
         } />)}
         <Route path="/results" element={<TaxonomyResults />}></Route>
-        <Route path="/data-collection" element={ <TaxonomyDataCollection /> }></Route>
+        <Route path="/data-collection" element={<TaxonomyDataCollection />}></Route>
       </Routes>
       <Steps current={currentStep} style={{ padding: '0 50px' }} onChange={onStepsChange}>
         <Step />
