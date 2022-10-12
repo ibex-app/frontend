@@ -1,3 +1,5 @@
+import { Account } from "./hitscount";
+
 export type Monitor = {
   collect_actions: string[];
   date_from: Date | string,
@@ -5,6 +7,9 @@ export type Monitor = {
   descr: string,
   title: string,
   _id: string
+  platforms: string[];
+  accounts?: Account[]
+  searchTerms?: SearchTerm[]
 }
 
 export type Progress = {

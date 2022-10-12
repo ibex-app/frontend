@@ -32,7 +32,9 @@ const TaxonomyProgress: React.FC = () => {
   // 2. monitor_progress, returns the information about the progress of data collection
   // 'get_monitor', 
   const noErrors = (monitorData: any) => {
-    return !Boolean(monitorData?.details?.out_of_limit.length);
+    // console.log(monitorData)
+
+    return !Boolean(monitorData?.detail?.out_of_limit.length);
   } 
 
   useEffect(() => {
@@ -40,11 +42,12 @@ const TaxonomyProgress: React.FC = () => {
       .then(E.fold(console.error, 
         (monitorData: any) => match(noErrors(monitorData))
         .with(true, () => {
+          // console.log('no errors')
           setMonitorData(monitorData)
         }).otherwise(() => {
           setErrors(monitorData?.detail?.out_of_limit)
-          console.log(monitorData?.detail?.out_of_limit)
-          console.log(333, errors)
+          // console.log(monitorData?.detail?.out_of_limit)
+          // console.log(333, errors)
         })));
   }, [monitor_id]);
 
@@ -55,14 +58,16 @@ const TaxonomyProgress: React.FC = () => {
   }
 
   const isFinalized = (res: MonitorProgressResponse) => {
-    return res.reduce((isFinalized: boolean, progress:Progress) => !isFinalized ? isFinalized : progress.tasks_count === progress.finalized_collect_tasks_count, true)
+    return res.reduce((isFinalized_: boolean, progress:Progress) => !isFinalized_ 
+      ? isFinalized_ 
+      : (progress.tasks_count === progress.finalized_collect_tasks_count && progress.tasks_count !== 0) , true)
   }
 
   useEffect(() => {
     if (loading) return;
-    console.log()
-    if (!monitorData) return;
-    console.log(555, monitorData)
+    // console.log()
+    // if (!monitorData) return;
+    // console.log(555, monitorData)
     setLoading(true);
 
     clearTimeout_();
@@ -98,12 +103,13 @@ const TaxonomyProgress: React.FC = () => {
           
             
           <Content>
-            <Space size={'middle'} className="taxonomy-header-spacer">
-              <h1>Data Collection Step - 4</h1>
-              
-              <h2>Colecting Posts for { monitorData?.monitor?.title }</h2>
             
-              <h2>Description: { monitorData?.monitor?.descr }</h2>
+            <Space size={'middle'} className="taxonomy-header-spacer">
+              {/* <h1>Data Collection Step - 4</h1> */}
+              
+              <h2>Monitor name: { monitorData?.monitor?.title }</h2>
+            
+              <h2>Monitor description: { monitorData?.monitor?.descr }</h2>
             </Space>
 
             <Row>
@@ -121,7 +127,7 @@ const TaxonomyProgress: React.FC = () => {
 
             <Row>
               <Col>
-                <h1>Platforms</h1>
+                <h1>Platforms</h1> { monitorData?.monitor?.platforms?.map(a => <span>a</span>) }
               </Col>
             </Row>
             {
@@ -130,7 +136,7 @@ const TaxonomyProgress: React.FC = () => {
                 <Space size={'middle'} className="taxonomy-header-spacer">
                   <span>The number of posts for some search terms / accounts exceed allowed maximum limit of 10 000 posts.
   
-                  Please <Link to={`/taxonomy/results?monitor_id=${monitor_id}`}>modify </Link> the monitor and try again</span>
+                  Please <Link className='underline-link' to={`/taxonomy/results?monitor_id=${monitor_id}`}>modify</Link> the monitor and try again</span>
                 { 
                   errors.map((error: any) => <>
                       <span className="">{platformIcon(error.platform)} {error?.search_terms && error?.search_terms.length ? error?.search_terms[0].term : error?.accounts[0].title} {error.hits_count}</span>
@@ -151,7 +157,7 @@ const TaxonomyProgress: React.FC = () => {
                     <Col span={20}>
                       { typeof(progressValue) === "number" && progressValue < 100 ? "Details are being loaded…" : "Details fetched" } 
                       
-                      <ProgressBar percentage={100} showInfo={true} />
+                      <ProgressBar percentage={progressValue} showInfo={true} />
 
                       {
                         `Posts count: ${item.posts_count}`
@@ -168,7 +174,7 @@ const TaxonomyProgress: React.FC = () => {
               
             }
             {
-                true ? <div><Link to={`/results/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </div> : <></>
+                isFinalizedState ? <div><Link to={`/results/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </div> : <></>
             }
               </Content>
         }
