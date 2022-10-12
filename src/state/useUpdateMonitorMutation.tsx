@@ -14,7 +14,7 @@ export const useUpdateMonitorMutation = (monitor_id: string) => {
           queryClient.invalidateQueries(queries.hitsCount(monitor_id)),
           queryClient.invalidateQueries(queries.posts({ monitor_id })),
           queryClient.invalidateQueries(queries.recommendations(monitor_id))
-        ])
+        ]).then(() => { })
       }
     }
   )
