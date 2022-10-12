@@ -640,3 +640,8 @@ table {
     justify-content: center;
     font-weight: bold;
 }
+
+
+.tax-cont .top-filters .ant-row.ant-form-item{
+    width: 98%;
+}
