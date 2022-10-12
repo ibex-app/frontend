@@ -105,6 +105,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
       </Space>
     </Form>
     <Table
+      rowKey='title'
       rowSelection={hitCountSelection}
       dataSource={hitsCountTableData}
       columns={columns as any} />
