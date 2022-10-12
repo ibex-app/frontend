@@ -36,19 +36,27 @@ const generatePlatforms = (data: Array<HitsCountSearchTerm>) =>
 
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [pristine, setPristine] = useState(true);
-  const { data } = useHitsCountState(monitor_id, pristine);
+  const [isLoading, setIsLoading] = useState(false);
   const { userSelection } = useContext(TaxonomyContext);
+
+  const refetchInterval = useMemo(() => match([isLoading, pristine])
+    .with([true, true], () => 3500)
+    .otherwise(() => 0)
+    , [isLoading, pristine]);
+
+  const { data } = useHitsCountState(monitor_id, refetchInterval);
+  const type = useMemo(() => data?.type, [data]);
   const dataFormatted = useMemo(() => data ? generateHitsCountTableData(data) : [], [data]);
   const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>([]);
-  const type = useMemo(() => data?.type, [data]);
 
   const [form] = useForm();
 
   useEffect(() => {
-    if (dataFormatted.length) {
-      setHitsCountTableData(dataFormatted as any);
-      setPristine(true);
-    }
+    data && setIsLoading(data?.is_loading);
+  }, [data])
+
+  useEffect(() => {
+    dataFormatted.length && setHitsCountTableData(dataFormatted as any);
   }, [dataFormatted, setPristine]);
 
   const deleteSearchTerm = useCallback((searchTerm: string) => {
