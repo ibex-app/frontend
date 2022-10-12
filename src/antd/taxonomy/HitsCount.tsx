@@ -35,8 +35,8 @@ const generatePlatforms = (data: Array<HitsCountSearchTerm>) =>
   }, [] as string[]);
 
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
-  const { data } = useHitsCountState(monitor_id);
-  const [dataSet, setDataSet] = useState(false);
+  const [pristine, setPristine] = useState(true);
+  const { data } = useHitsCountState(monitor_id, pristine);
   const { userSelection } = useContext(TaxonomyContext);
   const dataFormatted = useMemo(() => data ? generateHitsCountTableData(data) : [], [data]);
   const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>([]);
@@ -45,11 +45,11 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [form] = useForm();
 
   useEffect(() => {
-    if (!dataSet && dataFormatted.length) {
+    if (dataFormatted.length) {
       setHitsCountTableData(dataFormatted as any);
-      setDataSet(true);
+      setPristine(true);
     }
-  }, [dataFormatted, dataSet]);
+  }, [dataFormatted, setPristine]);
 
   const deleteSearchTerm = useCallback((searchTerm: string) => {
     setHitsCountTableData(hitsCountTableData.filter(({ title }) => searchTerm !== title));
@@ -58,7 +58,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const platforms = useMemo(() => data && data.type === 'search_terms' ? generatePlatforms(data.data) : [], [data]);
 
   const columns = useMemo(() => match(data)
-    .with({ type: 'search_terms' }, ({ data }) => platforms ? createSearchTermColumns(platforms, deleteSearchTerm) : [])
+    .with({ type: 'search_terms' }, () => platforms ? createSearchTermColumns(platforms, deleteSearchTerm) : [])
     .with({ type: 'accounts' }, () => createAccountColumns())
     .otherwise(() => [])
     , [data, deleteSearchTerm, platforms]);
@@ -85,13 +85,17 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     form.resetFields();
   }, [form, addNewHitsCount]);
 
+  useEffect(() => setPristine(
+    equals(hitsCountTableData, dataFormatted as any) || !hitsCountTableData.length
+  ), [hitsCountTableData, dataFormatted]);
+
   useEffect(() => toParent && toParent({
     all: hitsCountTableData,
     selected: hitCountsSelected,
     type,
     platforms,
-    pristine: equals(hitsCountTableData, dataFormatted as any) || !hitsCountTableData.length
-  }), [hitCountsSelected, hitsCountTableData, type, platforms, dataFormatted]);
+    pristine: pristine
+  }), [hitCountsSelected, hitsCountTableData, type, platforms, dataFormatted, pristine]);
 
   return <div className="leftbox-inner">
     <Form form={form} onFinish={onHitsCountAdd}>
