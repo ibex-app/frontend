@@ -11,6 +11,7 @@ const renderCell = (value: number | undefined | null) => match(value)
   .with(null, () => <Spin />)
   .with(undefined, () => <span className="tax-null">-</span>)
   .with(-1, () => "N/A")
+  .with(-2, () => "Error")
   .otherwise((val) => val &&
     <span className={val < 1 ? 'table-cell-gray' : val > 10000 ? 'table-cell-red' : ''}>
       {formatNum(val)}
