@@ -18,7 +18,7 @@ export const Text = ({ text, allowSuggestions }: Input) => {
   const splitted = text.trim().split(/\s+/);
 
   const getText = (text: string, index: number) => {
-    if (!text.match(regex) || text.match(regex)?.length == 0) return text + " ";
+    // if (!text.match(regex) || text.match(regex)?.length == 0) return text + " ";
     if (stopWords.includes(text.toLowerCase())) return text + " ";
 
     const highlight = allowSuggestions ? textContainsStringFromSet(text, taxonomyContext.highlightWords) : false;
