@@ -21,7 +21,7 @@ export const Post = ({ post, allowSuggestions }: Input) => {
           {created_at.$date && <h3>{new Date(created_at.$date).toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: 'numeric' })}</h3>}
         </div>
         <Text text={text} allowSuggestions={allowSuggestions} />
-        <span>{platform && platformIcon(platform)} <a href={url}>{url}</a></span>
+        <span>{platform && platformIcon(platform)} <a href={url} target="_blank">{url}</a></span>
       </Space>
     </Col>
     <Col span={4} offset={4}>
