@@ -145,7 +145,10 @@ const TaxonomyProgress: React.FC = () => {
                 </Space>
                 : monitorProgress && monitorProgress.length > 0 ? monitorProgress.map((item, i) => {
                 let progressValue: number = 0;
-                if (item.platform) progressValue = item.finalized_collect_tasks_count * 100 / item.tasks_count;
+                if (item.platform) {
+                  progressValue = item.finalized_collect_tasks_count * 100 / item.tasks_count;
+                  progressValue = Math.floor(progressValue * 100)/100
+                }
                 
                 // console.log(`NUmber -> for index ${i}`, progressValue);
                 return (
