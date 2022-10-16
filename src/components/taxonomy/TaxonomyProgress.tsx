@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Row, Layout, Space } from 'antd';
 import * as E from "fp-ts/lib/Either";
 import { Link } from "react-router-dom";
 
 import './Taxonomy.css';
-import { Get, Response } from '../../shared/Http';
-import { TaxonomyResponse, MonitorProgressResponse, MonitorRespose, Progress } from '../../types/taxonomy';
+import { Get } from '../../shared/Http';
+import { MonitorProgressResponse, MonitorRespose, Progress } from '../../types/taxonomy';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../../antd/PogressBar/ProgressBar';
 import { pipe } from 'ramda';
@@ -17,7 +17,6 @@ import { platformIcon } from '../../shared/Utils';
 const TaxonomyProgress: React.FC = () => {
 
   const { Content } = Layout;
-  const [taxonomyData, setTaxonomyData] = useState<Response<TaxonomyResponse>>(E.left(Error('Not fetched')));
   const [monitorData, setMonitorData] = useState<MonitorRespose>();
   const [monitorProgress, setMonitorProgress] = useState<MonitorProgressResponse>();
   const { search } = useLocation();
@@ -52,10 +51,10 @@ const TaxonomyProgress: React.FC = () => {
   }, [monitor_id]);
 
   
-  const clearTimeout_ = () => {
+  const clearTimeout_ = useCallback(() => {
     timeout && clearTimeout(timeout);
     setTimeout_(undefined);
-  }
+  }, [timeout]);
 
   const isFinalized = (res: MonitorProgressResponse) => {
     return res.reduce((isFinalized_: boolean, progress:Progress) => !isFinalized_ 
@@ -93,7 +92,7 @@ const TaxonomyProgress: React.FC = () => {
 
     try_();
     return () => clearTimeout_();
-  }, [monitorData, timeout]);
+  }, [monitorData, timeout, loading, monitor_id, clearTimeout_]);
 
 
   return (

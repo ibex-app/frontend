@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSliders } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
-import { Get } from '../../shared/Http';
-import { map, pipe } from "ramda";
+import { isEmpty, map, pipe } from "ramda";
 import { Button, Col, Row, Space } from "antd";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Posts } from "../../antd/Posts";
@@ -16,17 +15,14 @@ import { TaxonomyContext } from "./TaxonomyContext";
 import { capitalize, getAllKeywordsWithoutOperator, useNavWithQuery } from "../../shared/Utils";
 import { Filter } from "../filter/Filter";
 import FilterData from '../../data/taxonomy/filter.json';
-import { useQueryClient } from 'react-query';
-import { queries } from '../../shared/Queries';
 import { HitsCountTableItem } from '../../types/hitscount';
 import { useMonitorState } from '../../state/useMonitorState';
 import { useUpdateMonitorMutation } from '../../state/useUpdateMonitorMutation';
 
 export const TaxonomyResults = () => {
-  const queryClient = useQueryClient();
   const { search } = useLocation();
   const [hitsCount, setHitsCount_] = useState<HitsCountOutput>();
-  const [keywordsFilter, setKeywordsFilter] = useState<string[]>([]);
+  const [keywordsFilter, setKeywordsFilter] = useState<string[] | null>(null);
   const [userSelection, setUserSelection] = useState<string>();
   const [filter, setFilter] = useState({});
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
@@ -36,7 +32,7 @@ export const TaxonomyResults = () => {
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
   const { mutateAsync: updateMonitor } = useUpdateMonitorMutation(monitor_id);
 
-  const { data: monitorRes } = useMonitorState(monitor_id);
+  const { data: monitorRes, isLoading: monitorLoading } = useMonitorState(monitor_id);
 
   const monitor = useMemo(() => monitorRes?.monitor, [monitorRes]);
 
@@ -90,7 +86,7 @@ export const TaxonomyResults = () => {
           <Space direction="vertical" style={{ display: "flex" }}>
             <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
-            <Recommendations monitor_id={monitor_id} toParent={setHitsCount} />
+            {type === 'search_terms' && <Recommendations monitor_id={monitor_id} toParent={setHitsCount} />}
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
               <Button disabled={hitsCount?.pristine || buttonsDisabled} onClick={() => updateHitsCount()}>
                 Update Monitor
@@ -116,13 +112,13 @@ export const TaxonomyResults = () => {
             {!!hitsCount?.selected?.length && <Space className="flex search-header">
               Search results for {map(drawFilterItem, hitsCount.selected)}
             </Space>}
-            <Posts
+            {keywordsFilter && !monitorLoading && <Posts
               allowSuggestions={type === 'search_terms' ? true : false}
               key="postsTaxonomy"
               filter={{ ...filter, monitor_id, search_terms: keywordsFilter }}
               allowRedirect={false}
               shuffle={true}
-            />
+            />}
           </Space>
         </Col>
       </Row>
