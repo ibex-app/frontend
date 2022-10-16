@@ -650,3 +650,34 @@ table {
     text-decoration: underline;
     color: #1c9cea;
 }
+
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item {
+    margin-right: 40px;
+    border-radius: 100px;
+    font-size: 1.1em;
+    padding: 8px 88px;
+    height: auto;
+    font-weight: bold;
+    border: 2px solid #4670BEDE;
+    background: #fff;
+}
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item span{
+    color: #4670be;
+}
+
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item:hover {
+    border: 2px solid #165adade;
+    background: #40a9ff;
+}
+
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-button-wrapper-checked {
+    background: #096dd9;
+}
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-button-wrapper-checked span,
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item:hover span {
+    color: #fff;
+}
+
+.ant-btn.ant-btn-primary:hover span, .ant-btn.ant-btn-primary:focus span{
+    color: #fff;
+}
