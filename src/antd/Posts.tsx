@@ -30,7 +30,6 @@ export const Posts = ({ filter, allowRedirect, shuffle, allowSuggestions }: Inpu
                 refetchPage: (page, index) => index === ((data?.pages?.length || 1) - 1)
             }), 5000)
         }
-
         return () => clearInterval(interval);
     }, [lastPostsData, refetch, data?.pages?.length]);
 
@@ -47,7 +46,7 @@ export const Posts = ({ filter, allowRedirect, shuffle, allowSuggestions }: Inpu
                 isLoading={isLoadingFromServ || false} />
             }
             renderItem={(item) => allowRedirect
-                ? <Link to={`/details/${item._id.$oid}`}><Post post={item} allowSuggestions={allowSuggestions} /></Link>
+                ? <Link to={`/details/${item._id.$oid}`}><Post post={item} /></Link>
                 : <Post post={item} allowSuggestions={allowSuggestions} />
             }
         />}
