@@ -9,7 +9,7 @@ type Input = {
 }
 
 const lengthOfTextForShowMore = 80;
-const regex = /[a-zA-Z]/;
+const regex = /[^0-9.]+/;
 
 export const Text = ({ text, allowSuggestions }: Input) => {
   const taxonomyContext = useContext(TaxonomyContext);

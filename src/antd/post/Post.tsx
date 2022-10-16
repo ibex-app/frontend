@@ -17,7 +17,7 @@ export const Post = ({ post, allowSuggestions }: Input) => {
     <Col span={16}>
       <Space direction="vertical">
         <div>
-          <h1><Text text={title} /></h1>
+          <h1><Text text={title} allowSuggestions={allowSuggestions} /></h1>
           {created_at.$date && <h3>{new Date(created_at.$date).toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: 'numeric' })}</h3>}
         </div>
         <Text text={text} allowSuggestions={allowSuggestions} />
