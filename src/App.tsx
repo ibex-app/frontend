@@ -12,6 +12,7 @@ import { useGlobalState } from './app/store';
 import './App.css';
 import { Col, Row } from "antd";
 import { QueryClient, QueryClientProvider } from "react-query";
+import MonitorList from "./components/monitor-list/MonitorList";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ function App() {
               <Route path="/taxonomy/*" element={<Taxonomy />} />
               <Route path="/sources" element={<Sources />} />
               <Route path="/details/:postId" element={<Details />} />
+              <Route path="/monitors" element={<MonitorList />} />
             </Route>
             <Route path="/login" element={<Login />} />
           </Routes>
