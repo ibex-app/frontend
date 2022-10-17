@@ -1,4 +1,4 @@
-import { Button, Card, Col, Modal, Row } from 'antd';
+import { Button, Card, Col, List, Modal, Row } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react'
 import classes from './MonitorList.module.css'
 import { BarsOutlined, CopyOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -113,7 +113,9 @@ const MonitorList: React.FC = () => {
         )
       }
 
-      <> 
+      <List
+      grid={{ gutter: 16, column: 4 }}
+      >
         {
           !fetching ? (
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
@@ -131,11 +133,12 @@ const MonitorList: React.FC = () => {
               return (
                   <Col className="gutter-row" span={6}>
                     <Card
-                      style={{ width: 300, marginTop: 16 }}
+                      // style={{ width: 300, marginTop: 16 }}
+                      className="post"
                       actions={[
                         <DeleteOutlined key="delete" onClick={() => showDeleteModal(monitorItem)} />,
                         <CopyOutlined key="duplicate" onClick={() => showDuplicateModal(monitorItem)} />,
-                        <BarsOutlined key="summary" onClick={() => navigate("/results/summary")} />,
+                        <BarsOutlined key="summary" onClick={() => navigate("/results/summary?monitor_id=" + monitorItem._id)} />,
                       ]}
                     >
                       <Meta                        
@@ -149,7 +152,7 @@ const MonitorList: React.FC = () => {
             </Row>
           ) : "Loading"
         }
-      </>
+      </List>
     </div>
   )
 }
