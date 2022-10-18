@@ -28,7 +28,7 @@ export type SearchTerm = {
 
 export type MonitorRespose = {
   monitor: Monitor,
-  search_term: SearchTerm[],
+  search_terms: SearchTerm[],
   accounts: Account[],
   platforms: Array[]
 }

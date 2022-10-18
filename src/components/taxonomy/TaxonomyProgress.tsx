@@ -8,6 +8,8 @@ import { Get } from '../../shared/Http';
 import { MonitorProgressResponse, MonitorRespose, Progress } from '../../types/taxonomy';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../../antd/PogressBar/ProgressBar';
+import { MonitorBlock } from '../../components/monitor/Monitor';
+
 import { pipe } from 'ramda';
 import { then } from '../../shared/Utils';
 import { left, fold } from 'fp-ts/lib/Either';
@@ -123,33 +125,9 @@ const TaxonomyProgress: React.FC = () => {
           
             
           <Content>
+            { monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : 'Loading' }  
+            {/* { monitorData ? <MonitorBlock ></MonitorBlock> : 'Loading' }   */}
             
-            <Space size={'middle'} className="taxonomy-header-spacer">
-              {/* <h1>Data Collection Step - 4</h1> */}
-              
-              <h2>Monitor name: { monitorData?.monitor?.title }</h2>
-            
-              <h2>Monitor description: { monitorData?.monitor?.descr }</h2>
-            </Space>
-
-            <Row>
-              <Col>
-                <br />
-                Estimated
-              </Col>
-            </Row>
-
-            <Row>
-              <Col>
-                Date - { monitorData?.monitor?.date_from && monitorData?.monitor?.date_from.toString().slice(0, 10) }
-              </Col>
-            </Row>
-
-            <Row>
-              <Col>
-                <h1>Platforms</h1> { monitorData?.monitor?.platforms?.map(a => <span>a</span>) }
-              </Col>
-            </Row>
             {
               errors && errors?.length > 0 
               ? 

@@ -8,6 +8,8 @@ import { LineChart } from "../charts/line/LineChart";
 import * as E from "fp-ts/lib/Either";
 import { useState } from "react";
 import classes from './Summary.module.css';
+import { MonitorRespose } from '../../types/taxonomy';
+import { MonitorBlock } from '../../components/monitor/Monitor';
 
 // export type downloadStatsParamsProps = {
 //     monitorId: string,
@@ -24,6 +26,7 @@ export function Summary({ filter, axisX, axisY }: SummaryInputParams) {
     const [platformLoading, setPlatformLoading] = useState(false);
     const [keywordLoading, setKeywordLoading] = useState(false);
     const [accountLoading, setAccountLoading] = useState(false);
+    const [monitorData, setMonitorData] = useState<MonitorRespose>();
 
     const [platformLoadingText, setPlatformLoadingText] = useState("Download");
     const [keywordLoadingText, setKeywordLoadingText] = useState("Download");
@@ -86,11 +89,9 @@ export function Summary({ filter, axisX, axisY }: SummaryInputParams) {
     }
 
     return <div className='results'>
-        <div>
-            Monitor name
-            description
-            dates
-        </div>
+        
+        {/* { monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : 'Loading' }   */}
+
         <div className='dashbord-block post'>
             <div>By Platforms</div>
             <LineChart axisX='platform' axisY='count' filter={filter} />
