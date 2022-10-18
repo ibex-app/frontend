@@ -35,7 +35,17 @@ const TaxonomyProgress: React.FC = () => {
 
     return !Boolean(monitorData?.detail?.out_of_limit.length);
   } 
+  const secondsToHms = (d:number) => {
+      d = Number(d);
+      var h: number = Math.floor(d / 3600);
+      var m: number = Math.floor(d % 3600 / 60);
+      var s: number = Math.floor(d % 3600 % 60);
 
+      var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+      var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+      var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+      return hDisplay + mDisplay + sDisplay; 
+  }
   useEffect(() => {
     Get<MonitorRespose>('run_data_collection', { id: monitor_id })
       .then(E.fold(console.error, 
@@ -167,7 +177,7 @@ const TaxonomyProgress: React.FC = () => {
                       
                       {' - '}
                       {
-                        `Estimated time to get data: ${item.time_estimate}`
+                        item?.time_estimate ? `Estimated time to get data: ${secondsToHms(item.time_estimate)}` : ''
                       }
                     </Col>
                   </Row>
