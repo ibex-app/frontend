@@ -74,35 +74,46 @@ const TaxonomyProgress: React.FC = () => {
 
   useEffect(() => {
     if (loading) return;
-    // console.log()
-    // if (!monitorData) return;
+    console.log('check1', loading)
+    if (!monitorData) return;
     // console.log(555, monitorData)
     setLoading(true);
-
+    console.log('setTrue1', loading)
     clearTimeout_();
-    const try_ = () => pipe(
-      then((fold(
-        (err: Error) => console.log('errr', left(err)),
-        (res: MonitorProgressResponse) => match(isFinalized(res))
-          .with(false, () => {
-            console.log("Is Finalized ", isFinalized(res));
-            setLoading(false);
-            setMonitorProgress(res);
-            const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
-            return;
-          })
-          .otherwise(() => {
-            clearTimeout_();
-            setMonitorProgress(res);
-            console.log("Is Finalized ", isFinalized(res));
-            setisFinalizedState(true);
-          })
-      )))
-    )(Get<MonitorProgressResponse>('monitor_progress', { id: monitor_id }));
+    const try_ = () => {
+        console.log('check2', loading)
+        if (loading) return;
+        setLoading(true);
+        console.log('setTrue2', loading)
 
+        pipe(
+          then((fold(
+            (err: Error) => console.log('errr', left(err)),
+            (res: MonitorProgressResponse) => match(isFinalized(res))
+              .with(false, () => {
+                console.log("Is Finalized ", isFinalized(res));
+                setLoading(false);
+                console.log('setfalse1', loading)
+
+                setMonitorProgress(res);
+                const timeout_: any = setTimeout(() => setTimeout_(timeout_), 15000);
+                return;
+              })
+              .otherwise(() => {
+                setLoading(false);
+                console.log('setfalse2', loading)
+
+                clearTimeout_();
+                setMonitorProgress(res);
+                console.log("Is Finalized ", isFinalized(res));
+                setisFinalizedState(true);
+              })
+          )))
+        )(Get<MonitorProgressResponse>('monitor_progress', { id: monitor_id }));
+    }
     try_();
     return () => clearTimeout_();
-  }, [monitorData, timeout, loading, monitor_id, clearTimeout_]);
+  }, [monitorData, timeout, monitor_id, clearTimeout_]);
 
 
   return (
