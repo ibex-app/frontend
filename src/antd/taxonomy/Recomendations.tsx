@@ -1,9 +1,7 @@
-import { Collapse, Table, Spin } from "antd"
-import { getOrElse } from "fp-ts/lib/Either";
-import { useEffect, useState, useContext } from "react";
-import { Get } from "../../shared/Http";
-import { fold, left, right } from "fp-ts/lib/Either";
+import { Collapse, Spin } from "antd"
+import { useContext } from "react";
 import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
+import { drawFilterItem } from '../../shared/Utils/Taxonomy';
 import { useRecommendationsState } from '../../state/useRecommendationsState';
 
 const { Panel } = Collapse;
@@ -26,13 +24,15 @@ export const Recommendations = ({ monitor_id, toParent }: Input) => {
     {/* { recommendations.map(( rec: any) => <div>{rec}</div>) } */}
     <Panel header="Recommended keywords" key={1}>
       {/* <Table /> */}
-      { !recommendations || recommendations.is_loading
-          ? <div> Loading  <Spin></Spin></div>
-          : recommendations?.recommendations?.length
-            ? recommendations?.recommendations.map((rec: any) => <div className="recommend-row"><div className="recommend-prog"><span style={{ height: (rec.score * 100) + "%" }}></span></div>
-              <div className="recommend-word">{rec.word}</div> <button onClick={() => AddRecommendation(rec)}>Add </button></div>)
-            : <div> No Data</div>  
-          }
+      {!recommendations || recommendations.is_loading
+        ? <div> Loading  <Spin></Spin></div>
+        : recommendations?.recommendations?.length
+          ? recommendations?.recommendations.map((rec: any) => <div className="recommend-row"><div className="recommend-prog"><span style={{ height: (rec.score * 100) + "%" }}></span></div>
+            <div className="recommend-word">
+              {drawFilterItem({ title: rec.word })}
+            </div> <button onClick={() => AddRecommendation(rec)}>Add </button></div>)
+          : <div> No Data</div>
+      }
     </Panel>
   </Collapse>
 }
