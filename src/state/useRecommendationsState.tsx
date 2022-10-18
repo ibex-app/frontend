@@ -13,6 +13,7 @@ export const useRecommendationsState = (monitor_id: string) => {
     {
       enabled: !!monitor_id,
       refetchInterval: interval,
+      refetchOnWindowFocus: false,
       onSuccess: ({ is_loading }) => setInterval(is_loading ? 3500 : 0)
     });
 };

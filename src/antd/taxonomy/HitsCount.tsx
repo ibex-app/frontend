@@ -37,7 +37,7 @@ const generatePlatforms = (data: Array<HitsCountSearchTerm>) =>
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [pristine, setPristine] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const { userSelection } = useContext(TaxonomyContext);
+  const { userSelection, setUserSelection } = useContext(TaxonomyContext);
 
   const refetchInterval = useMemo(() => match([isLoading, pristine])
     .with([true, true], () => 3500)
@@ -86,6 +86,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
 
   useEffect(() => {
     userSelection && addNewHitsCount(userSelection)
+    setUserSelection('');
   }, [userSelection, addNewHitsCount]);
 
   const onHitsCountAdd = useCallback((values: string[]) => {
