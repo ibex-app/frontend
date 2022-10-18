@@ -41,6 +41,11 @@
             {
               "title": "Accounts",
               "value": "accounts"
+            },
+            {
+              "title": "Accounts and Keywords",
+              "value": "accounts_and_search_terms",
+              "disabled": true
             }
           ]
         }

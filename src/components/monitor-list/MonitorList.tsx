@@ -149,6 +149,22 @@ const MonitorList: React.FC = () => {
                   </Col>
                 )
               })}
+              <Col className="gutter-row" span={6}>
+                    <Card
+                      // style={{ width: 300, marginTop: 16 }}
+                      className="post"
+                      actions={[
+                        // <DeleteOutlined key="delete" onClick={() => showDeleteModal(monitorItem)} />,
+                        // <CopyOutlined key="duplicate" onClick={() => showDuplicateModal(monitorItem)} />,
+                        <BarsOutlined key="summary" onClick={() => navigate("/taxonomy/init")} />,
+                      ]}
+                    >
+                      <Meta                        
+                        title='Create new monitor'
+                        description='_'
+                      /> 
+                    </Card>
+                  </Col>
             </Row>
           ) : "Loading"
         }

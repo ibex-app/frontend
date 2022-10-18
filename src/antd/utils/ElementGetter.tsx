@@ -40,7 +40,7 @@ export const getElem = (element: FormElement): any => {
         .with("uploader", () => <Uploader element={element} />)
         .with("button", () => <Button type="primary" htmlType="submit">{label}</Button>) // TODO make dynamic
         .with("radio", () => <Radio.Group>
-          {children!.map(({ value, title }) => <Radio.Button key={`Radio-${title}`} value={value}>{title}</Radio.Button>)}
+          {children!.map(({ value, title, disabled }) => <Radio.Button key={`Radio-${title}`} value={value} disabled={disabled}>{title}</Radio.Button>)}
         </Radio.Group>)
         .otherwise(() => {
           console.error(`Invalid component name ${type}`);
