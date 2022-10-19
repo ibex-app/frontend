@@ -3,13 +3,14 @@ import { concat, keys, pipe, equals } from "ramda";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { generateHitsCountTableData } from "../../components/taxonomy/Data";
 import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
-import { hitsCountFormItem } from "../../data/taxonomy/HitCounts";
+import { accountHitsCountFormItem, hitsCountFormItem } from "../../data/taxonomy/HitCounts";
 import { HitsCountItem, HitsCountSearchTerm, HitsCountTableItem } from "../../types/hitscount";
 import { getElem } from "../utils/ElementGetter";
 import { match } from "ts-pattern";
 import { useHitsCountState } from '../../state/useHitsCountState';
 import { useForm } from 'antd/lib/form/Form';
 import { createAccountColumns, createSearchTermColumns, generateEmptyHitsCount } from './utils';
+import { Option } from '../../types/form';
 
 type Input = {
   monitor_id: string,
@@ -67,7 +68,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
 
   const columns = useMemo(() => match(data)
     .with({ type: 'search_terms' }, () => platforms ? createSearchTermColumns(platforms, deleteSearchTerm) : [])
-    .with({ type: 'accounts' }, () => createAccountColumns())
+    .with({ type: 'accounts' }, () => createAccountColumns(deleteSearchTerm))
     .otherwise(() => [])
     , [data, deleteSearchTerm, platforms]);
 
@@ -89,8 +90,9 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     setUserSelection('');
   }, [userSelection, addNewHitsCount]);
 
-  const onHitsCountAdd = useCallback((values: string[]) => {
-    addNewHitsCount(values[0])
+  const onHitsCountAdd = useCallback((values: string[] | Option[][]) => {
+    const val = values[0];
+    addNewHitsCount(typeof val === 'string' ? val : val[0])
     form.resetFields();
   }, [form, addNewHitsCount]);
 
@@ -109,7 +111,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   return <div className="leftbox-inner">
     <Form form={form} onFinish={onHitsCountAdd}>
       <Space size="small">
-        {getElem(hitsCountFormItem)}
+        {getElem(type === 'accounts' ? accountHitsCountFormItem : hitsCountFormItem)}
         {getElem({ id: 1, type: "button", label: "Add" })}
       </Space>
     </Form>

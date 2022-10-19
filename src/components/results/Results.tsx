@@ -20,8 +20,6 @@ export function Results() {
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
   const filters = { ...filter, monitor_id };
 
-  console.log("Filtered Data: ", filter);
-
   return (
     <Row >
       <Col span={3} style={{ height: "100vh", position: "sticky", top: "0" }}>

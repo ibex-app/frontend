@@ -13,6 +13,7 @@ interface FormCommon {
   disabled?: boolean;
   placeholder?: string;
   defaultValue?: any;
+  requestData?: string;
 }
 
 interface FormItemGroup {

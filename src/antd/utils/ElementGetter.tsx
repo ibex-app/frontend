@@ -13,7 +13,7 @@ import { dateFormat } from "../../shared/Utils";
 
 export const getElem = (element: FormElement): any => {
   const {
-    type, id, rules, placeholder, disabled, title, label, tip, children, checked
+    type, id, rules, placeholder, disabled, title, label, tip, children, checked, requestData
   } = element;
 
   return <>
@@ -27,7 +27,7 @@ export const getElem = (element: FormElement): any => {
             // defaultValue={value ? moment(value, dateFormat) : moment()}
             format={dateFormat} />
         )
-        .with("tag", () => <Tag el={element} />)
+        .with("tag", () => <Tag el={element} requestData={requestData} />)
         .with("text", () => <Input placeholder={placeholder} />)
         .with("textbox", () => <TextArea />)
         .with("checkbox", () => <Checkbox checked={checked} />)

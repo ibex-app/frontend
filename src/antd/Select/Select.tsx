@@ -4,13 +4,16 @@ import { last, map, pipe } from "ramda";
 
 import './Select.css';
 import { useCallback, useEffect, useRef, useState } from "react";
-import { filterHasOperator, filterOperatorUpper, platformIcon } from "../../shared/Utils";
+import { filterHasOperator, filterOperatorUpper, platformIcon, useDebounce } from "../../shared/Utils";
+import { useDynamicReqState } from '../../state/useDynamicReqState';
+import { title } from 'process';
 
 type Value = Option[];
 
 type CustomFormItemProps = {
   el: FormElement,
   value?: any;
+  requestData?: any;
   onChange?: (val: Value) => void
 };
 
@@ -35,11 +38,20 @@ const CustomToken = ({ option, index, onRemove }: CustomTokenInput) => {
 }
 
 export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
-  const { id, list, allowNew, placeholder, checkBoolUpper, selected } = el;
+  const { id, list, allowNew, placeholder, checkBoolUpper, selected, requestData } = el;
 
+  const [suggestions, setSuggestions] = useState<Option[]>(list || []);
   const [val, setValue] = useState<Option[]>(value || selected || []);
   const [userValue, setUserValue] = useState<string>('');
   const ref = useRef<any>();
+
+  const userValueDebounced = useDebounce(userValue, 500);
+
+  const { data } = useDynamicReqState<Option[]>(requestData || '', {
+    substring: userValueDebounced,
+    platforms: []
+  });
+  useEffect(() => data && setSuggestions(data), [data]);
 
   const newChecker = (newVal: string, props: any) => {
     const selected = map<{ label: string }, string>(({ label }) => label)(props.selected);
@@ -55,7 +67,6 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
   const onBlur = useCallback(() => userValue && allowNew && newChecker(userValue, { selected: val }) && onValChange([...val, { label: userValue }]), [userValue, value]);
 
   const onValChange = (val: Value) => {
-    // console.log(val)
     if (checkBoolUpper && val.length) {
       const lastKeyword = last(val as any[])?.label;
       val[val.length - 1].label = pipe(filterHasOperator, filterOperatorUpper)(lastKeyword);
@@ -82,13 +93,14 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     id={id}
     ref={ref}
     multiple
-    options={list || []}
+    options={suggestions}
     selected={val}
     placeholder={placeholder}
     allowNew={allowNew ? newChecker : false}
     onInputChange={(input: any, e: any) => onChange_(input)}
     labelKey={"label"}
     onBlur={onBlur}
+    emptyLabel={requestData && !data && userValue ? "Loading..." : "No results found."}
     renderMenuItemChildren={(option: Option, props: any, index: number) => {
       return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span></> : option.label || option
     }}

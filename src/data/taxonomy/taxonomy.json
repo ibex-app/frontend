@@ -107,8 +107,7 @@
               "title": "Input Accounts",
               "type": "tag",
               "list": [],
-              "tip": "Start typing the account name, and select ones you want to search.",
-              "requestData": "accounts"
+              "tip": "Start typing the account name, and select ones you want to search."
             },
             {
               "id": "accounts_upload",
