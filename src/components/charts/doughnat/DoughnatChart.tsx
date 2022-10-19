@@ -27,7 +27,7 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
   const [data, setData] = useState(data_);
   
   var exactCols = [ 
-    ['facebook', '#464b9c'],
+    ['facebook', '#2e89ff'],
     ['youtube', '#f10000'],
     ['twitter', '#51a3e3']
   ]

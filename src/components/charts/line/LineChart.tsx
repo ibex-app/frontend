@@ -14,7 +14,7 @@ import {
   Legend,
   Filler
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line, Bar  } from 'react-chartjs-2';
 import { ChartInputParams } from '../chartInputFilter';
 
 ChartJS.register(Filler);
@@ -54,7 +54,7 @@ export const options = {
   scales: {
     x: {
       // display: true,
-      // stacked: true,
+      stacked: false,
       title: {
         display: true,
         text: 'Week'
@@ -62,7 +62,7 @@ export const options = {
     },
     y: {
       // display: true,
-      // stacked: true,
+      stacked: false,
       title: {
         display: true,
         text: 'Count'
@@ -71,16 +71,20 @@ export const options = {
   }
 };
 
-export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
-  // console.log(axisX)
+
+
+export function LineChart({ axisX, axisY, filter, type}: ChartInputParams) {
   useEffect(() => {
     if (!filter.time_interval_from || !filter.time_interval_to) return
     if (Object.keys(filter).length) loadData();
-    // console.log(3333, filter)
   }, [filter]);
 
   const [fetching, setFetching] = useState(false);
-
+  const exactCols:any = {
+    facebook: '#2e89ff',
+    youtube: '#f10000',
+    twitter: '#51a3e3'
+  }
   var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
 
   let labels = [''];
@@ -96,62 +100,65 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
   };
 
   const [data, setData] = useState(data_);
+  const [timeInterval, setTimeInterval] = useState(1);
 
-
-  // const change = (e: any) => {
-  //   loadData(e.target.value)
-  // }
 
   const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
     var dateFrom: Date = new Date(filters.time_interval_from)
     var dateTo: Date = new Date(filters.time_interval_to)
-    dateTo.setDate(dateTo.getDate() + 10);
-    dateFrom.setDate(dateFrom.getDate() - 7);
+    dateTo.setDate(dateTo.getDate() + timeInterval*3);
+    dateFrom.setDate(dateFrom.getDate() - timeInterval);
 
     var interval: number = (dateTo.getTime() - dateFrom.getTime())
     var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
     var numberOfWeeks = Math.ceil(numberOfDays / 7);
+    
+    if (type == 'bar') {
+      options.scales.x.stacked = true
+      options.scales.y.stacked = true
+    }
 
     // var firstJan = new Date(1900 + dateFrom.getYear(), 0, 1)
     var firstJan = new Date(2022, 0, 1)
     var daysThisYear = (dateFrom.getTime() - firstJan.getTime()) / (24 * 60 * 60 * 1000)
-    var startWeek = Math.ceil(daysThisYear / 7)
+    var startTime = timeInterval == 7 ? Math.ceil(daysThisYear / 7) : Math.ceil(daysThisYear)
+    var endTime = startTime + (timeInterval == 7 ? numberOfWeeks : numberOfDays)
 
     let intervals: any = ['']
-    responce_data.forEach((i:any) => {
-      if(!i[labelType].title){
-        i[labelType].title = i[labelType].label
-      }
-    })
+    responce_data.forEach((i:any) => { if(!i[labelType].title){ i[labelType].title = i[labelType].label } })
 
     let post_label_values: [] = responce_data.map((i: any) => i[labelType].title).filter((v: any, i: any, a: any) => a.indexOf(v) === i)
 
-    // console.log('post_label_values', post_label_values)
-
-    let datasets = post_label_values.map((label: any, index: number) => ({
-      label: label,
-      data: [0],
-      borderColor:  cols[index],
-      // backgroundColor: cols[index],
-      // background: 'red',//cols[index],
-      // fill: true,
-      // pointBackgroundColor: 'rgba(0,0,0,.3)',
-      // borderColor: 'rgba(0,0,0,0)',
-      // pointHighlightStroke: cols[index],
-      // borderCapStyle: 'butt',
-      lineTension: .35,
-      radius: 4  
-    }))
+    let datasets = type == 'line' 
+      ? post_label_values.map((label: any, index: number) => ({
+          label: label,
+          data: [0],
+          borderColor:  exactCols[label] || cols[index],
+          lineTension: .35,
+          radius: 4  
+        }))
+      : post_label_values.map((label: any, index: number) => ({
+        label: label,
+        data: [0],
+        backgroundColor: cols[index],
+        fill: true,
+        pointBackgroundColor: 'rgba(0,0,0,.3)',
+        borderColor: 'rgba(0,0,0,0)',
+        lineTension: .35,
+        radius: 4
+      }))
     labels = []
-    // debugger
-    for (let week = startWeek; week <= startWeek + numberOfWeeks; week++) {
+    console.log(startTime, endTime)
+
+    for (let timeAt = startTime; timeAt <= endTime; timeAt++) {
       var intervalDate = new Date(dateFrom);
-      dateFrom.setDate(dateFrom.getDate() + week * 7);
+
+      dateFrom.setDate(dateFrom.getDate() + timeAt * timeInterval);
 
       labels.push(intervalDate.toISOString().slice(0, 10))
 
       datasets.forEach((dataset: any) => {
-        let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id.week == week)
+        let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id[timeInterval == 7 ? 'week' :'day'] == timeAt)
         if(!match.length){
           dataset.data.push(0)
         } else if (labelType == 'platform'){
@@ -163,26 +170,6 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
       })
     }
     
-    // datasets[0].data.forEach((value:any, index:number) => {
-    //     let total:number = datasets.map( i => i.data[index]).reduce((a, b) => a + b, 0)
-    //     // let curValue = 0 - total/2
-    //     datasets[0].data[index] = 0 - total/2
-    // })
-
-    // datasets[0].data.forEach((value:any, index:number) => {
-    //   let total:number = datasets.map( i => i.data[index]).reduce((a, b) => a + b, 0)
-    //   let curValue = 0 - total/2
-    //   console.log('total:', total, 'curValue:', curValue)
-    //   const before = JSON.stringify(datasets.map( i => i.data[index]))  
-    //   datasets.forEach(dataset => {
-    //     const oldValue = dataset.data[index]
-    //     dataset.data[index] = curValue
-    //     curValue += oldValue
-    //     console.log('curValue:', curValue, 'oldValue:', oldValue, 'dataset.data[index]:', dataset.data[index])
-
-    //   })
-    //   console.log(before, JSON.stringify(datasets.map( i => i.data[index])))
-    // })
     return {
       labels,
       datasets: datasets,
@@ -195,29 +182,24 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
     var dateTo: any = new Date(filter.time_interval_to)
     const diffTime: number = Math.abs(dateFrom - dateTo);
     const diffDays: number = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    
-    setFetching(true)
+    setTimeInterval(diffDays < 14 ? 1 : 7)
     
     const fetchData = Get('posts_aggregated', {
       post_request_params: transform_filters_to_request(filter),
       axisX: axisX,
       axisY: axisY,
-      days: diffDays < 30 ? 1 : 7
+      days: timeInterval
     });
 
 
     fetchData.then((_data: Response<any>) => {
       let maybeData: any = E.getOrElse(() => [data_])(_data)
-      if (!maybeData.length) {
-        return
-      }
+      if (!maybeData.length) return
 
       let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter)
       setData(dataset_and_labels);
       setFetching(false)
-      // console.log(dataset_and_labels)
     });
-
   }
 
   if (fetching) {
@@ -227,23 +209,16 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
   }
   return (
     <div className="chart-cont-l">
-      {/* <select onChange={change}>
-        {['platform', 'persons', 'locations', 'topics', 'datasources'].map(d => <option key={d}>{d}</option>)}
-      </select>
-      <select onChange={change}>
-        {['count', 'hate-speech', 'reach-out', 'likes', 'shares', 'sentiment', 'comments'].map(d => <option key={d}>{d}</option>)}
-      </select> */}
       {
-        fetching ? (
-          <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>
-        ) : (<div className="chart"><Line options={options} data={data} /></div>)
-        // ) : (<div className="chart"></div>)
+        fetching 
+          ? <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>
+          : <div className="chart">
+             { type == 'line' 
+              ? <Line options={options} data={data} />
+              : <Bar options={options} data={data} />
+              }
+          </div>
       }
     </div>
   );
 }
-
-// export default BarChart
-
-
-// 52 + 35 + 11 + 9  = 107
