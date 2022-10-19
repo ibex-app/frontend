@@ -49,13 +49,20 @@ export const TaxonomyResults = () => {
   const updateHitsCount = useCallback(() => {
     if (!hitsCount?.all) return;
     setButtonsDisabled(true);
+
+    if (type === 'accounts') {
+      updateMonitor(hitsCount.all).then(() => setButtonsDisabled(false))
+
+      return;
+    }
+
     const search_terms = hitsCount.all.map((search_term: any) => ({
-      id: search_term._id,
+      id: search_term.id,
       term: search_term.title
     }));
 
     updateMonitor({ id: monitor_id, search_terms }).then(() => setButtonsDisabled(false));;
-  }, [hitsCount?.all, monitor_id, updateMonitor]);
+  }, [hitsCount?.all, monitor_id, updateMonitor, type]);
 
   const filters = useMemo(() => {
     const filter = FilterData.data[0];

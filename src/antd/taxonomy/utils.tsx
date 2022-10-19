@@ -6,6 +6,7 @@ import { match } from 'ts-pattern';
 import { Spin } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { Option } from '../../types/form';
 
 const renderCell = (value: number | undefined | null) => match(value)
   .with(null, () => <Spin />)
@@ -49,7 +50,7 @@ export const createSearchTermColumns = (platforms: string[], deleteSearchTerm: a
   return cols;
 };
 
-export const createAccountColumns = (): ColumnsType<AccountItem> => [
+export const createAccountColumns = (deleteSearchTerm: (title: string) => void): ColumnsType<AccountItem> => [
   {
     title: "Account",
     key: "title",
@@ -60,9 +61,18 @@ export const createAccountColumns = (): ColumnsType<AccountItem> => [
     key: "hits_count",
     dataIndex: "hits_count",
     render: (text: number) => renderCell(text)
+  }, {
+    title: '',
+    key: 'action',
+    render: (_: any, { title }: any) => (
+      // <Space size="middle" onClick=''>
+      <span className="tax-delete" onClick={() => deleteSearchTerm(title)}>
+        <FontAwesomeIcon icon={faTrashCan} />
+      </span>
+    ),
   }
 ]
 
-export const generateEmptyHitsCount = (title: string) => ({
-  title
-})
+export const generateEmptyHitsCount = (input: string | Option) => typeof input === 'string' ? ({
+  title: input
+}) : { title: input.label, ...input }
