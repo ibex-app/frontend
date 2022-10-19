@@ -652,10 +652,11 @@ table {
 }
 
 label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item {
-    margin-right: 40px;
+    margin-right: 20px;
+    margin-bottom: 10px;
     border-radius: 100px;
     font-size: 1.1em;
-    padding: 8px 88px;
+    padding: 8px 63px;
     height: auto;
     font-weight: bold;
     border: 2px solid #4670BEDE;
@@ -680,4 +681,10 @@ label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item:hover span 
 
 .ant-btn.ant-btn-primary:hover span, .ant-btn.ant-btn-primary:focus span{
     color: #fff;
+}
+
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-button-wrapper-disabled,
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-button-wrapper-disabled:hover{
+    background: whitesmoke;
+    opacity: .3;
 }

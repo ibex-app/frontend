@@ -6,7 +6,8 @@ export type ChartInputFilter = {
 export type SummaryInputParams = {
   filter: Filter,
   axisX: string,
-  axisY: string
+  axisY: string,
+  setFilter: React.Dispatch<React.SetStateAction<{}>>
 } 
 
 export type ChartInputParams = {

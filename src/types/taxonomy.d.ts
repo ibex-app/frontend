@@ -12,8 +12,9 @@ export type Monitor = {
   searchTerms?: SearchTerm[]
 }
 
-export type Progress = {
+export type ProgressItem = {
   finalized_collect_tasks_count: number,
+  failed_collect_tasks_count: number,
   posts_count: number,
   tasks_count: number,
   time_estimate?: number,
@@ -28,12 +29,12 @@ export type SearchTerm = {
 
 export type MonitorRespose = {
   monitor: Monitor,
-  search_term: SearchTerm[],
+  search_terms: SearchTerm[],
   accounts: Account[],
   platforms: Array[]
 }
 
-export type MonitorProgressResponse = Progress[]
+export type MonitorProgressResponse = ProgressItem[]
 
 
 export type FilterElem = { hasOp: boolean, left: string, right?: string, op?: string };

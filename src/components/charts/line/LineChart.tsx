@@ -72,9 +72,10 @@ export const options = {
 };
 
 export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
-  console.log(axisX)
+  // console.log(axisX)
   useEffect(() => {
     if (Object.keys(filter).length) loadData();
+    // console.log(3333, filter)
   }, [filter]);
 
   const [fetching, setFetching] = useState(false);
@@ -103,7 +104,8 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
   const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
     var dateFrom: Date = new Date(filters.time_interval_from)
     var dateTo: Date = new Date(filters.time_interval_to)
-    dateTo.setDate(dateTo.getDate()+7);
+    dateTo.setDate(dateTo.getDate() + 10);
+    dateFrom.setDate(dateFrom.getDate() - 7);
 
     var interval: number = (dateTo.getTime() - dateFrom.getTime())
     var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
@@ -123,7 +125,7 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
 
     let post_label_values: [] = responce_data.map((i: any) => i[labelType].title).filter((v: any, i: any, a: any) => a.indexOf(v) === i)
 
-    console.log('post_label_values', post_label_values)
+    // console.log('post_label_values', post_label_values)
 
     let datasets = post_label_values.map((label: any, index: number) => ({
       label: label,

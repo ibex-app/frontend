@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Col, Row, Layout, Space } from 'antd';
+import { Col, Row, Layout, Space, Spin } from 'antd';
 import * as E from "fp-ts/lib/Either";
 import { Link } from "react-router-dom";
 
 import './Taxonomy.css';
 import { Get } from '../../shared/Http';
-import { MonitorProgressResponse, MonitorRespose, Progress } from '../../types/taxonomy';
+import { MonitorProgressResponse, MonitorRespose, ProgressItem } from '../../types/taxonomy';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../../antd/PogressBar/ProgressBar';
+import { MonitorBlock } from '../../components/monitor/Monitor';
+
 import { pipe } from 'ramda';
 import { then } from '../../shared/Utils';
 import { left, fold } from 'fp-ts/lib/Either';
@@ -35,7 +37,7 @@ const TaxonomyProgress: React.FC = () => {
 
     return !Boolean(monitorData?.detail?.out_of_limit.length);
   } 
-
+  
   useEffect(() => {
     Get<MonitorRespose>('run_data_collection', { id: monitor_id })
       .then(E.fold(console.error, 
@@ -57,42 +59,53 @@ const TaxonomyProgress: React.FC = () => {
   }, [timeout]);
 
   const isFinalized = (res: MonitorProgressResponse) => {
-    return res.reduce((isFinalized_: boolean, progress:Progress) => !isFinalized_ 
+    return res.reduce((isFinalized_: boolean, progress:ProgressItem) => !isFinalized_ 
       ? isFinalized_ 
       : (progress.tasks_count === progress.finalized_collect_tasks_count && progress.tasks_count !== 0) , true)
   }
 
   useEffect(() => {
     if (loading) return;
-    // console.log()
-    // if (!monitorData) return;
+    console.log('check1', loading)
+    if (!monitorData) return;
     // console.log(555, monitorData)
     setLoading(true);
-
+    console.log('setTrue1', loading)
     clearTimeout_();
-    const try_ = () => pipe(
-      then((fold(
-        (err: Error) => console.log('errr', left(err)),
-        (res: MonitorProgressResponse) => match(isFinalized(res))
-          .with(false, () => {
-            console.log("Is Finalized ", isFinalized(res));
-            setLoading(false);
-            setMonitorProgress(res);
-            const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
-            return;
-          })
-          .otherwise(() => {
-            clearTimeout_();
-            setMonitorProgress(res);
-            console.log("Is Finalized ", isFinalized(res));
-            setisFinalizedState(true);
-          })
-      )))
-    )(Get<MonitorProgressResponse>('monitor_progress', { id: monitor_id }));
+    const try_ = () => {
+        console.log('check2', loading)
+        if (loading) return;
+        setLoading(true);
+        console.log('setTrue2', loading)
 
+        pipe(
+          then((fold(
+            (err: Error) => console.log('errr', left(err)),
+            (res: MonitorProgressResponse) => match(isFinalized(res))
+              .with(false, () => {
+                console.log("Is Finalized ", isFinalized(res));
+                setLoading(false);
+                console.log('setfalse1', loading)
+
+                setMonitorProgress(res);
+                const timeout_: any = setTimeout(() => setTimeout_(timeout_), 15000);
+                return;
+              })
+              .otherwise(() => {
+                setLoading(false);
+                console.log('setfalse2', loading)
+
+                clearTimeout_();
+                setMonitorProgress(res);
+                console.log("Is Finalized ", isFinalized(res));
+                setisFinalizedState(true);
+              })
+          )))
+        )(Get<MonitorProgressResponse>('monitor_progress', { id: monitor_id }));
+    }
     try_();
     return () => clearTimeout_();
-  }, [monitorData, timeout, loading, monitor_id, clearTimeout_]);
+  }, [monitorData, timeout, monitor_id, clearTimeout_]);
 
 
   return (
@@ -102,37 +115,12 @@ const TaxonomyProgress: React.FC = () => {
           
             
           <Content>
+            { monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : 'Loading' }  
+            {/* { monitorData ? <MonitorBlock ></MonitorBlock> : 'Loading' }   */}
             
-            <Space size={'middle'} className="taxonomy-header-spacer">
-              {/* <h1>Data Collection Step - 4</h1> */}
-              
-              <h2>Monitor name: { monitorData?.monitor?.title }</h2>
-            
-              <h2>Monitor description: { monitorData?.monitor?.descr }</h2>
-            </Space>
-
-            <Row>
-              <Col>
-                <br />
-                Estimated
-              </Col>
-            </Row>
-
-            <Row>
-              <Col>
-                Date - { monitorData?.monitor?.date_from && monitorData?.monitor?.date_from.toString().slice(0, 10) }
-              </Col>
-            </Row>
-
-            <Row>
-              <Col>
-                <h1>Platforms</h1> { monitorData?.monitor?.platforms?.map(a => <span>a</span>) }
-              </Col>
-            </Row>
             {
               errors && errors?.length > 0 
-              ? 
-                <Space size={'middle'} className="taxonomy-header-spacer">
+              ? <Space size={'middle'} className="taxonomy-header-spacer">
                   <span>The number of posts for some search terms / accounts exceed allowed maximum limit of 10 000 posts.
   
                   Please <Link className='underline-link' to={`/taxonomy/results?monitor_id=${monitor_id}`}>modify</Link> the monitor and try again</span>
@@ -142,41 +130,13 @@ const TaxonomyProgress: React.FC = () => {
                   </>)
                 }
                 </Space>
-                : monitorProgress && monitorProgress.length > 0 ? monitorProgress.map((item, i) => {
-                let progressValue: number = 0;
-                if (item.platform) {
-                  progressValue = item.finalized_collect_tasks_count * 100 / item.tasks_count;
-                  progressValue = Math.floor(progressValue * 100)/100
-                }
-                
-                // console.log(`NUmber -> for index ${i}`, progressValue);
-                return (
-                  <Row key={item.platform}>
-                    <Col span={4}>
-                      { item.platform } stats 
-                    </Col>
-
-                    <Col span={20}>
-                      { typeof(progressValue) === "number" && progressValue < 100 ? "Details are being loaded…" : "Details fetched" } 
-                      
-                      <ProgressBar percentage={progressValue} showInfo={true} />
-
-                      {
-                        `Posts count: ${item.posts_count}`
-                      }
-                      
-                      {' - '}
-                      {
-                        `Estimated time to get data: ${item.time_estimate}`
-                      }
-                    </Col>
-                  </Row>
-                )
-              }) : <h1>No Data Available</h1>
+              : monitorProgress && monitorProgress.length > 0 
+                ? monitorProgress.map((progress: ProgressItem) => <ProgressBar progress={progress}></ProgressBar>)
+                : <h1>Loading <Spin></Spin></h1>
               
             }
             {
-                isFinalizedState ? <div><Link to={`/results/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </div> : <></>
+                isFinalizedState ? <button className="top-50"><Link to={`/results/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </button> : <></>
             }
               </Content>
         }
