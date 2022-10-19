@@ -61,7 +61,7 @@ const TaxonomyProgress: React.FC = () => {
   const isFinalized = (res: MonitorProgressResponse) => {
     return res.reduce((isFinalized_: boolean, progress:ProgressItem) => !isFinalized_ 
       ? isFinalized_ 
-      : (progress.tasks_count === progress.finalized_collect_tasks_count && progress.tasks_count !== 0) , true)
+      : (progress.tasks_count === (progress.finalized_collect_tasks_count + progress.failed_collect_tasks_count) && progress.tasks_count !== 0) , true)
   }
 
   useEffect(() => {

@@ -86,13 +86,19 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
     }
 
     useEffect(() => {
-        Get<MonitorRespose>('run_data_collection', { id: monitor_id })
+        Get<MonitorRespose>('get_monitor', { id: monitor_id })
           .then(E.fold(console.error, setMonitorData));
     }, [monitor_id]);
     
     useEffect(() => {
-        filter.time_interval_from = filter.time_interval_from || monitorData?.monitor.date_from
-        filter.time_interval_to = filter.time_interval_to || monitorData?.monitor.date_to || new Date()
+        if(!monitorData) return
+        filter.time_interval_from = filter.time_interval_from || new Date(monitorData.monitor.date_from)
+        filter.time_interval_to = filter.time_interval_to 
+            ? filter.time_interval_to
+            : monitorData?.monitor.date_to 
+                ? new Date(monitorData.monitor.date_to)
+                : new Date()
+        setFilter(filter)
     }, [monitorData]);
 
     return <div className='results'>
@@ -101,7 +107,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
 
         <div className='dashbord-block post'>
             <div>By Platforms</div>
-            <LineChart axisX='platform' axisY='count' filter={filter} />
+            <LineChart type='line' axisX='platform' axisY='count' filter={filter} />
             <DoughnatChart axisX='platform' axisY='count' filter={filter} />
             
             <button onClick={() => generateDynamicLink('platform', 'count')}>
@@ -110,7 +116,8 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
         </div>
         <div className='dashbord-block post'>
             <div>By keywords</div>
-            <BarChart axisX='platform' axisY='count' filter={filter} />
+            {/* <BarChart axisX='platform' axisY='count' filter={filter} /> */}
+            <LineChart type='bar' axisX='platform' axisY='count' filter={filter} />
             {/* <DoughnutChart  axisX={keyword} axisY={count}/> */}
             
             <button onClick={() => generateDynamicLink('keyword', 'count')}>
@@ -119,7 +126,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
         </div>
         <div className='dashbord-block post'>
             <div>By Accounts</div>
-            <LineChart axisX='platform' axisY='count' filter={filter} />
+            <LineChart type='line' axisX='platform' axisY='count' filter={filter} />
             {/* <DoughnutChart  axisX={account} axisY={count}/> */}
            
             <button onClick={() => generateDynamicLink('account', 'count')}>
