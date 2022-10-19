@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSliders } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
-import { isEmpty, map, pipe } from "ramda";
+import { map, pipe } from "ramda";
 import { Button, Col, Row, Space } from "antd";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Posts } from "../../antd/Posts";
@@ -66,6 +66,10 @@ export const TaxonomyResults = () => {
     return [{ ...filter, selected: list, list }]
   }, [hitsCount?.platforms])
 
+  const hitsCountSelectionIds = useMemo(() => ({
+    [type === 'accounts' ? 'account_ids' : 'search_term_ids']: hitsCount?.selected ? hitsCount?.selected?.map(({ id }) => id) : []
+  }), [hitsCount?.selected, type]);
+
   useEffect(() => {
     hitsCount?.selected?.length ?
       pipe(
@@ -115,7 +119,7 @@ export const TaxonomyResults = () => {
             {keywordsFilter && !monitorLoading && <Posts
               allowSuggestions={type === 'search_terms' ? true : false}
               key="postsTaxonomy"
-              filter={{ ...filter, monitor_id, search_terms: keywordsFilter }}
+              filter={{ ...filter, monitor_id, search_terms: keywordsFilter, ...hitsCountSelectionIds }}
               allowRedirect={false}
               shuffle={true}
             />}
