@@ -74,6 +74,7 @@ export const options = {
 export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
   // console.log(axisX)
   useEffect(() => {
+    if (!filter.time_interval_from || !filter.time_interval_to) return
     if (Object.keys(filter).length) loadData();
     // console.log(3333, filter)
   }, [filter]);
@@ -190,11 +191,18 @@ export function LineChart({ axisX, axisY, filter}: ChartInputParams) {
 
   const loadData = () => {
     setFetching(true)
+    var dateFrom: any = new Date(filter.time_interval_from)
+    var dateTo: any = new Date(filter.time_interval_to)
+    const diffTime: number = Math.abs(dateFrom - dateTo);
+    const diffDays: number = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    
+    setFetching(true)
+    
     const fetchData = Get('posts_aggregated', {
       post_request_params: transform_filters_to_request(filter),
       axisX: axisX,
       axisY: axisY,
-      days: 7
+      days: diffDays < 30 ? 1 : 7
     });
 
 

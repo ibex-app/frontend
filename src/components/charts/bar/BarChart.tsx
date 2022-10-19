@@ -167,7 +167,7 @@ export function BarChart({ axisX, axisY, filter }: ChartInputParams) {
       post_request_params: transform_filters_to_request(filter),
       axisX: axisX,
       axisY: axisY,
-      days: diffDays < 8 ? 1 : 7
+      days: diffDays < 30  ? 1 : 7
     });
 
     fetchData.then((_data: Response<any>) => {

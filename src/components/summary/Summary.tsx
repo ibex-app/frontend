@@ -86,7 +86,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
     }
 
     useEffect(() => {
-        Get<MonitorRespose>('run_data_collection', { id: monitor_id })
+        Get<MonitorRespose>('get_monitor', { id: monitor_id })
           .then(E.fold(console.error, setMonitorData));
     }, [monitor_id]);
     
