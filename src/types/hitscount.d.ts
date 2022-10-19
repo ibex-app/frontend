@@ -1,5 +1,5 @@
 export type AccountItem = {
-  _id: string,
+  id: string,
   title: string,
   platform: string,
   platform_id: string,
@@ -29,7 +29,7 @@ type AccountItemRes = {
 export type SearchTermItem = {
   tags: string[],
   term: string,
-  _id: string
+  id: string
 }
 
 type NumNullUndef = number | null | undefined
