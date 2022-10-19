@@ -1,10 +1,10 @@
-import { fold, getOrElse } from "fp-ts/lib/Either";
+import { getOrElse } from "fp-ts/lib/Either";
 import { lensPath, pipe, set } from "ramda";
 import { useEffect, useMemo, useState } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { FormComponent } from "../../antd/Form";
 import { Get, Response } from "../../shared/Http";
-import { useNavWithQuery, useDebounce } from "../../shared/Utils";
+import { useNavWithQuery } from "../../shared/Utils";
 import { TaxonomyResults } from "./Results";
 import { match } from 'ts-pattern';
 import { finalizeForm } from "../../shared/Utils/Taxonomy";
@@ -13,7 +13,6 @@ import TaxonomyDataCollection from "./TaxonomyProgress";
 import { useUpdateMonitorMutation } from '../../state/useUpdateMonitorMutation';
 export const { data }: { data: any[] } = require('../../data/taxonomy/taxonomy.json');
 
-const accountLens = lensPath([1, 'children', 1, 'children', 0, 'list']);
 const accountFormLens = lensPath(["form2", "accounts"]);
 const accountsSelectedLens = lensPath([1, 'children', 1, 'children', 0, 'selected']);
 const keywordsLens = lensPath([1, 'children', 0, 'children', 0, 'selected']);
@@ -28,14 +27,11 @@ export function Taxonomy() {
   const [form, setForm] = useState<any>({});
   const [platforms, setPlatforms] = useState([]);
 
-  const [accountSubstr, setAccountSubstr] = useState("");
-  const [accountSuggestions, setAccountSuggestions] = useState<any[]>();
-  const substring = useDebounce(accountSubstr, 500);
   const monitor_id = useMemo(() => new URLSearchParams(location.search).get('monitor_id') || "", [location.search]);
   const { mutateAsync: _updateMonitor } = useUpdateMonitorMutation(monitor_id);
 
   const onValuesChange = (changed: any, values: any, formId: string) => {
-    const { accounts, platforms, search_terms_upload, accounts_upload } = changed;
+    const { platforms, search_terms_upload, accounts_upload } = changed;
 
     if (search_terms_upload) {
       pipe(set(keywordsLens, search_terms_upload), setFormData)(formData);
@@ -49,29 +45,12 @@ export function Taxonomy() {
       return;
     }
 
-    if (accounts && typeof accounts[0] === 'string') {
-      setAccountSubstr(accounts[0]);
-      return;
-    }
-
     if (platforms) setPlatforms(platforms);
 
     setForm({ ...form, [formId]: { ...form[formId], ...changed } });
   }
 
-  useEffect(() => accountSuggestions && pipe(
-    set(accountLens, accountSuggestions),
-    setFormData
-  )(formData), [accountSuggestions]);
-
   useEffect(() => { if (!form.form1 && !monitor_id) navWithQuery('/taxonomy/init') }, []);
-
-  // if platforms or debounced substring from account changes, we suggest new options
-  useEffect(() => {
-    if (substring) Get<Array<{ title: string }>>('search_account', { platforms, substring }).then(
-      fold(() => { }, setAccountSuggestions)
-    );
-  }, [platforms, substring]);
 
   const updateMonitor = () => _updateMonitor(finalizeForm(form)).then(() => navWithQuery('/taxonomy/results'));
 
