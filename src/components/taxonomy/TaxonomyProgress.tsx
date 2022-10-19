@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Col, Row, Layout, Space } from 'antd';
+import { Col, Row, Layout, Space, Spin } from 'antd';
 import * as E from "fp-ts/lib/Either";
 import { Link } from "react-router-dom";
 
 import './Taxonomy.css';
 import { Get } from '../../shared/Http';
-import { MonitorProgressResponse, MonitorRespose, Progress } from '../../types/taxonomy';
+import { MonitorProgressResponse, MonitorRespose, ProgressItem } from '../../types/taxonomy';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../../antd/PogressBar/ProgressBar';
 import { MonitorBlock } from '../../components/monitor/Monitor';
@@ -37,17 +37,7 @@ const TaxonomyProgress: React.FC = () => {
 
     return !Boolean(monitorData?.detail?.out_of_limit.length);
   } 
-  const secondsToHms = (d:number) => {
-      d = Number(d);
-      var h: number = Math.floor(d / 3600);
-      var m: number = Math.floor(d % 3600 / 60);
-      var s: number = Math.floor(d % 3600 % 60);
-
-      var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-      var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
-      var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
-      return hDisplay + mDisplay + sDisplay; 
-  }
+  
   useEffect(() => {
     Get<MonitorRespose>('run_data_collection', { id: monitor_id })
       .then(E.fold(console.error, 
@@ -69,7 +59,7 @@ const TaxonomyProgress: React.FC = () => {
   }, [timeout]);
 
   const isFinalized = (res: MonitorProgressResponse) => {
-    return res.reduce((isFinalized_: boolean, progress:Progress) => !isFinalized_ 
+    return res.reduce((isFinalized_: boolean, progress:ProgressItem) => !isFinalized_ 
       ? isFinalized_ 
       : (progress.tasks_count === progress.finalized_collect_tasks_count && progress.tasks_count !== 0) , true)
   }
@@ -130,8 +120,7 @@ const TaxonomyProgress: React.FC = () => {
             
             {
               errors && errors?.length > 0 
-              ? 
-                <Space size={'middle'} className="taxonomy-header-spacer">
+              ? <Space size={'middle'} className="taxonomy-header-spacer">
                   <span>The number of posts for some search terms / accounts exceed allowed maximum limit of 10 000 posts.
   
                   Please <Link className='underline-link' to={`/taxonomy/results?monitor_id=${monitor_id}`}>modify</Link> the monitor and try again</span>
@@ -141,41 +130,13 @@ const TaxonomyProgress: React.FC = () => {
                   </>)
                 }
                 </Space>
-                : monitorProgress && monitorProgress.length > 0 ? monitorProgress.map((item, i) => {
-                let progressValue: number = 0;
-                if (item.platform) {
-                  progressValue = item.finalized_collect_tasks_count * 100 / item.tasks_count;
-                  progressValue = Math.floor(progressValue * 100)/100
-                }
-                
-                // console.log(`NUmber -> for index ${i}`, progressValue);
-                return (
-                  <Row key={item.platform}>
-                    <Col span={4}>
-                      { item.platform } stats 
-                    </Col>
-
-                    <Col span={20}>
-                      { typeof(progressValue) === "number" && progressValue < 100 ? "Details are being loaded…" : "Details fetched" } 
-                      
-                      <ProgressBar percentage={progressValue} showInfo={true} />
-
-                      {
-                        `Posts count: ${item.posts_count}`
-                      }
-                      
-                      {' - '}
-                      {
-                        item?.time_estimate ? `Estimated time to get data: ${secondsToHms(item.time_estimate)}` : ''
-                      }
-                    </Col>
-                  </Row>
-                )
-              }) : <h1>No Data Available</h1>
+              : monitorProgress && monitorProgress.length > 0 
+                ? monitorProgress.map((progress: ProgressItem) => <ProgressBar progress={progress}></ProgressBar>)
+                : <h1>Loading <Spin></Spin></h1>
               
             }
             {
-                isFinalizedState ? <div><Link to={`/results/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </div> : <></>
+                isFinalizedState ? <button className="top-50"><Link to={`/results/summary?monitor_id=${monitor_id}`}>Go to monitor results</Link> </button> : <></>
             }
               </Content>
         }
