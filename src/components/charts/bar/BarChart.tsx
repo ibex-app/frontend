@@ -72,6 +72,7 @@ export const options = {
 
 export function BarChart({ axisX, axisY, filter }: ChartInputParams) {
   useEffect(() => {
+    if (!filter.time_interval_from || !filter.time_interval_to) return
     if (Object.keys(filter).length) loadData();
   }, [filter]);
 
@@ -93,14 +94,13 @@ export function BarChart({ axisX, axisY, filter }: ChartInputParams) {
 
   const [data, setData] = useState(data_);
 
-  // const change = (e: any) => {
-  //   loadData(e.target.value)
-  // }
 
   const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
     var dateFrom: Date = new Date(filters.time_interval_from)
     var dateTo: Date = new Date(filters.time_interval_to)
-    dateTo.setDate(dateTo.getDate() + 7);
+
+    dateTo.setDate(dateTo.getDate() + 10);
+    dateFrom.setDate(dateFrom.getDate() - 7);
 
     var interval: number = (dateTo.getTime() - dateFrom.getTime())
     var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
@@ -157,12 +157,17 @@ export function BarChart({ axisX, axisY, filter }: ChartInputParams) {
   }
 
   const loadData = () => {
+    var dateFrom: any = new Date(filter.time_interval_from)
+    var dateTo: any = new Date(filter.time_interval_to)
+    const diffTime: number = Math.abs(dateFrom - dateTo);
+    const diffDays: number = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    
     setFetching(true)
     const fetchData = Get('posts_aggregated', {
       post_request_params: transform_filters_to_request(filter),
       axisX: axisX,
       axisY: axisY,
-      days: 7
+      days: diffDays < 8 ? 1 : 7
     });
 
     fetchData.then((_data: Response<any>) => {

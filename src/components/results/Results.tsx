@@ -37,7 +37,7 @@ export function Results() {
             {/* <Route path="line" element={<LineChart filter={filters} />} /> */}
             <Route path="map" element={<MapChart filter={filters} />} />
             <Route path="bubble" element={<BubbleChart />} />
-            <Route path="summary" element={<Summary filter={filters} axisX="platform" axisY="count" />} />
+            <Route path="summary" element={<Summary setFilter={setFilter} filter={filters} axisX="platform" axisY="count" />} />
           </Routes>
         </Space>
       </Col>

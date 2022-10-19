@@ -6,18 +6,14 @@ import { ChartInputFilter, SummaryInputParams } from "../charts/chartInputFilter
 import { DoughnatChart } from "../charts/doughnat/DoughnatChart";
 import { LineChart } from "../charts/line/LineChart";
 import * as E from "fp-ts/lib/Either";
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import classes from './Summary.module.css';
 import { MonitorRespose } from '../../types/taxonomy';
 import { MonitorBlock } from '../../components/monitor/Monitor';
+import { useLocation } from 'react-router-dom';
 
-// export type downloadStatsParamsProps = {
-//     monitorId: string,
-//     axisX: string, 
-//     axisY: string
-// }
 
-export function Summary({ filter, axisX, axisY }: SummaryInputParams) {
+export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams) {
     const [fileLink, setFileLink] = useState<any>("");
     const [fileLinkByPlatforms, setFileLinkByPlatforms] = useState<any>("");
     const [fileLinkByKeywords, setFileLinkByKeywords] = useState<any>("");
@@ -31,7 +27,8 @@ export function Summary({ filter, axisX, axisY }: SummaryInputParams) {
     const [platformLoadingText, setPlatformLoadingText] = useState("Download");
     const [keywordLoadingText, setKeywordLoadingText] = useState("Download");
     const [accountLoadingText, setAccountLoadingText] = useState("Download");
-
+    const { search } = useLocation();
+    const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);          
 
     const getDownloadLink = (axisX: string, axisY: string) => {
         const fetchData = Get('download_posts_aggregated', {
@@ -88,9 +85,19 @@ export function Summary({ filter, axisX, axisY }: SummaryInputParams) {
         getDownloadLink(axisX, axisY);
     }
 
+    useEffect(() => {
+        Get<MonitorRespose>('run_data_collection', { id: monitor_id })
+          .then(E.fold(console.error, setMonitorData));
+    }, [monitor_id]);
+    
+    useEffect(() => {
+        filter.time_interval_from = filter.time_interval_from || monitorData?.monitor.date_from
+        filter.time_interval_to = filter.time_interval_to || monitorData?.monitor.date_to || new Date()
+    }, [monitorData]);
+
     return <div className='results'>
         
-        {/* { monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : 'Loading' }   */}
+        { monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : 'Loading' }  
 
         <div className='dashbord-block post'>
             <div>By Platforms</div>
