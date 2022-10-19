@@ -140,7 +140,7 @@ export function LineChart({ axisX, axisY, filter, type}: ChartInputParams) {
       : post_label_values.map((label: any, index: number) => ({
         label: label,
         data: [0],
-        backgroundColor: cols[index],
+        backgroundColor: exactCols[label] || cols[index],
         fill: true,
         pointBackgroundColor: 'rgba(0,0,0,.3)',
         borderColor: 'rgba(0,0,0,0)',
