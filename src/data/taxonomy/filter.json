@@ -32,6 +32,13 @@
           "_id": "vkontakte"
         }
       ]
+    },
+    {
+      "id": "account_ids",
+      "type": "tag",
+      "title": "Account",
+      "selected": [],
+      "list": []
     }
   ]
 }

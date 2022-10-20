@@ -18,7 +18,7 @@ export function Results() {
   const { search } = useLocation();
   const [filter, setFilter] = useState({});
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
-  const filters = { ...filter, monitor_id };
+  const filters = useMemo(() => ({ ...filter, monitor_id }), [filter, monitor_id]);
 
   return (
     <Row >

@@ -18,13 +18,14 @@ import FilterData from '../../data/taxonomy/filter.json';
 import { HitsCountTableItem } from '../../types/hitscount';
 import { useMonitorState } from '../../state/useMonitorState';
 import { useUpdateMonitorMutation } from '../../state/useUpdateMonitorMutation';
+import { FormElement } from '../../types/form';
 
 export const TaxonomyResults = () => {
   const { search } = useLocation();
   const [hitsCount, setHitsCount_] = useState<HitsCountOutput>();
   const [keywordsFilter, setKeywordsFilter] = useState<string[] | null>(null);
   const [userSelection, setUserSelection] = useState<string>();
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState<object | null>(null);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
 
   const navWithQuery = useNavWithQuery();
@@ -32,9 +33,7 @@ export const TaxonomyResults = () => {
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
   const { mutateAsync: updateMonitor } = useUpdateMonitorMutation(monitor_id);
 
-  const { data: monitorRes, isLoading: monitorLoading } = useMonitorState(monitor_id);
-
-  const monitor = useMemo(() => monitorRes?.monitor, [monitorRes]);
+  const { data: monitor, isLoading: monitorLoading } = useMonitorState(monitor_id);
 
   const type = useMemo(() => hitsCount?.type, [hitsCount]);
   const highlightWords = useMemo(() => {
@@ -65,13 +64,19 @@ export const TaxonomyResults = () => {
   }, [hitsCount?.all, monitor_id, updateMonitor, type]);
 
   const filters = useMemo(() => {
-    const filter = FilterData.data[0];
-    const list = hitsCount?.platforms?.map((platform, id) => ({
-      id, label: capitalize(platform), _id: platform
-    }))
+    let filterArr: FormElement[] = [];
 
-    return [{ ...filter, selected: list, list }]
-  }, [hitsCount?.platforms])
+    if (monitor?.platforms?.length) {
+      const platformsData = FilterData.data[0];
+      const list = monitor?.platforms?.map((platform) => ({
+        label: capitalize(platform)
+      }))
+
+      filterArr.push({ ...platformsData, list, selected: list });
+    }
+
+    return filterArr
+  }, [monitor])
 
   const hitsCountSelectionIds = useMemo(() => ({
     [type === 'accounts' ? 'account_ids' : 'search_term_ids']: hitsCount?.selected ? hitsCount?.selected?.map(({ id }) => id) : []
@@ -123,7 +128,7 @@ export const TaxonomyResults = () => {
             {!!hitsCount?.selected?.length && <Space className="flex search-header">
               Search results for {map(drawFilterItem, hitsCount.selected)}
             </Space>}
-            {keywordsFilter && !monitorLoading && <Posts
+            {keywordsFilter && !monitorLoading && filter && <Posts
               allowSuggestions={type === 'search_terms' ? true : false}
               key="postsTaxonomy"
               filter={{ ...filter, monitor_id, search_terms: keywordsFilter, ...hitsCountSelectionIds }}
