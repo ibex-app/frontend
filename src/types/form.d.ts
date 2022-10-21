@@ -26,7 +26,7 @@ interface Checkbox {
 }
 
 
-export type Option = { label: string, icon?: string };
+export type Option = { label: string, icon?: string | null, value?: any };
 
 interface Tag {
   allowNew?: boolean,

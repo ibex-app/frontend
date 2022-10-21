@@ -17,7 +17,8 @@ type Account = {
   id?: string,
   title: string,
   platform?: string,
-  url?: string
+  url?: string,
+  img: null | string
 }
 
 type AccountItemRes = {

@@ -6,7 +6,6 @@ import './Select.css';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { filterHasOperator, filterOperatorUpper, platformIcon, useDebounce } from "../../shared/Utils";
 import { useDynamicReqState } from '../../state/useDynamicReqState';
-import { title } from 'process';
 
 type Value = Option[];
 

@@ -1,4 +1,4 @@
-import { Account } from "./hitscount";
+import { Account, AccountItem } from "./hitscount";
 
 export type Monitor = {
   collect_actions: string[];
@@ -7,9 +7,6 @@ export type Monitor = {
   descr: string,
   title: string,
   _id: string
-  platforms: string[];
-  accounts?: Account[]
-  searchTerms?: SearchTerm[]
 }
 
 export type ProgressItem = {
@@ -27,8 +24,7 @@ export type SearchTerm = {
   term: string
 }
 
-export type MonitorRespose = {
-  monitor: Monitor,
+export interface MonitorRespose extends Monitor {
   search_terms: SearchTerm[],
   accounts: Account[],
   platforms: Array[]
