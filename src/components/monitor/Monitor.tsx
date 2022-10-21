@@ -21,7 +21,7 @@ export const MonitorBlock = ({ monitorData } : MonitorBlockInput ) => {
         monitorData ? 
         <Space direction="vertical">
           <div>
-            <h1>{monitorData?.monitor?.title}</h1>
+          <Row>  <Col > <h1>{monitorData?.monitor?.title} </h1></Col> { monitorData?.monitor?.platforms?.map(a => <Col className="small-social" span={3}>{platformIcon(a)}</Col> ) }</Row>
             { 
             <>
               <h3> 
@@ -36,8 +36,8 @@ export const MonitorBlock = ({ monitorData } : MonitorBlockInput ) => {
           }
           </div>
           <div>{monitorData?.monitor?.descr }</div>
-          <Row> { monitorData?.monitor?.platforms?.map(a => <Col span={4}>{platformIcon(a)}</Col> ) } </Row>
-          <div> { monitorData?.accounts.map((account: Account) => <span>{account.platform ? platformIcon(account.platform) : ''} {account.title}</span>)}</div>
+          {/* <Row>  </Row> */}
+          <div> { monitorData?.accounts.map((account: Account) => <div>{account.platform ? platformIcon(account.platform) : ''} {account.title}</div>)}</div>
           <div> { monitorData?.search_terms.map((search_term: SearchTerm) => <div>{drawFilterItem({ title: search_term?.term })}</div>)}</div>
         </Space>
         : ''
