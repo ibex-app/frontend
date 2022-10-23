@@ -1,4 +1,4 @@
-import { Form, Space, Table } from "antd";
+import { Form, Modal, Space, Table } from "antd";
 import { concat, keys, pipe, equals } from "ramda";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { generateHitsCountTableData } from "../../components/taxonomy/Data";
@@ -34,6 +34,8 @@ const generatePlatforms = (data: Array<HitsCountSearchTerm>) =>
 
     return acc;
   }, [] as string[]);
+
+const errorModal = Modal.error;
 
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [pristine, setPristine] = useState(true);
@@ -92,7 +94,15 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
 
   const onHitsCountAdd = useCallback((values: string[] | Option[][]) => {
     const val = values[0];
-    addNewHitsCount(typeof val === 'string' ? val : val[0])
+    const d = dataFormatted as any
+    const t = typeof val === 'string' ? val : val[0]?.label;
+
+    if (d.find(({ title }: any) => title.toLowerCase() === t.toLowerCase())) {
+      errorModal({ title: 'Error', content: 'Search term already exists' });
+      return
+    }
+
+    addNewHitsCount(typeof val === 'string' ? val : val[0]);
     form.resetFields();
   }, [form, addNewHitsCount]);
 
