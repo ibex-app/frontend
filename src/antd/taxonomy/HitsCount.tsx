@@ -21,7 +21,8 @@ export type HitsCountOutput = {
   type?: 'search_terms' | 'accounts';
   selected?: HitsCountTableItem[],
   all?: HitsCountTableItem[],
-  pristine?: boolean
+  pristine?: boolean,
+  is_loading?: boolean
 }
 
 const generatePlatforms = (data: Array<HitsCountSearchTerm>) =>
@@ -103,8 +104,9 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     all: hitsCountTableData,
     selected: hitCountsSelected,
     type,
-    pristine: pristine
-  }), [hitCountsSelected, hitsCountTableData, type, dataFormatted, pristine]);
+    pristine: pristine,
+    is_loading: isLoading
+  }), [hitCountsSelected, hitsCountTableData, type, dataFormatted, pristine, isLoading]);
 
   return <div className="leftbox-inner">
     <Form form={form} onFinish={onHitsCountAdd}>

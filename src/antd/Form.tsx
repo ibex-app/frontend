@@ -3,7 +3,7 @@ import { lensPath, view } from "ramda";
 import { Link } from "react-router-dom";
 import { getElem } from "./utils/ElementGetter";
 
-export const FormComponent = ({ formData, className, formValues, onValuesChange, onSubmit }: any) => {
+export const FormComponent = ({ formData, className, formValues, onValuesChange, onSubmit, submitDisabled }: any) => {
   const { title, redirect, children } = formData;
 
   return (
@@ -29,7 +29,7 @@ export const FormComponent = ({ formData, className, formValues, onValuesChange,
           }
 
           {redirect &&
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" disabled={submitDisabled}>
               Next
             </Button>
           }

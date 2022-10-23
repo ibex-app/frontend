@@ -7,6 +7,15 @@ import { Spin } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Option } from '../../types/form';
+import { anyPass, propSatisfies } from 'ramda';
+
+export const hitsCountCalcItems = ['hits_count', 'facebook', 'telegram', 'twitter', 'youtube', 'vkontakte'];
+const isOverLimit = propSatisfies(x => x > 10000)
+
+export const hitsCountIsOverLimit = (hitsCount?: any[]) =>
+  hitsCount && hitsCount.map(
+    anyPass(hitsCountCalcItems.map(x => isOverLimit(x))))
+    .reduce((acc, x) => acc || x, false);
 
 const renderCell = (value: number | undefined | null) => match(value)
   .with(null, () => <Spin />)

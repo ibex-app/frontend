@@ -6,7 +6,7 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons'
 
 import './Taxonomy.css';
 import { map, pipe } from "ramda";
-import { Button, Col, Row, Space } from "antd";
+import { Button, Col, Modal, Row, Space } from "antd";
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Posts } from "../../antd/Posts";
 import { HitsCount, HitsCountOutput } from "../../antd/taxonomy/HitsCount";
@@ -19,6 +19,9 @@ import { HitsCountTableItem } from '../../types/hitscount';
 import { useMonitorState } from '../../state/useMonitorState';
 import { useUpdateMonitorMutation } from '../../state/useUpdateMonitorMutation';
 import { FormElement } from '../../types/form';
+import { hitsCountIsOverLimit } from '../../antd/taxonomy/utils';
+
+const modalError = Modal.error;
 
 export const TaxonomyResults = () => {
   const { search } = useLocation();
@@ -50,7 +53,8 @@ export const TaxonomyResults = () => {
     setButtonsDisabled(true);
 
     if (type === 'accounts') {
-      updateMonitor(hitsCount.all).then(() => setButtonsDisabled(false))
+      console.log(hitsCount.all)
+      // updateMonitor(hitsCount.all).then(() => setButtonsDisabled(false))
 
       return;
     }
@@ -90,6 +94,30 @@ export const TaxonomyResults = () => {
       )(hitsCount.selected) : setKeywordsFilter([]);
   }, [hitsCount]);
 
+  const dataCollectionEnabled = useMemo(() => hitsCount?.is_loading === false && hitsCount?.all?.length, [hitsCount]);
+
+  const runDataCollection = useCallback(() => {
+    if (!hitsCount?.pristine) {
+      modalError({
+        title: 'Error',
+        content: 'You have unsaved changes. Please update monitor before running the data collection.',
+      });
+      return;
+    }
+
+    if (hitsCountIsOverLimit(hitsCount?.all)) {
+      modalError({
+        title: 'Error',
+        content: 'Posts count for some of the search terms exceeds allowed quota. Please modify the list of keywords.'
+      })
+
+      return;
+    }
+
+    setButtonsDisabled(true)
+    navWithQuery('/taxonomy/data-collection')
+  }, [navWithQuery, hitsCount?.all, hitsCount?.pristine]);
+
   return (
     <TaxonomyContext.Provider value={{
       highlightWords,
@@ -111,10 +139,7 @@ export const TaxonomyResults = () => {
 
             <div className="flex align-center align-middle">
               {
-                <Button disabled={buttonsDisabled} onClick={() => {
-                  setButtonsDisabled(true)
-                  navWithQuery('/taxonomy/data-collection')
-                }}>
+                <Button disabled={buttonsDisabled || !dataCollectionEnabled} onClick={runDataCollection}>
                   Run data collection
                 </Button>
               }

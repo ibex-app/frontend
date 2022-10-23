@@ -25,7 +25,7 @@ export function Taxonomy() {
   const navWithQuery = useNavWithQuery();
   const [formData, setFormData] = useState(data);
   const [form, setForm] = useState<any>({});
-  const [platforms, setPlatforms] = useState([]);
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const monitor_id = useMemo(() => new URLSearchParams(location.search).get('monitor_id') || "", [location.search]);
   const { mutateAsync: _updateMonitor } = useUpdateMonitorMutation(monitor_id);
@@ -44,9 +44,6 @@ export function Taxonomy() {
       pipe(set(accountFormLens, accounts_upload), setForm)(form);
       return;
     }
-
-    if (platforms) setPlatforms(platforms);
-
     setForm({ ...form, [formId]: { ...form[formId], ...changed } });
   }
 
@@ -58,8 +55,9 @@ export function Taxonomy() {
     match(formData.id)
       .with("form1", () => navWithQuery(formData.redirect))
       .with("form2", () => {
+        setSubmitDisabled(true);
         if (monitor_id) {
-          updateMonitor();
+          updateMonitor().then(() => setSubmitDisabled(false));
           return;
         }
 
@@ -67,6 +65,7 @@ export function Taxonomy() {
         createMonitor.then((_data: Response<any>) => {
           const { _id }: any = getOrElse(() => [])(_data);
           Get('collect_sample', { id: _id }).then(() => {
+            setSubmitDisabled(false)
             navWithQuery(`${formData.redirect}?monitor_id=${_id}`);
           });
         });
@@ -100,7 +99,9 @@ export function Taxonomy() {
             onValuesChange={(changed: any, values: any) => onValuesChange(changed, values, item.id)}
             formData={item}
             formValues={form}
-            onSubmit={(values: any) => onSubmit(item, values)} />
+            onSubmit={(values: any) => onSubmit(item, values)}
+            submitDisabled={submitDisabled}
+          />
         } />)}
         <Route path="/results" element={<TaxonomyResults />}></Route>
         <Route path="/data-collection" element={<TaxonomyDataCollection />}></Route>
