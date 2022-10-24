@@ -1,9 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import { Filter } from '../filter/Filter';
-import { BarChart } from '../charts/bar/BarChart';
 import { GraphChart } from '../charts/graph/GraphChart';
-import { LineChart } from '../charts/line/LineChart';
 import { MapChart } from '../charts/map/MapChart';
 import { BubbleChart } from '../charts/bubble/BubbleChart';
 import { Space } from "antd";
@@ -13,12 +11,51 @@ import { Sidebar } from '../sidebar/Sidebar';
 import { Col, Row } from "antd";
 import FilterData from '../../data/filter.json';
 import { Summary } from "../summary/Summary";
+import { useMonitorState } from '../../state/useMonitorState';
+import { length } from 'ramda';
+import { drawFilterItem } from '../../shared/Utils/Taxonomy';
 
 export function Results() {
   const { search } = useLocation();
   const [filter, setFilter] = useState({});
   const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
   const filters = useMemo(() => ({ ...filter, monitor_id }), [filter, monitor_id]);
+
+  const { data: monitor, isLoading: monitorLoading } = useMonitorState(monitor_id);
+
+  const externalFilterData: any = useMemo(() => FilterData.data, []);
+
+  const filterData = useMemo(() => {
+    const temp = [...externalFilterData];
+
+    if (!monitor) return [];
+
+    length(monitor.platforms) && temp.push({
+      "id": "platform",
+      "type": "tag",
+      "title": "Platform",
+      "value": [],
+      "list": monitor.platforms.map(platform => ({ "id": platform, "label": platform }))
+    });
+
+    length(monitor.search_terms) && temp.push({
+      "id": "search_terms",
+      "type": "tag",
+      "title": "Search Terms",
+      "value": [],
+      "list": monitor.search_terms.map(({ id, term }) => ({ "id": id, "label": term, render: drawFilterItem({ title: term }) }))
+    })
+
+    length(monitor.accounts) && temp.push({
+      id: "account_ids",
+      type: "tag",
+      title: "Accounts",
+      value: [],
+      list: monitor.accounts.map(({ id, platform, title }: any) => ({ id, platform, label: title }))
+    });
+
+    return temp;
+  }, [monitor?.accounts])
 
   return (
     <Row >
@@ -27,7 +64,7 @@ export function Results() {
       </Col>
       <Col span={21} className="results-cont">
         <Space direction="vertical">
-          <Filter data={FilterData.data} onChange={setFilter} />
+          {!monitorLoading && <Filter data={filterData} onChange={setFilter} />}
           <Routes>
             <Route path="/" element={<Posts filter={filters} allowRedirect />} />
             {/* <Route path="bar" element={<BarChart filter={filters} />} /> */}

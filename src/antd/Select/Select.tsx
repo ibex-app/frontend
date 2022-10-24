@@ -26,7 +26,8 @@ const TypeaheadOverride: any = Typeahead;
 
 const CustomToken = ({ option, index, onRemove }: CustomTokenInput) => {
   return <div className="rbt-token rbt-token-removeable" tabIndex={index}>
-    {option.icon ? <>{option.icon && platformIcon(option.icon)} {option.label}</> : option.label || option}
+    {!!option.render && option.render}
+    {!option.render && (option.icon ? <>{option.icon && platformIcon(option.icon)} {option.label}</> : option.label || option)}
     <button tabIndex={-1} aria-label="Remove" className="close rbt-close rbt-token-remove-button" type="button" onClick={() => {
       onRemove(index);
     }}>
@@ -101,6 +102,7 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     onBlur={onBlur}
     emptyLabel={requestData && !data && userValue ? "Loading..." : "No results found."}
     renderMenuItemChildren={(option: Option, props: any, index: number) => {
+      if (option.render) return option.render;
       return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span></> : option.label || option
     }}
     renderToken={(option: Option, props: any, index: number) =>

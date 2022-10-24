@@ -2017,6 +2017,7 @@ main.main .main-dashboard {
   /* flex-wrap: wrap; */
   display: flex;
   gap: 3px;
+  overflow-y: auto;
 }
 
 input.ant-input,
@@ -2107,6 +2108,8 @@ button.ant-btn span {
   padding: 4px 25px 5px 11px;
   font-size: 1em;
   position: relative;
+  max-height: 30px;
+  white-space: nowrap;
 }
 
 .rbt-input-main {
@@ -2302,7 +2305,7 @@ button.ant-btn span {
 
 
 .results-cont {
-  padding-top: 150px;
+  padding-top: 80px;
 }
 
 
@@ -2313,17 +2316,18 @@ button.ant-btn span {
 .top-filters .ant-row.ant-form-item {
   width: 19%;
 }
+
 .ant-radio-group {
   font-size: 14px;
 }
 
-.chart-cont-l{
+.chart-cont-l {
   width: 70%;
   height: 25vh;
   display: inline-block;
 }
 
-.chart-cont-sm{
+.chart-cont-sm {
   width: 10%;
   margin-left: 12%;
   height: 25vh;
@@ -2333,21 +2337,22 @@ button.ant-btn span {
 .ant-progress-success-bg {
   background-color: #81de53;
 }
-.live{
+
+.live {
   display: inline-block;
-    margin-left: 5px;
-    padding: 3px 8px;
-    border-radius: 5px;
-    background: #81de53;
-    color: #fff;
-    font-weight: bold;
+  margin-left: 5px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: #81de53;
+  color: #fff;
+  font-weight: bold;
 }
 
-.top-50{
+.top-50 {
   margin-top: 50px;
 }
 
-.bottom-50{
+.bottom-50 {
   margin-bottom: 50px;
 
 }

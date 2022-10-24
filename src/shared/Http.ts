@@ -87,8 +87,7 @@ export const Delete = async <T>(path: string, params: Object): Promise<Response<
 };
 
 
-export const transform_filters_to_request = (filters_: Filter) => {
-    let filters = JSON.parse(JSON.stringify(filters_));
+export const transform_filters_to_request = (filters: Filter) => {
     if (filters.time_interval_from && filters.time_interval_to) {
         filters.time_interval_from = formatDate(filters.time_interval_from);
         filters.time_interval_to = formatDate(filters.time_interval_to);
@@ -97,7 +96,9 @@ export const transform_filters_to_request = (filters_: Filter) => {
     if (filters.author_platform_id) filters.author_platform_id = filters.author_platform_id.map((a: any) => a._id)
     if (filters.locations) filters.locations = filters.locations.map((a: any) => a._id)
     if (filters.persons) filters.persons = filters.persons.map((a: any) => a._id)
-    if (filters.account_ids) filters.account_ids = filters.account_ids.map((a: any) => a.value)
+
+    if (filters.account_ids) filters.account_ids = filters.account_ids.map(({ id }: any) => id)
+    if (filters.search_terms) filters.search_terms = filters.search_terms.map(({ id }: any) => id)
 
     return filters
 }

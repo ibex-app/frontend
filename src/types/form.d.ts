@@ -26,13 +26,13 @@ interface Checkbox {
 }
 
 
-export type Option = { label: string, icon?: string | null, value?: any };
+export type Option = { label: string, icon?: string | null, value?: any, render?: () => React.ReactNode };
 
 interface Tag {
   allowNew?: boolean,
   list?: Option[],
   checkBoolUpper?: boolean,
-  selected?: Option[]
+  selected?: Option[],
 }
 
 interface Input {

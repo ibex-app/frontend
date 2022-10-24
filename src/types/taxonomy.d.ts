@@ -19,7 +19,7 @@ export type ProgressItem = {
 }
 
 export type SearchTerm = {
-  _id: string,
+  id: string,
   tags: string[],
   term: string
 }
