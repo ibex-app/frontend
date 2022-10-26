@@ -1,4 +1,5 @@
-import { Collapse, Spin } from "antd"
+import { Collapse } from "antd"
+import Spinner from '../../antd/Spinner/Spinner';
 import { useContext, useMemo, useState } from "react";
 import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
 import { drawFilterItem } from '../../shared/Utils/Taxonomy';
@@ -31,7 +32,7 @@ export const Recommendations = ({ monitor_id, toParent }: Input) => {
     <Panel header="Recommended keywords" key={1}>
       {/* <Table /> */}
       {!data || data.is_loading
-        ? <div> Loading  <Spin></Spin></div>
+        ? <div> Loading  <Spinner></Spinner></div>
         : !!recommendations.length
           ? recommendations.map((rec: any) => <div className="recommend-row" key={rec.word}><div className="recommend-prog"><span style={{ height: (rec.score * 100) + "%" }}></span></div>
             <div className="recommend-word">

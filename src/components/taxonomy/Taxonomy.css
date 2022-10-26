@@ -95,6 +95,8 @@
     align-items: center;
     height: 100%;
     font-size: 19px;
+    font-weight: bold;
+    /* color: #4670be */
 }
 
 input[type="radio"],
@@ -365,7 +367,7 @@ input[type="checkbox"] {
 .leftbox-title {
     width: 90%;
     margin-left: 5%;
-    height: 83px;
+    height: 89px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -688,4 +690,12 @@ label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-b
 label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-button-wrapper-disabled:hover{
     background: whitesmoke;
     opacity: .3;
+}
+
+
+.ant-steps-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
 }

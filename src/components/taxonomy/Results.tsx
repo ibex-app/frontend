@@ -127,7 +127,7 @@ export const TaxonomyResults = () => {
       <Row className="tax-cont">
         <Col span={8} className="fixed-col" style={{ height: 'calc(99vh - 62px)', overflow: 'auto' }}>
           <Space direction="vertical" style={{ display: "flex" }}>
-            <div className="leftbox-title"> <span>{monitor?.title}</span> <FontAwesomeIcon icon={faSliders} /></div>
+            <div className="leftbox-title"> <span>{monitor?.title}</span></div>
             <HitsCount monitor_id={monitor_id} toParent={setHitsCount} />
             {type === 'search_terms' && <Recommendations monitor_id={monitor_id} toParent={setHitsCount} />}
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>

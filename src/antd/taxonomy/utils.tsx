@@ -3,7 +3,7 @@ import { formatNum, platformIcon } from '../../shared/Utils';
 import { drawFilterItem } from '../../shared/Utils/Taxonomy';
 import { AccountItem, HitsCountItem } from '../../types/hitscount';
 import { match } from 'ts-pattern';
-import { Spin } from 'antd';
+import Spinner from '../../antd/Spinner/Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Option } from '../../types/form';
@@ -18,7 +18,7 @@ export const hitsCountIsOverLimit = (hitsCount?: any[]) =>
     .reduce((acc, x) => acc || x, false);
 
 const renderCell = (value: number | undefined | null) => match(value)
-  .with(null, () => <Spin />)
+  .with(null, () => <Spinner />)
   .with(undefined, () => <span className="tax-null">-</span>)
   .with(-1, () => "N/A")
   .with(-2, () => "Error")

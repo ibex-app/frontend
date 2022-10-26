@@ -8,6 +8,7 @@ import { Get } from '../../shared/Http';
 import { MonitorProgressResponse, MonitorRespose, ProgressItem } from '../../types/taxonomy';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../../antd/PogressBar/ProgressBar';
+import Spinner from '../../antd/Spinner/Spinner';
 import { MonitorBlock } from '../../components/monitor/Monitor';
 
 import { pipe } from 'ramda';
@@ -132,7 +133,7 @@ const TaxonomyProgress: React.FC = () => {
                 </Space>
               : monitorProgress && monitorProgress.length > 0 
                 ? monitorProgress.map((progress: ProgressItem) => <ProgressBar progress={progress}></ProgressBar>)
-                : <h1>Loading <Spin></Spin></h1>
+                : <h1>Loading <Spinner/></h1>
               
             }
             {

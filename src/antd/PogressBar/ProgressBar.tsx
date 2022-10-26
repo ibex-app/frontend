@@ -1,6 +1,6 @@
 import React from 'react'
 import { Progress } from 'antd';
-import { Col, Row, Layout, Space, Spin } from 'antd';
+import { Col, Row } from 'antd';
 import { platformIcon } from '../../shared/Utils';
 import { MonitorProgressResponse, MonitorRespose, ProgressItem } from '../../types/taxonomy';
 

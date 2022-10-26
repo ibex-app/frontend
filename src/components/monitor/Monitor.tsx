@@ -1,7 +1,7 @@
 import { MonitorRespose, SearchTerm } from '../../types/taxonomy';
 import { Account } from '../../types/hitscount';
 
-import { PieChartOutlined, CopyOutlined, DeleteOutlined, UnorderedListOutlined, CloudDownloadOutlined } from '@ant-design/icons';
+import { PieChartOutlined, CopyOutlined, DeleteOutlined, UnorderedListOutlined, CloudDownloadOutlined, LoadingOutlined } from '@ant-design/icons';
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Col, Row, Space } from 'antd';
@@ -23,7 +23,7 @@ type MonitorBlockInput = {
 export const MonitorBlock = ({ monitorData, extraButtons, hideButtons }: MonitorBlockInput) => {
   const navigate = useNavigate();
 
-  return <Row className="post bottom-50">
+  return <Row className="post monitor bottom-20">
     <Col span={24}>
        {
         monitorData ? 
@@ -56,14 +56,15 @@ export const MonitorBlock = ({ monitorData, extraButtons, hideButtons }: Monitor
                 <Col span={12}><Button className='post-btn' onClick={() => navigate("/results/?monitor_id=" + monitorData._id)}> <UnorderedListOutlined key="posts" /> Posts </Button> </Col>
                 <Col span={12}><Button className='post-btn'  onClick={() => navigate("/results/summary?monitor_id=" + monitorData._id)}><CloudDownloadOutlined key="summary" /> Download</Button></Col>
                 </>
-                :
-                <Col span={12}><Button className='post-btn' onClick={() => navigate("/taxonomy/results/?monitor_id=" + monitorData._id)}> <UnorderedListOutlined key="samples" /> Samples </Button> </Col>
+                : monitorData.status == 3
+                  ? <Col span={12}><Button className='post-btn' onClick={() => navigate("/taxonomy/progress/?monitor_id=" + monitorData._id)}> <LoadingOutlined key="progress" /> Progress </Button> </Col>
+                  : <Col span={12}><Button className='post-btn' onClick={() => navigate("/taxonomy/results/?monitor_id=" + monitorData._id)}> <UnorderedListOutlined key="samples" /> Samples </Button> </Col>
 
               }
           </Row>
           <div className='extra-buttons'>
                 {extraButtons ? 
-                  <><Button  onClick={() => extraButtons.showDuplicateModal(monitorData)}><CopyOutlined key="duplicate" /> Duplicate</Button>,
+                  <><Button  onClick={() => extraButtons.showDuplicateModal(monitorData)}><CopyOutlined key="duplicate" /> Duplicate</Button>
                  <Button  className='delete-mon' onClick={() => extraButtons.showDeleteModal(monitorData)}><DeleteOutlined key="delete" /> Delete</Button> 
                  </>
                 : ''

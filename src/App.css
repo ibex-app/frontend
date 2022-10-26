@@ -2356,15 +2356,20 @@ button.ant-btn span {
   margin-bottom: 50px;
 
 }
+.bottom-20 {
+  margin-bottom: 20px;
+
+}
+
 
 .monitor.post{
-  padding: 2px;
+  padding: 14px 21px;
   overflow: hidden;
 }
 
 .small-social{
   border-radius: 100%;
-    box-shadow: 0 0 3px 1px #43434375;
+    box-shadow: 0 0 2px 1px #43434375;
     height: 25px;
     width: 25px;
     padding: 0;
@@ -2394,7 +2399,9 @@ button.ant-btn span {
   width: auto;
   padding: 0;
   
-  top:25px
+  top:30px;
+  width: 120px;
+  text-align: left;
 }
 
 .extra-buttons > button.delete-mon{
