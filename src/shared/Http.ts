@@ -59,33 +59,6 @@ export const Get = async <T>(path: string, params: Object): Promise<Response<T>>
     )()
 };
 
-export const Delete = async <T>(path: string, params: Object): Promise<Response<T>> => {
-    const token = window.localStorage.getItem('jwt')
-    const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
-
-    return pipe(
-        TE.tryCatch(
-            () => fetch(`https://${subdomain}.ibex-app.com/api/${path}`, {
-                method: 'delete',
-                headers: new Headers(token ? {
-                    'Content-Type': 'application/json',
-                    "Authorization": "Bearer " + token
-                } : { 'Content-Type': 'application/json' }),
-                body: JSON.stringify(params),
-            }).then((res: any) => {
-                if (res.status === 401) {
-                    console.log(4444, res.status)
-                    Logout()
-                }
-                return res.json()
-            }),
-            (reason) => new Error(`${reason}`)
-        ),
-        // TE.getOrElse(useError),
-        TE.map((resp) => resp)
-    )()
-};
-
 
 export const transform_filters_to_request = (filters: Filter) => {
     if (filters.time_interval_from && filters.time_interval_to) {

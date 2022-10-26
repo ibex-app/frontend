@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import classes from './MonitorList.module.css'
 import { PieChartOutlined, CopyOutlined, DeleteOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
-import { Delete, Get, Response } from '../../shared/Http';
+import { Get, Response } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
 import { Monitor, MonitorRespose } from '../../types/taxonomy';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ import { MonitorBlock } from '../../components/monitor/Monitor';
 const MonitorList: React.FC = () => {
   const [data, setData] = useState<MonitorRespose[]>([]);
   const [fetching, setFetching]: any = useState(true);
+  const [refetch, setRefetch]: any = useState(true);
   
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [duplicateModalVisible, setDuplicateModalVisible] = useState(false);
@@ -32,17 +33,13 @@ const MonitorList: React.FC = () => {
   };
 
   const deleteItemHandler = useCallback(() => {
-    const fetchData = Delete('delete_monitor', { monitor_id: monitorId });
-
-    fetchData.then((_data: Response<any>) => {
-      let maybeData = E.getOrElse(() => [])(_data)
-      if (!maybeData || !maybeData.forEach) return
-      console.log(maybeData);
+    hideDeleteModal()
+    Get('delete_monitor', { id: monitorId }).then((_data: Response<any>) => {
+      setRefetch(1)
     });
   }, [monitorId]);
   
   const showDuplicateModal = (monitorItem: Monitor) => {
-    console.log(monitorItem)
     setMonitorId(monitorItem?._id);
     setDuplicateModalVisible(true);
   };
@@ -63,9 +60,9 @@ const MonitorList: React.FC = () => {
       });
     }, [monitorId]
   );
+
   useEffect(() => {
     if(data?.length){
-      console.log(2222222222222, data)
       setFetching(false)
     }
   },[data])
@@ -74,7 +71,8 @@ const MonitorList: React.FC = () => {
     setFetching(true)
     Get<MonitorRespose[]>('get_monitors', { tag: '*' })
         .then(E.fold(console.error, setData));
-  }, [duplicateItemHandler, deleteItemHandler])
+  }, [refetch])
+
   const extraButtons = {
     showDuplicateModal: showDuplicateModal, 
     showDeleteModal: showDeleteModal
