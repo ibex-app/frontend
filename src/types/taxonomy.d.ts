@@ -7,6 +7,7 @@ export type Monitor = {
   descr: string,
   title: string,
   _id: string
+  status: number
 }
 
 export type ProgressItem = {

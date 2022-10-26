@@ -1,7 +1,7 @@
 import { MonitorRespose, SearchTerm } from '../../types/taxonomy';
 import { Account } from '../../types/hitscount';
 
-import { PieChartOutlined, CopyOutlined, DeleteOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { PieChartOutlined, CopyOutlined, DeleteOutlined, UnorderedListOutlined, CloudDownloadOutlined } from '@ant-design/icons';
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Col, Row, Space } from 'antd';
@@ -50,8 +50,16 @@ export const MonitorBlock = ({ monitorData, extraButtons, hideButtons }: Monitor
             :
              <>
              <Row>
-          <Col span={12}><Button className='post-btn' onClick={() => navigate("/results/?monitor_id=" + monitorData._id)}> <UnorderedListOutlined key="posts" /> Posts </Button> </Col>
-          <Col span={12}><Button className='post-btn'  onClick={() => navigate("/results/summary?monitor_id=" + monitorData._id)}><PieChartOutlined key="summary" /> Download</Button></Col>
+              {
+                monitorData.status > 2 
+                ? <>
+                <Col span={12}><Button className='post-btn' onClick={() => navigate("/results/?monitor_id=" + monitorData._id)}> <UnorderedListOutlined key="posts" /> Posts </Button> </Col>
+                <Col span={12}><Button className='post-btn'  onClick={() => navigate("/results/summary?monitor_id=" + monitorData._id)}><CloudDownloadOutlined key="summary" /> Download</Button></Col>
+                </>
+                :
+                <Col span={12}><Button className='post-btn' onClick={() => navigate("/taxonomy/results/?monitor_id=" + monitorData._id)}> <UnorderedListOutlined key="samples" /> Samples </Button> </Col>
+
+              }
           </Row>
           <div className='extra-buttons'>
                 {extraButtons ? 
