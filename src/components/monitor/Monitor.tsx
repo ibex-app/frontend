@@ -1,24 +1,35 @@
 import { MonitorRespose, SearchTerm } from '../../types/taxonomy';
 import { Account } from '../../types/hitscount';
 
+import { PieChartOutlined, CopyOutlined, DeleteOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { drawFilterItem } from "../../shared/Utils/Taxonomy";
-
-import { Col, Row, Space } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Col, Row, Space } from 'antd';
 import { platformIcon } from '../../shared/Utils';
+import { Collapse } from 'antd';
+import React from 'react';
+
+const { Panel } = Collapse;
 
 type MonitorBlockInput = {
-  monitorData: MonitorRespose
+  monitorData: MonitorRespose,
+  extraButtons?: {
+    showDuplicateModal: any,
+    showDeleteModal: any
+  },
+  hideButtons?: boolean
 }
 
-export const MonitorBlock = ({ monitorData }: MonitorBlockInput) => {
+export const MonitorBlock = ({ monitorData, extraButtons, hideButtons }: MonitorBlockInput) => {
+  const navigate = useNavigate();
 
   return <Row className="post bottom-50">
-    <Col span={16}>
+    <Col span={24}>
        {
         monitorData ? 
         <Space direction="vertical">
           <div>
-          <Row>  <Col > <h1>{monitorData?.title} </h1></Col> { monitorData?.platforms?.map(a => <Col className="small-social" span={3}>{platformIcon(a)}</Col> ) }</Row>
+          <Row>  <Col > <h1>{monitorData?.title} </h1></Col> { monitorData?.platforms?.map(a => <Col className="small-social">{platformIcon(a)}</Col> ) }</Row>
             { 
             <>
               <h3> 
@@ -32,10 +43,42 @@ export const MonitorBlock = ({ monitorData }: MonitorBlockInput) => {
             </>
           }
           </div>
+          
           <div>{monitorData?.descr }</div>
-          {/* <Row>  </Row> */}
-          <div> { monitorData?.accounts.map((account: Account) => <div>{account.platform ? platformIcon(account.platform) : ''} {account.title}</div>)}</div>
-          <div> { monitorData?.search_terms.map((search_term: SearchTerm) => <div>{drawFilterItem({ title: search_term?.term })}</div>)}</div>
+          {
+            hideButtons ? <></>
+            :
+             <>
+             <Row>
+          <Col span={12}><Button className='post-btn' onClick={() => navigate("/results/?monitor_id=" + monitorData._id)}> <UnorderedListOutlined key="posts" /> Posts </Button> </Col>
+          <Col span={12}><Button className='post-btn'  onClick={() => navigate("/results/summary?monitor_id=" + monitorData._id)}><PieChartOutlined key="summary" /> Download</Button></Col>
+          </Row>
+          <div className='extra-buttons'>
+                {extraButtons ? 
+                  <><Button  onClick={() => extraButtons.showDuplicateModal(monitorData)}><CopyOutlined key="duplicate" /> Duplicate</Button>,
+                 <Button  className='delete-mon' onClick={() => extraButtons.showDeleteModal(monitorData)}><DeleteOutlined key="delete" /> Delete</Button> 
+                 </>
+                : ''
+              }
+            </div>
+             </>
+
+          }
+          
+            {
+              monitorData?.accounts?.length || monitorData?.search_terms?.length 
+              ?
+              <Collapse  ghost>
+
+              <Panel header={monitorData?.accounts?.length ? 'Accounts' : 'Search Terms'} key="1">
+          
+                <div className='in-monitor-list'> { (monitorData?.accounts || []).map((account: Account) => <div>{account.platform ? platformIcon(account.platform) : ''} {account.title}</div>)}</div>
+                <div className='in-monitor-list'> { (monitorData?.search_terms || []).map((search_term: SearchTerm) => <div>{drawFilterItem({ title: search_term?.term })}</div>)}</div>
+              </Panel>
+              </Collapse>
+              : <></>
+            }
+          
         </Space>
         : ''
       }

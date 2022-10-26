@@ -466,6 +466,7 @@ table {
 .tax-scroll {
     height: calc(92vh - 61px);
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .tax-line-cont {

@@ -45,7 +45,7 @@ export function Sidebar() {
           <ul>
             {/* <li><a className="inactive" href="/taxonomy">Taxonomy</a></li>
           <li><a className="inactive" href="/sources">Data Sources</a></li> */}
-            <li><Link to="results">Monitors<i className="icn icn-arrow arrw-dwn"></i></Link>
+            <li><Link to="/monitors">Monitors<i className="icn icn-arrow arrw-dwn"></i></Link>
               <ul>
 
                 {fetching ? (

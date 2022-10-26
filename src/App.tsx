@@ -46,7 +46,7 @@ function App() {
         <Col span={24}>
           <Routes>
             <Route path="/" element={<PrivateRoutes />} >
-              <Route path="/" element={<Results />} />
+              <Route path="/" element={<MonitorList />} />
               <Route path="/results/*" element={<Results />} />
               {/* <Route path="/summary/*" element={<Summary />} /> */}
               <Route path="/taxonomy/*" element={<Taxonomy />} />

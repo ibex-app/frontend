@@ -88,7 +88,7 @@ const TaxonomyProgress: React.FC = () => {
                 console.log('setfalse1', loading)
 
                 setMonitorProgress(res);
-                const timeout_: any = setTimeout(() => setTimeout_(timeout_), 15000);
+                const timeout_: any = setTimeout(() => setTimeout_(timeout_), 8000);
                 return;
               })
               .otherwise(() => {
@@ -115,7 +115,7 @@ const TaxonomyProgress: React.FC = () => {
           
             
           <Content>
-            { monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : 'Loading' }  
+            { monitorData ? <MonitorBlock monitorData={monitorData} hideButtons={true}></MonitorBlock> : 'Loading' }  
             {/* { monitorData ? <MonitorBlock ></MonitorBlock> : 'Loading' }   */}
             
             {
