@@ -125,7 +125,10 @@ export function LineChart({ axisX, axisY, filter, type}: ChartInputParams) {
     var endTime = startTime + (timeInterval == 7 ? numberOfWeeks : numberOfDays)
 
     let intervals: any = ['']
-    responce_data.forEach((i:any) => { if(!i[labelType].title){ i[labelType].title = i[labelType].label } })
+    responce_data.forEach((i:any) => { 
+      if(!i[labelType].title){ 
+        i[labelType].title = i[labelType].label || i[labelType].term || i[labelType].title
+    } })
 
     let post_label_values: [] = responce_data.map((i: any) => i[labelType].title).filter((v: any, i: any, a: any) => a.indexOf(v) === i)
 
@@ -148,7 +151,7 @@ export function LineChart({ axisX, axisY, filter, type}: ChartInputParams) {
         radius: 4
       }))
     labels = []
-    console.log(startTime, endTime)
+    // console.log(startTime, endTime)
 
     for (let timeAt = startTime; timeAt <= endTime; timeAt++) {
       var intervalDate = new Date(dateFrom);
@@ -159,9 +162,10 @@ export function LineChart({ axisX, axisY, filter, type}: ChartInputParams) {
 
       datasets.forEach((dataset: any) => {
         let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id[timeInterval == 7 ? 'week' :'day'] == timeAt)
+        // console.log(dataset.label, timeAt, match)
         if(!match.length){
           dataset.data.push(0)
-        } else if (labelType == 'platform'){
+        } else if (labelType == 'platform' || labelType == 'search_term_ids'  || labelType == 'account_id'){
           let count = match.reduce((a: any, b: any) => a += b.count, 0)
           dataset.data.push(count)
         } else {

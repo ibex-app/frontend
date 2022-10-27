@@ -67,26 +67,26 @@ const TaxonomyProgress: React.FC = () => {
 
   useEffect(() => {
     if (loading) return;
-    console.log('check1', loading)
+    // console.log('check1', loading)
     if (!monitorData) return;
-    // console.log(555, monitorData)
+    console.log(555, monitorData)
     setLoading(true);
-    console.log('setTrue1', loading)
+    // console.log('setTrue1', loading)
     clearTimeout_();
     const try_ = () => {
-        console.log('check2', loading)
+        // console.log('check2', loading)
         if (loading) return;
         setLoading(true);
-        console.log('setTrue2', loading)
+        // console.log('setTrue2', loading)
 
         pipe(
           then((fold(
             (err: Error) => console.log('errr', left(err)),
             (res: MonitorProgressResponse) => match(isFinalized(res))
               .with(false, () => {
-                console.log("Is Finalized ", isFinalized(res));
+                // console.log("Is Finalized ", isFinalized(res));
                 setLoading(false);
-                console.log('setfalse1', loading)
+                // console.log('setfalse1', loading)
 
                 setMonitorProgress(res);
                 const timeout_: any = setTimeout(() => setTimeout_(timeout_), 8000);
@@ -116,7 +116,7 @@ const TaxonomyProgress: React.FC = () => {
           
             
           <Content>
-            { monitorData ? <MonitorBlock monitorData={monitorData} hideButtons={true}></MonitorBlock> : 'Loading' }  
+            { monitorData ? <MonitorBlock monitorData={monitorData} hideButtons={true}></MonitorBlock> : '' }  
             {/* { monitorData ? <MonitorBlock ></MonitorBlock> : 'Loading' }   */}
             
             {

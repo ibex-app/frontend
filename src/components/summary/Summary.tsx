@@ -20,9 +20,9 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
     const [accountLoading, setAccountLoading] = useState(false);
     const [monitorData, setMonitorData] = useState<MonitorRespose>();
 
-    const [platformLoadingText, setPlatformLoadingText] = useState("Download");
-    const [keywordLoadingText, setKeywordLoadingText] = useState("Download");
-    const [accountLoadingText, setAccountLoadingText] = useState("Download");
+    const [platformLoadingText, setPlatformLoadingText] = useState("Download data aggregated by Platforms");
+    const [keywordLoadingText, setKeywordLoadingText] = useState("Download data aggregated by Search Terms");
+    const [accountLoadingText, setAccountLoadingText] = useState("Download data aggregated by Accounts");
     const { search } = useLocation();
     const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
@@ -41,7 +41,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
                 }
                 else {
                     setAccountLoading(false);
-                    setAccountLoadingText("Download");
+                    setAccountLoadingText("Download data aggregated by Accounts");
                     setFileLinkByAccounts(maybeData?.file_location);
                     window.location.href = maybeData?.file_location;
                 }
@@ -53,7 +53,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
                 }
                 else {
                     setKeywordLoading(false);
-                    setKeywordLoadingText("Download");
+                    setKeywordLoadingText("Download data aggregated by Search Terms");
                     setFileLinkByKeywords(maybeData?.file_location);
                     window.location.href = maybeData?.file_location;
                 }
@@ -65,7 +65,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
                 }
                 else {
                     setPlatformLoading(false);
-                    setPlatformLoadingText("Download");
+                    setPlatformLoadingText("Download data aggregated by Platforms");
                     setFileLinkByPlatforms(maybeData?.file_location);
                     window.location.href = maybeData?.file_location;
                 }
@@ -99,10 +99,10 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
 
     return <div className='results'>
 
-        {monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : 'Loading'}
+        {monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : ''}
 
         <div className='dashbord-block post'>
-            <div>By Platforms</div>
+            <div>Platforms</div>
             <LineChart type='line' axisX='platform' axisY='count' filter={filter} />
             <DoughnatChart axisX='platform' axisY='count' filter={filter} />
 
@@ -110,32 +110,36 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
                 {platformLoadingText}
             </button>
         </div>
-        <div className='dashbord-block post'>
-            <div>By keywords</div>
-            {/* <BarChart axisX='platform' axisY='count' filter={filter} /> */}
-            <LineChart type='bar' axisX='platform' axisY='count' filter={filter} />
-            {/* <DoughnutChart  axisX={keyword} axisY={count}/> */}
+        
+            { 
+            monitorData?.search_terms?.length ? <div className='dashbord-block post'>
+                <div>Search Terms</div>
+                {/* <BarChart axisX='platform' axisY='count' filter={filter} /> */}
+                <LineChart type='bar' axisX='search_term_ids' axisY='count' filter={filter} />
+                <DoughnatChart axisX='search_term_ids' axisY='count' filter={filter} />
 
-            <button onClick={() => generateDynamicLink('keyword', 'count')}>
-                {keywordLoadingText}
-            </button>
-        </div>
-        <div className='dashbord-block post'>
-            <div>By Accounts</div>
-            <LineChart type='line' axisX='platform' axisY='count' filter={filter} />
-            {/* <DoughnutChart  axisX={account} axisY={count}/> */}
+                <button onClick={() => generateDynamicLink('keyword', 'count')}>
+                    {keywordLoadingText}
+                </button></div> : ''
+            }
+            {
+            monitorData?.accounts?.length ? <div className='dashbord-block post'>
+                <div>Accounts</div>
+                <LineChart type='line' axisX='account_id' axisY='count' filter={filter} />
+                {/* <DoughnutChart  axisX={account} axisY={count}/> */}
 
-            <button onClick={() => generateDynamicLink('account', 'count')}>
-                {accountLoadingText}
-            </button>
-        </div>
+                <button onClick={() => generateDynamicLink('account', 'count')}>
+                    {accountLoadingText}
+                </button></div> : ''
+            }           
+        
 
         <div className='dashbord-block post'>
-            <div>All the posts</div>
+            {/* <div>All the posts</div> */}
 
             {/* <DoughnutChart  axisX={account} axisY={count}/> */}
             <button>
-                Download
+                Full data Download
             </button>
         </div>
 

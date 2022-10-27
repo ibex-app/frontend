@@ -69,11 +69,11 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
 
   const generate_dataset = (responce_data: any) => {
     return {
-      labels: responce_data.map((dataPoint:any) => dataPoint[axisX]),
+      labels: responce_data.map((dataPoint:any) => dataPoint[axisX].term || dataPoint[axisX].label),
       datasets: [{
-        data: responce_data.map((dataPoint:any) => dataPoint[axisY]),
-        backgroundColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX], index)),
-        borderColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX], index))
+        data: responce_data.map((dataPoint:any) => dataPoint.count),
+        backgroundColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX].term || dataPoint[axisX].label, index)),
+        borderColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX].term || dataPoint[axisX].label, index))
       }]
     }
   }
@@ -93,6 +93,7 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
       }
 
       let dataset_and_labels: any = generate_dataset(maybeData)
+      console.log(dataset_and_labels)
       setData(dataset_and_labels);
       setFetching(false);
     });
