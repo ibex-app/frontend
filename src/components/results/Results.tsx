@@ -58,13 +58,16 @@ export function Results() {
   }, [monitor?.accounts])
 
   return (
+    <>
+    <Sidebar />
     <Row >
-      <Col span={3} style={{ height: "100vh", position: "sticky", top: "0" }}>
-        <Sidebar />
+      <Col span={24} className="results-cont">
+      {!monitorLoading && <Filter data={filterData} onChange={setFilter} />}
       </Col>
-      <Col span={21} className="results-cont">
-        <Space direction="vertical" className="ant-space ant-space-vertical tax-mid mt-20" style={{ width: '80%' }}>
-          {!monitorLoading && <Filter data={filterData} onChange={setFilter} />}
+    </Row>
+    <Row align="middle">
+      <Col span={18} offset={3} className="results-cont mt-80">
+        {/* <Space direction="vertical" className="ant-space ant-space-vertical tax-mid mt-20" > */}
           <Routes>
             <Route path="/" element={<Posts filter={filters} allowRedirect />} />
             {/* <Route path="bar" element={<BarChart filter={filters} />} /> */}
@@ -74,8 +77,9 @@ export function Results() {
             <Route path="bubble" element={<BubbleChart />} />
             <Route path="summary" element={<Summary setFilter={setFilter} filter={filters} axisX="platform" axisY="count" />} />
           </Routes>
-        </Space>
+        {/* </Space> */}
       </Col>
     </Row>
+    </>
   );
 }

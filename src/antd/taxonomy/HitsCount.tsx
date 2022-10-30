@@ -129,6 +129,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
       rowKey='id'
       rowSelection={hitCountSelection}
       dataSource={hitsCountTableData}
+      pagination={{ defaultPageSize: 8}}
       columns={columns as any} />
   </div>
 }

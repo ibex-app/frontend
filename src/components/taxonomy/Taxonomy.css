@@ -92,7 +92,7 @@
 }
 
 .tax-mid {
-    width: 70%;
+    width: 75%;
     margin: 0 auto;
     position: relative;
 }
@@ -374,11 +374,11 @@ input[type="checkbox"] {
 .leftbox-title {
     width: 90%;
     margin-left: 5%;
-    height: 89px;
+    height: 66px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-    padding: 3.5vh 0 3.5vh 5%;
+    padding: 0 5% 0 5%;
     font-size: 20px;
     color: #b1b1b1;
     border-bottom: 2px solid gainsboro;
@@ -707,4 +707,9 @@ label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-b
     align-items: center;
     justify-content: space-around;
     font-weight: bold;
+}
+
+
+.tax-cont .top-filters .tax-mid{
+    width: 100%;
 }
