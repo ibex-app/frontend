@@ -136,9 +136,8 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
                 
             <h1><div className="post-content">Search Terms</div></h1>
 
-                {/* <BarChart axisX='platform' axisY='count' filter={filter} /> */}
-                {/* <TimeSeriesChart type='bar' axisX='search_term_ids' axisY='count' filter={filter} /> */}
-                {/* <DoughnatChart axisX='search_term_ids' axisY='count' filter={filter} /> */}
+                <TimeSeriesChart type='bar' axisX='search_term_ids' axisY='count' filter={filter} /> 
+                <DoughnatChart axisX='search_term_ids' axisY='count' filter={filter}  type='bar'/> 
 
                 <button onClick={() => generateDynamicLink('keyword', 'count')}>
                     {keywordLoadingText}
@@ -149,8 +148,8 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
                 
             <h1><div className="post-content">Accounts</div></h1>
 
-                {/* <TimeSeriesChart type='line' axisX='account_id' axisY='count' filter={filter} /> */}
-                {/* <DoughnatChart  axisX='account' axisY='count' filter={filter} type='bar' /> */}
+                <TimeSeriesChart type='line' axisX='account_id' axisY='count' filter={filter} />
+                <DoughnatChart  axisX='account_id' axisY='count' filter={filter} type='bar' />
 
                 <button onClick={() => generateDynamicLink('account', 'count')}>
                     {accountLoadingText}

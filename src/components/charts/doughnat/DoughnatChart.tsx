@@ -6,15 +6,17 @@ import Spinner from '../../../antd/Spinner/Spinner';
 import { ChartInputParams } from '../chartInputFilter';
 import { Get, Response, transform_filters_to_request } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
+// import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+// ChartJS.register(ChartDataLabels);
 
 
 export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
   const [fetching, setFetching] = useState(false);
   
   useEffect(() => {
-    if (Object.keys(filter).length) loadData();
+    if (Object.keys(filter).length && filter.time_interval_from && filter.time_interval_to) loadData();
   }, [filter]);
   
   let data_: any = {
@@ -37,23 +39,40 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
   var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
   
   const options = {
+    indexAxis: 'y' as const,
     maintainAspectRatio: false,
     type: 'line',
     responsive: true,
-    borderWidth: 6,
-    cutout: '92%',
+    // borderWidth: 6,
+    // cutout: '92%',
     borderJoinStyle: 'round',
-    spacing: 9,
+    // spacing: 9,
     plugins: {
+      // ChartDataLabels,
+      // doughnutlabel: {
+      //   labels: [{
+      //     text: '550',
+      //     font: {
+      //       size: 20,
+      //       weight: 'bold'
+      //     }
+      //   }, {
+      //     text: 'total'
+      //   }]
+      // },
+      // datalabels: {
+       
+      // },
       filler: {
         propagate: false,
       },
       legend: {
+        display: type !== 'bar',
         position: 'bottom' as const,
       },
       padding: {
-        top: 50,
-        left: 50,
+        top: 150,
+        left: 150,
         right: 15,
         bottom: 50
       },
@@ -71,17 +90,23 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
 
   const generate_dataset = (responce_data: any) => {
     return {
-      labels: responce_data.map((dataPoint:any) => dataPoint[axisX].term || dataPoint[axisX].label),
+      labels: responce_data.map((dataPoint:any) => dataPoint[axisX].term || dataPoint[axisX].label || dataPoint[axisX].title),
       datasets: [{
+        label: axisX,
         data: responce_data.map((dataPoint:any) => dataPoint.count),
-        backgroundColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX].term || dataPoint[axisX].label, index)),
-        borderColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX].term || dataPoint[axisX].label, index))
-      }]
+        backgroundColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX].term || dataPoint[axisX].label || dataPoint[axisX].title, index)),
+        borderColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX].term || dataPoint[axisX].label || dataPoint[axisX].title, index))
+      }],
+      innerText: 'total: ' + responce_data.map((dataPoint:any) => dataPoint.count).reduce((a:number, b:number) => a + b, 0)
     }
   }
 
   const loadData = () => {
     setFetching(true)
+    if(type == 'bar'){
+      options.plugins.legend.display = false
+      // options.plugins.legend.position = undefined
+    }
     const fetchData = Get('posts_aggregated', {
       post_request_params: transform_filters_to_request(filter),
       axisX: axisX,
@@ -101,8 +126,7 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
     });
   }
 
-  return (
-    <div className="chart-cont-sm">
+  return <div className="chart-cont-sm">
       <div className="chart">
         {
           fetching 
@@ -115,5 +139,4 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
         }
       </div>
     </div>
-  )
 }

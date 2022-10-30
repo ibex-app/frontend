@@ -104,11 +104,12 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
   const [timeInterval, setTimeInterval] = useState(1);
 
 
-  const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
+  const generate_dataset = (responce_data: any, labelType: string, filters: any, timeInterval: number) => {
     var dateFrom: Date = new Date(filters.time_interval_from)
     var dateTo: Date = new Date(filters.time_interval_to)
-    dateTo.setDate(dateTo.getDate() + timeInterval*3);
-    dateFrom.setDate(dateFrom.getDate() - timeInterval);
+    console.log('generate_dataset timeInterval', timeInterval)
+    dateTo.setDate(dateTo.getDate() + (timeInterval*2));
+    dateFrom.setDate(dateFrom.getDate() + timeInterval);
 
     var interval: number = (dateTo.getTime() - dateFrom.getTime())
     var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
@@ -132,7 +133,7 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
     } })
 
     let post_label_values: [] = responce_data.map((i: any) => i[labelType].title).filter((v: any, i: any, a: any) => a.indexOf(v) === i)
-
+    
     let datasets = type == 'line' 
       ? post_label_values.map((label: any, index: number) => ({
           label: label,
@@ -155,9 +156,11 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
     // console.log(startTime, endTime)
 
     for (let timeAt = startTime; timeAt <= endTime; timeAt++) {
-      var intervalDate = new Date(dateFrom);
-
-      dateFrom.setDate(dateFrom.getDate() + timeAt * timeInterval);
+      var intervalDate = new Date(firstJan);
+      // console.log(intervalDate.toDateString())
+      intervalDate.setDate(intervalDate.getDate() + (timeAt * timeInterval));
+      // console.log(timeAt * timeInterval)
+      // console.log(intervalDate.toDateString())
 
       labels.push(intervalDate.toISOString().slice(0, 10))
 
@@ -187,13 +190,19 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
     var dateTo: any = new Date(filter.time_interval_to)
     const diffTime: number = Math.abs(dateFrom - dateTo);
     const diffDays: number = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    setTimeInterval(diffDays < 14 ? 1 : 7)
-    
+    let timeInterval_: number = diffDays < 26 ? 1 : 7
+    // setTimeInterval(timeInterval_)
+
+    // console.log('filter.time_interval_from', filter.time_interval_from)
+    // console.log('filter.time_interval_to', filter.time_interval_to)
+    // console.log('diffDays', diffDays)
+    // console.log('setTimeInterval', timeInterval_)
+
     const fetchData = Get('posts_aggregated', {
       post_request_params: transform_filters_to_request(filter),
       axisX: axisX,
       axisY: axisY,
-      days: timeInterval
+      days: timeInterval_
     });
 
 
@@ -201,7 +210,7 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
       let maybeData: any = E.getOrElse(() => [data_])(_data)
       if (!maybeData.length) return
 
-      let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter)
+      let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter, timeInterval_)
       setData(dataset_and_labels);
       setFetching(false)
     });
