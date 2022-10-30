@@ -2424,3 +2424,13 @@ button.ant-btn span {
 
   height: auto;
 }
+
+.rbt-input-main{
+  min-width: 200px;
+}
+
+.blank-icon{
+  font-size: 0.8em;
+    color: #4670be;
+    cursor: pointer !important;
+}

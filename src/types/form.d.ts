@@ -26,7 +26,7 @@ interface Checkbox {
 }
 
 
-export type Option = { label: string, icon?: string | null, value?: any, render?: () => React.ReactNode };
+export type Option = { label: string, icon?: string | null, value?: any, url?: string, render?: () => React.ReactNode };
 
 interface Tag {
   allowNew?: boolean,

@@ -71,7 +71,7 @@ export const transform_filters_to_request = (filters: Filter) => {
     if (filters.persons) filters.persons = filters.persons.map((a: any) => a._id)
 
     if (filters.account_ids) filters.account_ids = filters.account_ids.map(({ id }: any) => id)
-    if (filters.search_terms) filters.search_terms = filters.search_terms.map(({ id }: any) => id)
+    if (filters.search_term_ids) filters.search_term_ids = filters.search_term_ids.map(({ id }: any) => id)
 
     return filters
 }

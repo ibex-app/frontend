@@ -39,7 +39,7 @@ export function Results() {
     });
 
     length(monitor.search_terms) && temp.push({
-      "id": "search_terms",
+      "id": "search_term_ids",
       "type": "tag",
       "title": "Search Terms",
       "value": [],
