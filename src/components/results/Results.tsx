@@ -63,13 +63,13 @@ export function Results() {
         <Sidebar />
       </Col>
       <Col span={21} className="results-cont">
-        <Space direction="vertical">
+        <Space direction="vertical" className="ant-space ant-space-vertical tax-mid mt-20" style={{ width: '80%' }}>
           {!monitorLoading && <Filter data={filterData} onChange={setFilter} />}
           <Routes>
             <Route path="/" element={<Posts filter={filters} allowRedirect />} />
             {/* <Route path="bar" element={<BarChart filter={filters} />} /> */}
             <Route path="graph" element={<GraphChart />} />
-            {/* <Route path="line" element={<LineChart filter={filters} />} /> */}
+            {/* <Route path="line" element={<TimeSeriesChart filter={filters} />} /> */}
             <Route path="map" element={<MapChart filter={filters} />} />
             <Route path="bubble" element={<BubbleChart />} />
             <Route path="summary" element={<Summary setFilter={setFilter} filter={filters} axisX="platform" axisY="count" />} />

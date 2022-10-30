@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { Bar  } from 'react-chartjs-2';
+import Spinner from '../../../antd/Spinner/Spinner';
 import { ChartInputParams } from '../chartInputFilter';
 import { Get, Response, transform_filters_to_request } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
@@ -8,7 +10,7 @@ import * as E from "fp-ts/lib/Either";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
+export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
   const [fetching, setFetching] = useState(false);
   
   useEffect(() => {
@@ -99,26 +101,19 @@ export function DoughnatChart({axisX, axisY, filter}: ChartInputParams) {
     });
   }
 
-  if (fetching) {
-    return (
-      <div className="chart-cont-sm" >Loading...</div>
-    )
-  }
-  
   return (
     <div className="chart-cont-sm">
-      {
-        fetching ? (
-          <div className="button-tr">
-            <div>
-              <div className="round-btn-transp">
-                Loading...
-              </div>
+      <div className="chart">
+        {
+          fetching 
+          ? <div className="button-tr">
+              <div><div className="chart-loadding"> Loading the chart... <Spinner /></div></div>
             </div>
-          </div>
-        ) : 
-        <div className="chart"><Doughnut options={options} data={data} /></div>
-      }
+          : type == 'bar' 
+                ? <Bar options={options} data={data} />
+                : <Doughnut options={options} data={data} />
+        }
+      </div>
     </div>
   )
 }

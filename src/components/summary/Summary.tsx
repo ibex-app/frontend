@@ -1,12 +1,13 @@
 import { Get, Response, transform_filters_to_request } from "../../shared/Http";
 import { SummaryInputParams } from "../charts/chartInputFilter";
 import { DoughnatChart } from "../charts/doughnat/DoughnatChart";
-import { LineChart } from "../charts/line/LineChart";
+import { TimeSeriesChart } from "../charts/time-series/TimeSeriesChart";
 import * as E from "fp-ts/lib/Either";
 import { useState, useMemo, useEffect } from "react";
 import { MonitorRespose } from '../../types/taxonomy';
 import { MonitorBlock } from '../../components/monitor/Monitor';
 import { useLocation } from 'react-router-dom';
+import { Space, List, Row, Col } from "antd";
 
 
 export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams) {
@@ -97,13 +98,32 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
         setFilter(filter)
     }, [monitorData]);
 
-    return <div className='results'>
+    return <List style={{ paddingRight: "20px" }} >
+
+    
+    {/* // <Space className="ant-space ant-space-vertical tax-mid mt-24"> */}
 
         {monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : ''}
-
+        {/* <Row className="post">
+            <Col span={16}>
+            <Space direction="vertical" style={{ width: "100%" }}>
+                <h1><div className="post-content">Platforms</div></h1>
+                <TimeSeriesChart type='line' axisX='platform' axisY='count' filter={filter} />
+            </Space>
+            </Col>
+            <Col span={4} >
+                <DoughnatChart axisX='platform' axisY='count' filter={filter} />
+            </Col>
+            <button onClick={() => generateDynamicLink('platform', 'count')}>
+                {platformLoadingText}
+            </button>
+      </Row> */}
         <div className='dashbord-block post'>
-            <div>Platforms</div>
-            <LineChart type='line' axisX='platform' axisY='count' filter={filter} />
+            <div>
+            <h1><div className="post-content">Platforms</div></h1>
+            </div>
+            
+            <TimeSeriesChart type='line' axisX='platform' axisY='count' filter={filter} />
             <DoughnatChart axisX='platform' axisY='count' filter={filter} />
 
             <button onClick={() => generateDynamicLink('platform', 'count')}>
@@ -113,10 +133,12 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
         
             { 
             monitorData?.search_terms?.length ? <div className='dashbord-block post'>
-                <div>Search Terms</div>
+                
+            <h1><div className="post-content">Search Terms</div></h1>
+
                 {/* <BarChart axisX='platform' axisY='count' filter={filter} /> */}
-                <LineChart type='bar' axisX='search_term_ids' axisY='count' filter={filter} />
-                <DoughnatChart axisX='search_term_ids' axisY='count' filter={filter} />
+                {/* <TimeSeriesChart type='bar' axisX='search_term_ids' axisY='count' filter={filter} /> */}
+                {/* <DoughnatChart axisX='search_term_ids' axisY='count' filter={filter} /> */}
 
                 <button onClick={() => generateDynamicLink('keyword', 'count')}>
                     {keywordLoadingText}
@@ -124,9 +146,11 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
             }
             {
             monitorData?.accounts?.length ? <div className='dashbord-block post'>
-                <div>Accounts</div>
-                <LineChart type='line' axisX='account_id' axisY='count' filter={filter} />
-                {/* <DoughnutChart  axisX={account} axisY={count}/> */}
+                
+            <h1><div className="post-content">Accounts</div></h1>
+
+                {/* <TimeSeriesChart type='line' axisX='account_id' axisY='count' filter={filter} /> */}
+                {/* <DoughnatChart  axisX='account' axisY='count' filter={filter} type='bar' /> */}
 
                 <button onClick={() => generateDynamicLink('account', 'count')}>
                     {accountLoadingText}
@@ -142,6 +166,6 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
                 Full data Download
             </button>
         </div>
-
-    </div>
+        </List>
+    {/* </Space> */}
 }

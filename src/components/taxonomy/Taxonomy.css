@@ -47,6 +47,13 @@
     font-weight: bold;
     margin-bottom: 40px;
 }
+.chart-loadding {
+    font-size: .8em;
+    margin-top: 20px;
+    padding: 11px 23px;
+    border-radius: 30px;
+    font-weight: bold;
+}
 
 .round-btn-transp.round-btn-transparent {
     background: none;
@@ -517,6 +524,8 @@ table {
 
 .leftbox-inner .ant-table-tbody>tr>td:nth-child(2) {
     max-width: 14vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .leftbox-inner .ant-table-tbody>tr>td {

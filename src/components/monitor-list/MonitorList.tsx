@@ -8,6 +8,8 @@ import * as E from "fp-ts/lib/Either";
 import { Monitor, MonitorRespose } from '../../types/taxonomy';
 import { Link, useNavigate } from 'react-router-dom';
 import { MonitorBlock } from '../../components/monitor/Monitor';
+import Spinner from '../../antd/Spinner/Spinner';
+
 
 const MonitorList: React.FC = () => {
   const [data, setData] = useState<MonitorRespose[]>([]);
@@ -62,9 +64,9 @@ const MonitorList: React.FC = () => {
   );
 
   useEffect(() => {
-    if(data?.length){
+    // if(data?.length){
       setFetching(false)
-    }
+    // }
   },[data])
 
   useEffect(() => {
@@ -123,52 +125,16 @@ const MonitorList: React.FC = () => {
         )
       }
       
-      <List
-      grid={{ gutter: 16, column: 4 }}
-      >
+      <List grid={{ gutter: 16, column: 4 }}>
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         {
-          !fetching ? (
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            {data.map((monitorItem: MonitorRespose) => {
-              let monitorDescription = "";
-              if (monitorItem.date_to) {
-                monitorDescription = monitorItem.descr + ' ' 
-                + monitorItem.date_from.toString().slice(0, 10) + monitorItem?.date_to.toString().slice(0, 10)
-              }
-              else {
-                monitorDescription = monitorItem.descr + ' ' 
-                + monitorItem.date_from.toString().slice(0, 10) + ""
-              }
-
-              return (
-                  <Col className="gutter-row" span={24}>
-                    
-                    {/* <Card
-                      // style={{ width: 300, marginTop: 16 }}
-                      className="post monitor"
-                      title={monitorItem.title}
-                      actions={[
-                        <Button onClick={() => navigate("/results/?monitor_id=" + monitorItem._id)}> <UnorderedListOutlined key="posts" /> Posts </Button>,
-                        <Button  onClick={() => navigate("/results/summary?monitor_id=" + monitorItem._id)}><PieChartOutlined key="summary" /> Download</Button>,
-                        <Button  onClick={() => showDuplicateModal(monitorItem)}><CopyOutlined key="duplicate" /> Duplicate</Button>,
-                        <Button  onClick={() => showDeleteModal(monitorItem)}><DeleteOutlined key="delete" /> Delete</Button>,
-                        // <CopyOutlined key="duplicate" onClick={() => showDuplicateModal(monitorItem)} />,
-                        // <PieChartOutlined />\
-                      ]}
-                    >
-                      <Meta                        
-                        // title={monitorItem.title}
-                        description={monitorDescription}
-                      /> 
-                    </Card> */}
+          fetching 
+            ? <span>Loading... <Spinner /></span>
+            : data.map((monitorItem: MonitorRespose) => <Col className="gutter-row" span={24}>
                     <MonitorBlock extraButtons={extraButtons} monitorData={monitorItem}></MonitorBlock>
-                  </Col>
-                )
-              })}
-              
-            </Row>
-          ) : "Loading"
+                  </Col>)
         }
+        </Row>
       </List>
       </Space>
       </Row>

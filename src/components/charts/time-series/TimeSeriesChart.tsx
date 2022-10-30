@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { Get, Response, transform_filters_to_request } from '../../../shared/Http';
 import * as E from "fp-ts/lib/Either";
+import Spinner from '../../../antd/Spinner/Spinner';
 
 import {
   Chart as ChartJS,
@@ -73,7 +74,7 @@ export const options = {
 
 
 
-export function LineChart({ axisX, axisY, filter, type}: ChartInputParams) {
+export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams) {
   useEffect(() => {
     if (!filter.time_interval_from || !filter.time_interval_to) return
     if (Object.keys(filter).length) loadData();
@@ -206,16 +207,12 @@ export function LineChart({ axisX, axisY, filter, type}: ChartInputParams) {
     });
   }
 
-  if (fetching) {
-    return (
-      <div className="chart-cont-l" >Loading...</div>
-    )
-  }
+ 
   return (
     <div className="chart-cont-l">
       {
         fetching 
-          ? <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>
+          ? <div className="button-tr"><div><div className="chart-loadding">Loading the chart...<Spinner /></div></div></div>
           : <div className="chart">
              { type == 'line' 
               ? <Line options={options} data={data} />

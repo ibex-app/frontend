@@ -1850,8 +1850,8 @@ button {
 }
 
 .results {
-  margin: 15px 0 15px 15px;
-  padding-right: 15px;
+  /* margin: 15px 0 15px 15px;
+  padding-right: 15px; */
   overflow: hidden;
   min-height: 80vh;
 }
@@ -2293,14 +2293,15 @@ button.ant-btn span {
 }
 
 .results {
-  margin: 15px 0 15px 15px;
-  padding-right: 15px;
+  /* margin: 15px 0 15px 15px; */
+  /* padding-right: 15px; */
   overflow: hidden;
   min-height: 200px;
   position: relative;
   height: 100%;
   width: 85vw;
-  top: 2rem;
+  padding: 0 3px;
+  /* top: 2rem; */
 }
 
 

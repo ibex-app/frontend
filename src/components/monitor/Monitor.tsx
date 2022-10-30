@@ -53,7 +53,7 @@ export const MonitorBlock = ({ monitorData, extraButtons, hideButtons }: Monitor
               {
                 monitorData.status > 2 
                 ? <>
-                <Col span={12}><Button className='post-btn' onClick={() => navigate("/results/?monitor_id=" + monitorData._id)}> <UnorderedListOutlined key="posts" /> Posts </Button> </Col>
+                <Col span={12}><Button className='post-btn' onClick={() => navigate("/results?monitor_id=" + monitorData._id)}> <UnorderedListOutlined key="posts" /> Posts </Button> </Col>
                 <Col span={12}><Button className='post-btn'  onClick={() => navigate("/results/summary?monitor_id=" + monitorData._id)}><CloudDownloadOutlined key="summary" /> Download</Button></Col>
                 </>
                 : monitorData.status == 3
