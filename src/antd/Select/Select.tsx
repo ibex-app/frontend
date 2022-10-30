@@ -55,7 +55,13 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     substring: userValueDebounced,
     platforms: []
   });
-  useEffect(() => data && setSuggestions(data), [data]);
+  useEffect(() => {
+    if (data) {
+      setUserValue('');
+      ref.current.state.text = "";
+      setSuggestions(data);
+    }
+  }, [data]);
 
   const newChecker = (newVal: string, props: any) => {
     const selected = map<{ label: string }, string>(({ label }) => label)(props.selected);
@@ -87,8 +93,8 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     setValue(newVal);
     onChange!(newVal);
   }, [val]);
-  
-  const openInNewTab = (url:any) => {
+
+  const openInNewTab = (url: any) => {
     window.open(url, '_blank');
   }
 
@@ -110,7 +116,7 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     emptyLabel={requestData && !data && userValue ? "Loading..." : "No results found."}
     renderMenuItemChildren={(option: Option, props: any, index: number) => {
       if (option.render) return option.render;
-      return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span> 
+      return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span>
         <a className="blank-icon" onClick={e => { e.stopPropagation(); e.preventDefault(); openInNewTab(option.url); }} target='_blank' href={option.url}><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a></> : option.label || option
     }}
     renderToken={(option: Option, props: any, index: number) =>

@@ -4,6 +4,7 @@ import { string } from "fp-ts";
 interface FormCommon {
   id: number | string,
   type: string;
+  name?: string;
   title?: string;
   children?: FormElement[];
   value?: any;

@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormElement } from "../../types/form";
 
 export const hitsCountFormItem: FormElement = {
-  id: 0,
+  id: "search_terms",
   type: "text",
+  name: "search_terms",
   placeholder: "Search term",
   prefix: <FontAwesomeIcon icon={faMagnifyingGlass} />
 }
 
 export const accountHitsCountFormItem: FormElement = {
-  id: 0,
+  id: "accounts",
   type: "tag",
   placeholder: "Account name",
   prefix: <FontAwesomeIcon icon={faMagnifyingGlass} />,

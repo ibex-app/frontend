@@ -53,6 +53,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>([]);
 
   const [form] = useForm();
+  const accounts = Form.useWatch('accounts', form);
 
   useEffect(() => {
     data && setIsLoading(data?.is_loading);
@@ -97,14 +98,14 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     const d = dataFormatted as any
     const t = typeof val === 'string' ? val : val[0]?.label;
 
-    if (d.find(({ title }: any) => title.toLowerCase() === t.toLowerCase())) {
+    if (d?.find(({ title }: any) => title?.toLowerCase() === t?.toLowerCase())) {
       errorModal({ title: 'Error', content: 'Search term already exists' });
       return
     }
 
     addNewHitsCount(typeof val === 'string' ? val : val[0]);
     form.resetFields();
-  }, [form, addNewHitsCount]);
+  }, [form, addNewHitsCount, dataFormatted]);
 
   useEffect(() => setPristine(
     equals(hitsCountTableData, dataFormatted as any) || !hitsCountTableData.length
@@ -118,6 +119,12 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     is_loading: isLoading
   }), [hitCountsSelected, hitsCountTableData, type, dataFormatted, pristine, isLoading]);
 
+  useEffect(() => {
+    if (accounts && typeof accounts[0] === 'object') {
+      onHitsCountAdd([accounts]);
+    }
+  }, [accounts, onHitsCountAdd]);
+
   return <div className="leftbox-inner">
     <Form form={form} onFinish={onHitsCountAdd}>
       <Space size="small">
@@ -129,7 +136,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
       rowKey='id'
       rowSelection={hitCountSelection}
       dataSource={hitsCountTableData}
-      pagination={{ defaultPageSize: 8}}
+      pagination={{ defaultPageSize: 8 }}
       columns={columns as any} />
   </div>
 }
