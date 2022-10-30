@@ -79,12 +79,12 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
     },
   };
 
-  const getCol = (label: string, index: number) => {
+  const getCol = (dataPoint: any, index: number) => {
+    const label:string = dataPoint.platform || dataPoint.label || dataPoint.title
     let col: string = ''
     exactCols.forEach((exactCol:any) => {
       if(exactCol[0] === label) col = exactCol[1]
     })
-    
     return col || cols[index]
   }
 
@@ -94,8 +94,8 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
       datasets: [{
         label: axisX,
         data: responce_data.map((dataPoint:any) => dataPoint.count),
-        backgroundColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX].term || dataPoint[axisX].label || dataPoint[axisX].title, index)),
-        borderColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX].term || dataPoint[axisX].label || dataPoint[axisX].title, index))
+        backgroundColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX], index)),
+        borderColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX], index))
       }],
       innerText: 'total: ' + responce_data.map((dataPoint:any) => dataPoint.count).reduce((a:number, b:number) => a + b, 0)
     }
