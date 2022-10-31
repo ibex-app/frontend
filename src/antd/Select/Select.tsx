@@ -4,10 +4,9 @@ import { last, map, pipe } from "ramda";
 
 import './Select.css';
 import { useCallback, useEffect, useRef, useState } from "react";
-import { filterHasOperator, filterOperatorUpper, platformIcon, useDebounce } from "../../shared/Utils";
+import { filterHasOperator, filterOperatorUpper, platformIcon, useDebounce, blankLink } from "../../shared/Utils";
 import { useDynamicReqState } from '../../state/useDynamicReqState';
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 
 
@@ -94,9 +93,6 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     onChange!(newVal);
   }, [val]);
 
-  const openInNewTab = (url: any) => {
-    window.open(url, '_blank');
-  }
 
   useEffect(() => {
     selected && setValue(selected);
@@ -116,8 +112,7 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     emptyLabel={requestData && !data && userValue ? "Loading..." : "No results found."}
     renderMenuItemChildren={(option: Option, props: any, index: number) => {
       if (option.render) return option.render;
-      return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span>
-        <a className="blank-icon" onClick={e => { e.stopPropagation(); e.preventDefault(); openInNewTab(option.url); }} target='_blank' href={option.url}><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a></> : option.label || option
+      return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span> {blankLink(option.url)}</> : option.label || option
     }}
     renderToken={(option: Option, props: any, index: number) =>
       <CustomToken option={option} index={index} onRemove={onRemove} />

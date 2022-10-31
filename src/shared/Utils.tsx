@@ -5,6 +5,7 @@ import { match } from 'ts-pattern';
 import { faFacebook, faTwitter, faYoutube, faTelegram } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router-dom";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 export const dateFormat = "DD.MM.YYYY";
 
@@ -138,6 +139,14 @@ export const useDebounce = (value: any, delay: number) => {
     [value, delay]
   );
   return debouncedValue;
+}
+
+const openInNewTab = (url: any) => {
+  window.open(url, '_blank');
+}
+
+export const blankLink = (option: any) => {
+  return <a className="blank-icon" onClick={e => { e.stopPropagation(); e.preventDefault(); openInNewTab(option.url); }} target='_blank' href={option.url}><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a>
 }
 
 export const platformIcon = (platform: string) =>

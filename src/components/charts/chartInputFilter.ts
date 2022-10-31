@@ -14,5 +14,5 @@ export type ChartInputParams = {
   axisX: string;
   axisY: string;
   filter: Filter,
-  type?: 'bar' | 'line'
+  type?: 'bar' | 'doughnat' | 'line'
 }

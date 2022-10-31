@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Col, Row, Layout, Space, Spin } from 'antd';
+import { Col, Row, Layout, Space, Spin, Button, List } from 'antd';
 import * as E from "fp-ts/lib/Either";
 import { Link } from "react-router-dom";
 
@@ -111,7 +111,18 @@ const TaxonomyProgress: React.FC = () => {
 
   return (
     <>
-      <div className='data-collection-content'>
+      
+      <div className="tax-title-line">
+        <div className="tax-mid">Monitors <Link to='/'>         <Button>Exit</Button>            </Link></div>
+        {/* <div className="tax-mid">Monitors  </div> */}
+
+      </div>
+      <Row justify="center" className="tax-scroll monitor-list">
+        <Space className="tax-mid mt-20" direction="vertical" size="middle">
+        <List grid={{ gutter: 16, column: 4 }}>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+
+      
         {
           
             
@@ -141,7 +152,11 @@ const TaxonomyProgress: React.FC = () => {
             }
               </Content>
         }
-      </div>
+  
+      </Row>
+      </List>
+      </Space>
+      </Row>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { ColumnsType } from 'antd/lib/table';
-import { formatNum, platformIcon } from '../../shared/Utils';
+import { formatNum, platformIcon, blankLink } from '../../shared/Utils';
 import { drawFilterItem } from '../../shared/Utils/Taxonomy';
 import { AccountItem, HitsCountItem } from '../../types/hitscount';
 import { match } from 'ts-pattern';
@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Option } from '../../types/form';
 import { anyPass, propSatisfies } from 'ramda';
+
 
 export const hitsCountCalcItems = ['hits_count', 'facebook', 'telegram', 'twitter', 'youtube', 'vkontakte'];
 const isOverLimit = propSatisfies(x => x > 10000)
@@ -27,6 +28,8 @@ const renderCell = (value: number | undefined | null) => match(value)
       {formatNum(val)}
     </span>
   )
+
+
 
 export const createSearchTermColumns = (platforms: string[], deleteSearchTerm: any) => {
   let cols: ColumnsType<HitsCountItem> = [{
@@ -64,7 +67,7 @@ export const createAccountColumns = (deleteSearchTerm: (title: string) => void):
     title: "Account",
     key: "title",
     dataIndex: "title",
-    render: (title, { platform }) => <>{platformIcon(platform)} {title}</>
+    render: (title, { platform, url }) => <>{platformIcon(platform)} {title} {blankLink(url)}</>
   }, {
     title: "Count",
     key: "hits_count",

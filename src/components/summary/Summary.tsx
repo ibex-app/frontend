@@ -27,6 +27,17 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
     const { search } = useLocation();
     const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
+    const chertBlock = (title: string, axisX: string, axisY: string, type: 'doughnat' | 'bar') => <div className='dashbord-block post'>
+        <div>
+            <h1><div className="post-content">{title}</div></h1>
+        </div>
+        <TimeSeriesChart type='line' axisX={axisX} axisY={axisY} filter={filter} />
+        <DoughnatChart axisX={axisX} axisY={axisY} filter={filter} type={type} />
+        <button onClick={() => generateDynamicLink(axisX, axisY)}>
+            {platformLoadingText}
+        </button>
+    </div>
+
     const getDownloadLink = (axisX: string, axisY: string) => {
         const fetchData = Get('download_posts_aggregated', {
             post_request_params: transform_filters_to_request(filter),
@@ -100,8 +111,8 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
 
     return <List style={{ paddingRight: "20px" }} >
 
-    
-    {/* // <Space className="ant-space ant-space-vertical tax-mid mt-24"> */}
+
+        {/* // <Space className="ant-space ant-space-vertical tax-mid mt-24"> */}
 
         {monitorData ? <MonitorBlock monitorData={monitorData}></MonitorBlock> : ''}
         {/* <Row className="post">
@@ -117,85 +128,20 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
             <button onClick={() => generateDynamicLink('platform', 'count')}>
                 {platformLoadingText}
             </button>
-      </Row> */}
-        <div className='dashbord-block post'>
-            <div>
-            <h1><div className="post-content">Posts per Platform</div></h1>
-            </div>
-            
-            <TimeSeriesChart type='line' axisX='platform' axisY='count' filter={filter} />
-            <DoughnatChart axisX='platform' axisY='count' filter={filter} />
-
-            <button onClick={() => generateDynamicLink('platform', 'count')}>
-                {platformLoadingText}
-            </button>
-        </div>
-        <div className='dashbord-block post'>
-            <div>
-            <h1><div className="post-content">Engagement per Platform</div></h1>
-            </div>
-            
-            <TimeSeriesChart type='line' axisX='platform' axisY='total' filter={filter} />
-            <DoughnatChart axisX='platform' axisY='total' filter={filter} />
-
-            <button onClick={() => generateDynamicLink('platform', 'total')}>
-                {platformLoadingText}
-            </button>
-        </div>
-            { 
-            monitorData?.search_terms?.length 
-                ?<>
-                <div className='dashbord-block post'>
-                
-                <h1><div className="post-content">Posts per Search Terms</div></h1>
-
-                <TimeSeriesChart type='bar' axisX='search_term_ids' axisY='count' filter={filter} /> 
-                <DoughnatChart axisX='search_term_ids' axisY='count' filter={filter}  type='bar'/> 
-
-                <button onClick={() => generateDynamicLink('keyword', 'count')}>
-                    {keywordLoadingText}
-                </button></div>
-                <div className='dashbord-block post'>
-                
-                <h1><div className="post-content">Engagement per Search Terms</div></h1>
-
-                <TimeSeriesChart type='bar' axisX='search_term_ids' axisY='total' filter={filter} /> 
-                <DoughnatChart axisX='search_term_ids' axisY='total' filter={filter}  type='bar'/> 
-
-                <button onClick={() => generateDynamicLink('keyword', 'total')}>
-                    {keywordLoadingText}
-                </button></div>
-                </>
-                 
-                 : ''
-            }
-            {
-            monitorData?.accounts?.length ? 
-            <>
-            <div className='dashbord-block post'>
-                
-            <h1><div className="post-content">Posts per Account</div></h1>
-
-                <TimeSeriesChart type='line' axisX='account_id' axisY='count' filter={filter} />
-                <DoughnatChart  axisX='account_id' axisY='count' filter={filter} type='bar' />
-
-                <button onClick={() => generateDynamicLink('account', 'count')}>
-                    {accountLoadingText}
-                </button></div> 
-                <div className='dashbord-block post'>
-                
-            <h1><div className="post-content">Engagement per Account</div></h1>
-
-                <TimeSeriesChart type='line' axisX='account_id' axisY='total' filter={filter} />
-                <DoughnatChart  axisX='account_id' axisY='total' filter={filter} type='bar' />
-
-                <button onClick={() => generateDynamicLink('account', 'total')}>
-                    {accountLoadingText}
-                </button></div> 
-            </>
-                : ''
-            }           
-        
+        </Row> */
+        }
+        {/* {chertBlock('Posts per Platform', 'platform', 'count', 'doughnat')} */}
+        {chertBlock('Engagement per Platform', 'platform', 'total', 'doughnat')}
+        {
+            monitorData?.search_terms?.length ? <>
+                {chertBlock('Posts per Search Term', 'search_term_ids', 'count', 'bar')}
+                {chertBlock('Engagement per Search Term', 'search_term_ids', 'total', 'bar')} </> : ''
+        }
+        {
+            monitorData?.accounts?.length && false ? <>
+                {chertBlock('Posts per Account', 'account_id', 'count', 'bar')}
+                {chertBlock('Engagement per Account', 'account_id', 'total', 'bar')} </> : ''
+        }
 
         <div className='dashbord-block post'>
             {/* <div>All the posts</div> */}
@@ -205,6 +151,5 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
                 Full data Download
             </button>
         </div>
-        </List>
-    {/* </Space> */}
+    </List>
 }

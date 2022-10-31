@@ -126,10 +126,10 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   }, [accounts, onHitsCountAdd]);
 
   return <div className="leftbox-inner">
-    <Form form={form} onFinish={onHitsCountAdd}>
-      <Space size="small">
+    <Form form={form} onFinish={onHitsCountAdd} >
+      <Space size="small" className={type === 'accounts' ? 'tax-no-button' : ''}>
         {getElem(type === 'accounts' ? accountHitsCountFormItem : hitsCountFormItem)}
-        {getElem({ id: 1, type: "button", label: "Add" })}
+        {type !== 'accounts' ? getElem({ id: 1, type: "button", label: "Add" }) : ''}
       </Space>
     </Form>
     <Table
