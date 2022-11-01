@@ -27,6 +27,17 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
         <DoughnatChart axisX={axisX} axisY={axisY} filter={filter} type={type} />
         <button disabled={downloading} onClick={() => getDownloadLink(axisX, axisY, timeInterval || 1)}><CloudDownloadOutlined key="summary" /> Download</button>
     </div>
+    const getAllPosts = () => {
+        setDownloading(true)
+        const fetchData = Get('download_posts', {...transform_filters_to_request(filter)});
+
+        fetchData.then((_data: Response<any>) => {
+            let maybeData: any = E.getOrElse(() => setFileLink)(_data)
+            if (!maybeData.file_location) return;
+            setDownloading(false);
+            window.location.href = maybeData?.file_location;
+        });
+    }
 
     const getDownloadLink = (axisX: string, axisY: string, timeInterval_:number) => {
         setDownloading(true)
@@ -41,7 +52,6 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
             let maybeData: any = E.getOrElse(() => setFileLink)(_data)
             if (!maybeData.file_location) return;
             setDownloading(false);
-            // setFileLink(maybeData?.file_location);
             window.location.href = maybeData?.file_location;
         });
     }
@@ -109,9 +119,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
             {/* <div>All the posts</div> */}
 
             {/* <DoughnutChart  axisX={account} axisY={count}/> */}
-            <button>
-                Full data Download
-            </button>
+            <button disabled={downloading} onClick={getAllPosts}> <CloudDownloadOutlined key="summary" /> Full data Download </button>
         </div>
     </List>
 }
