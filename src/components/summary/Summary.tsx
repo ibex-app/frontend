@@ -25,16 +25,16 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
         </div>
         <TimeSeriesChart type='line' axisX={axisX} axisY={axisY} filter={filter} timeInterval={timeInterval}/>
         <DoughnatChart axisX={axisX} axisY={axisY} filter={filter} type={type} />
-        <button disabled={downloading} onClick={() => getDownloadLink(axisX, axisY)}><CloudDownloadOutlined key="summary" /> Download</button>
+        <button disabled={downloading} onClick={() => getDownloadLink(axisX, axisY, timeInterval || 1)}><CloudDownloadOutlined key="summary" /> Download</button>
     </div>
 
-    const getDownloadLink = (axisX: string, axisY: string) => {
+    const getDownloadLink = (axisX: string, axisY: string, timeInterval_:number) => {
         setDownloading(true)
         const fetchData = Get('download_posts_aggregated', {
             post_request_params: transform_filters_to_request(filter),
             axisX: axisX,
             axisY: axisY,
-
+            days: timeInterval_
         });
 
         fetchData.then((_data: Response<any>) => {
@@ -44,10 +44,6 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
             // setFileLink(maybeData?.file_location);
             window.location.href = maybeData?.file_location;
         });
-    }
-
-    const generateDynamicLink = (axisX: string, axisY: string) => {
-        getDownloadLink(axisX, axisY);
     }
 
     useEffect(() => {
