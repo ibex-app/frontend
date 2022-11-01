@@ -11,6 +11,16 @@ import * as E from "fp-ts/lib/Either";
 ChartJS.register(ArcElement, Tooltip, Legend);
 // ChartJS.register(ChartDataLabels);
 
+const exactCols:any = {
+  facebook: '#2e89ff',
+  youtube: '#f10000',
+  twitter: '#51a3e3'
+}
+const cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
+export const getCol = (dataPoint: any, index: number) => {
+  const label:string = dataPoint.platform || dataPoint.label || dataPoint.title
+  return exactCols[label] || cols[index]
+}
 
 export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
   const [fetching, setFetching] = useState(false);
@@ -30,13 +40,7 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
   
   const [data, setData] = useState(data_);
   
-  var exactCols = [ 
-    ['facebook', '#2e89ff'],
-    ['youtube', '#f10000'],
-    ['twitter', '#51a3e3']
-  ]
-
-  var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
+  
   
   const options = {
     indexAxis: 'y' as const,
@@ -79,25 +83,19 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
     },
   };
 
-  const getCol = (dataPoint: any, index: number) => {
-    const label:string = dataPoint.platform || dataPoint.label || dataPoint.title
-    let col: string = ''
-    exactCols.forEach((exactCol:any) => {
-      if(exactCol[0] === label) col = exactCol[1]
-    })
-    return col || cols[index]
-  }
+ 
 
   const generate_dataset = (responce_data: any) => {
+    responce_data.forEach((dataPoint:any) => dataPoint.label = dataPoint.label || dataPoint.title || dataPoint.term || (dataPoint.platform  + '_' + dataPoint.account_title))
     return {
-      labels: responce_data.map((dataPoint:any) => dataPoint[axisX].term || dataPoint[axisX].label || dataPoint[axisX].title),
+      labels: responce_data.map((dataPoint:any) => dataPoint.label),
       datasets: [{
         label: axisX,
         data: responce_data.map((dataPoint:any) => dataPoint.count),
-        backgroundColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX], index)),
-        borderColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint[axisX], index))
+        backgroundColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint, index)),
+        // borderColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint.platform, index))
       }],
-      innerText: 'total: ' + responce_data.map((dataPoint:any) => dataPoint.count).reduce((a:number, b:number) => a + b, 0)
+      // innerText: 'total: ' + responce_data.map((dataPoint:any) => dataPoint.count).reduce((a:number, b:number) => a + b, 0)
     }
   }
 
@@ -120,7 +118,7 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
       }
 
       let dataset_and_labels: any = generate_dataset(maybeData)
-      console.log(dataset_and_labels)
+      // console.log(dataset_and_labels)
       setData(dataset_and_labels);
       setFetching(false);
     });

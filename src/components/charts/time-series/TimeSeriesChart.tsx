@@ -17,6 +17,7 @@ import {
 } from 'chart.js';
 import { Line, Bar  } from 'react-chartjs-2';
 import { ChartInputParams } from '../chartInputFilter';
+import {getCol} from '../doughnat/DoughnatChart'
 
 ChartJS.register(Filler);
 
@@ -74,18 +75,14 @@ export const options = {
 
 
 
-export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams) {
+export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: ChartInputParams) {
   useEffect(() => {
-    if (!filter.time_interval_from || !filter.time_interval_to) return
+    if (!filter.time_interval_from || !filter.time_interval_to || !timeInterval) return
     if (Object.keys(filter).length) loadData();
   }, [filter]);
 
   const [fetching, setFetching] = useState(false);
-  const exactCols:any = {
-    facebook: '#2e89ff',
-    youtube: '#f10000',
-    twitter: '#51a3e3'
-  }
+  
   var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
 
   let labels = [''];
@@ -101,15 +98,16 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
   };
 
   const [data, setData] = useState(data_);
-  const [timeInterval, setTimeInterval] = useState(1);
 
 
-  const generate_dataset = (responce_data: any, labelType: string, filters: any, timeInterval: number) => {
+
+  const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
+
     var dateFrom: Date = new Date(filters.time_interval_from)
     var dateTo: Date = new Date(filters.time_interval_to)
-    console.log('generate_dataset timeInterval', timeInterval)
-    dateTo.setDate(dateTo.getDate() + (timeInterval*2));
-    dateFrom.setDate(dateFrom.getDate() + timeInterval);
+    // console.log('generate_dataset timeInterval', timeInterval)
+    dateTo.setDate(dateTo.getDate() + ((timeInterval || 1)*2));
+    dateFrom.setDate(dateFrom.getDate() + (timeInterval || 1));
 
     var interval: number = (dateTo.getTime() - dateFrom.getTime())
     var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
@@ -127,25 +125,26 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
     var endTime = startTime + (timeInterval == 7 ? numberOfWeeks : numberOfDays)
 
     let intervals: any = ['']
-    responce_data.forEach((i:any) => { 
-      if(!i[labelType].title){ 
-        i[labelType].title = i[labelType].label || i[labelType].term || i[labelType].title
-    } })
+    responce_data.forEach((dataPoint:any) => dataPoint.label = dataPoint.label || dataPoint.title || dataPoint.term || (dataPoint.platform  + '_' + dataPoint.account_title))
 
-    let post_label_values: [] = responce_data.map((i: any) => i[labelType].title).filter((v: any, i: any, a: any) => a.indexOf(v) === i)
-    
+    let post_label_values: [] = responce_data.map((dataPoint: any) => ({label: dataPoint.label, platform: dataPoint.platform}))
+                                             .filter((value:any, index:number, self: any) =>
+                                             index === self.findIndex((t: any) => (
+                                               t.label === value.label && t.platform === value.platform
+                                             ))
+                                           )
     let datasets = type == 'line' 
       ? post_label_values.map((label: any, index: number) => ({
-          label: label,
+          label: label.label,
           data: [0],
-          borderColor:  exactCols[label] || cols[index],
+          borderColor:  getCol(label, index),
           lineTension: .35,
           radius: 4  
         }))
       : post_label_values.map((label: any, index: number) => ({
-        label: label,
+        label: label.label,
         data: [0],
-        backgroundColor: exactCols[label] || cols[index],
+        backgroundColor: getCol(label, index),
         fill: true,
         pointBackgroundColor: 'rgba(0,0,0,.3)',
         borderColor: 'rgba(0,0,0,0)',
@@ -157,15 +156,12 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
 
     for (let timeAt = startTime; timeAt <= endTime; timeAt++) {
       var intervalDate = new Date(firstJan);
-      // console.log(intervalDate.toDateString())
-      intervalDate.setDate(intervalDate.getDate() + (timeAt * timeInterval));
-      // console.log(timeAt * timeInterval)
-      // console.log(intervalDate.toDateString())
+      intervalDate.setDate(intervalDate.getDate() + (timeAt * (timeInterval || 1)));
 
       labels.push(intervalDate.toISOString().slice(0, 10))
 
       datasets.forEach((dataset: any) => {
-        let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id[timeInterval == 7 ? 'week' :'day'] == timeAt)
+        let match = responce_data.filter((dataPoint: any) => dataPoint.label == dataset.label && dataPoint[timeInterval == 7 ? 'week' :'day'] == timeAt)
         // console.log(dataset.label, timeAt, match)
         if(!match.length){
           dataset.data.push(0)
@@ -177,7 +173,7 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
         }
       })
     }
-    
+    // console.log(datasets)
     return {
       labels,
       datasets: datasets,
@@ -185,24 +181,14 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
   }
 
   const loadData = () => {
+    if(!timeInterval) return
     setFetching(true)
-    var dateFrom: any = new Date(filter.time_interval_from)
-    var dateTo: any = new Date(filter.time_interval_to)
-    const diffTime: number = Math.abs(dateFrom - dateTo);
-    const diffDays: number = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    let timeInterval_: number = diffDays < 26 ? 1 : 7
-    // setTimeInterval(timeInterval_)
-
-    // console.log('filter.time_interval_from', filter.time_interval_from)
-    // console.log('filter.time_interval_to', filter.time_interval_to)
-    // console.log('diffDays', diffDays)
-    // console.log('setTimeInterval', timeInterval_)
 
     const fetchData = Get('posts_aggregated', {
       post_request_params: transform_filters_to_request(filter),
       axisX: axisX,
       axisY: axisY,
-      days: timeInterval_
+      days: timeInterval
     });
 
 
@@ -210,7 +196,7 @@ export function TimeSeriesChart({ axisX, axisY, filter, type}: ChartInputParams)
       let maybeData: any = E.getOrElse(() => [data_])(_data)
       if (!maybeData.length) return
 
-      let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter, timeInterval_)
+      let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter)
       setData(dataset_and_labels);
       setFetching(false)
     });

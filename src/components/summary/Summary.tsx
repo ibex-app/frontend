@@ -8,22 +8,14 @@ import { MonitorRespose } from '../../types/taxonomy';
 import { MonitorBlock } from '../../components/monitor/Monitor';
 import { useLocation } from 'react-router-dom';
 import { Space, List, Row, Col } from "antd";
-
+import { CloudDownloadOutlined } from '@ant-design/icons';
 
 export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams) {
     const [fileLink, setFileLink] = useState<any>("");
-    const [fileLinkByPlatforms, setFileLinkByPlatforms] = useState<any>("");
-    const [fileLinkByKeywords, setFileLinkByKeywords] = useState<any>("");
-    const [fileLinkByAccounts, setFileLinkByAccounts] = useState<any>("");
-
-    const [platformLoading, setPlatformLoading] = useState(false);
-    const [keywordLoading, setKeywordLoading] = useState(false);
-    const [accountLoading, setAccountLoading] = useState(false);
+    const [downloading, setDownloading] = useState(false);
+    const [timeInterval, setTimeinterval] = useState<number>();
     const [monitorData, setMonitorData] = useState<MonitorRespose>();
 
-    const [platformLoadingText, setPlatformLoadingText] = useState("Download data aggregated by Platforms");
-    const [keywordLoadingText, setKeywordLoadingText] = useState("Download data aggregated by Search Terms");
-    const [accountLoadingText, setAccountLoadingText] = useState("Download data aggregated by Accounts");
     const { search } = useLocation();
     const monitor_id = useMemo(() => new URLSearchParams(search).get('monitor_id') || "", [search]);
 
@@ -31,65 +23,30 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
         <div>
             <h1><div className="post-content">{title}</div></h1>
         </div>
-        <TimeSeriesChart type='line' axisX={axisX} axisY={axisY} filter={filter} />
+        <TimeSeriesChart type='line' axisX={axisX} axisY={axisY} filter={filter} timeInterval={timeInterval}/>
         <DoughnatChart axisX={axisX} axisY={axisY} filter={filter} type={type} />
-        <button onClick={() => generateDynamicLink(axisX, axisY)}>
-            {platformLoadingText}
-        </button>
+        <button disabled={downloading} onClick={() => getDownloadLink(axisX, axisY)}><CloudDownloadOutlined key="summary" /> Download</button>
     </div>
 
     const getDownloadLink = (axisX: string, axisY: string) => {
+        setDownloading(true)
         const fetchData = Get('download_posts_aggregated', {
             post_request_params: transform_filters_to_request(filter),
             axisX: axisX,
-            axisY: axisY
+            axisY: axisY,
+
         });
 
         fetchData.then((_data: Response<any>) => {
-            if (axisX === 'account') {
-                let maybeData: any = E.getOrElse(() => fileLinkByAccounts)(_data)
-                if (!maybeData.file_location) {
-                    return;
-                }
-                else {
-                    setAccountLoading(false);
-                    setAccountLoadingText("Download data aggregated by Accounts");
-                    setFileLinkByAccounts(maybeData?.file_location);
-                    window.location.href = maybeData?.file_location;
-                }
-            }
-            else if (axisX === 'keyword') {
-                let maybeData: any = E.getOrElse(() => fileLinkByKeywords)(_data)
-                if (!maybeData.file_location) {
-                    return;
-                }
-                else {
-                    setKeywordLoading(false);
-                    setKeywordLoadingText("Download data aggregated by Search Terms");
-                    setFileLinkByKeywords(maybeData?.file_location);
-                    window.location.href = maybeData?.file_location;
-                }
-            }
-            else if (axisX === 'platform') {
-                let maybeData: any = E.getOrElse(() => fileLinkByPlatforms)(_data)
-                if (!maybeData.file_location) {
-                    return;
-                }
-                else {
-                    setPlatformLoading(false);
-                    setPlatformLoadingText("Download data aggregated by Platforms");
-                    setFileLinkByPlatforms(maybeData?.file_location);
-                    window.location.href = maybeData?.file_location;
-                }
-            }
+            let maybeData: any = E.getOrElse(() => setFileLink)(_data)
+            if (!maybeData.file_location) return;
+            setDownloading(false);
+            // setFileLink(maybeData?.file_location);
+            window.location.href = maybeData?.file_location;
         });
     }
 
     const generateDynamicLink = (axisX: string, axisY: string) => {
-        if (axisX === 'platform') setPlatformLoadingText("Downloading...");
-        else if (axisX === 'keyword') setKeywordLoadingText("Downloading...");
-        else if (axisX === 'account') setAccountLoadingText("Downloading...")
-
         getDownloadLink(axisX, axisY);
     }
 
@@ -106,7 +63,14 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
             : monitorData?.date_to
                 ? new Date(monitorData.date_to)
                 : new Date()
+
+        var dateFrom: any = new Date(filter.time_interval_from)
+        var dateTo: any = new Date(filter.time_interval_to)
+        const diffTime: number = Math.abs(dateFrom - dateTo);
+        const diffDays: number = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        let timeInterval: number = diffDays < 26 ? 1 : 7
         setFilter(filter)
+        setTimeinterval(timeInterval)
     }, [monitorData]);
 
     return <List style={{ paddingRight: "20px" }} >
@@ -130,17 +94,19 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
             </button>
         </Row> */
         }
-        {/* {chertBlock('Posts per Platform', 'platform', 'count', 'doughnat')} */}
+        
+        {chertBlock('Posts per Platform', 'platform', 'count', 'doughnat')}
         {chertBlock('Engagement per Platform', 'platform', 'total', 'doughnat')}
         {
             monitorData?.search_terms?.length ? <>
                 {chertBlock('Posts per Search Term', 'search_term_ids', 'count', 'bar')}
-                {chertBlock('Engagement per Search Term', 'search_term_ids', 'total', 'bar')} </> : ''
+                {chertBlock('Engagement per Search Term', 'search_term_ids', 'total', 'bar') } </> : ''
         }
         {
-            monitorData?.accounts?.length && false ? <>
+            monitorData?.accounts?.length ? <>
                 {chertBlock('Posts per Account', 'account_id', 'count', 'bar')}
-                {chertBlock('Engagement per Account', 'account_id', 'total', 'bar')} </> : ''
+                {chertBlock('Engagement per Account', 'account_id', 'total', 'bar')}
+                 </> : ''
         }
 
         <div className='dashbord-block post'>
