@@ -95,11 +95,14 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
 
   const onHitsCountAdd = useCallback((values: any) => {
     const val = !!values.length ? values[0] : values.search_terms;
-    const d = dataFormatted as any
-    const t = typeof val === 'string' ? val : val[0]?.label;
+    const t = typeof val === 'string' ? val : val[0];
 
-    if (d?.find(({ title }: any) => title?.toLowerCase() === t?.toLowerCase())) {
-      errorModal({ title: 'Error', content: 'Search term already exists' });
+    if (hitsCountTableData?.find(
+      ({ title, platform_id }: any) =>
+        (t.platform_id === platform_id && t.label === title) || (typeof t === 'string' && title.toLowerCase() === t.toLowerCase()))
+    ) {
+      errorModal({ title: 'Error', content: 'Item term already exists' });
+      form.resetFields();
       return
     }
 
