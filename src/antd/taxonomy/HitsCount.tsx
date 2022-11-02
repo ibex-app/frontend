@@ -93,8 +93,8 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     setUserSelection('');
   }, [userSelection, addNewHitsCount]);
 
-  const onHitsCountAdd = useCallback((values: string[] | Option[][]) => {
-    const val = values[0];
+  const onHitsCountAdd = useCallback((values: any) => {
+    const val = !!values.length ? values[0] : values.search_terms;
     const d = dataFormatted as any
     const t = typeof val === 'string' ? val : val[0]?.label;
 
