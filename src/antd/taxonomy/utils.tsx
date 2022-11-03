@@ -86,5 +86,5 @@ export const createAccountColumns = (deleteSearchTerm: (title: string) => void):
 ]
 
 export const generateEmptyHitsCount = (input: string | Option) => typeof input === 'string' ? {
-  title: input, id: input
+  title: input
 } : { title: input.label, ...input }
