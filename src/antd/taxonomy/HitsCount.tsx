@@ -82,7 +82,13 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
     onChange: (_: React.Key[], selectedRows: any[]) => setHitCountSelection(selectedRows)
   }), [hitCountsSelected]);
 
+  const preNewProcessHitsCcount = (newKeyword: string) => {
+    const newKeywordClear = newKeyword.replace(/[^\w\s]/gi, '')
+    return newKeywordClear
+  }
+  
   const addNewHitsCount = useMemo(() => pipe(
+    preNewProcessHitsCcount,
     generateEmptyHitsCount,
     (tableItem) => concat([tableItem], hitsCountTableData),
     setHitsCountTableData
