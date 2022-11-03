@@ -112,7 +112,7 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     emptyLabel={requestData && !data && userValue ? "Loading..." : "No results found."}
     renderMenuItemChildren={(option: Option, props: any, index: number) => {
       if (option.render) return option.render;
-      return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span> {blankLink(option.url)}</> : option.label || option
+      return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span> {blankLink(option)}</> : option.label || option
     }}
     renderToken={(option: Option, props: any, index: number) =>
       <CustomToken option={option} index={index} onRemove={onRemove} />
