@@ -88,21 +88,18 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   }
 
   const log = (a:any) => {
-    console.log(a)
+    // console.log(a)
     return a
   }
 
   const addNewHitsCount = useMemo(() => pipe(
     log,
-    
     preProcessNewHitsCcount,
     log,
     generateEmptyHitsCount,
     log,
-
     (tableItem) => concat([tableItem], hitsCountTableData),
     log,
-
     setHitsCountTableData
   ), [hitsCountTableData]);
 
