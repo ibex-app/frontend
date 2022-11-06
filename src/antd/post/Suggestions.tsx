@@ -27,7 +27,7 @@ export const Suggestions = ({ text, selection, highlight, index }: Input) => {
         return <span
           key={op}
           onClick={() => setUserSelection(`${item.title} ${op} ${text}`)}>
-          {elem}
+          {elem}&nbsp;
         </span>
       }
       )) : <span onClick={() => setUserSelection(text)}>{text}</span>}

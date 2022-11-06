@@ -113,7 +113,7 @@ const TaxonomyProgress: React.FC = () => {
     <>
       
       <div className="tax-title-line">
-        <div className="tax-mid">Monitors <Link to='/'>         <Button>Exit</Button>            </Link></div>
+        <div className="tax-mid">Data Collection <Link to='/'>         <Button>Exit</Button>            </Link></div>
         {/* <div className="tax-mid">Monitors  </div> */}
 
       </div>

@@ -82,6 +82,8 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
   }, [filter]);
 
   const [fetching, setFetching] = useState(false);
+  const [noData, setNoData] = useState(false);
+  
   
   var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
 
@@ -118,14 +120,19 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
       options.scales.y.stacked = true
     }
 
-    // var firstJan = new Date(1900 + dateFrom.getYear(), 0, 1)
     var firstJan = new Date(2022, 0, 1)
     var daysThisYear = (dateFrom.getTime() - firstJan.getTime()) / (24 * 60 * 60 * 1000)
     var startTime = timeInterval == 7 ? Math.ceil(daysThisYear / 7) : Math.ceil(daysThisYear)
     var endTime = startTime + (timeInterval == 7 ? numberOfWeeks : numberOfDays)
 
-    let intervals: any = ['']
     responce_data.forEach((dataPoint:any) => dataPoint.label = dataPoint.label || dataPoint.title || dataPoint.term || (dataPoint.platform  + '_' + dataPoint.account_title))
+    
+    const max_values: any = {}
+    if(axisY == 'total' && (axisX == 'platform' || axisX == 'account')){
+      responce_data.forEach((i:any) => {
+          max_values[i.label] = max_values[i.label] > i.count ? max_values[i.label] : i.count
+      })
+    }
 
     let post_label_values: [] = responce_data.map((dataPoint: any) => ({label: dataPoint.label, platform: dataPoint.platform}))
                                              .filter((value:any, index:number, self: any) =>
@@ -167,7 +174,9 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
           dataset.data.push(0)
         } else if (labelType == 'platform' || labelType == 'search_term_ids'  || labelType == 'account_id'){
           let count = match.reduce((a: any, b: any) => a += b.count, 0)
-          dataset.data.push(count)
+          let val = axisY == 'total' && (axisX == 'platform' || axisX == 'account') ? max_values[dataset.label]/count : count
+          // let val = count
+          dataset.data.push(val)
         } else {
           dataset.data.push(match.length)
         }
@@ -183,6 +192,7 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
   const loadData = () => {
     if(!timeInterval) return
     setFetching(true)
+    setNoData(false)
 
     const fetchData = Get('posts_aggregated', {
       post_request_params: transform_filters_to_request(filter),
@@ -194,7 +204,11 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
 
     fetchData.then((_data: Response<any>) => {
       let maybeData: any = E.getOrElse(() => [data_])(_data)
-      if (!maybeData.length) return
+      if (!maybeData.length) {
+        setFetching(false)
+        setNoData(true)
+        return
+      }
 
       let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter)
       setData(dataset_and_labels);
@@ -208,12 +222,13 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
       {
         fetching 
           ? <div className="button-tr"><div><div className="chart-loadding">Loading the chart...<Spinner /></div></div></div>
-          : <div className="chart">
-             { type == 'line' 
-              ? <Line options={options} data={data} />
-              : <Bar options={options} data={data} />
-              }
-          </div>
+          : noData 
+            ? <div className="button-tr"><div><div className="chart-loadding">No Posts</div></div></div>
+            :<div className="chart">
+              { type == 'line' 
+                ? <Line options={options} data={data} />
+                : <Bar options={options} data={data} /> }
+           </div>
       }
     </div>
   );

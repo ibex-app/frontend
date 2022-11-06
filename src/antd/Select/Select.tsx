@@ -106,7 +106,11 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     selected={val}
     placeholder={placeholder}
     allowNew={allowNew ? newChecker : false}
-    onInputChange={(input: any, e: any) => onChange_(input)}
+    onInputChange={(input: any, e: any) => {
+      // console.log(111, input, e)
+      e.stopPropagation(); e.preventDefault();
+      onChange_(input)
+    }}
     labelKey={"label"}
     onBlur={onBlur}
     emptyLabel={requestData && !data && userValue ? "Loading..." : "No results found."}
@@ -117,6 +121,9 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     renderToken={(option: Option, props: any, index: number) =>
       <CustomToken option={option} index={index} onRemove={onRemove} />
     }
-    onChange={onValChange}
+    onChange={(input: any, e: any) => {
+      console.log(222, input, e)
+      onValChange(input)
+    }}
   />
 }

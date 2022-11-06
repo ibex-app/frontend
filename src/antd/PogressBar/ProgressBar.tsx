@@ -35,7 +35,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({progress}: ProgressBarProps) =
   
   // console.log(`NUmber -> for index ${i}`, progressValue);
   return (
-    <Row key={progress.platform}>
+    <Row key={progress.platform} className="mt-50">
       <Col span={4}>
         { progress.platform ? platformIcon(progress.platform) : ''} stats 
       </Col>

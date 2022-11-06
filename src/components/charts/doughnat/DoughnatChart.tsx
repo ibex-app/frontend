@@ -39,7 +39,7 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
   };
   
   const [data, setData] = useState(data_);
-  
+  const [noData, setNoData] = useState(false);
   
   
   const options = {
@@ -114,6 +114,8 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
     fetchData.then((_data: Response<any>) => {
       let maybeData: any = E.getOrElse(() => [data_])(_data)
       if (!maybeData.length) {
+        setFetching(false)
+        setNoData(true)
         return
       }
 
@@ -123,15 +125,15 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
       setFetching(false);
     });
   }
-
+  
   return <div className="chart-cont-sm">
       <div className="chart">
         {
           fetching 
-          ? <div className="button-tr">
-              <div><div className="chart-loadding"> Loading the chart... <Spinner /></div></div>
-            </div>
-          : type == 'bar' 
+          ? <div className="button-tr"><div><div className="chart-loadding"> Loading the chart... <Spinner /></div></div></div>
+          : noData 
+            ? <div className="button-tr"><div><div className="chart-loadding">No Posts</div></div></div>
+            : type == 'bar' 
                 ? <Bar options={options} data={data} />
                 : <Doughnut options={options} data={data} />
         }
