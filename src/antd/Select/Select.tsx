@@ -122,7 +122,7 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
       <CustomToken option={option} index={index} onRemove={onRemove} />
     }
     onChange={(input: any, e: any) => {
-      console.log(222, input, e)
+      // console.log(222, input, e)
       onValChange(input)
     }}
   />

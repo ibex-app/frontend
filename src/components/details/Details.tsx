@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Get } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 import { match } from 'ts-pattern';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faShare, faMessage, faThumbsDown, faBiohazard } from '@fortawesome/free-solid-svg-icons'
 import './details.css';
 import { Col, Row } from "antd";
+import { Post } from "../../antd/post/Post";
 
 export function Details() {
   const { postId } = useParams();
@@ -40,39 +41,7 @@ export function Details() {
     <section className="post--content">
       <iframe id="ytplayer" src={`${post?.url?.replace("/watch?v=", "/embed/")}?start=${options.second}&autoplay=${options.autoplay}`} ></iframe>
     </section>
-    <section className="post--content-extra">
-      <div className="table--item">
-        <div className="table--row">
-          <div >
-            <div className="title"> {post.title}</div>
-            {<div className="sub-title"> {post.created_at} | chanell name </div>}
-            <div className="description"> {post.text} </div>
-            {<Link className="platform" to={post.url}> {post.platform} {post.url}</Link>}
-            {<div className="scores">
-              <FontAwesomeIcon icon={faThumbsUp} /> {post.scores?.likes}
-              <FontAwesomeIcon icon={faThumbsDown} /> {post.scores?.sad}
-              <FontAwesomeIcon icon={faShare} /> {post.scores?.shares}
-              <FontAwesomeIcon icon={faMessage} /> {post.scores?.engagement}
-              <FontAwesomeIcon icon={faBiohazard} />
-            </div>
-            }
-
-          </div>
-          {/* <Tag data={tags} onChange={() => console.log("TODO JANEZ")} /> */}
-
-          <div className="table--extra-row"><i className="icn icn--type-video"></i>
-            <div className="table--item-tags">
-              <div className="flex">
-                {/* <span className="font-xs mr-15">Tags</span> */}
-                <div className="flex">
-                  {/* {tags.map(({ title }: any) => (<a href="£" className="badge bg-secondary">{title}</a>))} */}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <Post post={post}/>
   </>
 
   const transcripts =
@@ -95,20 +64,6 @@ export function Details() {
     fetchData.then((_post: any) => {
       let maybePost: any = E.getOrElse(() => [])(_post)
       if (!maybePost) return;
-
-      maybePost.created_at = new Date(maybePost.created_at.$date).toLocaleString('en-us', { month: 'short', year: 'numeric', day: 'numeric' })
-      maybePost.platform = match(maybePost.platform)
-        .with("facebook", () => <FontAwesomeIcon icon={faFacebook} />)
-        .with("twitter", () => <FontAwesomeIcon icon={faTwitter} />)
-        .with("youtube", () => <FontAwesomeIcon icon={faYoutube} />)
-        .otherwise(() => <span>Invalid Icon</span>)
-
-      maybePost.tags = maybePost.labels ? [].concat(
-        maybePost.labels.topics || [],
-        maybePost.labels.persons || [],
-        maybePost.labels.locations || [],
-        maybePost.labels.organizations || []
-      ) : [];
       setPost(maybePost)
       setFetching(false)
     });

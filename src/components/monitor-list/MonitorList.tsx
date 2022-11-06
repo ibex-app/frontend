@@ -1,7 +1,7 @@
 import { Button, Card, Col, List, Modal, Row, Space } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react'
 import classes from './MonitorList.module.css'
-import { PieChartOutlined, CopyOutlined, DeleteOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
 import { Get, Response } from '../../shared/Http';
 import * as E from "fp-ts/lib/Either";
@@ -84,7 +84,7 @@ const MonitorList: React.FC = () => {
   return (
     <div>
       <div className="tax-title-line">
-        <div className="tax-mid">Monitors <Link to='/taxonomy/init'>              <Button>Create</Button>            </Link></div>
+        <div className="tax-mid">Monitors <Link to='/taxonomy/init'>              <Button><PlusCircleOutlined />Create</Button>            </Link></div>
         {/* <div className="tax-mid">Monitors  </div> */}
 
       </div>

@@ -8,7 +8,9 @@ export const drawFilterItem: any = pipe<any, string, WordList, JSX.Element[]>(
   map(({ type, keyword }) => <span className={type}>{keyword}</span>)
 );
 
-export const finalizeForm = ({ form1, form2 }: any) => ({
+export const finalizeForm = ({ form1, form2 }: any) => {
+  // console.log(444, form1, form2)
+  return {
   ...form1,
   ...form2,
   date_from: form2.date_from.toISOString(),
@@ -19,7 +21,7 @@ export const finalizeForm = ({ form1, form2 }: any) => ({
     platform_id: account.platform_id,
     title: account.label
   })),
-});
+}};
 
   // const estimateTime = (form: any) => {
   //     const timeLeft = (form.search_terms.length || 1) * 8 * form.platforms.length

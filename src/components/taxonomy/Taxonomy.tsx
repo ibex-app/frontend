@@ -60,8 +60,8 @@ export function Taxonomy() {
           updateMonitor().then(() => setSubmitDisabled(false));
           return;
         }
-
-        const createMonitor = Get('create_monitor', finalizeForm(form));
+        const finalizedForm: any = finalizeForm(form)
+        const createMonitor = Get('create_monitor', finalizedForm);
         createMonitor.then((_data: Response<any>) => {
           const { _id }: any = getOrElse(() => [])(_data);
           Get('collect_sample', { id: _id }).then(() => {

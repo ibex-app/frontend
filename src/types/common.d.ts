@@ -37,13 +37,16 @@ export type PostType = {
   },
   "scores": {
     "likes": number,
+    "dislikes": number,
     "views": number,
     "engagement": number,
     "shares": number,
     "sad": number,
     "wow": number,
     "love": number,
-    "angry": number
+    "angry": number,
+    "comments": number,
+    "other" : number
   },
   "transcripts": null,
   "account": []

@@ -22,9 +22,10 @@
 
 .post h3 {
   font-weight: 400;
-  font-size: 13px;
-  line-height: 20px;
-  color: #717478;
+    font-size: 13px;
+    color: #717478;
+    margin-bottom: 11px;
+    margin-top: 28px;
 }
 
 .post a {

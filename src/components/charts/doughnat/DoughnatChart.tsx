@@ -101,6 +101,7 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
 
   const loadData = () => {
     setFetching(true)
+    setNoData(false)
     if(type == 'bar'){
       options.plugins.legend.display = false
       // options.plugins.legend.position = undefined

@@ -2459,3 +2459,10 @@ button[disabled]{
   width: 100%;
   text-align: center;
 }
+
+.scores > span {
+  margin-top: 13px;
+  display: inline-block;
+  margin-right: 35px;
+  color: #989898;
+}
