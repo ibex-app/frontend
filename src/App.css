@@ -2466,3 +2466,16 @@ button[disabled]{
   margin-right: 35px;
   color: #989898;
 }
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb {
+  color: rgba(0,0,0,.3);
+  width: 26px;
+  border-radius: 13px;
+  background-clip: padding-box;
+  border: 10px solid transparent;
+}
+
+*::-webkit-scrollbar-thumb {        
+  box-shadow: inset 0 0 0 10px;
+}
