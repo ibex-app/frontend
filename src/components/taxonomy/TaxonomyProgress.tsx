@@ -118,7 +118,7 @@ const TaxonomyProgress: React.FC = () => {
 
       </div>
       <Row justify="center" className="tax-scroll monitor-list">
-        <Space className="tax-mid mt-20" direction="vertical" size="middle">
+        <Space className="tax-mid mt-20 mb-100" direction="vertical" size="middle">
         <List grid={{ gutter: 16, column: 4 }}>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
 

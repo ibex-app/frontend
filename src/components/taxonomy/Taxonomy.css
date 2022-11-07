@@ -722,3 +722,7 @@ label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-b
 .tax-no-button, .tax-no-button > .ant-space-item{
     width: 100%;
 }
+
+.mb-100{
+    margin-bottom: 100px;
+}
