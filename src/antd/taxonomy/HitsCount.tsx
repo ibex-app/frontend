@@ -83,7 +83,7 @@ export const HitsCount = ({ monitor_id, toParent }: Input) => {
   }), [hitCountsSelected]);
 
   const preProcessNewHitsCcount = (newKeyword: any) => {
-    if(typeof newKeyword == "string") return newKeyword.replace(/[!@#$%^&*(),.?":{}|<>_+=„“\\]/gi, '')//.toLowerCase()
+    if(typeof newKeyword == "string") return newKeyword.replace(/[!$%^&*(),.?":{}|<>_+=„“\\]/gi, '')//.toLowerCase()
     return newKeyword
   }
 
