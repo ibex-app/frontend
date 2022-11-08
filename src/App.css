@@ -2479,3 +2479,7 @@ button[disabled]{
 *::-webkit-scrollbar-thumb {        
   box-shadow: inset 0 0 0 10px rgba(0, 0, 0, .3);
 }
+
+.ant-radio-button-wrapper:not(:first-child):before{
+    display: none;
+}
