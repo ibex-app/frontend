@@ -69,14 +69,13 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
             : monitorData?.date_to
                 ? new Date(monitorData.date_to)
                 : new Date()
-
         var dateFrom: any = new Date(filter.time_interval_from)
         var dateTo: any = new Date(filter.time_interval_to)
         const diffTime: number = Math.abs(dateFrom - dateTo);
         const diffDays: number = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
         let timeInterval: number = diffDays < 26 ? 1 : 7
-        setFilter(filter)
         setTimeinterval(timeInterval)
+        setFilter(filter)
     }, [monitorData]);
 
     return <List style={{ paddingRight: "20px" }} >
