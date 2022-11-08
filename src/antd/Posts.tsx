@@ -13,7 +13,7 @@ type Input = {
     shuffle?: boolean
 }
 
-const defaultPagination = { start_index: 0, count: 10 };
+const defaultPagination = { start_index: 0, count: 30 };
 
 export const Posts = ({ filter, allowRedirect, shuffle, allowSuggestions }: Input) => {
     const { data, isLoading, isFetching, fetchNextPage, refetch } = usePostsState({ ...filter, ...defaultPagination, shuffle });

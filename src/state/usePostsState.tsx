@@ -8,7 +8,7 @@ interface InputParams extends Filter, Pagination {
 }
 
 export const usePostsState = (params: InputParams) =>
-  useInfiniteQuery(queries.posts(params), ({ pageParam = 0 }) => _Get<PostResponse>('posts', { ...params, start_index: pageParam * 10 }), {
+  useInfiniteQuery(queries.posts(params), ({ pageParam = 0 }) => _Get<PostResponse>('posts', { ...params, start_index: pageParam * 30 }), {
     enabled: !!params.monitor_id,
     refetchOnWindowFocus: false,
     getNextPageParam: (lastPage, pages) => pages.length || 1
