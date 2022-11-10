@@ -19,7 +19,8 @@ export const finalizeForm = ({ form1, form2 }: any) => {
   accounts: form2.accounts?.map((account: any) => ({
     platform: account.platform,
     platform_id: account.platform_id,
-    title: account.label
+    title: account.label,
+    url: account.url
   })),
 }};
 

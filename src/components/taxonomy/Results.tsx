@@ -53,7 +53,7 @@ export const TaxonomyResults = () => {
     setButtonsDisabled(true);
 
     if (type === 'accounts') {
-      const accounts = hitsCount.all.map(({ title, platform_id, id, platform }: any) => ({ title, platform_id, id, platform }));
+      const accounts = hitsCount.all.map(({ title, platform_id, id, platform, url }: any) => ({ title, platform_id, id, platform, url }));
       updateMonitor({ id: monitor_id, accounts }).then(() => setButtonsDisabled(false));
       return;
     }
