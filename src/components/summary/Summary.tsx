@@ -25,7 +25,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
         </div>
         <TimeSeriesChart type='line' axisX={axisX} axisY={axisY} filter={filter} timeInterval={timeInterval}/>
         <DoughnatChart axisX={axisX} axisY={axisY} filter={filter} type={type} />
-        <button disabled={downloading} onClick={() => getDownloadLink(axisX, axisY, timeInterval || 1)}><CloudDownloadOutlined key="summary" /> Download</button>
+        <button className="mt-20" disabled={downloading} onClick={() => getDownloadLink(axisX, axisY, timeInterval || 1)}><CloudDownloadOutlined key="summary" /> Download</button>
     </div>
     const getAllPosts = () => {
         setDownloading(true)
@@ -63,12 +63,15 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
 
     useEffect(() => {
         if (!monitorData) return
+        if (filter.time_interval_from && filter.time_interval_to) return
+
         filter.time_interval_from = filter.time_interval_from || new Date(monitorData.date_from)
         filter.time_interval_to = filter.time_interval_to
             ? filter.time_interval_to
             : monitorData?.date_to
                 ? new Date(monitorData.date_to)
                 : new Date()
+
         var dateFrom: any = new Date(filter.time_interval_from)
         var dateTo: any = new Date(filter.time_interval_to)
         const diffTime: number = Math.abs(dateFrom - dateTo);
@@ -76,7 +79,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
         let timeInterval: number = diffDays < 26 ? 1 : 7
         setTimeinterval(timeInterval)
         setFilter(filter)
-    }, [monitorData]);
+    }, [monitorData, filter]);
 
     return <List style={{ paddingRight: "20px" }} >
 

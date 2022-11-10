@@ -1890,6 +1890,7 @@ main.main .main-dashboard {
   /* position: absolute; */
   top: 20px;
   overflow: hidden;
+  position: relative;
 }
 
 .inactive {
@@ -2482,4 +2483,17 @@ button[disabled]{
 
 .ant-radio-button-wrapper:not(:first-child):before{
     display: none;
+}
+
+.chart-number {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -15px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #939090;
 }

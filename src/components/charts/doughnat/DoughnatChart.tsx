@@ -24,7 +24,7 @@ export const getCol = (dataPoint: any, index: number) => {
 
 export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
   const [fetching, setFetching] = useState(false);
-  
+  const [total, setTotal] = useState<number>()
   useEffect(() => {
     if (Object.keys(filter).length && filter.time_interval_from && filter.time_interval_to) loadData();
   }, [filter]);
@@ -40,9 +40,10 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
   
   const [data, setData] = useState(data_);
   const [noData, setNoData] = useState(false);
-  
-  
+
+
   const options = {
+
     indexAxis: 'y' as const,
     maintainAspectRatio: false,
     type: 'line',
@@ -87,6 +88,7 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
 
   const generate_dataset = (responce_data: any) => {
     responce_data.forEach((dataPoint:any) => dataPoint.label = dataPoint.label || dataPoint.title || dataPoint.term || (dataPoint.platform  + '_' + dataPoint.account_title))
+    setTotal(responce_data.map((dataPoint:any) => dataPoint.count).reduce((a:number, b:number) => a + b, 0))
     return {
       labels: responce_data.map((dataPoint:any) => dataPoint.label),
       datasets: [{
@@ -94,8 +96,7 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
         data: responce_data.map((dataPoint:any) => dataPoint.count),
         backgroundColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint, index)),
         // borderColor: responce_data.map((dataPoint:any, index:number) => getCol(dataPoint.platform, index))
-      }],
-      // innerText: 'total: ' + responce_data.map((dataPoint:any) => dataPoint.count).reduce((a:number, b:number) => a + b, 0)
+      }]
     }
   }
 
@@ -136,7 +137,7 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
             ? <div className="button-tr"><div><div className="chart-loadding">No Posts</div></div></div>
             : type == 'bar' 
                 ? <Bar options={options} data={data} />
-                : <Doughnut options={options} data={data} />
+                : <><div className='chart-number'>{total}</div><Doughnut options={options} data={data} /></>
         }
       </div>
     </div>
