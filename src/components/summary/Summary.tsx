@@ -116,7 +116,7 @@ export function Summary({ filter, axisX, axisY, setFilter }: SummaryInputParams)
                 {chertBlock('Engagement per Account', 'account_id', 'total', 'bar')}
                  </> : ''
         }
-
+        {chertBlock('Posts per Language', 'language', 'count', 'doughnat')}
         <div className='dashbord-block post'>
             {/* <div>All the posts</div> */}
 

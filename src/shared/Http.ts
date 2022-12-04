@@ -17,7 +17,7 @@ const Logout = () => {
 
 export const _Get = <T>(path: string, params: Object): Promise<T> => {
     const token = window.localStorage.getItem('jwt')
-    const subdomain = window.location.href.indexOf('localhost') > -1 ? 'un' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
+    const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
     const url = `https://${subdomain}.ibex-app.com/api/${path}`
     const headers = new Headers(token ? {
         'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const _Get = <T>(path: string, params: Object): Promise<T> => {
 
 export const Get = async <T>(path: string, params: Object): Promise<Response<T>> => {
     const token = window.localStorage.getItem('jwt')
-    const subdomain = window.location.href.indexOf('localhost') > -1 ? 'un' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
+    const subdomain = window.location.href.indexOf('localhost') > -1 ? 'dev' : window.location.href.split('.ibex-app.com')[0].split('//')[1]
 
     return pipe(
         TE.tryCatch(

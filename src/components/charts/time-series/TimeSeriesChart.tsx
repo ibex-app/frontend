@@ -128,7 +128,7 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
     responce_data.forEach((dataPoint:any) => dataPoint.label = dataPoint.label || dataPoint.title || dataPoint.term || (dataPoint.platform  + '_' + dataPoint.account_title))
     
     const max_values: any = {}
-    if(axisY == 'total' && (axisX == 'platform' || axisX == 'account')){
+    if(axisY == 'total' && (axisX == 'platform' || axisX == 'account' || axisX == 'language')){
       responce_data.forEach((i:any) => {
           max_values[i.label] = max_values[i.label] > i.count ? max_values[i.label] : i.count
       })
@@ -172,9 +172,9 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
         // console.log(dataset.label, timeAt, match)
         if(!match.length){
           dataset.data.push(0)
-        } else if (labelType == 'platform' || labelType == 'search_term_ids'  || labelType == 'account_id'){
+        } else if (labelType == 'platform' || labelType == 'search_term_ids'  || labelType == 'account_id' || axisX == 'language'){
           let count = match.reduce((a: any, b: any) => a += b.count, 0)
-          let val = axisY == 'total' && (axisX == 'platform' || axisX == 'account') ? max_values[dataset.label]/count : count
+          let val = axisY == 'total' && (axisX == 'platform' || axisX == 'account' || axisX == 'language') ? max_values[dataset.label]/count : count
           // let val = count
           dataset.data.push(val)
         } else {
