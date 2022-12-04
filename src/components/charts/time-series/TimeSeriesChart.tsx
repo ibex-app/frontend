@@ -143,14 +143,14 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
     let datasets = type == 'line' 
       ? post_label_values.map((label: any, index: number) => ({
           label: label.label,
-          data: [0],
+          data: [],
           borderColor:  getCol(label, index),
           lineTension: .35,
           radius: 4  
         }))
       : post_label_values.map((label: any, index: number) => ({
         label: label.label,
-        data: [0],
+        data: [],
         backgroundColor: getCol(label, index),
         fill: true,
         pointBackgroundColor: 'rgba(0,0,0,.3)',
@@ -159,18 +159,17 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
         radius: 4
       }))
     labels = []
-    console.log(startTime, endTime)
-
-    for (let timeAt = startTime; timeAt <= endTime; timeAt++) {
+    
+    
+    for (var timeAt = startTime; timeAt <= endTime; timeAt++) {
       var intervalDate = new Date(firstJan);
       intervalDate.setDate(intervalDate.getDate() + (timeAt * (timeInterval || 1)));
-
       labels.push(intervalDate.toISOString().slice(0, 10))
-
+      
       datasets.forEach((dataset: any) => {
         let match = responce_data.filter((dataPoint: any) => dataPoint.label == dataset.label && dataPoint[timeInterval == 7 ? 'week' :'day'] == timeAt)
-        // console.log(dataset.label, timeAt, match)
         if(!match.length){
+          // console.log(111, dataset.label, timeAt, match)
           dataset.data.push(0)
         } else if (labelType == 'platform' || labelType == 'search_term_ids'  || labelType == 'account_id' || axisX == 'language'){
           let count = match.reduce((a: any, b: any) => a += b.count, 0)
@@ -182,7 +181,8 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
         }
       })
     }
-    // console.log(datasets)
+    
+    console.log(datasets)
     return {
       labels,
       datasets: datasets,
