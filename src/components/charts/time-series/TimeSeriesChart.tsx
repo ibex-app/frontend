@@ -108,8 +108,8 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
     var dateFrom: Date = new Date(filters.time_interval_from)
     var dateTo: Date = new Date(filters.time_interval_to)
     // console.log('generate_dataset timeInterval', timeInterval)
-    dateTo.setDate(dateTo.getDate() + ((timeInterval || 1)*2));
-    dateFrom.setDate(dateFrom.getDate() + (timeInterval || 1));
+    // dateTo.setDate(dateTo.getDate() + ((timeInterval || 1)*2));
+    // dateFrom.setDate(dateFrom.getDate() + (timeInterval || 1));
 
     var interval: number = (dateTo.getTime() - dateFrom.getTime())
     var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
@@ -159,7 +159,7 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
         radius: 4
       }))
     labels = []
-    // console.log(startTime, endTime)
+    console.log(startTime, endTime)
 
     for (let timeAt = startTime; timeAt <= endTime; timeAt++) {
       var intervalDate = new Date(firstJan);
