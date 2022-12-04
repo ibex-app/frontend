@@ -182,7 +182,7 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
       })
     }
     
-    console.log(datasets)
+    // console.log(datasets)
     return {
       labels,
       datasets: datasets,

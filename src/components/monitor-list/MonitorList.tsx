@@ -24,7 +24,7 @@ const MonitorList: React.FC = () => {
   const navigate = useNavigate();
   
   const showDeleteModal = (monitorItem: Monitor) => {
-    console.log(monitorItem)
+    // console.log(monitorItem)
     setMonitorId(monitorItem?._id);
     setDeleteModalVisible(true);
   };
@@ -58,7 +58,7 @@ const MonitorList: React.FC = () => {
       fetchData.then((_data: Response<any>) => {
         let maybeData = E.getOrElse(() => [])(_data)
         if (!maybeData || !maybeData.forEach) return
-        console.log(maybeData);
+        // console.log(maybeData);
       });
     }, [monitorId]
   );

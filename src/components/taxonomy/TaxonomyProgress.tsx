@@ -69,7 +69,7 @@ const TaxonomyProgress: React.FC = () => {
     if (loading) return;
     // console.log('check1', loading)
     if (!monitorData) return;
-    console.log(555, monitorData)
+    // console.log(555, monitorData)
     setLoading(true);
     // console.log('setTrue1', loading)
     clearTimeout_();
@@ -94,11 +94,11 @@ const TaxonomyProgress: React.FC = () => {
               })
               .otherwise(() => {
                 setLoading(false);
-                console.log('setfalse2', loading)
+                // console.log('setfalse2', loading)
 
                 clearTimeout_();
                 setMonitorProgress(res);
-                console.log("Is Finalized ", isFinalized(res));
+                // console.log("Is Finalized ", isFinalized(res));
                 setisFinalizedState(true);
               })
           )))
