@@ -173,7 +173,8 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
           dataset.data.push(0)
         } else if (labelType == 'platform' || labelType == 'search_term_ids'  || labelType == 'account_id' || axisX == 'language'){
           let count = match.reduce((a: any, b: any) => a += b.count, 0)
-          let val = axisY == 'total' && (axisX == 'platform' || axisX == 'account' || axisX == 'language') ? max_values[dataset.label]/count : count
+          // let val = axisY == 'total' && (axisX == 'platform' || axisX == 'account' || axisX == 'language') ? max_values[dataset.label]/count : count
+          let val = count
           // let val = count
           dataset.data.push(val)
         } else {

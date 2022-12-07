@@ -87,8 +87,10 @@ export function DoughnatChart({axisX, axisY, filter, type}: ChartInputParams) {
  
 
   const generate_dataset = (responce_data: any) => {
+    responce_data = responce_data.slice(0, 8)
     responce_data.forEach((dataPoint:any) => dataPoint.label = dataPoint.label || dataPoint.title || dataPoint.term || (dataPoint.platform  + '_' + dataPoint.account_title))
     setTotal(responce_data.map((dataPoint:any) => dataPoint.count).reduce((a:number, b:number) => a + b, 0))
+    
     return {
       labels: responce_data.map((dataPoint:any) => dataPoint.label),
       datasets: [{
