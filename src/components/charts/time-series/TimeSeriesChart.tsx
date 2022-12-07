@@ -101,7 +101,21 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
 
   const [data, setData] = useState(data_);
 
+  const filter_top_labels = (responce_data: any) => {
+    const total_values: any = {}
+    responce_data.forEach((i:any) => {
+        total_values[i.label] = total_values[i.label] || 0
+      total_values[i.label] += i.count
+    })
+    const total_values_array: any = Object.keys(total_values).map(key => ({label: key, count: total_values[key]}))
 
+    const total_values_array_sorted: any = total_values_array.sort((a: any, b: any) => b.count - a.count);
+
+    const top_rows = total_values_array_sorted.slice(0, 8).map((i:any) => i.label)
+
+    const responce_data_:any = responce_data.filter((i: any) => top_rows.indexOf(i.label) > -1)
+    return responce_data_
+  }
 
   const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
 
@@ -133,6 +147,9 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
           max_values[i.label] = max_values[i.label] > i.count ? max_values[i.label] : i.count
       })
     }
+
+    responce_data = filter_top_labels(responce_data)
+    
 
     let post_label_values: [] = responce_data.map((dataPoint: any) => ({label: dataPoint.label, platform: dataPoint.platform}))
                                              .filter((value:any, index:number, self: any) =>
