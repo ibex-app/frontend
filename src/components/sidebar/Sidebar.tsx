@@ -17,7 +17,7 @@ export function Sidebar() {
 
   const routeChange = (monitorId: string) => {
     setGlobalState('filters', { ...filters, 'monitor_id': monitorId });
-    navigate(`/summary?monitor_id=${monitorId}`);
+    navigate(`results/summary?monitor_id=${monitorId}`);
   }
 
   useEffect(() => {
