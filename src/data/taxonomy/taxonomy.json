@@ -134,7 +134,7 @@
               ]
             },
             {
-              "id": "date_end",
+              "id": "date_to",
               "type": "date"
             }
           ]
