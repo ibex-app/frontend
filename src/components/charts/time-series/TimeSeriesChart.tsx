@@ -129,17 +129,13 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
     var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
     var numberOfWeeks = Math.ceil(numberOfDays / 7);
     
-    if (type == 'bar') {
-      options.scales.x.stacked = true
-      options.scales.y.stacked = true
-    }
-
-    var firstJan = new Date(2022, 0, 1)
-    var daysThisYear = (dateFrom.getTime() - firstJan.getTime()) / (24 * 60 * 60 * 1000)
-    var startTime = timeInterval == 7 ? Math.ceil(daysThisYear / 7) : Math.ceil(daysThisYear)
-    var endTime = startTime + (timeInterval == 7 ? numberOfWeeks : numberOfDays)
-
     responce_data.forEach((dataPoint:any) => dataPoint.label = dataPoint.label || dataPoint.title || dataPoint.term || (dataPoint.platform  + '_' + dataPoint.account_title))
+    
+    let min_year:number = 9999
+    responce_data.forEach((i:any) => {
+      min_year = i.year <  min_year ? i.year : min_year
+    })
+
     
     const max_values: any = {}
     if(axisY == 'total' && (axisX == 'platform' || axisX == 'account' || axisX == 'language')){
@@ -147,6 +143,18 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
           max_values[i.label] = max_values[i.label] > i.count ? max_values[i.label] : i.count
       })
     }
+
+    if (type == 'bar') {
+      options.scales.x.stacked = true
+      options.scales.y.stacked = true
+    }
+
+    var firstJan = new Date(min_year, 0, 1)
+    var daysThisYear = (dateFrom.getTime() - firstJan.getTime()) / (24 * 60 * 60 * 1000)
+    var startTime = timeInterval == 7 ? Math.ceil(daysThisYear / 7) : Math.ceil(daysThisYear)
+    var endTime = startTime + (timeInterval == 7 ? numberOfWeeks : numberOfDays)
+
+    
 
     responce_data = filter_top_labels(responce_data)
     
@@ -182,9 +190,11 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
       var intervalDate = new Date(firstJan);
       intervalDate.setDate(intervalDate.getDate() + (timeAt * (timeInterval || 1)));
       labels.push(intervalDate.toISOString().slice(0, 10))
+
+      let timeAt_mod = timeInterval == 7 ? timeAt % 52 : timeAt % 365 
       
       datasets.forEach((dataset: any) => {
-        let match = responce_data.filter((dataPoint: any) => dataPoint.label == dataset.label && dataPoint[timeInterval == 7 ? 'week' :'day'] == timeAt)
+        let match = responce_data.filter((dataPoint: any) => dataPoint.label == dataset.label && dataPoint[timeInterval == 7 ? 'week' :'day'] == timeAt_mod && dataPoint.year == intervalDate.getFullYear())
         if(!match.length){
           // console.log(111, dataset.label, timeAt, match)
           dataset.data.push(0)
@@ -200,7 +210,7 @@ export function TimeSeriesChart({ axisX, axisY, filter, type, timeInterval}: Cha
       })
     }
     
-    // console.log(datasets)
+    console.log(labels, datasets)
     return {
       labels,
       datasets: datasets,
