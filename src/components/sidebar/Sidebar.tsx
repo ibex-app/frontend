@@ -17,7 +17,7 @@ export function Sidebar() {
 
   const routeChange = (monitorId: string) => {
     setGlobalState('filters', { ...filters, 'monitor_id': monitorId });
-    navigate(`/results?monitor_id=${monitorId}`);
+    navigate(`/results/summary?monitor_id=${monitorId}`);
   }
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export function Sidebar() {
           <ul>
             {/* <li><a className="inactive" href="/taxonomy">Taxonomy</a></li>
           <li><a className="inactive" href="/sources">Data Sources</a></li> */}
-            <li><Link to="results">Monitors<i className="icn icn-arrow arrw-dwn"></i></Link>
+            <li><Link to="/monitors">Monitors<i className="icn icn-arrow arrw-dwn"></i></Link>
               <ul>
 
                 {fetching ? (
@@ -63,12 +63,13 @@ export function Sidebar() {
 
         <nav className="main-nav">
           <ul>
-            <li className="inactive"> . </li>
+            {/* <li className="inactive"> . </li> */}
+            {/* <li><Link to="/monitors">All Monitors</Link></li>
             <li><Link to="/results/bar" >Bar</Link></li>
             <li><Link to="/results/line" >Line</Link></li>
             <li><Link to="/results/map" >Map</Link></li>
             <li><Link className="inactive" to="/results/graph" >Graph</Link></li>
-            <li><Link className="inactive" to="/results/bubble" >Bubble</Link></li>
+            <li><Link className="inactive" to="/results/bubble" >Bubble</Link></li> */}
           </ul>
         </nav>
       </div>

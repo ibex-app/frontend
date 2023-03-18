@@ -1,27 +1,4 @@
-import { number } from "fp-ts";
-
-export type HitsCountTableItem = {
-  key: string,
-  search_term: string,
-  facebook: string,
-  youtube: string,
-  twitter: string,
-  vkontakte: string,
-  telegram: string,
-}
-
-export type HitsCountItem = {
-  "search_term": string,
-  "facebook"?: number,
-  "twitter"?: number,
-  "youtube"?: number,
-  "vkontakte"?: number,
-  "telegram"?: number
-};
-
-export type HitsCountResponse = {
-  search_terms: Array<HitsCountItem>
-};
+import { Account, AccountItem } from "./hitscount";
 
 export type Monitor = {
   collect_actions: string[];
@@ -30,30 +7,32 @@ export type Monitor = {
   descr: string,
   title: string,
   _id: string
+  status: number
 }
 
-export type Progress = {
+export type ProgressItem = {
   finalized_collect_tasks_count: number,
+  failed_collect_tasks_count: number,
   posts_count: number,
-  tasks_count: number, 
+  tasks_count: number,
   time_estimate?: number,
   platform?: string
 }
 
 export type SearchTerm = {
-  _id: string,
+  id: string,
   tags: string[],
   term: string
 }
 
-export type MonitorRespose = {
-  monitor: Monitor,
-  search_term: SearchTerm[],
+export interface MonitorRespose extends Monitor {
+  search_terms: SearchTerm[],
   accounts: Account[],
   platforms: Array[]
 }
 
-export type MonitorProgressResponse = Progress[]
+
+export type MonitorProgressResponse = ProgressItem[]
 
 
 export type FilterElem = { hasOp: boolean, left: string, right?: string, op?: string };
@@ -61,5 +40,5 @@ export type FilterElem = { hasOp: boolean, left: string, right?: string, op?: st
 export type FilterElemPartial = { hasOp?: boolean, op?: string, s: string };
 
 export type TaxonomyResponse = {
-  
+
 }

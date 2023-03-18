@@ -2,8 +2,9 @@ import { Rule } from "antd/lib/form";
 import { string } from "fp-ts";
 
 interface FormCommon {
-  id: number,
+  id: number | string,
   type: string;
+  name?: string;
   title?: string;
   children?: FormElement[];
   value?: any;
@@ -12,6 +13,8 @@ interface FormCommon {
   tip?: string;
   disabled?: boolean;
   placeholder?: string;
+  defaultValue?: any;
+  requestData?: string;
 }
 
 interface FormItemGroup {
@@ -24,13 +27,13 @@ interface Checkbox {
 }
 
 
-export type Option = { label: string, icon?: string };
+export type Option = { label: string, icon?: string | null, value?: any, url?: string, render?: () => React.ReactNode };
 
 interface Tag {
   allowNew?: boolean,
   list?: Option[],
   checkBoolUpper?: boolean,
-  selected?: Option[]
+  selected?: Option[],
 }
 
 interface Input {

@@ -47,6 +47,13 @@
     font-weight: bold;
     margin-bottom: 40px;
 }
+.chart-loadding {
+    font-size: .8em;
+    margin-top: 20px;
+    padding: 11px 23px;
+    border-radius: 30px;
+    font-weight: bold;
+}
 
 .round-btn-transp.round-btn-transparent {
     background: none;
@@ -85,7 +92,7 @@
 }
 
 .tax-mid {
-    width: 70%;
+    width: 75%;
     margin: 0 auto;
     position: relative;
 }
@@ -95,6 +102,8 @@
     align-items: center;
     height: 100%;
     font-size: 19px;
+    font-weight: bold;
+    /* color: #4670be */
 }
 
 input[type="radio"],
@@ -116,7 +125,7 @@ input[type="checkbox"] {
 }
 
 .fa-facebook {
-    color: #4064ac;
+    color: #2e89ff;
 }
 
 .fa-twitter {
@@ -365,15 +374,15 @@ input[type="checkbox"] {
 .leftbox-title {
     width: 90%;
     margin-left: 5%;
-    height: 60px;
+    height: 66px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-    padding: 3.5vh 0 3.5vh 5%;
+    padding: 0 5% 0 5%;
     font-size: 20px;
     color: #b1b1b1;
     border-bottom: 2px solid gainsboro;
-    margin-top: 5px;
+    
     font-weight: 500;
     justify-content: space-between;
 }
@@ -447,13 +456,19 @@ table {
     color: #DD7A1E;
 }
 
+
+span.keyword {
+    margin-right: 5px;
+}
+  
+
 .op {
     background: #616468;
     border-radius: 4px;
     color: #FFFFFF;
     font-size: 12px;
     padding: 2px 6px;
-    margin: 0px 5px;
+    margin-right: 5px;
 }
 
 .ant-table-pagination>* {
@@ -466,6 +481,7 @@ table {
 .tax-scroll {
     height: calc(92vh - 61px);
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .tax-line-cont {
@@ -514,6 +530,8 @@ table {
 
 .leftbox-inner .ant-table-tbody>tr>td:nth-child(2) {
     max-width: 14vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .leftbox-inner .ant-table-tbody>tr>td {
@@ -613,4 +631,98 @@ table {
 }
 .recommend-word{
     width: 79%;
+}
+
+.table-cell-gray{
+    color: #c9c9c9;
+}
+.table-cell-red{
+    color: red;
+    position: relative;
+}
+
+.table-cell-red::after{
+    position: absolute;
+    content: "!";
+    background: #febd57;
+    color: white;
+    top: -14px;
+    left: 4px;
+    border-radius: 100%;
+    width: 11px;
+    height: 11px;
+    display: flex;
+    align-items: center;
+    font-size: 9px;
+    text-align: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+
+.tax-cont .top-filters .ant-row.ant-form-item{
+    width: 98%;
+}
+
+.underline-link{
+    text-decoration: underline;
+    color: #1c9cea;
+}
+
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    border-radius: 100px;
+    font-size: 1.1em;
+    padding: 8px 63px;
+    height: auto;
+    font-weight: bold;
+    border: 2px solid #4670BEDE;
+    background: #fff;
+}
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item span{
+    color: #4670be;
+}
+
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item:hover {
+    border: 2px solid #165adade;
+    background: #40a9ff;
+}
+
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-button-wrapper-checked {
+    background: #096dd9;
+}
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-button-wrapper-checked span,
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item:hover span {
+    color: #fff;
+}
+
+.ant-btn.ant-btn-primary:hover span, .ant-btn.ant-btn-primary:focus span{
+    color: #fff;
+}
+
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-button-wrapper-disabled,
+label.ant-radio-button-wrapper.ant-radio-button-wrapper-in-form-item.ant-radio-button-wrapper-disabled:hover{
+    background: whitesmoke;
+    opacity: .3;
+}
+
+
+.ant-steps-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+}
+
+
+.tax-cont .top-filters .tax-mid{
+    width: 100%;
+}
+.tax-no-button, .tax-no-button > .ant-space-item{
+    width: 100%;
+}
+
+.mb-100{
+    margin-bottom: 100px;
 }

@@ -3,14 +3,19 @@ import { FormElement, Option } from "../../types/form"
 import { last, map, pipe } from "ramda";
 
 import './Select.css';
-import { useEffect, useRef, useState } from "react";
-import { filterHasOperator, filterOperatorUpper, platformIcon } from "../../shared/Utils";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { filterHasOperator, filterOperatorUpper, platformIcon, useDebounce, blankLink } from "../../shared/Utils";
+import { useDynamicReqState } from '../../state/useDynamicReqState';
+
+
+
 
 type Value = Option[];
 
 type CustomFormItemProps = {
   el: FormElement,
   value?: any;
+  requestData?: any;
   onChange?: (val: Value) => void
 };
 
@@ -24,7 +29,8 @@ const TypeaheadOverride: any = Typeahead;
 
 const CustomToken = ({ option, index, onRemove }: CustomTokenInput) => {
   return <div className="rbt-token rbt-token-removeable" tabIndex={index}>
-    {option.icon ? <>{option.icon && platformIcon(option.icon)} {option.label}</> : option.label || option}
+    {!!option.render && option.render}
+    {!option.render && (option.icon ? <>{option.icon && platformIcon(option.icon)} {option.label}</> : option.label || option)}
     <button tabIndex={-1} aria-label="Remove" className="close rbt-close rbt-token-remove-button" type="button" onClick={() => {
       onRemove(index);
     }}>
@@ -35,11 +41,26 @@ const CustomToken = ({ option, index, onRemove }: CustomTokenInput) => {
 }
 
 export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
-  const { id, list, allowNew, placeholder, checkBoolUpper, selected } = el;
+  const { id, list, allowNew, placeholder, checkBoolUpper, selected, requestData } = el;
 
-  const [val, setValue] = useState<Option[]>(value || []);
+  const [suggestions, setSuggestions] = useState<Option[]>(list || []);
+  const [val, setValue] = useState<Option[]>(value || selected || []);
   const [userValue, setUserValue] = useState<string>('');
   const ref = useRef<any>();
+
+  const userValueDebounced = useDebounce(userValue, 500);
+
+  const { data } = useDynamicReqState<Option[]>(requestData || '', {
+    substring: userValueDebounced,
+    platforms: []
+  });
+  useEffect(() => {
+    if (data) {
+      setUserValue('');
+      ref.current.state.text = "";
+      setSuggestions(data);
+    }
+  }, [data]);
 
   const newChecker = (newVal: string, props: any) => {
     const selected = map<{ label: string }, string>(({ label }) => label)(props.selected);
@@ -52,8 +73,7 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     onChange!([value]);
   }
 
-  const onBlur = () =>
-    userValue && allowNew && newChecker(userValue, { selected: value }) && onValChange([...value, { label: userValue }])
+  const onBlur = useCallback(() => userValue && allowNew && newChecker(userValue, { selected: val }) && onValChange([...val, { label: userValue }]), [userValue, value]);
 
   const onValChange = (val: Value) => {
     if (checkBoolUpper && val.length) {
@@ -67,11 +87,11 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     onChange!(val);
   }
 
-  const onRemove = (index: number) => {
-    const newVal = value.filter((_: any, i: number) => index !== i);
+  const onRemove = useCallback((index: number) => {
+    const newVal = val.filter((_: any, i: number) => index !== i);
     setValue(newVal);
     onChange!(newVal);
-  }
+  }, [val]);
 
 
   useEffect(() => {
@@ -82,19 +102,28 @@ export const Tag = ({ el, onChange, value }: CustomFormItemProps) => {
     id={id}
     ref={ref}
     multiple
-    options={list || []}
+    options={suggestions}
     selected={val}
     placeholder={placeholder}
     allowNew={allowNew ? newChecker : false}
-    onInputChange={(input: any, e: any) => onChange_(input)}
+    onInputChange={(input: any, e: any) => {
+      // console.log(111, input, e)
+      e.stopPropagation(); e.preventDefault();
+      onChange_(input)
+    }}
     labelKey={"label"}
     onBlur={onBlur}
+    emptyLabel={requestData && !data && userValue ? "Loading..." : "No results found."}
     renderMenuItemChildren={(option: Option, props: any, index: number) => {
-      return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span></> : option.label || option
+      if (option.render) return option.render;
+      return option.icon ? <>{option.icon && platformIcon(option.icon)} <span>{option.label}</span> {blankLink(option)}</> : option.label || option
     }}
     renderToken={(option: Option, props: any, index: number) =>
       <CustomToken option={option} index={index} onRemove={onRemove} />
     }
-    onChange={onValChange}
+    onChange={(input: any, e: any) => {
+      // console.log(222, input, e)
+      onValChange(input)
+    }}
   />
 }

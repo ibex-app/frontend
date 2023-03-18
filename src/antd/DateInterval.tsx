@@ -11,7 +11,7 @@ export const DateInterval = ({ children }: { children: FormElement[] }) => {
   const [isOnGoing, setIsOnGoing] = useState(true);
 
   return <Space size='middle' direction="vertical">
-    <Row className="container align-middle"> On-going monitor?
+    <Row className="container align-middle"> Ongoing monitor?
       <span className={`checkmark ${isOnGoing ? 'checked' : ''}`} onClick={() => setIsOnGoing(!isOnGoing)}></span>
     </Row>
     <Row>

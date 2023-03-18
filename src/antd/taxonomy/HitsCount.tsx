@@ -1,169 +1,160 @@
-import { Form, Input, Space, Spin, Table } from "antd";
-import { concat, keys, pipe, prop } from "ramda";
-import { useContext, useEffect, useState } from "react";
-import { generateHitsCountTableData, generateHitsCountTableItem } from "../../components/taxonomy/Data";
+import { Form, Modal, Space, Table } from "antd";
+import { concat, keys, pipe, equals } from "ramda";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { generateHitsCountTableData } from "../../components/taxonomy/Data";
 import { TaxonomyContext } from "../../components/taxonomy/TaxonomyContext";
-// import { hitCountCols, hitsCountFormItem } from "../../data/taxonomy/HitCounts";
-import { drawFilterItem } from "../../shared/Utils/Taxonomy";
-import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import { faMagnifyingGlass, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { hitsCountFormItem } from "../../data/taxonomy/HitCounts";
-import { Get } from "../../shared/Http";
-import { HitsCountResponse, HitsCountTableItem, HitsCountItem } from "../../types/taxonomy";
+import { accountHitsCountFormItem, hitsCountFormItem } from "../../data/taxonomy/HitCounts";
+import { HitsCountItem, HitsCountSearchTerm, HitsCountTableItem } from "../../types/hitscount";
 import { getElem } from "../utils/ElementGetter";
-import { fold, left, right } from "fp-ts/lib/Either";
-import { platformIcon, then } from "../../shared/Utils";
 import { match } from "ts-pattern";
-import { ColumnsType } from "antd/lib/table";
+import { useHitsCountState } from '../../state/useHitsCountState';
+import { useForm } from 'antd/lib/form/Form';
+import { createAccountColumns, createSearchTermColumns, generateEmptyHitsCount } from './utils';
+import { Option } from '../../types/form';
 
 type Input = {
   monitor_id: string,
-  toParent?: (output: HitsCountOutput) => void;
+  toParent?: (output: any) => void;
 }
 
 export type HitsCountOutput = {
+  type?: 'search_terms' | 'accounts';
   selected?: HitsCountTableItem[],
   all?: HitsCountTableItem[],
-  // isModified?: boolean,
+  pristine?: boolean,
+  is_loading?: boolean
 }
 
-const createColumns = (platforms: string[], deleteSearchTerm: any) => {
-  let cols: ColumnsType<HitsCountTableItem> = [{
-    title: "Keyword",
-    dataIndex: "search_term",
-    key: "search_term",
-    render: (text: string) => text && drawFilterItem({ search_term: text })
-  }];
-
-  platforms.forEach(platform => {
-    cols.push({
-      title: platformIcon(platform),
-      dataIndex: platform,
-      key: platform,
-      render: (text: number) => text ? text.toString() : <Spin />
-    });
-  });
-
-  cols.push({
-    title: '',
-    key: 'action',
-    render: (_: any, record: any) => (
-      // <Space size="middle" onClick=''>
-      <span className="tax-delete" onClick={() => deleteSearchTerm(record)}>
-        <FontAwesomeIcon icon={faTrashCan} />
-      </span>
-    ),
-  });
-
-  return cols;
-};
-
-const generatePlatforms = ({ search_terms }: HitsCountResponse) =>
-  search_terms.reduce((acc, curr) => {
-    keys(curr).forEach(key => {
-      if (key !== 'search_term' && !acc.includes(key)) acc.push(key);
-    });
+const generatePlatforms = (data: Array<HitsCountSearchTerm>) =>
+  data.reduce((acc, curr) => {
+    keys(curr).forEach(key => match(key)
+      .with('item', 'title', 'id', () => acc)
+      .otherwise(() => !acc.includes(key) && acc.push(key))
+    );
 
     return acc;
   }, [] as string[]);
 
+const errorModal = Modal.error;
+
 export const HitsCount = ({ monitor_id, toParent }: Input) => {
-  const [data, setData] = useState<HitsCountTableItem[]>();
+  const [pristine, setPristine] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const { userSelection, setUserSelection } = useContext(TaxonomyContext);
+
+  const refetchInterval = useMemo(() => match([isLoading, pristine])
+    .with([true, true], () => 3500)
+    .otherwise(() => 0)
+    , [isLoading, pristine]);
+
+  const { data } = useHitsCountState(monitor_id, refetchInterval);
+  const type = useMemo(() => data?.type, [data]);
+  const dataFormatted = useMemo(() => data ? generateHitsCountTableData(data) : [], [data]);
   const [hitsCountTableData, setHitsCountTableData] = useState<HitsCountTableItem[]>([]);
-  const [hitCountsSelected, setHitCountSelection] = useState<HitsCountTableItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
-  const [platforms, setPlatforms] = useState<string[]>();
 
-  const { userSelection } = useContext(TaxonomyContext);
-
-  const deleteSearchTerm = (SearchTerm: any) => {
-    if (!hitsCountTableData) return;
-    const newhitsCountTableData = hitsCountTableData.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term)
-    setHitsCountTableData(newhitsCountTableData);
-    setHitCountSelection(hitCountsSelected.filter((SearchTerm_: any) => SearchTerm_.search_term !== SearchTerm.search_term));
-    
-    // toParent && toParent({ isModified: true } )
-  }
-
-  var isFullSingle = (hitsCountItem: any) => Object.keys(hitsCountItem)
-    .reduce((isfull, key) => hitsCountItem[key] === null ? false : isfull, true)
-
-
-  var isFull = (hitsCountResponse: HitsCountResponse) => Boolean(hitsCountResponse.search_terms
-    && hitsCountResponse.search_terms.length
-    && hitsCountResponse.search_terms.length > 0
-    && hitsCountResponse.search_terms.map(isFullSingle).every((isFull_: boolean) => isFull_))
-
-  const clearTimeout_ = () => {
-    timeout && clearTimeout(timeout);
-    setTimeout_(undefined);
-  }
+  const [form] = useForm();
+  const accounts = Form.useWatch('accounts', form);
 
   useEffect(() => {
-    if (loading) return;
-    setLoading(true);
-
-    clearTimeout_();
-    const try_ = () => pipe(
-      then((fold(
-        (err: Error) => console.log('errr', left(err)),
-        (res: HitsCountResponse) => match(isFull(res))
-          .with(false, () => {
-            setLoading(false);
-            const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
-            setData(generateHitsCountTableData(right(res)))
-            return;
-          })
-          .otherwise(() => {
-            clearTimeout_();
-            setPlatforms(generatePlatforms(res));
-            setData(generateHitsCountTableData(right(res)))
-          })
-      )))
-    )(Get<HitsCountResponse>('get_hits_count', { id: monitor_id }));
-
-    try_();
-    return () => clearTimeout_();
-  }, [monitor_id, timeout]);
-
-  useEffect(() => data && setHitsCountTableData(data), [data]);
-
-  useEffect(() => toParent && toParent({ all: hitsCountTableData} ), [hitsCountTableData]);
+    data && setIsLoading(data?.is_loading);
+  }, [data])
 
   useEffect(() => {
-    if (toParent) toParent({
-      selected: hitCountsSelected
-    });
-  }, [hitCountsSelected]);
+    dataFormatted.length && setHitsCountTableData(dataFormatted as any);
+  }, [dataFormatted, setPristine]);
 
-  const hitCountSelection = {
+  const deleteSearchTerm = useCallback((searchTerm: string) => {
+    setHitsCountTableData(hitsCountTableData.filter(({ title }) => searchTerm !== title));
+  }, [hitsCountTableData]);
+
+  const platforms = useMemo(() => data && data.type === 'search_terms' ? generatePlatforms(data.data) : [], [data]);
+
+  const columns = useMemo(() => match(data)
+    .with({ type: 'search_terms' }, () => platforms ? createSearchTermColumns(platforms, deleteSearchTerm) : [])
+    .with({ type: 'accounts' }, () => createAccountColumns(deleteSearchTerm))
+    .otherwise(() => [])
+    , [data, deleteSearchTerm, platforms]);
+
+  const [hitCountsSelected, setHitCountSelection] = useState<HitsCountItem[]>([]);
+
+  const hitCountSelection = useMemo(() => ({
     hitCountsSelected,
     onChange: (_: React.Key[], selectedRows: any[]) => setHitCountSelection(selectedRows)
+  }), [hitCountsSelected]);
+
+  const preProcessNewHitsCcount = (newKeyword: any) => {
+    if(typeof newKeyword == "string") return newKeyword.replace(/[!$%^&*(),.?":{}|<>_+=„“\\]/gi, '')//.toLowerCase()
+    return newKeyword
   }
 
-  const addNewHitsCount = pipe(
-    (keyword: string) => generateHitsCountTableItem(keyword, { search_term: keyword }),
+  const log = (a:any) => {
+    // console.log(a)
+    return a
+  }
+
+  const addNewHitsCount = useMemo(() => pipe(
+    log,
+    preProcessNewHitsCcount,
+    log,
+    generateEmptyHitsCount,
+    log,
     (tableItem) => concat([tableItem], hitsCountTableData),
-    setHitsCountTableData,
-    // () => toParent && toParent({ isModified: true } )
-  )
+    log,
+    setHitsCountTableData
+  ), [hitsCountTableData]);
 
   useEffect(() => {
     userSelection && addNewHitsCount(userSelection)
-  }, [userSelection])
+    setUserSelection('');
+  }, [userSelection, addNewHitsCount]);
+
+  const onHitsCountAdd = useCallback((values: any) => {
+    const val = !!values.length ? values[0] : values.search_terms;
+    const t = typeof val === 'string' ? val : val[0];
+
+    if (hitsCountTableData?.find(
+      ({ title, platform_id }: any) =>
+        (t.platform_id === platform_id && t.label === title) || (typeof t === 'string' && title.toLowerCase() === t.toLowerCase()))
+    ) {
+      errorModal({ title: 'Error', content: 'Item term already exists' });
+      form.resetFields();
+      return
+    }
+
+    addNewHitsCount(typeof val === 'string' ? val : val[0]);
+    form.resetFields();
+  }, [form, addNewHitsCount, dataFormatted]);
+
+  useEffect(() => setPristine(
+    equals(hitsCountTableData, dataFormatted as any) || !hitsCountTableData.length
+  ), [hitsCountTableData, dataFormatted]);
+
+  useEffect(() => toParent && toParent({
+    all: hitsCountTableData,
+    selected: hitCountsSelected,
+    type,
+    pristine: pristine,
+    is_loading: isLoading
+  }), [hitCountsSelected, hitsCountTableData, type, dataFormatted, pristine, isLoading]);
+
+  useEffect(() => {
+    if (accounts && typeof accounts[0] === 'object') {
+      onHitsCountAdd([accounts]);
+    }
+  }, [accounts, onHitsCountAdd]);
 
   return <div className="leftbox-inner">
-    <Form onFinish={(obj) => obj[0] && addNewHitsCount(obj[0])}>
-      <Space size="small">
-        {getElem(hitsCountFormItem)}
-        {getElem({ id: 1, type: "button", label: "Add" })}
+    <Form form={form} onFinish={onHitsCountAdd} >
+      <Space size="small" className={type === 'accounts' ? 'tax-no-button' : ''}>
+        {getElem(type === 'accounts' ? accountHitsCountFormItem : hitsCountFormItem)}
+        {type !== 'accounts' ? getElem({ id: 1, type: "button", label: "Add" }) : ''}
       </Space>
     </Form>
     <Table
+      rowKey='id'
       rowSelection={hitCountSelection}
       dataSource={hitsCountTableData}
-      columns={platforms && createColumns(platforms, deleteSearchTerm)} />
+      pagination={{ defaultPageSize: 8 }}
+      columns={columns as any} />
   </div>
 }

@@ -8,7 +8,7 @@
       "children": [
         {
           "id": "title",
-          "title": "What is the name of the report?",
+          "title": "What is the name of your report?",
           "value": "",
           "type": "text",
           "rules": [
@@ -22,15 +22,11 @@
           "title": "What is the report about?",
           "value": "",
           "type": "textbox",
-          "rules": [
-            {
-              "required": true
-            }
-          ]
+          "rules": []
         },
         {
           "id": "type",
-          "title": "Are you using the keywords or accounts for data collection?",
+          "title": "Are you using keywords or accounts for data collection?",
           "type": "radio",
           "rules": [
             {
@@ -45,6 +41,11 @@
             {
               "title": "Accounts",
               "value": "accounts"
+            },
+            {
+              "title": "Accounts and Keywords",
+              "value": "accounts_and_search_terms",
+              "disabled": true
             }
           ]
         }
@@ -107,7 +108,7 @@
               "type": "tag",
               "list": [],
               "tip": "Start typing the account name, and select ones you want to search.",
-              "requestData": "accounts"
+              "requestData": "search_account"
             },
             {
               "id": "accounts_upload",
@@ -121,7 +122,7 @@
           "id": "date",
           "title": "Date Range",
           "type": "date_interval",
-          "tip": "On-going monitor would add newly created posts to the report in real-time",
+          "tip": "Ongoing monitor would add newly created posts to the report in real-time",
           "children": [
             {
               "id": "date_from",
@@ -133,7 +134,7 @@
               ]
             },
             {
-              "id": "date_end",
+              "id": "date_to",
               "type": "date"
             }
           ]

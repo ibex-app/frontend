@@ -3,12 +3,14 @@ import { getWordList, WordList } from "../Utils";
 
 // input HitsCountTableData
 export const drawFilterItem: any = pipe<any, string, WordList, JSX.Element[]>(
-  prop('search_term'),
+  prop('title'),
   getWordList,
   map(({ type, keyword }) => <span className={type}>{keyword}</span>)
 );
 
-export const finalizeForm = ({ form1, form2 }: any) => ({
+export const finalizeForm = ({ form1, form2 }: any) => {
+  // console.log(444, form1, form2)
+  return {
   ...form1,
   ...form2,
   date_from: form2.date_from.toISOString(),
@@ -17,9 +19,10 @@ export const finalizeForm = ({ form1, form2 }: any) => ({
   accounts: form2.accounts?.map((account: any) => ({
     platform: account.platform,
     platform_id: account.platform_id,
-    title: account.label
+    title: account.label,
+    url: account.url
   })),
-});
+}};
 
   // const estimateTime = (form: any) => {
   //     const timeLeft = (form.search_terms.length || 1) * 8 * form.platforms.length
@@ -69,7 +72,7 @@ export const finalizeForm = ({ form1, form2 }: any) => ({
   //         estimateTime(finalForm)
   //         const createMonitor = Get('create_monitor', finalForm);
 
-          
+
   //     }
   // }, [])
 

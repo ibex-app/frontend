@@ -161,7 +161,7 @@ select::-ms-expand {
 }
 
 img {
-  max-width: 100%;
+  /* max-width: 100%; */
   height: auto;
 }
 
@@ -1542,14 +1542,14 @@ footer {
 }
 
 .sidebar {
-  width: 12%;
-  height: 100vh;
+  /* width: 12%; */
+  height: calc(100vh - 68px );
   background-color: #FCFCFC;
   padding: 0 15px;
   position: fixed;
   overflow: hidden;
   left: 0;
-  top: 0;
+  bottom: 0;
 }
 
 .sidebar .main-nav ul li {
@@ -1850,8 +1850,8 @@ button {
 }
 
 .results {
-  margin: 15px 0 15px 15px;
-  padding-right: 15px;
+  /* margin: 15px 0 15px 15px;
+  padding-right: 15px; */
   overflow: hidden;
   min-height: 80vh;
 }
@@ -1883,12 +1883,14 @@ main.main .main-dashboard {
 }
 
 .chart {
-  width: 80%;
+  width: 100%;
   left: 5%;
-  height: calc(100% - 50px);
-  position: absolute;
-  top: 70px;
+  /* height: calc(100% - 50px); */
+  height: 100%;
+  /* position: absolute; */
+  top: 20px;
   overflow: hidden;
+  position: relative;
 }
 
 .inactive {
@@ -2016,6 +2018,7 @@ main.main .main-dashboard {
   /* flex-wrap: wrap; */
   display: flex;
   gap: 3px;
+  overflow-y: auto;
 }
 
 input.ant-input,
@@ -2106,6 +2109,8 @@ button.ant-btn span {
   padding: 4px 25px 5px 11px;
   font-size: 1em;
   position: relative;
+  max-height: 30px;
+  white-space: nowrap;
 }
 
 .rbt-input-main {
@@ -2166,9 +2171,6 @@ button.ant-btn span {
   font-size: 1.4em;
 }
 
-.top-filters .ant-space-item {
-  width: 19%;
-}
 
 .top-filters {
   display: flex;
@@ -2177,11 +2179,11 @@ button.ant-btn span {
   position: fixed;
   top: 0;
   right: 0;
-  width: 88%;
+  width: 100%;
   z-index: 1;
   background: #fcfcfc;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
 }
 
 .top-filters .ant-picker {
@@ -2192,6 +2194,7 @@ button.ant-btn span {
   padding: 2px 5px 2px;
   font-size: 0.9em;
   margin: 0;
+  /* height: 80px; */
 }
 
 .top-filters .ant-col.ant-form-item-label label {
@@ -2254,6 +2257,7 @@ button.ant-btn span {
 
 #root {
   height: 100vh;
+  /* overflow: hidden; */
 }
 
 .date-interval {
@@ -2288,19 +2292,20 @@ button.ant-btn span {
 }
 
 .results {
-  margin: 15px 0 15px 15px;
-  padding-right: 15px;
+  /* margin: 15px 0 15px 15px; */
+  /* padding-right: 15px; */
   overflow: hidden;
-  min-height: 80vh;
-  position: fixed;
-  height: 75vh;
+  min-height: 200px;
+  position: relative;
+  height: 100%;
   width: 85vw;
-  top: 17vh;
+  padding: 0 3px;
+  /* top: 2rem; */
 }
 
 
 .results-cont {
-  padding-top: 150px;
+  padding-top: 10px;
 }
 
 
@@ -2310,7 +2315,189 @@ button.ant-btn span {
 
 .top-filters .ant-row.ant-form-item {
   width: 19%;
+  margin-left: .5%;
+  margin-right: .5%;
 }
+
 .ant-radio-group {
   font-size: 14px;
+}
+
+.chart-cont-l {
+  width: 70%;
+  height: 25vh;
+  display: inline-block;
+}
+
+.chart-cont-sm {
+  width: 29%;
+  margin-left: 1%;
+  height: 25vh;
+  display: inline-block;
+}
+.chart-cont-l, .chart-cont-sm{
+  vertical-align: top;
+}
+
+.ant-progress-success-bg {
+  background-color: #81de53;
+}
+
+.live {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: #81de53;
+  color: #fff;
+  font-weight: bold;
+}
+
+.top-50 {
+  margin-top: 50px;
+}
+
+.bottom-50 {
+  margin-bottom: 50px;
+
+}
+.bottom-20 {
+  margin-bottom: 20px;
+
+}
+
+
+.monitor.post{
+  padding: 14px 21px;
+  overflow: hidden;
+}
+
+.small-social{
+  border-radius: 100%;
+    box-shadow: 0 0 2px 1px #43434375;
+    height: 25px;
+    width: 25px;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: -5px;
+    background: #fff;
+}
+
+.monitor-list.tax-scroll{
+  height: calc(100vh - 81px)
+}
+
+
+.in-monitor-list > div {
+  margin-bottom: 6px;
+}
+
+.extra-buttons > button{
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background: none;
+  width: auto;
+  padding: 0;
+  
+  top:30px;
+  width: 120px;
+  text-align: left;
+}
+
+.extra-buttons > button.delete-mon{
+  top:0px
+}
+.extra-buttons > button.delete-mon > span{
+  color: #d36262;
+}
+.extra-buttons > button:hover{
+  border: none;
+
+}
+
+.mt-80{
+  margin-top: 80px;
+}
+.mt-50{
+  margin-top: 80px;
+}
+
+.top-filters.tax-title-line {
+
+  height: auto;
+}
+
+.rbt-input-main{
+  min-width: 200px;
+}
+
+.blank-icon{
+  font-size: 0.8em;
+    color: #4670be;
+    cursor: pointer !important;
+}
+
+button[disabled]{
+  opacity: .3;
+  cursor: not-allowed;
+}
+
+
+.ant-modal-content {
+  background: #FFFFFF;
+    box-shadow: 0px 2px 5px rgb(0 0 0 / 25%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns {
+  width: 100%;
+  text-align: center;
+}
+
+.scores > span {
+  margin-top: 13px;
+  display: inline-block;
+  margin-right: 35px;
+  color: #989898;
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb {
+  color: rgba(0,0,0,.3);
+    width: 16px;
+    border-radius: 13px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+}
+
+*::-webkit-scrollbar-thumb {        
+  box-shadow: inset 0 0 0 10px rgba(0, 0, 0, .3);
+}
+
+.ant-radio-button-wrapper:not(:first-child):before{
+    display: none;
+}
+
+.chart-number {
+  align-items: center;
+    color: #939090;
+    display: flex;
+    font-size: 1.5em;
+    font-weight: 700;
+    justify-content: center;
+    position: absolute;
+    z-index: 0;
+    margin-top: 23%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }

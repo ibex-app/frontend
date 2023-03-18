@@ -16,13 +16,16 @@
   line-height: 25px;
   color: #323335;
   font-weight: 600;
+  margin-right: 10px;
+
 }
 
 .post h3 {
   font-weight: 400;
-  font-size: 13px;
-  line-height: 20px;
-  color: #717478;
+    font-size: 13px;
+    color: #717478;
+    margin-bottom: 11px;
+    margin-top: 28px;
 }
 
 .post a {
@@ -39,4 +42,9 @@
 
 .post-content .highlight {
   color: #DD7A1E;
+}
+
+.post .post-btn{
+  padding: 6px 42px;
+    font-size: 1em;
 }

@@ -1,120 +1,54 @@
-import { List, Spin } from "antd";
-import * as E from "fp-ts/lib/Either";
-import { isEmpty, pipe } from "ramda";
-import { useEffect, useState } from "react";
+import { List } from "antd";
+import { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { match } from "ts-pattern";
-import { Get, Response } from "../shared/Http";
-import { then } from "../shared/Utils";
-import { PostResponse, PostType } from "../types/common";
-import { loadMore } from "./LoadMore";
+import { usePostsState } from "../state/usePostsState";
+import { LoadMore } from "./LoadMore";
 import { Post } from "./post/Post";
+import { Loader } from "./Loader";
 
 type Input = {
-  filter: Filter,
-  allowRedirect?: boolean
+    filter: Filter,
+    allowRedirect?: boolean,
+    allowSuggestions?: boolean,
+    shuffle?: boolean
 }
 
-const defaultPagination = { start_index: 0, count: 10 };
+const defaultPagination = { start_index: 0, count: 30 };
 
-const Loader = ({ isLoading }: { isLoading?: boolean }) =>
-  <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-    {isLoading ? 'Ibex is collecting data, please stand-by' : 'Loading'} <Spin />
-  </div>
+export const Posts = ({ filter, allowRedirect, shuffle, allowSuggestions }: Input) => {
+    const { data, isLoading, isFetching, fetchNextPage, refetch } = usePostsState({ ...filter, ...defaultPagination, shuffle });
+    const lastPostsData = useMemo(() => data?.pages[data?.pages.length - 1], [data]);
+    const isLoadingFromServ = useMemo(() => data?.pages[data.pages.length - 1].is_loading, [data]);
 
-export const Posts = ({ filter, allowRedirect }: Input) => {
-  const [posts, setPosts] = useState<Response<PostResponse>>(E.left(Error('Not fetched')));
-  const [pagination, setPagination] = useState(defaultPagination);
+    const posts = useMemo(() => data?.pages.flatMap(({ posts }) => posts) || [], [data?.pages]);
 
-  const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [filterRef, setFilterRef] = useState<any>({});
-  const [timeout, setTimeout_] = useState<NodeJS.Timeout>();
+    useEffect(() => {
+        let interval: NodeJS.Timeout;
 
-  const clearTimeout_ = () => {
-    timeout && clearTimeout(timeout);
-    setTimeout_(undefined);
-  }
+        if (lastPostsData?.is_loading && lastPostsData.posts.length < defaultPagination.count) {
+            interval = setInterval(() => refetch({
+                refetchPage: (page, index) => index === ((data?.pages?.length || 1) - 1)
+            }), 5000)
+        }
+        return () => clearInterval(interval);
+    }, [lastPostsData, refetch, data?.pages?.length]);
 
-  const getPosts = () => {
-    // console.log(2222, 'getPosts called')
-    return Get<PostResponse>('posts', { ...filter, ...pagination })
-  };
-
-  useEffect(() => {
-    console.log(222, timeout);
-    // debugger
-    setPosts(E.left(new Error('Not fetched')));
-    clearTimeout_();
-    if (isFetching) return;
-    setIsFetching(true);
-    const try_ = () => pipe(
-      then((E.fold(
-        (err: Error) => setPosts(E.left(err)),
-        (res: PostResponse) => match(res.is_loading && res.posts.length < 10)
-          .with(true, () => {
-            setIsFetching(false);
-            if (!isEmpty(res)) setPosts(E.right(res));
-            const timeout_: any = setTimeout(() => setTimeout_(timeout_), 5000);
-            return;
-          })
-          .otherwise(() => {
-            setIsFetching(false);
-            setTimeout_(undefined);
-            setPosts(E.right(res));
-          })
-      )))
-    )(getPosts());
-
-    try_();
-
-    return () => clearTimeout_();
-  }, [timeout]);
-
-  useEffect(() => {
-    getPosts().then(pipe(
-      E.bindTo('new'),
-      E.bind('old', () => posts),
-      E.map((posts) => setPosts(E.right({
-        is_loading: posts.new.is_loading,
-        posts: posts.old.posts.concat(posts.new.posts)
-      })))
-    ));
-  }, [pagination])
-
-  const onLoadMore = () => {
-    setPagination({ start_index: pagination.start_index + pagination.count, count: pagination.count })
-  };
-
-
-  useEffect(() => {
-
-    // console.log(222, JSON.stringify(filter), JSON.stringify(filterRef))
-    if(JSON.stringify(filter) === JSON.stringify(filterRef)) return
-    setFilterRef(filter)
-    clearTimeout_()
-    getPosts().then(setPosts)
-
-
-    // const timeoutId = setTimeout(() => {
-    //   // debugger
-    // }, 1000);
-    // return () => clearTimeout(timeoutId)    
-  }, [filter]);
-
-  return E.fold(
-    () => <Loader />,
-    (data: PostResponse) =>
-      <>
-        {!data?.posts?.length && data.is_loading && <Loader isLoading={data.is_loading} />}
-        {!!data?.posts?.length && <List
-          dataSource={data.posts}
-          style={{ paddingRight: "20px" }}
-          loadMore={loadMore(onLoadMore, data.posts.length, pagination.count, data.is_loading)}
-          renderItem={(item) => allowRedirect
-            ? <Link to={`/details/${item._id.$oid}`}><Post post={item} /></Link>
-            : <Post post={item} />
-          }
+    return isLoading && isFetching ? <Loader isInProgress={isLoadingFromServ} /> : <>
+        {!posts.length && isLoadingFromServ && <Loader isInProgress={isLoadingFromServ} />}
+        {!posts.length && !isLoadingFromServ && <div style={{ textAlign: 'center' }}>No posts found</div>}
+        {!!posts.length && <List
+            dataSource={posts}
+            style={{ paddingRight: "20px" }}
+            loadMore={<LoadMore
+                onLoadMore={fetchNextPage}
+                count={lastPostsData?.posts?.length || 0}
+                pageSize={defaultPagination.count}
+                isLoading={isLoadingFromServ || false} />
+            }
+            renderItem={(item) => allowRedirect
+                ? <Link to={`/details/${item._id.$oid}`}><Post post={item} /></Link>
+                : <Post post={item} allowSuggestions={allowSuggestions} />
+            }
         />}
-      </>
-  )(posts);
+    </>
 }  

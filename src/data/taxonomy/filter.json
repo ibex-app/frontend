@@ -4,7 +4,7 @@
       "id": "platform",
       "type": "tag",
       "title": "Platform",
-      "value": [],
+      "selected": [],
       "list": [
         {
           "id": 0,
@@ -32,6 +32,13 @@
           "_id": "vkontakte"
         }
       ]
+    },
+    {
+      "id": "account_ids",
+      "type": "tag",
+      "title": "Account",
+      "selected": [],
+      "list": []
     }
   ]
 }

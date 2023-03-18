@@ -10,11 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Tag } from "../Select/Select";
 import { dateFormat } from "../../shared/Utils";
-import moment from "moment";
 
 export const getElem = (element: FormElement): any => {
   const {
-    type, id, rules, placeholder, disabled, title, label, tip, value, children, checked
+    type, id, rules, placeholder, disabled, title, label, tip, children, checked, requestData
   } = element;
 
   return <>
@@ -28,7 +27,7 @@ export const getElem = (element: FormElement): any => {
             // defaultValue={value ? moment(value, dateFormat) : moment()}
             format={dateFormat} />
         )
-        .with("tag", () => <Tag el={element} />)
+        .with("tag", () => <Tag el={element} requestData={requestData} />)
         .with("text", () => <Input placeholder={placeholder} />)
         .with("textbox", () => <TextArea />)
         .with("checkbox", () => <Checkbox checked={checked} />)
@@ -41,7 +40,7 @@ export const getElem = (element: FormElement): any => {
         .with("uploader", () => <Uploader element={element} />)
         .with("button", () => <Button type="primary" htmlType="submit">{label}</Button>) // TODO make dynamic
         .with("radio", () => <Radio.Group>
-          {children!.map(({ value, title }) => <Radio.Button key={`Radio-${title}`} value={value}>{title}</Radio.Button>)}
+          {children!.map(({ value, title, disabled }) => <Radio.Button key={`Radio-${title}`} value={value} disabled={disabled}>{title}</Radio.Button>)}
         </Radio.Group>)
         .otherwise(() => {
           console.error(`Invalid component name ${type}`);

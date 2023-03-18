@@ -13,7 +13,7 @@ import {
   Filler
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { ChartInputFilter } from '../chartInputFilter'
+import { ChartInputFilter, ChartInputParams } from '../chartInputFilter'
 
 ChartJS.register(Filler);
 
@@ -28,6 +28,7 @@ ChartJS.register(
 );
 
 export const options = {
+  maintainAspectRatio: false,
   type: 'line',
   responsive: true,
   plugins: {
@@ -35,7 +36,7 @@ export const options = {
       propagate: false,
     },
     legend: {
-      position: 'right' as const,
+      position: 'top' as const,
     },
     // title: {
     //   display: true,
@@ -69,13 +70,18 @@ export const options = {
 };
 
 
-export function BarChart({ filter }: ChartInputFilter) {
+export function BarChart({ axisX, axisY, filter }: ChartInputParams) {
   useEffect(() => {
-    if (Object.keys(filter).length) loadData('platform');
+    if (!filter.time_interval_from || !filter.time_interval_to) return
+    if (Object.keys(filter).length) loadData();
   }, [filter]);
 
   const [fetching, setFetching] = useState(false);
-
+  const exactCols:any = {
+    facebook: '#2e89ff',
+    youtube: '#f10000',
+    twitter: '#51a3e3'
+  }
   var cols = ["#bf501f", "#f59c34", "#89a7c6", "#7bc597", "#8d639a", "#8d639a", "#e4a774", "#828687", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick"]
 
   let labels = [''];
@@ -91,30 +97,29 @@ export function BarChart({ filter }: ChartInputFilter) {
   };
 
   const [data, setData] = useState(data_);
+  const [timeInterval, setTimeInterval] = useState(1);
 
-  const change = (e: any) => {
-    loadData(e.target.value)
-  }
 
   const generate_dataset = (responce_data: any, labelType: string, filters: any) => {
     var dateFrom: Date = new Date(filters.time_interval_from)
     var dateTo: Date = new Date(filters.time_interval_to)
-    dateTo.setDate(dateTo.getDate() + 7);
+    dateTo.setDate(dateTo.getDate() + timeInterval*3);
+    dateFrom.setDate(dateFrom.getDate() - timeInterval);
 
     var interval: number = (dateTo.getTime() - dateFrom.getTime())
     var numberOfDays = Math.floor(interval / (24 * 60 * 60 * 1000));
     var numberOfWeeks = Math.ceil(numberOfDays / 7);
+    
+
 
     // var firstJan = new Date(1900 + dateFrom.getYear(), 0, 1)
     var firstJan = new Date(2022, 0, 1)
     var daysThisYear = (dateFrom.getTime() - firstJan.getTime()) / (24 * 60 * 60 * 1000)
-    var startWeek = Math.ceil(daysThisYear / 7)
+    var startTime = timeInterval == 7 ? Math.ceil(daysThisYear / 7) : Math.ceil(daysThisYear)
+    var endTime = startTime + (timeInterval == 7 ? numberOfWeeks : numberOfDays)
 
-    responce_data.forEach((i: any) => {
-      if (!i[labelType].title) {
-        i[labelType].title = i[labelType].label
-      }
-    })
+    let intervals: any = ['']
+    responce_data.forEach((i:any) => { if(!i[labelType].title){ i[labelType].title = i[labelType].label } })
 
     let post_label_values: [] = responce_data.map((i: any) => i[labelType].title).filter((v: any, i: any, a: any) => a.indexOf(v) === i)
 
@@ -129,18 +134,20 @@ export function BarChart({ filter }: ChartInputFilter) {
       radius: 4
     }))
     labels = []
+    
 
-    for (let week = startWeek; week <= startWeek + numberOfWeeks; week++) {
+    for (let timeAt = startTime; timeAt <= endTime; timeAt++) {
       var intervalDate = new Date(dateFrom);
-      dateFrom.setDate(dateFrom.getDate() + week * 7);
+
+      dateFrom.setDate(dateFrom.getDate() + timeAt * timeInterval);
 
       labels.push(intervalDate.toISOString().slice(0, 10))
 
       datasets.forEach((dataset: any) => {
-        let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id.week == week)
-        if (!match.length) {
+        let match = responce_data.filter((d: any) => d[labelType].title == dataset.label && d._id[timeInterval == 7 ? 'week' :'day'] == timeAt)
+        if(!match.length){
           dataset.data.push(0)
-        } else if (labelType == 'platform') {
+        } else if (labelType == 'platform'){
           let count = match.reduce((a: any, b: any) => a += b.count, 0)
           dataset.data.push(count)
         } else {
@@ -148,53 +155,52 @@ export function BarChart({ filter }: ChartInputFilter) {
         }
       })
     }
-
+    
     return {
       labels,
       datasets: datasets,
     }
   }
 
-  const loadData = (labelType: string) => {
+  const loadData = () => {
     setFetching(true)
+    var dateFrom: any = new Date(filter.time_interval_from)
+    var dateTo: any = new Date(filter.time_interval_to)
+    const diffTime: number = Math.abs(dateFrom - dateTo);
+    const diffDays: number = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    setTimeInterval(diffDays < 14 ? 1 : 7)
+    
     const fetchData = Get('posts_aggregated', {
       post_request_params: transform_filters_to_request(filter),
-      axisX: labelType,
-      days: 7
+      axisX: axisX,
+      axisY: axisY,
+      days: timeInterval
     });
 
 
     fetchData.then((_data: Response<any>) => {
       let maybeData: any = E.getOrElse(() => [data_])(_data)
-      if (!maybeData.length) {
-        return
-      }
+      if (!maybeData.length) return
 
-      let dataset_and_labels: any = generate_dataset(maybeData, labelType, filter)
+      let dataset_and_labels: any = generate_dataset(maybeData, axisX, filter)
       setData(dataset_and_labels);
-      setFetching(false);
+      setFetching(false)
     });
-
   }
+    
+  
 
   if (fetching) {
     return (
-      <div className="results" >Loading...</div>
+      <div className="chart-cont-l" >Loading...</div>
     )
   }
   return (
-    <div className="results">
-      <select onChange={change}>
-        {['platform', 'persons', 'locations', 'topics', 'datasources'].map(d => <option key={d}>{d}</option>)}
-      </select>
-      <select onChange={change}>
-        {['count', 'hate-speech', 'reach-out', 'likes', 'shares', 'sentiment', 'comments'].map(d => <option key={d}>{d}</option>)}
-      </select>
+    <div className="chart-cont-l">
       {
         fetching ? (
           <div className="button-tr"><div><div className="round-btn-transp">Loading...</div></div></div>
         ) : (<div className="chart"><Bar options={options} data={data} /></div>)
-        // ) : (<div className="chart"></div>)
       }
     </div>
   );
